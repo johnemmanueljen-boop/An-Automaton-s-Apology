@@ -1,0 +1,284 @@
+[
+ {
+  "note": "072.md",
+  "config": "Brennan",
+  "statement_lines": 40,
+  "paper_text": "oai-text/A-strict-inverse-first-power-bound-for-univalent-functions-September-24-2026__paper.txt"
+ },
+ {
+  "note": "072.md",
+  "config": "BrennanSharp",
+  "statement_lines": 29,
+  "paper_text": "oai-text/A-strict-inverse-first-power-bound-for-univalent-functions-September-24-2026__paper.txt"
+ },
+ {
+  "note": "072.md",
+  "config": "StrictMeans",
+  "statement_lines": 32,
+  "paper_text": "oai-text/A-strict-inverse-first-power-bound-for-univalent-functions-September-24-2026__paper.txt"
+ },
+ {
+  "note": "081.md",
+  "config": "RieszQuantitative",
+  "statement_lines": 47,
+  "paper_text": "oai-text/Riesz-transforms-and-uniform-rectifiability-in-higher-codimension-September-24-2026__paper.txt"
+ },
+ {
+  "note": "112.md",
+  "config": "DepthThree",
+  "statement_lines": 104,
+  "paper_text": "oai-text/Beyond-the-Square-Root-Exponent-for-Depth-Three-Boolean-Circuits-September-23-2026__main.txt"
+ },
+ {
+  "note": "140.md",
+  "config": "GaussianFiniteEntropy",
+  "statement_lines": 153,
+  "paper_text": "oai-text/Localization-costs-and-information-growth-for-exact-Gaussian-observations-September-27-2026__paper.txt"
+ },
+ {
+  "note": "140.md",
+  "config": "GaussianInformation",
+  "statement_lines": 159,
+  "paper_text": "oai-text/Localization-costs-and-information-growth-for-exact-Gaussian-observations-September-27-2026__paper.txt"
+ },
+ {
+  "note": "140.md",
+  "config": "NoiselessRegression",
+  "statement_lines": 97,
+  "paper_text": "oai-text/Localization-costs-and-information-growth-for-exact-Gaussian-observations-September-27-2026__paper.txt"
+ },
+ {
+  "note": "175.md",
+  "config": "TalagrandDiscreteConvexity",
+  "statement_lines": 40,
+  "paper_text": "oai-text/Integral-and-fractional-expectation-thresholds-are-equivalent-September-23-2026__paper.txt"
+ },
+ {
+  "note": "175.md",
+  "config": "TalagrandExpectationThreshold",
+  "statement_lines": 39,
+  "paper_text": "oai-text/Integral-and-fractional-expectation-thresholds-are-equivalent-September-23-2026__paper.txt"
+ },
+ {
+  "note": "198.md",
+  "config": "FinitisticAsymmetry",
+  "statement_lines": 31,
+  "paper_text": "oai-text/An-algebra-of-infinite-little-finitistic-dimension-September-23-2026__paper.txt"
+ },
+ {
+  "note": "198.md",
+  "config": "LittleFinitistic",
+  "statement_lines": 25,
+  "paper_text": "oai-text/An-algebra-of-infinite-little-finitistic-dimension-September-23-2026__paper.txt"
+ },
+ {
+  "note": "206.md",
+  "config": "FiniteCongruenceGraph",
+  "statement_lines": 48,
+  "paper_text": "oai-text/Finite-Congruence-Lattices-Characterization-and-Undecidability-September-24-2026__paper.txt"
+ },
+ {
+  "note": "222.md",
+  "config": "IsingFiniteness",
+  "statement_lines": 63,
+  "paper_text": "oai-text/The-free-energy-of-the-Ising-random-perceptron-September-24-2026__The-free-energy-of-the-Ising-random-perceptron-September-24-2026.txt"
+ },
+ {
+  "note": "222.md",
+  "config": "PerceptronFreeEnergy",
+  "statement_lines": 80,
+  "paper_text": "oai-text/The-free-energy-of-the-Ising-random-perceptron-September-24-2026__The-free-energy-of-the-Ising-random-perceptron-September-24-2026.txt"
+ },
+ {
+  "note": "240.md",
+  "config": "CHObstruction",
+  "statement_lines": 78,
+  "paper_text": "oai-text/A-CH-Obstruction-to-a-Prescribed-Categoricity-Threshold-September-24-2026__paper.txt"
+ },
+ {
+  "note": "246.md",
+  "config": "CannonGeometricAction",
+  "statement_lines": 77,
+  "paper_text": "oai-text/A-Modulus-Proof-of-Cannons-Conjecture-September-23-2026__paper.txt"
+ },
+ {
+  "note": "252.md",
+  "config": "TorsionFreeHyperbolic",
+  "statement_lines": 33,
+  "paper_text": "oai-text/a-torsion-free-hyperbolic-group-that-is-not-residually-finite-September-23-2026__paper.txt"
+ },
+ {
+  "note": "343.md",
+  "config": "BallPacking",
+  "statement_lines": 30,
+  "paper_text": "oai-text/Symplectic-Ball-Packings-in-Higher-Dimensions-September-23-2026__paper.txt"
+ },
+ {
+  "note": "343.md",
+  "config": "BallPackingNecessity",
+  "statement_lines": 30,
+  "paper_text": "oai-text/Symplectic-Ball-Packings-in-Higher-Dimensions-September-23-2026__paper.txt"
+ },
+ {
+  "note": "356.md",
+  "config": "WeakHessian",
+  "statement_lines": 180,
+  "paper_text": "oai-text/Weak-Hessian-bounds-along-every-geodesic-in-RCD-spaces-September-24-2026__weak-hessian-geodesics.txt"
+ },
+ {
+  "note": "360.md",
+  "config": "BiholderTransport",
+  "statement_lines": 99,
+  "paper_text": "oai-text/Global-Support-and-Convex-Injectivity-Domains-under-Weak-MTW-September-25-2026__paper.txt"
+ },
+ {
+  "note": "360.md",
+  "config": "WeakMTWGlobalSupport",
+  "statement_lines": 59,
+  "paper_text": "oai-text/Global-Support-and-Convex-Injectivity-Domains-under-Weak-MTW-September-25-2026__paper.txt"
+ },
+ {
+  "note": "008.md",
+  "config": "DeligneDrinfeld",
+  "statement_lines": 164,
+  "paper_text": "oai-text/The-Deligne-Drinfeld-conjecture-September-23-2026__paper.txt"
+ },
+ {
+  "note": "049.md",
+  "config": "AbhyankarSathaye",
+  "statement_lines": 16,
+  "paper_text": "oai-text/A-stable-coordinate-that-is-not-a-coordinate-in-four-variables-October-5-2026__stable-coordinate-four-variables.txt"
+ },
+ {
+  "note": "049.md",
+  "config": "CommutingDerivations",
+  "statement_lines": 55,
+  "paper_text": "oai-text/A-stable-coordinate-that-is-not-a-coordinate-in-four-variables-October-5-2026__stable-coordinate-four-variables.txt"
+ },
+ {
+  "note": "049.md",
+  "config": "StableCoordinateFour",
+  "statement_lines": 35,
+  "paper_text": "oai-text/A-stable-coordinate-that-is-not-a-coordinate-in-four-variables-October-5-2026__stable-coordinate-four-variables.txt"
+ },
+ {
+  "note": "075.md",
+  "config": "FourierLLogL",
+  "statement_lines": 19,
+  "paper_text": "oai-text/Almost-everywhere-Fourier-convergence-in-L-log-L-September-23-2026__paper.txt"
+ },
+ {
+  "note": "100.md",
+  "config": "RuledCovering",
+  "statement_lines": 175,
+  "paper_text": "oai-text/Finite-angular-cylinder-covers-below-the-half-area-bound-September-27-2026__main.txt"
+ },
+ {
+  "note": "100.md",
+  "config": "TriangularCovering",
+  "statement_lines": 49,
+  "paper_text": "oai-text/Finite-angular-cylinder-covers-below-the-half-area-bound-September-27-2026__main.txt"
+ },
+ {
+  "note": "102.md",
+  "config": "DirectedFeedback",
+  "statement_lines": 79,
+  "paper_text": "oai-text/A-Direct-Proof-of-Optimal-Max-Cut-Hardness-September-23-2026__paper.txt"
+ },
+ {
+  "note": "102.md",
+  "config": "MinUncut",
+  "statement_lines": 78,
+  "paper_text": "oai-text/A-Direct-Proof-of-Optimal-Max-Cut-Hardness-September-23-2026__paper.txt"
+ },
+ {
+  "note": "102.md",
+  "config": "OptimalMaxCut",
+  "statement_lines": 121,
+  "paper_text": "oai-text/A-Direct-Proof-of-Optimal-Max-Cut-Hardness-September-23-2026__paper.txt"
+ },
+ {
+  "note": "102.md",
+  "config": "UniqueGamesTheorem",
+  "statement_lines": 176,
+  "paper_text": "oai-text/A-Direct-Proof-of-Optimal-Max-Cut-Hardness-September-23-2026__paper.txt"
+ },
+ {
+  "note": "102.md",
+  "config": "VertexCover",
+  "statement_lines": 115,
+  "paper_text": "oai-text/A-Direct-Proof-of-Optimal-Max-Cut-Hardness-September-23-2026__paper.txt"
+ },
+ {
+  "note": "148.md",
+  "config": "SelfSimilar",
+  "statement_lines": 51,
+  "paper_text": "oai-text/The-entropy-rate-dimension-formula-for-self-similar-measures-on-the-line-September-24-2026__main.txt"
+ },
+ {
+  "note": "148.md",
+  "config": "SelfSimilarCorollaries",
+  "statement_lines": 63,
+  "paper_text": "oai-text/The-entropy-rate-dimension-formula-for-self-similar-measures-on-the-line-September-24-2026__main.txt"
+ },
+ {
+  "note": "157.md",
+  "config": "HadwigerCounterexample",
+  "statement_lines": 40,
+  "paper_text": "oai-text/A-counterexample-to-Hadwigers-conjecture-September-23-2026__paper.txt"
+ },
+ {
+  "note": "157.md",
+  "config": "ListHadwiger",
+  "statement_lines": 24,
+  "paper_text": "oai-text/A-counterexample-to-Hadwigers-conjecture-September-23-2026__paper.txt"
+ },
+ {
+  "note": "174.md",
+  "config": "AlgorithmicThinTrees",
+  "statement_lines": 146,
+  "paper_text": "oai-text/A-polynomial-time-construction-of-strong-thin-trees-September-23-2026__paper.txt"
+ },
+ {
+  "note": "174.md",
+  "config": "StrongThinTree",
+  "statement_lines": 30,
+  "paper_text": "oai-text/A-polynomial-time-construction-of-strong-thin-trees-September-23-2026__paper.txt"
+ },
+ {
+  "note": "176.md",
+  "config": "SecondKahnKalai",
+  "statement_lines": 54,
+  "paper_text": "oai-text/The-second-Kahn-Kalai-conjecture-September-24-2026__paper.txt"
+ },
+ {
+  "note": "192.md",
+  "config": "SquareRootDegree",
+  "statement_lines": 43,
+  "paper_text": "oai-text/Unbounded-Violations-of-the-Square-Root-Degree-Bound-September-26-2026__Unbounded-Violations-of-the-Square-Root-Degree-Bound-September-26-2026.txt"
+ },
+ {
+  "note": "249.md",
+  "config": "EilenbergGanea",
+  "statement_lines": 95,
+  "paper_text": "oai-text/A-finitely-generated-counterexample-to-the-Eilenberg-Ganea-conjecture-September-23-2026__paper.txt"
+ },
+ {
+  "note": "271.md",
+  "config": "Heisenberg",
+  "statement_lines": 180,
+  "paper_text": "oai-text/Spontaneous-magnetization-in-the-quantum-Heisenberg-ferromagnet-September-24-2026__paper.txt"
+ },
+ {
+  "note": "330.md",
+  "config": "DiscreteLipschitzFree",
+  "statement_lines": 133,
+  "paper_text": "oai-text/Failure-of-Bounded-Approximation-in-a-Lipschitz-Free-Space-over-a-Uniformly-Discrete-Metric-Space-September-26-2026__main.txt"
+ },
+ {
+  "note": "330.md",
+  "config": "RealL1Renorming",
+  "statement_lines": 38,
+  "paper_text": "oai-text/Failure-of-Bounded-Approximation-in-a-Lipschitz-Free-Space-over-a-Uniformly-Discrete-Metric-Space-September-26-2026__main.txt"
+ }
+]

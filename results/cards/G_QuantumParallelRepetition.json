@@ -1,0 +1,454 @@
+{
+ "result": "G_QuantumParallelRepetition",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/G_QuantumParallelRepetition.lean",
+ "theorems": [
+  "QuantumParallelRepetition.distributionUniformExponential",
+  "QuantumParallelRepetition.standardQuantumParallelRepetition"
+ ],
+ "lint": [
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.entangledValue",
+   "decl_kind": "def",
+   "line": 96,
+   "snippet": "sSup (Set.range (Strategy.winProbability (G := G)))",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.distributionUniformExponential",
+   "decl_kind": "theorem",
+   "line": 118,
+   "snippet": "0 < 1 - entangledValue G →",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.distributionUniformExponential",
+   "decl_kind": "theorem",
+   "line": 123,
+   "snippet": "((1 - entangledValue G) ^ 13 /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.distributionUniformExponential",
+   "decl_kind": "theorem",
+   "line": 123,
+   "snippet": "((1 - entangledValue G) ^ 13 /",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.distributionUniformExponential",
+   "decl_kind": "theorem",
+   "line": 124,
+   "snippet": "((1 - entangledValue G) +",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.distributionUniformExponential",
+   "decl_kind": "theorem",
+   "line": 125,
+   "snippet": "Real.log",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.distributionUniformExponential",
+   "decl_kind": "theorem",
+   "line": 126,
+   "snippet": "((Fintype.card A : ℝ) *",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.distributionUniformExponential",
+   "decl_kind": "theorem",
+   "line": 127,
+   "snippet": "(Fintype.card B : ℝ))))) * (n : ℝ)) := by",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.Game",
+   "decl_kind": "structure",
+   "line": 15,
+   "snippet": "weight_nonneg : ∀ x y, 0 ≤ questionWeight x y",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "G_QuantumParallelRepetition.lean",
+   "decl": "QuantumParallelRepetition.POVM",
+   "decl_kind": "structure",
+   "line": 57,
+   "snippet": "positive : ∀ i, (effect i).PosSemidef",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  }
+ ],
+ "audit": {
+  "summary": "Two results are formalized. (1) There is a universal c>0 such that for every finite game G with nonempty answer sets and ε = 1−ω*(G) > 0, and every n≥1, ω*(G^n) ≤ exp(−c·ε^13/(ε+log(|A||B|))·n). (2) For every finite game with ω*(G)<1 there are c,C>0 with ω*(G^n) ≤ C·exp(−cn) for all n. Here ω* is the supremum over finite-dimensional tensor-product strategies with mixed states and POVMs. The main caveat is minor: (2) allows a multiplicative constant C, so it is formally weaker than the conjecture's exact form exp(−c_G n). Since ω*(G^n) ≤ ω*(G) < 1, the two forms are mathematically equivalent, and (1) implies the paper's form anyway.",
+  "glossary": [
+   {
+    "decl": "Game",
+    "line": 12,
+    "plain": "Finite two-player game: a probability distribution μ on X×Y and a predicate V(x,y,a,b).",
+    "standard_concept": "two-player one-round game (X,Y,A,B,μ,V)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Game.repeat",
+    "line": 23,
+    "plain": "G^{⊗n}: product distribution μ^n; the players win iff V holds in every coordinate.",
+    "standard_concept": "n-fold parallel repetition",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": false
+   },
+   {
+    "decl": "DensityMatrix",
+    "line": 50,
+    "plain": "PSD complex matrix with trace 1.",
+    "standard_concept": "quantum state",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "POVM",
+    "line": 55,
+    "plain": "Family of PSD effects summing to the identity.",
+    "standard_concept": "POVM",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Strategy",
+    "line": 60,
+    "plain": "Finite-dimensional systems for Alice and Bob, a joint mixed state on A⊗B, and question-dependent POVMs for each player.",
+    "standard_concept": "finite-dimensional tensor-product entangled strategy",
+    "matches_standard": "yes",
+    "note": "Excludes commuting-operator strategies; this is standard for ω*.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Strategy.winProbability",
+    "line": 87,
+    "plain": "Σ_{x,y} μ(x,y) Σ_{a,b} [V] Re tr(ρ (A^x_a ⊗ B^y_b)).",
+    "standard_concept": "winning probability",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "entangledValue",
+    "line": 94,
+    "plain": "Supremum of winProbability over all strategies.",
+    "standard_concept": "ω*(G)",
+    "matches_standard": "yes",
+    "note": "Bounded by 1, so sSup is meaningful. If an answer set is empty, no strategy exists and the value is junk 0, which is harmless here.",
+    "citation_ok": true
+   },
+   {
+    "decl": "HasExponentialBound",
+    "line": 102,
+    "plain": "∃ c>0, C>0, ∀ n, v n ≤ C e^{−cn}.",
+    "standard_concept": "exponential decay",
+    "matches_standard": "partly",
+    "note": "Includes the constant C; the conjecture uses C=1 for n≥1. The two are equivalent given ω*(G^n) ≤ ω*(G) < 1.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "distributionUniformExponential",
+    "line": 112,
+    "plain": "∃ c>0 such that for all finite X,Y,A,B (in Type) and every game G: if A and B are nonempty and 1−ω*(G) > 0, then for all n ≥ 1, ω*(G^n) ≤ exp(−c·(ε^13/(ε+ln(|A||B|)))·n), where ε = 1−ω*(G).",
+    "citation_ok": true
+   },
+   {
+    "theorem": "standardQuantumParallelRepetition",
+    "line": 130,
+    "plain": "For every finite game G, ω*(G) < 1 implies ∃ c>0, C>0 with ω*(G^n) ≤ C e^{−cn} for all n ∈ ℕ.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "∃ universal c_qs>0: for every finite game with nonempty answer alphabets, ε = 1−ω*(G) > 0, and every n≥1, ω*(G^{⊗n}) ≤ exp(−c_qs ε^13/(ε+log(|A||B|)) n)."
+   },
+   {
+    "ref": "Quantum Parallel Repetition Conjecture",
+    "plain": "For every finite game with ω*(G)<1, ∃ c_G>0 with ω*(G^{⊗n}) ≤ exp(−c_G n) for all n≥1."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "distributionUniformExponential",
+    "relation": "equivalent",
+    "why": "Same quantifier order, hypotheses and bound; log is the natural log, as is standard."
+   },
+   {
+    "paper_ref": "Quantum Parallel Repetition Conjecture",
+    "lean_theorem": "standardQuantumParallelRepetition",
+    "relation": "lean_weaker",
+    "why": "Allows a constant C. Mathematically equivalent via ω*(G^n) ≤ ω*(G) < 1, so the gap is only formal."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "HasExponentialBound",
+    "line": 104,
+    "paper_ref": "Quantum Parallel Repetition Conjecture",
+    "explanation": "The bound C·exp(−cn) with arbitrary C>0 is formally weaker than exp(−c_G n) for n≥1. It is recoverable because ω*(G^n) ≤ ω*(G) < 1. Theorem 1.1 is formalized separately in exact form.",
+    "polarity": "lean weaker",
+    "probe_idea": "Prove ∀ G, entangledValue G < 1 → ∃ c>0, ∀ n ≥ 1, repeatedEntangledValue G n ≤ Real.exp (-c*n).",
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "Strategy",
+    "line": 62,
+    "paper_ref": null,
+    "explanation": "Strategies are finite-dimensional and tensor-product, with Alice/Bob types restricted to universe Type. This is the standard ω*. The excerpt does not specify the model explicitly.",
+    "polarity": "n/a",
+    "probe_idea": null,
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 96,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Win probabilities are bounded by 1. The set is nonempty when A and B are nonempty; when it is empty the value is 0, which yields only trivially true instances."
+   },
+   {
+    "line": 118,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ, not ℕ."
+   },
+   {
+    "line": 123,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The denominator ε + log(|A||B|) ≥ ε > 0 because A and B are nonempty."
+   },
+   {
+    "line": 123,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real subtraction."
+   },
+   {
+    "line": 124,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real subtraction."
+   },
+   {
+    "line": 125,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "The argument |A||B| is ≥ 1 by the Nonempty hypotheses, so the log is ≥ 0 and genuine."
+   },
+   {
+    "line": 126,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "A is a Fintype assumed nonempty, so its card is ≥ 1."
+   },
+   {
+    "line": 127,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "B is a Fintype assumed nonempty, so its card is ≥ 1."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "HasExponentialBound",
+    "line": 104,
+    "explanation": "The bound C·exp(−cn) with arbitrary C>0 is formally weaker than exp(−c_G n) for n≥1. It is recoverable because ω*(G^n) ≤ ω*(G) < 1. Theorem 1.1 is formalized separately in exact form.",
+    "probe_idea": "Prove ∀ G, entangledValue G < 1 → ∃ c>0, ∀ n ≥ 1, repeatedEntangledValue G n ≤ Real.exp (-c*n)."
+   },
+   "result": {
+    "id": "F1-a0",
+    "status": "GREEN",
+    "claim": "HasExponentialBound allows an arbitrary prefactor C. The sequence 2·exp(-n) satisfies it, yet it violates every pure bound exp(-c·n) with c>0 at n=0, because the value there is 2 > 1. So the definition is formally weaker than a pure exp(-c·n) bound, at least at n=0.",
+    "kind": "discrepancy",
+    "seconds": 26.4,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_hasExp_weaker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_hasExp_weaker :\n    QuantumParallelRepetition.HasExponentialBound (fun n : ℕ => 2 * Real.exp (-(1:ℝ) * (n:ℝ))) ∧\n    ¬ ∃ c : ℝ, 0 < c ∧ ∀ n : ℕ,\n      (fun n : ℕ => 2 * Real.exp (-(1:ℝ) * (n:ℝ))) n ≤ Real.exp (-c * (n:ℝ)) := by\n  refine ⟨⟨1, one_pos, 2, two_pos, fun n => le_refl _⟩, ?_⟩\n  rintro ⟨c, hc, h⟩\n  have := h 0\n  norm_num at this",
+   "attempts": [
+    {
+     "lean": "theorem probe_hasExp_weaker :\n    QuantumParallelRepetition.HasExponentialBound (fun n : ℕ => 2 * Real.exp (-(1:ℝ) * (n:ℝ))) ∧\n    ¬ ∃ c : ℝ, 0 < c ∧ ∀ n : ℕ,\n      (fun n : ℕ => 2 * Real.exp (-(1:ℝ) * (n:ℝ))) n ≤ Real.exp (-c * (n:ℝ)) := by\n  refine ⟨⟨1, one_pos, 2, two_pos, fun n => le_refl _⟩, ?_⟩\n  rintro ⟨c, hc, h⟩\n  have := h 0\n  norm_num at this",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 26.4
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance of the main definition"
+   },
+   "result": {
+    "id": "NV-a2",
+    "status": "YELLOW",
+    "claim": "There is a concrete game on Unit questions and answers together with a concrete entangled strategy for it. This shows that the Game, DensityMatrix, POVM and Strategy structures can all be instantiated.",
+    "kind": "non-vacuity",
+    "seconds": 27.0,
+    "detail": "line 11: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  Finset.univ\nin the target expression\n  ∑ _y ∈ {default}, 1 = 1\n\nhpos : sorry\nhposp : sorry\nhcomp : ∑ _i, 1 = 1\nhtr : Matrix.trace 1 = 1\n⊢ ∑ _y ∈ {default}, 1 = 1\n'probe_nv_strategy' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'probe_nv_strategy': ['sorryAx']}",
+    "axioms": {
+     "probe_nv_strategy": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_nv_strategy :\n    ∃ G : QuantumParallelRepetition.Game Unit Unit Unit Unit,\n      Nonempty (QuantumParallelRepetition.Strategy G) := by\n  have hpos : (1 : Matrix Unit Unit ℂ).PosSemidef := Matrix.PosSemidef.one\n  have hposp : (1 : Matrix (Unit × Unit) (Unit × Unit) ℂ).PosSemidef := Matrix.PosSemidef.one\n  have hcomp : (∑ _i : Unit, (1 : Matrix Unit Unit ℂ)) = 1 := by\n    rw [Finset.univ_unique, Finset.sum_singleton]\n  have htr : Matrix.trace (1 : Matrix (Unit × Unit) (Unit × Unit) ℂ) = 1 := by\n    rw [Matrix.trace_one]\n    simp\n  have hw : (∑ _x : Unit, ∑ _y : Unit, (1 : ℝ)) = 1 := by\n    rw [Finset.univ_unique, Finset.sum_singleton, Finset.univ_unique, Finset.sum_singleton]\n  refine ⟨⟨fun _ _ => (1 : ℝ), fun _ _ => zero_le_one, hw, fun _ _ _ _ => true⟩, ⟨?_⟩⟩\n  exact\n    { Alice := Unit\n      Bob := Unit\n      state := ⟨(1 : Matrix (Unit × Unit) (Unit × Unit) ℂ), hposp, htr⟩\n      aliceMeasurement := fun _ => ⟨fun _ => (1 : Matrix Unit Unit ℂ), fun _ => hpos, hcomp⟩\n      bobMeasurement := fun _ => ⟨fun _ => (1 : Matrix Unit Unit ℂ), fun _ => hpos, hcomp⟩ }",
+   "attempts": [
+    {
+     "lean": "theorem probe_nv_strategy :\n    ∃ G : QuantumParallelRepetition.Game Unit Unit Unit Unit,\n      Nonempty (QuantumParallelRepetition.Strategy G) := by\n  refine ⟨⟨fun _ _ => 1, fun _ _ => zero_le_one, by simp, fun _ _ _ _ => true⟩, ⟨?_⟩⟩\n  exact\n    { Alice := Unit\n      Bob := Unit\n      state := ⟨1, Matrix.PosSemidef.one, by simp⟩\n      aliceMeasurement := fun _ => ⟨fun _ => 1, fun _ => Matrix.PosSemidef.one, by simp⟩\n      bobMeasurement := fun _ => ⟨fun _ => 1, fun _ => Matrix.PosSemidef.one, by simp⟩ }",
+     "status": "YELLOW",
+     "detail": "non-standard axioms: {'probe_nv_strategy': ['sorryAx']}",
+     "seconds": 26.8
+    },
+    {
+     "lean": "theorem probe_nv_strategy :\n    ∃ G : QuantumParallelRepetition.Game Unit Unit Unit Unit,\n      Nonempty (QuantumParallelRepetition.Strategy G) := by\n  let G : QuantumParallelRepetition.Game Unit Unit Unit Unit :=\n    { questionWeight := fun _ _ => (1 : ℝ)\n      weight_nonneg := fun _ _ => zero_le_one\n      weight_normalized := by simp\n      predicate := fun _ _ _ _ => true }\n  have hpos : (1 : Matrix Unit Unit ℂ).PosSemidef := Matrix.PosSemidef.one\n  have hposp : (1 : Matrix (Unit × Unit) (Unit × Unit) ℂ).PosSemidef := Matrix.PosSemidef.one\n  let P : QuantumParallelRepetition.POVM Unit Unit :=\n    { effect := fun _ => (1 : Matrix Unit Unit ℂ)\n      positive := fun _ => hpos\n      complete := by simp }\n  let ρ : QuantumParallelRepetition.DensityMatrix (Unit × Unit) :=\n    { matrix := (1 : Matrix (Unit × Unit) (Unit × Unit) ℂ)\n      positive := hposp\n      trace_one := by simp }\n  refine ⟨G, ⟨?_⟩⟩\n  exact\n    { Alice := Unit\n      Bob := Unit\n      state := ρ\n      aliceMeasurement := fun _ => P\n      bobMeasurement := fun _ => P }",
+     "status": "YELLOW",
+     "detail": "non-standard axioms: {'probe_nv_strategy': ['sorryAx']}",
+     "seconds": 27.7
+    },
+    {
+     "lean": "theorem probe_nv_strategy :\n    ∃ G : QuantumParallelRepetition.Game Unit Unit Unit Unit,\n      Nonempty (QuantumParallelRepetition.Strategy G) := by\n  have hpos : (1 : Matrix Unit Unit ℂ).PosSemidef := Matrix.PosSemidef.one\n  have hposp : (1 : Matrix (Unit × Unit) (Unit × Unit) ℂ).PosSemidef := Matrix.PosSemidef.one\n  have hcomp : (∑ _i : Unit, (1 : Matrix Unit Unit ℂ)) = 1 := by\n    rw [Finset.univ_unique, Finset.sum_singleton]\n  have htr : Matrix.trace (1 : Matrix (Unit × Unit) (Unit × Unit) ℂ) = 1 := by\n    rw [Matrix.trace_one]\n    simp\n  have hw : (∑ _x : Unit, ∑ _y : Unit, (1 : ℝ)) = 1 := by\n    rw [Finset.univ_unique, Finset.sum_singleton, Finset.univ_unique, Finset.sum_singleton]\n  refine ⟨⟨fun _ _ => (1 : ℝ), fun _ _ => zero_le_one, hw, fun _ _ _ _ => true⟩, ⟨?_⟩⟩\n  exact\n    { Alice := Unit\n      Bob := Unit\n      state := ⟨(1 : Matrix (Unit × Unit) (Unit × Unit) ℂ), hposp, htr⟩\n      aliceMeasurement := fun _ => ⟨fun _ => (1 : Matrix Unit Unit ℂ), fun _ => hpos, hcomp⟩\n      bobMeasurement := fun _ => ⟨fun _ => (1 : Matrix Unit Unit ℂ), fun _ => hpos, hcomp⟩ }",
+     "status": "YELLOW",
+     "detail": "line 11: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  Finset.univ\nin the target expression\n  ∑ _y ∈ {default}, 1 = 1\n\nhpos : sorry\nhposp : sorry\nhcomp : ∑ _i, 1 = 1\nhtr : Matrix.trace 1 = 1\n⊢ ∑ _y ∈ {default}, 1 = 1\n'probe_nv_strategy' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'probe_nv_strategy': ['sorryAx']}",
+     "seconds": 27.0
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "QuantumParallelRepetition.distributionUniformExponential",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ c : ℝ, 0 < c ∧\n      ∀ {X Y A B : Type}\n        [Fintype X] [Fintype Y] [Fintype A] [Fintype B]\n        (G : Game X Y A B),\n        Nonempty A → Nonempty B →\n        0 < 1 - entangledValue G →\n        ∀ n : ℕ, 0 < n →\n          repeatedEntangledValue G n ≤\n            Real.exp\n              (-(c *\n                ((1 - entangledValue G) ^ 13 /\n                  ((1 - entangledValue G) +\n                    Real.log\n                      ((Fintype.card A : ℝ) *\n                        (Fintype.card B : ℝ))))) * (n : ℝ))",
+   "restated": "∃ c : ℝ, 0 < c ∧ ∀ {X Y A B : Type} [Fintype X] [Fintype Y] [Fintype A] [Fintype B] (G : Game X Y A B), Nonempty A → Nonempty B → entangledValue G < 1 → ∀ n : ℕ, 0 < n → repeatedEntangledValue G n ≤ Real.exp (-(c * ((1 - entangledValue G) ^ 13 / ((1 - entangledValue G) + Real.log ((Fintype.card A : ℝ) * (Fintype.card B : ℝ)))))  * (n : ℝ))",
+   "english": "There is a universal constant c > 0 such that for every finite nonlocal game G with nonempty answer sets and entangled value ω(G) < 1, and every n ≥ 1, the entangled value of the n-fold parallel repetition is at most exp(-c · (1-ω)^13 / ((1-ω) + log(|A||B|)) · n).",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "Game",
+    "entangledValue",
+    "repeatedEntangledValue"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace QuantumParallelRepetition\nopen scoped BigOperators ComplexOrder Kronecker MatrixOrder\nopen Matrix\ntheorem probe_restate_0  :\n    (∃ c : ℝ, 0 < c ∧\n      ∀ {X Y A B : Type}\n        [Fintype X] [Fintype Y] [Fintype A] [Fintype B]\n        (G : Game X Y A B),\n        Nonempty A → Nonempty B →\n        0 < 1 - entangledValue G →\n        ∀ n : ℕ, 0 < n →\n          repeatedEntangledValue G n ≤\n            Real.exp\n              (-(c *\n                ((1 - entangledValue G) ^ 13 /\n                  ((1 - entangledValue G) +\n                    Real.log\n                      ((Fintype.card A : ℝ) *\n                        (Fintype.card B : ℝ))))) * (n : ℝ))) ↔\n    (∃ c : ℝ, 0 < c ∧ ∀ {X Y A B : Type} [Fintype X] [Fintype Y] [Fintype A] [Fintype B] (G : Game X Y A B), Nonempty A → Nonempty B → entangledValue G < 1 → ∀ n : ℕ, 0 < n → repeatedEntangledValue G n ≤ Real.exp (-(c * ((1 - entangledValue G) ^ 13 / ((1 - entangledValue G) + Real.log ((Fintype.card A : ℝ) * (Fintype.card B : ℝ)))))  * (n : ℝ))) := by\n  simp only [sub_pos]\nend QuantumParallelRepetition\n",
+   "seconds": 27.1
+  },
+  {
+   "target": "QuantumParallelRepetition.standardQuantumParallelRepetition",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "∀ {X Y A B : Type}\n    [Fintype X] [Fintype Y] [Fintype A] [Fintype B]\n    (G : Game X Y A B), StandardQuantumParallelRepetition G",
+   "restated": "@entangledValue X Y A B _ _ _ _ G < 1 → ∃ c : ℝ, 0 < c ∧ ∃ C : ℝ, 0 < C ∧ ∀ n : ℕ, @repeatedEntangledValue X Y A B _ _ _ _ G n ≤ C * Real.exp (-c * (n : ℝ))",
+   "english": "If the entangled value of G is strictly less than 1, then there are constants c > 0 and C > 0 such that for every n the entangled value of the n-fold parallel repetition of G is at most C·exp(-c·n).",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "entangledValue",
+    "repeatedEntangledValue"
+   ],
+   "detail": "non-standard axioms: {'QuantumParallelRepetition.probe_restate_12': ['sorryAx']}",
+   "lean": "namespace QuantumParallelRepetition\nopen scoped BigOperators ComplexOrder Kronecker MatrixOrder\nopen Matrix\ntheorem probe_restate_12  :\n    (∀ {X Y A B : Type}\n    [Fintype X] [Fintype Y] [Fintype A] [Fintype B]\n    (G : Game X Y A B), StandardQuantumParallelRepetition G) ↔\n    (@entangledValue X Y A B _ _ _ _ G < 1 → ∃ c : ℝ, 0 < c ∧ ∃ C : ℝ, 0 < C ∧ ∀ n : ℕ, @repeatedEntangledValue X Y A B _ _ _ _ G n ≤ C * Real.exp (-c * (n : ℝ))) := by\n  unfold StandardQuantumParallelRepetition HasExponentialBound\n   exact Iff.rfl\nend QuantumParallelRepetition\n",
+   "seconds": 22.1
+  },
+  {
+   "target": "QuantumParallelRepetition.HasExponentialBound",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "@HasExponentialBound v",
+   "restated": "∃ r : ℝ, 0 < r ∧ r < 1 ∧ ∃ C : ℝ, 0 < C ∧ ∀ n : ℕ, v n ≤ C * r ^ n",
+   "english": "There exist a ratio r with 0 < r < 1 and a constant C > 0 such that v n ≤ C · rⁿ for every natural number n.",
+   "mathlib_only": true,
+   "bespoke_used": [],
+   "detail": "non-standard axioms: {'QuantumParallelRepetition.probe_restate_22': ['sorryAx']}",
+   "lean": "namespace QuantumParallelRepetition\nopen scoped BigOperators ComplexOrder Kronecker MatrixOrder\nopen Matrix\ntheorem probe_restate_22 (v : ℕ → ℝ) :\n    (@HasExponentialBound v) ↔\n    (∃ r : ℝ, 0 < r ∧ r < 1 ∧ ∃ C : ℝ, 0 < C ∧ ∀ n : ℕ, v n ≤ C * r ^ n) := by\n  unfold QuantumParallelRepetition.HasExponentialBound\n  have key : ∀ (t : ℝ) (n : ℕ), Real.exp (t * (n : ℝ)) = Real.exp t ^ n := by\n    intro t n\n    induction n with\n    | zero => simp\n    | succ k ih => rw [Nat.cast_succ, mul_add, mul_one, Real.exp_add, ih, pow_succ]\n  constructor\n  · rintro ⟨c, hc, C, hC, h⟩\n    refine ⟨Real.exp (-c), Real.exp_pos _, Real.exp_lt_one (by linarith), C, hC, fun n => ?_⟩\n    have h1 := h n\n    rw [key (-c) n] at h1\n    exact h1\n  · rintro ⟨r, hr0, hr1, C, hC, h⟩\n    refine ⟨-Real.log r, ?_, C, hC, fun n => ?_⟩\n    · have h2 := Real.log_lt_log hr0 hr1\n      rw [Real.log_one] at h2\n      linarith\n    · have e : Real.exp (-(-Real.log r) * (n : ℝ)) = r ^ n := by\n        rw [neg_neg, key, Real.exp_log hr0]\n      rw [e]\n      exact h n\nend QuantumParallelRepetition\n",
+   "seconds": 27.9
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 111,
+  "lines_needing_human_review": 65,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

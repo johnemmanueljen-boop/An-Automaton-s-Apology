@@ -1,0 +1,967 @@
+[
+ {
+  "note": "049.md",
+  "config": "AbhyankarSathaye",
+  "lines": 16,
+  "summary": "Lean proves that for every n ≥ 4 there is a polynomial F ∈ ℂ[x_0,…,x_{n-1}] whose quotient ℂ[x]/(F) is ℂ-isomorphic to a polynomial ring in n−1 variables, but which is not a coordinate: no ℂ-automorphism of ℂ[x] sends a variable to F. For n = 4 this is the paper's disproof of the Abhyankar–Sathaye embedding conjecture. The main caveat is that the existential statement omits Theorem 1.1's positive half, namely that f becomes a coordinate after adjoining one variable, so the stable-coordinate counterexample is not formalized. The Lean statement is also stronger than the excerpt: it claims every n ≥ 4, while the paper treats only n = 4.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "relation": "lean_weaker",
+    "why": "Only the non-coordinate half is stated, existentially. The one-stable-coordinate part (automorphism of R[w]) is absent."
+   },
+   {
+    "paper_ref": "Corollary 1.2",
+    "lean_theorem": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "relation": "lean_weaker",
+    "why": "At n=4 Lean gives one hypersurface (F=0) ≅ A^3 that is not a coordinate, i.e. the AS-conjecture disproof. It does not cover every λ-fiber or the specific f."
+   },
+   {
+    "paper_ref": "Extension to n ≥ 5",
+    "lean_theorem": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "relation": "lean_stronger",
+    "why": "Lean claims counterexamples in all dimensions ≥ 4; the excerpt only treats n = 4. The paper's f becomes a coordinate after adding a variable, so it does not directly give n=5."
+   }
+  ],
+  "flags_medium_high": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "line": 12,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The stable-coordinate half of Theorem 1.1 (f is a coordinate of R[w]) is not formalized. The headline counterexample to the stable coordinate conjecture is therefore not checked. Only the Abhyankar–Sathaye counterexample is.",
+    "polarity": "lean weaker",
+    "probe_idea": "Add the conjunct: ∃ φ : MvPolynomial (Fin (n+1)) ℂ ≃ₐ[ℂ] MvPolynomial (Fin (n+1)) ℂ, ∃ i, φ (X i) = rename Fin.castSucc F."
+   }
+  ],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "line": 12,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The stable-coordinate half of Theorem 1.1 (f is a coordinate of R[w]) is not formalized. The headline counterexample to the stable coordinate conjecture is therefore not checked. Only the Abhyankar–Sathaye counterexample is.",
+    "polarity": "lean weaker",
+    "probe_idea": "Add the conjunct: ∃ φ : MvPolynomial (Fin (n+1)) ℂ ≃ₐ[ℂ] MvPolynomial (Fin (n+1)) ℂ, ∃ i, φ (X i) = rename Fin.castSucc F."
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "line": 11,
+    "paper_ref": null,
+    "explanation": "The statement is existential and does not pin down the paper's explicit degree-5 polynomial f, nor all fibers f−λ.",
+    "polarity": "lean weaker",
+    "probe_idea": "State the theorem for the explicit f at n=4 and for f - C λ for arbitrary λ."
+   },
+   {
+    "id": "F3",
+    "category": "other",
+    "severity": "low",
+    "decl": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "line": 11,
+    "paper_ref": "Corollary 1.2",
+    "explanation": "Lean claims the result for every n ≥ 4, which is stronger than the n=4 result in the excerpt. Higher-dimensional cases are not in the excerpt. Stronger is acceptable, but this content goes beyond the paper.",
+    "polarity": "lean stronger",
+    "probe_idea": null
+   }
+  ]
+ },
+ {
+  "note": "075.md",
+  "config": "FourierLLogL",
+  "lines": 19,
+  "summary": "The theorem says: for every a.e.-strongly-measurable f : ℝ/2πℤ → ℂ with ∫ |f| log(2+|f|) dμ < ∞, where μ is normalized Haar measure, there is a measurable null set E off which the symmetric Fourier partial sums S_N f(x) = Σ_{|k|≤N} f̂(k) e^{ikx} converge to f(x) as N → ∞ along all N. This matches Theorem 1.1 faithfully. The integrability hypothesis implies f ∈ L¹, so `fourierCoeff` is not a junk value. No significant caveat was found; only the auxiliary weak-L¹ maximal corollary is left unformalized.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "paperMain",
+    "relation": "equivalent",
+    "why": "Same class (|f| log(2+|f|) integrable), same symmetric partial sums, full-sequence limit, measurable null exceptional set."
+   },
+   {
+    "paper_ref": "Corollary 10.3",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "The maximal weak-L¹ bound is not stated in Lean."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "paperMain",
+    "line": 12,
+    "paper_ref": "Corollary 10.3",
+    "explanation": "Only the a.e. convergence theorem is formalized. The weak-L¹ maximal estimate and the intermediate good-set estimate (1.1) are not formalized.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ]
+ },
+ {
+  "note": "157.md",
+  "config": "ListHadwiger",
+  "lines": 24,
+  "summary": "The Lean target asserts a linear list-Hadwiger bound. There is a constant C ≥ 1 such that every finite nonempty simple graph G satisfies ch(G) ≤ C·h(G), where ch is the list chromatic number and h is the Hadwiger number. The paper excerpt claims the opposite kind of result: it disproves Hadwiger's conjecture χ(G) ≤ h(G) by constructing counterexamples, and it proves no positive upper bound on any chromatic parameter in terms of h(G). The single most important caveat is that the formal statement is unrelated to, and of opposite polarity from, the paper's claims (goal substitution). The bespoke definitions themselves look faithful.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Connected matchings and independence number do not appear in the Lean file."
+   },
+   {
+    "paper_ref": "Corollary 1.2",
+    "lean_theorem": "main_theorem",
+    "relation": "different",
+    "why": "The paper constructs counterexamples to χ ≤ h; Lean asserts a positive linear bound ch ≤ C·h, a different (open, linear list-Hadwiger) statement."
+   },
+   {
+    "paper_ref": "Proposition 3.5 (stated in intro)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Not present in the Lean file."
+   }
+  ],
+  "flags_medium_high": [
+   {
+    "id": "F1",
+    "category": "goal-substitution",
+    "severity": "high",
+    "decl": "main_theorem",
+    "line": 26,
+    "paper_ref": "Corollary 1.2",
+    "explanation": "The Lean statement asserts the existence of a universal linear bound ch(G) ≤ C·h(G); this is the linear list-Hadwiger conjecture. The paper excerpt only constructs graphs with χ > h, a negative existence result. Nothing in the excerpt proves, or even states, an upper bound of this form. The paper's counterexamples are consistent with the Lean claim for C ≥ 2 but do not imply it. The formal target therefore certifies nothing the paper claims.",
+    "polarity": "unclear",
+    "probe_idea": "Formalize the paper's actual claim instead: ∀ N, ∃ (V : Type) [Fintype V] (G : SimpleGraph V), N ≤ Fintype.card V ∧ hadwigerNumber G < G.chromaticNumber (and the α ≤ 2 / cm bounds). Compare it with main_theorem."
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "high",
+    "decl": "main_theorem",
+    "line": 30,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper's main theorem (α(G) ≤ 2 with cm(G) < m/100) and its fractional corollary are absent from the formalization.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "goal-substitution",
+    "severity": "high",
+    "decl": "main_theorem",
+    "line": 26,
+    "paper_ref": "Corollary 1.2",
+    "explanation": "The Lean statement asserts the existence of a universal linear bound ch(G) ≤ C·h(G); this is the linear list-Hadwiger conjecture. The paper excerpt only constructs graphs with χ > h, a negative existence result. Nothing in the excerpt proves, or even states, an upper bound of this form. The paper's counterexamples are consistent with the Lean claim for C ≥ 2 but do not imply it. The formal target therefore certifies nothing the paper claims.",
+    "polarity": "unclear",
+    "probe_idea": "Formalize the paper's actual claim instead: ∀ N, ∃ (V : Type) [Fintype V] (G : SimpleGraph V), N ≤ Fintype.card V ∧ hadwigerNumber G < G.chromaticNumber (and the α ≤ 2 / cm bounds). Compare it with main_theorem."
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "high",
+    "decl": "main_theorem",
+    "line": 30,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper's main theorem (α(G) ≤ 2 with cm(G) < m/100) and its fractional corollary are absent from the formalization.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ]
+ },
+ {
+  "note": "198.md",
+  "config": "LittleFinitistic",
+  "lines": 25,
+  "summary": "The Lean theorem asserts that there is a ring A with a ℂ-algebra structure, finite-dimensional over ℂ, satisfying two things. First, its little finitistic dimension (the supremum of the projective dimensions of finitely generated left A-modules of finite projective dimension) equals ⊤. Second, for every m ≥ 1 there is a finitely generated left A-module N with 2m−2 ≤ pd N < ∞. This matches Theorem 1.1 faithfully. The main caveat is coverage only: the corollaries about the big finitistic dimension, injective generation, and Corollary 1.2 are not formalized. No faithfulness defect was found.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "OAI.LittleFinitistic.Main.exists_counterexample",
+    "relation": "equivalent",
+    "why": "Over a finite-dimensional algebra, finitely generated modules are the same as finite-dimensional ones. The algebra is fixed before m is quantified, the bounds match, and fin.dim = ∞ is stated explicitly."
+   },
+   {
+    "paper_ref": "Corollary 1.2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Neither the left–right asymmetry, the big finitistic dimension, nor injective generation is stated in Lean."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "OAI.LittleFinitistic.Main.exists_counterexample",
+    "line": 23,
+    "paper_ref": "Corollary 1.2",
+    "explanation": "Only Theorem 1.1 is formalized. The big-finitistic, injective-generation and asymmetry consequences are absent.",
+    "polarity": "n/a",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "OAI.LittleFinitistic.Main.exists_counterexample",
+    "line": 26,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper speaks of finite-dimensional modules, while Lean uses Module.Finite A N. These are equivalent because A is finite-dimensional over ℂ via the algebra structure, so this is not a real discrepancy.",
+    "polarity": "n/a",
+    "probe_idea": "Prove: FiniteDimensional ℂ A → Module.Finite A N → FiniteDimensional ℂ N, using the restricted-scalars ℂ-structure."
+   }
+  ]
+ },
+ {
+  "note": "072.md",
+  "config": "BrennanSharp",
+  "lines": 29,
+  "summary": "The Lean theorem states five facts about the Koebe map k(z)=z/(1−z)^2. It is schlicht on the unit disk. ∫_D |k'|^{-2} dA = ∞ and ∫_D |k'|^{2/3} dA = ∞. Its inverse g on the Koebe domain Ω = k(D) satisfies |g'|^4 ∉ L¹(Ω) and |g'|^{4/3} ∉ L¹(Ω). This is the classical sharpness example for the Brennan exponent range 4/3 < p < 4. The most important caveat: none of this appears in the supplied excerpt. That paper's Theorem 1.1, the uniform M_{-1}[f'](r) bound giving B_b(−1) < 1/4, is not formalized at all. The Lean content apparently belongs to the cited companion article on Brennan's conjecture, which is not in the excerpt.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "The Lean file says nothing about integral means M_{-1}, the spectrum B_b, or any uniform bound over S."
+   },
+   {
+    "paper_ref": "Lemma 2.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Not addressed."
+   },
+   {
+    "paper_ref": "Lemma 2.2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Not addressed."
+   },
+   {
+    "paper_ref": "Companion article [Ope26] (Brennan endpoint sharpness)",
+    "lean_theorem": "sharp_endpoints",
+    "relation": "different",
+    "why": "Not in excerpt. The Lean statement matches the classical Koebe sharpness example for Brennan's exponents 4/3 and 4, which this excerpt only references."
+   }
+  ],
+  "flags_medium_high": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "high",
+    "decl": "sharp_endpoints",
+    "line": 36,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The target theorem is about Koebe-map endpoint divergence for Brennan's conjecture, not the paper's main result, the uniform inverse-first-power bound and B_b(−1) < 1/4. The paper's headline claim is entirely unformalized. The formalized content is not stated in the excerpt.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "high",
+    "decl": "sharp_endpoints",
+    "line": 36,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The target theorem is about Koebe-map endpoint divergence for Brennan's conjecture, not the paper's main result, the uniform inverse-first-power bound and B_b(−1) < 1/4. The paper's headline claim is entirely unformalized. The formalized content is not stated in the excerpt.",
+    "polarity": "n/a",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "SharpEndpointStatement",
+    "line": 33,
+    "paper_ref": null,
+    "explanation": "¬IntegrableOn could in principle hold merely through failure of a.e.-strong measurability. Here deriv of any function ℂ→ℂ is measurable (measurable_deriv), so ¬IntegrableOn should mean genuine divergence. Only the endpoints are asserted; finiteness inside (4/3, 4) is not claimed.",
+    "polarity": "lean weaker",
+    "probe_idea": "example : AEStronglyMeasurable (fun z => ‖deriv koebeInverse z‖ ^ (4:ℝ)) (volume.restrict koebeDomain) := by measurability / measurable_deriv"
+   }
+  ]
+ },
+ {
+  "note": "343.md",
+  "config": "BallPacking",
+  "lines": 30,
+  "summary": "The Lean theorem states that for n ≥ 3, k ≥ 1, R > 0 and positive r_1..r_k, the following are equivalent. (1) There exist open neighborhoods U_i of the closed capacity-r_i balls in ℂ^n, with smooth topological embeddings f_i : U_i → ℂ^n that preserve the standard symplectic form, sending each closed ball into the open capacity-R ball, with pairwise disjoint images of the closed balls. (2) Σ r_i^n < R^n and r_i + r_j < R for i ≠ j. This matches Theorem 1.1 of the paper. No substantive caveat was found. The only nuance is that the neighborhood U_i is not itself required to map into the target, which is harmless because the neighborhood can be shrunk.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "main_theorem",
+    "relation": "equivalent",
+    "why": "Same dimension and count hypotheses, the same capacity convention, closed source and open target, embeddings on neighborhoods, disjoint images, and the same inequalities."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "HasPacking",
+    "line": 29,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The neighborhood U_i is not required to map into int B(R); only the closed ball is. The paper's notion presumably has the whole embedding land in the target. These are equivalent, since f_i^{-1}(int B(R)) ∩ U_i is an open neighborhood of the compact ball. So this is not a mismatch, just a presentational difference.",
+    "polarity": "n/a",
+    "probe_idea": "Prove that HasPacking implies the variant requiring Set.MapsTo (f i) (U i) (openBall n R), by shrinking U i to U i ∩ f i ⁻¹' openBall n R."
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "SymplecticOn",
+    "line": 22,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The embedding is required to be topological, plus smooth with symplectic derivative, rather than a smooth embedding stated directly. This is equivalent because a symplectic linear map is injective.",
+    "polarity": "n/a",
+    "probe_idea": "Show that ∀ x ∈ U, Function.Injective (fderiv ℝ f x) follows from the form-preservation clause, using the nondegeneracy of standardForm."
+   }
+  ]
+ },
+ {
+  "note": "174.md",
+  "config": "StrongThinTree",
+  "lines": 30,
+  "summary": "The Lean theorem states that there is a universal constant C > 0 with the following property. For every k ≥ 1 and every loopless multigraph on n ≥ 2 vertices with labelled edge copies that is k-edge-connected, some spanning tree T satisfies |δ_T(S)| ≤ (C/k)|δ_G(S)| for every cut ∅ ≠ S ⊊ V. The definitions are faithful. The most important caveat is that this is only the existence statement (the companion strong thin-tree conjecture). The paper's actual contribution, a deterministic polynomial-time algorithm that also handles binary-encoded multiplicities, is not formalized.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "strongThinTree",
+    "relation": "lean_weaker",
+    "why": "Lean asserts only existence of the tree; the deterministic polynomial-time algorithm and the binary-multiplicity input model are not formalized. The n = 1 case is also excluded, though it is trivial."
+   }
+  ],
+  "flags_medium_high": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "strongThinTree",
+    "line": 31,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper's main claim is algorithmic: deterministic polynomial time, including with binary multiplicities. The Lean statement is a pure existence claim (∃ T), which corresponds to the companion paper's existence theorem rather than this paper's contribution.",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   }
+  ],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "strongThinTree",
+    "line": 31,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper's main claim is algorithmic: deterministic polynomial time, including with binary multiplicities. The Lean statement is a pure existence claim (∃ T), which corresponds to the companion paper's existence theorem rather than this paper's contribution.",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "quantifier",
+    "severity": "low",
+    "decl": "MainStatement",
+    "line": 32,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "Lean requires n ≥ 2, while the paper allows n ≥ 1. The one-vertex case is trivial (empty tree, vacuous cut condition), so little is lost.",
+    "polarity": "lean weaker",
+    "probe_idea": "Prove the n = 1 instance with T = ∅."
+   }
+  ]
+ },
+ {
+  "note": "252.md",
+  "config": "TorsionFreeHyperbolic",
+  "lines": 33,
+  "summary": "The Lean theorem asserts that some group G (in Type) exists that is torsion-free, word-hyperbolic and not residually finite. Word-hyperbolic is encoded as: some finite S makes the Cayley graph `mulCayley S` connected, and some natural number δ makes every geodesic triangle of walks δ-thin on vertices. This matches Theorem 1.1. The main caveat is coverage only: Corollary 1.2 (linear obstruction) and Theorem 2.1 (triangle-complex criterion) are not formalized. The bespoke hyperbolicity definition looks like a faithful vertex-level version of the standard Gromov thin-triangles definition.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "OAI.Release075.main",
+    "relation": "equivalent",
+    "why": "All three properties are encoded with standard meanings."
+   },
+   {
+    "paper_ref": "Corollary 1.2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "There is no statement about linear representations."
+   },
+   {
+    "paper_ref": "Theorem 2.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "This is an intermediate criterion and is not stated in Lean."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "OAI.Release075.main",
+    "line": 37,
+    "paper_ref": "Corollary 1.2",
+    "explanation": "Only the headline existence theorem is formalized. The linear-obstruction corollary and the triangle-complex criterion are absent.",
+    "polarity": "n/a",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "WordHyperbolic",
+    "line": 24,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "Thinness is required only at vertices of the Cayley graph, using graph distance and geodesic walks. Points interior to edges are ignored, which is standard up to a shift δ ↦ δ+1. Faithfulness also relies on `SimpleGraph.mulCayley` having the usual Cayley-graph adjacency (left or right multiplication by elements of S, symmetrized).",
+    "polarity": "unclear",
+    "probe_idea": "Check the definition of SimpleGraph.mulCayley: prove `(SimpleGraph.mulCayley S).Adj a b ↔ a ≠ b ∧ ∃ s ∈ S, a * s = b ∨ b * s = a` (or the left-multiplication analogue)."
+   }
+  ]
+ },
+ {
+  "note": "330.md",
+  "config": "RealL1Renorming",
+  "lines": 38,
+  "summary": "For every natural p ≥ 1 the Lean statement asserts an equivalent norm N on real ℓ¹(ℕ) such that (1/2)‖c‖₁ ≤ N(c) ≤ B_p‖c‖₁, where B_p = 300p²+150p+5. With that norm and the original vector-space operations, ℓ¹ is complete, has 2B_p-BAP and fails p-BAP. For p = 1 it fails 1-BAP, i.e. MAP. This matches Corollary 1.3 faithfully. The main caveat is minor: the statement depends on the local `letI` instances for the norm N, rather than the global ℓ¹ instances, being the ones picked up inside `HasBAP` and `CompleteSpace`. Lean prioritises local instances, so this should be fine.",
+  "coverage": [
+   {
+    "paper_ref": "Corollary 1.3",
+    "lean_theorem": "real_l1_quantitative_renorming",
+    "relation": "equivalent",
+    "why": "All bounds, BAP constants and the MAP failure for p = 1 match; the module operations are kept fixed."
+   },
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Free spaces are not formalized in this file."
+   },
+   {
+    "paper_ref": "Theorem 1.2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Not in the target file."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "RealL1RenormingStatement",
+    "line": 41,
+    "paper_ref": "Corollary 1.3",
+    "explanation": "Correctness depends on the local `letI` instances (norm N and structure s) being used inside `HasBAP` and `CompleteSpace`, overriding the global ℓ¹ instances declared at lines 30-34. Lean 4 prefers local instances, so this is very likely fine. If the global instance were used instead, the BAP claims would concern the original ℓ¹ norm, which has MAP; the statement would then be contradictory rather than vacuous.",
+    "polarity": "n/a",
+    "probe_idea": "Inside the `let` block, check `example : (‖·‖ : RealL1 → ℝ) = N := rfl`."
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "RealL1RenormingStatement",
+    "line": 46,
+    "paper_ref": "Corollary 1.3",
+    "explanation": "The clause `p = 1 → ¬HasBAP 1` is redundant given `¬HasBAP p`. It is harmless.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ]
+ },
+ {
+  "note": "175.md",
+  "config": "TalagrandExpectationThreshold",
+  "lines": 39,
+  "summary": "The Lean theorem states the following. For a finite nonempty ground type α and a nonempty, proper, increasing family F ⊆ 2^α, sup{p∈[0,1] : F is fractionally p-small with budget 1/2} ≤ 25·512^4 · sup{p∈[0,1] : F is p-small with budget 1/2}. The definitions of cover, cost, fractional cover and fractional cost match the paper's ⟨G⟩, c_p(G), ⟨g⟩ and w(g,p). Both feasible sets contain p = 0 and are bounded by 1, so the sSup values are genuine suprema, not junk. The main caveat is minor: the paper's pointwise reformulation (fractional cover at r gives an integral cover at r/C) and Remark 1.2 are not stated separately.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "talagrand_expectation_threshold_equivalence",
+    "relation": "equivalent",
+    "why": "Same hypotheses, definitions and constant; sSup equals the paper's threshold."
+   },
+   {
+    "paper_ref": "Theorem 1.1 (budget remark)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "The pointwise form is not stated. It follows from the sup form together with monotonicity in p."
+   },
+   {
+    "paper_ref": "Theorem 2.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Intermediate lemma."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "talagrand_expectation_threshold_equivalence",
+    "line": 55,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "Only the threshold inequality is formalized. The pointwise 'same budget' reformulation and Remark 1.2 (Talagrand's original formulation) are not stated separately.",
+    "polarity": "n/a",
+    "probe_idea": "∀ r g, FractionalCover F g → fracCost r g ≤ 1/2 → Small (r/(25*512^4)) F"
+   }
+  ]
+ },
+ {
+  "note": "192.md",
+  "config": "SquareRootDegree",
+  "lines": 43,
+  "summary": "The Lean theorem proves two things. First, for every real C > 0 there are n > 0 and a nonconstant function f : {±1}^n → {±1} (encoded as Bool-valued inputs and ℝ-valued outputs in {−1, 1}) whose signed sum of singleton Fourier coefficients exceeds C·√deg(f). Second, the set of ratios Σ_i|f̂({i})|/√deg(f), taken over Boolean f with deg(f) > 0, is not bounded above. The definitions of the uniform average, the characters, the Fourier coefficients and the real Fourier degree (sup of |S| over nonzero f̂(S), which is 0 for constants) match the paper. I found no material caveat: the junk-value risks (division, empty sup, cardinality zero) are all neutralized by the hypotheses or are harmless.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "OAI.SquareRootDegree.main",
+    "relation": "equivalent",
+    "why": "Both clauses are formalized faithfully. 'Not bounded above' is the real-valued rendering of sup = ∞."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": []
+ },
+ {
+  "note": "081.md",
+  "config": "RieszQuantitative",
+  "lines": 47,
+  "summary": "Fix integers d ≥ 4 and 2 ≤ n ≤ d−2, and constants C_AD ≥ 1 and C_R ≥ 0. The Lean statement says there exist θ > 0 and M ≥ 0 that work for every regular (Radon) Borel measure μ on ℝ^d satisfying two conditions: n-AD regularity with constant C_AD, and the uniform L² bound C_R for all hard truncations of the kernel (x−y)/|x−y|^{n+1}. For such μ, every x ∈ supp μ and every 0 < r ≤ diam(supp μ) admit an M-Lipschitz map g from the Euclidean n-ball B(0,r) into ℝ^d with μ(B(x,r) ∩ g(B)) ≥ θ rⁿ. This matches the excerpted Theorem 1.3 with class-uniform constants. The main caveat is that Definition 1.2 and condition (1.2) are not in the excerpt, so the exact conventions (μ versus Hⁿ|E, r ≤ diam versus r < diam, open versus closed balls) cannot be fully checked, though each plausible variant is equivalent up to constants.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.3",
+    "lean_theorem": "quantitative_higher_codimension_riesz_rectifiability",
+    "relation": "equivalent",
+    "why": "Same dimension range, hypotheses, uniform quantifier order (constants chosen before μ, x and r) and ball-image conclusion, up to conventions in Definition 1.2 that are not in the excerpt."
+   },
+   {
+    "paper_ref": "Section 8 (variation / principal values)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Corollaries are not part of the target."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "BallImageConclusion",
+    "line": 39,
+    "paper_ref": "Definition 1.2",
+    "explanation": "Definition 1.2 is not in the excerpt. It may measure E ∩ B(x,r) ∩ g(B) with Hⁿ rather than μ, use closed balls, or use r < diam E. For AD-regular μ these variants are equivalent up to constants depending only on C_AD, n and d. The class-uniform form therefore matches.",
+    "polarity": "unclear",
+    "probe_idea": "Prove that for ADRegularWithConstant n C μ, μ ≤ c(C,n,d)·Hⁿ restricted to supp μ and conversely, so the μ and Hⁿ versions of the conclusion are interchangeable."
+   },
+   {
+    "id": "F2",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "truncated",
+    "line": 20,
+    "paper_ref": "Lemma 1.4",
+    "explanation": "The Bochner integral returns 0 when the integrand is not integrable. Lemma 1.4 gives absolute convergence for AD-regular μ with D_E > 0 and f ∈ L², so the junk value should never be used. In the degenerate case D_E = 0 the conclusion is vacuous.",
+    "polarity": "n/a",
+    "probe_idea": "Prove ∀ x ε > 0, MemLp f 2 μ → Integrable (fun y => f y • kernel n x y) (μ.restrict {y | ε < dist x y}) under ADRegularWithConstant with 0 < ediam μ.support."
+   }
+  ]
+ },
+ {
+  "note": "206.md",
+  "config": "FiniteCongruenceGraph",
+  "lines": 48,
+  "summary": "The Lean theorem states that a finite lattice L with a least element is isomorphic to the full congruence lattice Con(A) of some algebra A on a nonempty finite carrier Fin n (finitely many finitary operations) if and only if there is a nonempty finite colored complete graph. Its coloring c : Fin n → Fin n → L must be symmetric, vanish exactly on the diagonal, satisfy the triangle inequality, be join-dense in L, and satisfy a path condition. The path condition says every pair whose color lies below the join of a nonempty seed set's colors is connected, by an equivalence-closure path, to images of seeds under label-decreasing self-maps. This is a faithful rendering of the characterization in Theorem 1.1(i). The main caveat is that the exact wording of the paper's Theorem 2.2 is not in the excerpt, and the decidability claims and parts (ii)–(iv) are not formalized.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1(i) / Theorem 2.2",
+    "lean_theorem": "graph_criterion",
+    "relation": "equivalent",
+    "why": "The iff characterization appears faithful. The per-size decidability remark is not formalized but is trivial for a finite search."
+   },
+   {
+    "paper_ref": "Theorem 1.1(ii)-(iv)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "The target is only the graph criterion."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "IsGraphWitness",
+    "line": 41,
+    "paper_ref": "Theorem 2.2",
+    "explanation": "The exact statement of Theorem 2.2 is not in the excerpt, so the Lean criterion cannot be compared verbatim. Possible differences include seed nonemptiness, ordered versus unordered seeds, and join-density versus another generation condition. Sketch check: necessity holds with c = principal congruence Cg, since unary polynomials are label-decreasing and Mal'cev chains give the path condition. Sufficiency holds with all label-decreasing maps as operations. So the Lean iff is a correct, standard criterion.",
+    "polarity": "unclear",
+    "probe_idea": "Compare the Lean IsGraphWitness clause-by-clause with the full text of Theorem 2.2."
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "Algebra",
+    "line": 10,
+    "paper_ref": "Theorem 1.1(i)",
+    "explanation": "Algebras have finitely many finitary operations. This is harmless for Con on a finite carrier, because finitely many operations suffice to separate the finitely many non-congruences.",
+    "polarity": "n/a",
+    "probe_idea": null
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "graph_criterion",
+    "line": 57,
+    "paper_ref": "Theorem 1.1(ii)-(iv)",
+    "explanation": "The headline undecidability results and the minimal nonrepresentable lattice are not formalized. Only the background characterization is.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ]
+ },
+ {
+  "note": "100.md",
+  "config": "TriangularCovering",
+  "lines": 49,
+  "summary": "The Lean theorem proves three facts about the specific regular tetrahedron K = {(x,y,√2 t) : 0≤t≤1, |x|≤1−t, |y|≤t}. First, the infimum of its orthogonal shadow areas equals √2. Second, there exist δ>0 and C>0 such that for every 0<ε<δ there is a covering of K by exactly 2⌈2/ε²⌉ cylinders with nondegenerate triangular perpendicular bases, whose total area satisfies |Σ|B_i|/√2 − (1/2 − 13ε²/6000)| ≤ Cε⁴ and is strictly less than A_min/2. Third, some finite such covering of K has Σ|B_i|/|π_{u_i⊥}K| < 1/2. The main caveat is that Corollary 1.2 (every nondegenerate tetrahedron) is formalized only for this one regular tetrahedron, and Theorem 1.1's explicit range ε ≤ 1/2000 and constant 2 are replaced by existential δ and C.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "OAI.TriangularCovering.main",
+    "relation": "lean_weaker",
+    "why": "The range of ε (any δ instead of 1/2000) and the constant (any C instead of 2) are existential; the cylinder count, leading terms and strict saving match."
+   },
+   {
+    "paper_ref": "Lemma 2.1",
+    "lean_theorem": "OAI.TriangularCovering.main",
+    "relation": "lean_weaker",
+    "why": "Lean states the infimum value only, not that it is attained."
+   },
+   {
+    "paper_ref": "Corollary 1.2",
+    "lean_theorem": "OAI.TriangularCovering.main",
+    "relation": "lean_weaker",
+    "why": "Lean covers only the specific regular tetrahedron K; the affine-invariance extension to all tetrahedra is not formalized."
+   }
+  ],
+  "flags_medium_high": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "NormalizedCounterexample",
+    "line": 62,
+    "paper_ref": "Corollary 1.2",
+    "explanation": "The corollary claims the counterexample for every nondegenerate tetrahedron. Lean proves it only for K, where it follows directly from part (ii) and A_min = H. The affine-invariance step is not formalized.",
+    "polarity": "lean weaker",
+    "probe_idea": "State ∀ v : Fin 4 → Space, AffineIndependent ℝ v → ∃ m (c : Fin m → TriCylinder), (convexHull ℝ (range v)) ⊆ ⋃ i, (c i).carrier ∧ Σ i, area (c i).base / area (projection (c i).axis '' convexHull ℝ (range v)) < 1/2."
+   },
+   {
+    "id": "F2",
+    "category": "quantifier",
+    "severity": "medium",
+    "decl": "MainAsymptotic",
+    "line": 55,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper asserts the construction for every 0<ε≤1/2000 with remainder at most 2ε⁴. Lean only asserts existence of some δ>0 and C>0, so the explicit range and constant are lost.",
+    "polarity": "lean weaker",
+    "probe_idea": "Replace ∃ δ C with δ = 1/2000 (using ε ≤ δ) and C = 2."
+   }
+  ],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "NormalizedCounterexample",
+    "line": 62,
+    "paper_ref": "Corollary 1.2",
+    "explanation": "The corollary claims the counterexample for every nondegenerate tetrahedron. Lean proves it only for K, where it follows directly from part (ii) and A_min = H. The affine-invariance step is not formalized.",
+    "polarity": "lean weaker",
+    "probe_idea": "State ∀ v : Fin 4 → Space, AffineIndependent ℝ v → ∃ m (c : Fin m → TriCylinder), (convexHull ℝ (range v)) ⊆ ⋃ i, (c i).carrier ∧ Σ i, area (c i).base / area (projection (c i).axis '' convexHull ℝ (range v)) < 1/2."
+   },
+   {
+    "id": "F2",
+    "category": "quantifier",
+    "severity": "medium",
+    "decl": "MainAsymptotic",
+    "line": 55,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper asserts the construction for every 0<ε≤1/2000 with remainder at most 2ε⁴. Lean only asserts existence of some δ>0 and C>0, so the explicit range and constant are lost.",
+    "polarity": "lean weaker",
+    "probe_idea": "Replace ∃ δ C with δ = 1/2000 (using ε ≤ δ) and C = 2."
+   },
+   {
+    "id": "F3",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "area",
+    "line": 22,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "Area uses Measure.euclideanHausdorffMeasure 2. This equals planar Lebesgue area only if that measure is normalized. Since A_min = √2 is proved, an unnormalized measure would have made the theorem false, so this is likely fine but worth confirming.",
+    "polarity": "unclear",
+    "probe_idea": "Prove area of the unit square {(x,y,0) : x,y ∈ [0,1]} equals 1."
+   },
+   {
+    "id": "F4",
+    "category": "other",
+    "severity": "low",
+    "decl": "A_min",
+    "line": 26,
+    "paper_ref": "Lemma 2.1",
+    "explanation": "A_min is an infimum; attainment of the minimum (the paper's 'min', equality at u=(1,0,0)) is not asserted.",
+    "polarity": "lean weaker",
+    "probe_idea": "Prove shadowArea !₂[1,0,0] = H."
+   }
+  ]
+ },
+ {
+  "note": "148.md",
+  "config": "SelfSimilar",
+  "lines": 51,
+  "summary": "For a finite nonempty IFS φ_i(x) = r_i x + t_i on ℝ with 0 < |r_i| < 1 and strictly positive probability weights p_i, the theorem states the following. Any probability measure μ satisfying μ = Σ p_i (φ_i)_*μ has lower Hausdorff dimension (inf of dim_H E over Borel E with μ(E) > 0) equal to min{1, h/χ}. Here h = inf_{n≥1} H(G_n)/n is the base-2 entropy of the law of the n-fold composed affine map, and χ = −Σ p_i log₂|r_i|. This matches Theorem 1.1. The only caveat is that the entropy rate is encoded as an infimum rather than a limit; Fekete's lemma makes these equal because H(G_n) is subadditive.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "entropy_rate_dimension",
+    "relation": "equivalent",
+    "why": "All hypotheses and definitions match. The entropy rate is taken as an infimum, which equals the limit by Fekete. The lower-dimension convention matches one of the conventions the paper says are equivalent."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "System.entropyRate",
+    "line": 50,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "h_RW is encoded as inf_n H(G_n)/n rather than the limit. These are equal because H(G_{n+m}) ≤ H(G_n) + H(G_m), so this is a faithful encoding but not literally the paper's definition.",
+    "polarity": "n/a",
+    "probe_idea": "Tendsto (fun n => S.walkEntropy (n+1) / (n+1)) atTop (nhds S.entropyRate)"
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "lowerHausdorffDimension",
+    "line": 61,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The Lean statement uses the lower Hausdorff dimension (inf over positive-measure sets). The paper states that, by exact dimensionality, either convention gives the same result, so this choice is acceptable.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ]
+ },
+ {
+  "note": "176.md",
+  "config": "SecondKahnKalai",
+  "lines": 54,
+  "summary": "The Lean theorem states the two bounds of Theorem 1.1 with the paper's constants. For n ≥ 2 and a finite simple graph H with at least one edge and at most n vertices: p_c(n,H) ≤ min{1, 2048·e^50·p_E(n,H)·(1+log₂ h)} and p_c(n,H) ≤ 6144·e^50·p_E(n,H)·log₂ n. Here p_c and p_E are infima over [0,1], defined with an explicit product-measure model of G(n,p) and Mathlib's `copyCount`, which counts subgraphs isomorphic to H. The most important caveat is that faithfulness depends on `copyCount` and on `H.Subgraph` (which includes vertex-only and empty subgraphs) meaning the paper's N(G,F) and 'every subgraph F ⊆ H'; on inspection both appear to match, and no substantive discrepancy was found.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "secondKahnKalaiBounds",
+    "relation": "equivalent",
+    "why": "The definitions, hypotheses and constants match the paper's statement."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "expectationThreshold",
+    "line": 54,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The constraint ranges over all Mathlib subgraphs of H, including the empty subgraph and vertex-only subgraphs. The paper says 'every subgraph F ⊆ H'. These extra constraints are trivially satisfied (count C(n,k) ≥ 1), so the threshold is unchanged.",
+    "polarity": "n/a",
+    "probe_idea": "For F : H.Subgraph with no edges and F.verts.ncard ≤ n, prove 1 ≤ (graphOfEdges W).copyCount F.coe for every W."
+   }
+  ]
+ },
+ {
+  "note": "360.md",
+  "config": "WeakMTWGlobalSupport",
+  "lines": 59,
+  "summary": "The Lean theorem states the following. Let M be a smooth, compact, connected, boundaryless Riemannian manifold of dimension n ≥ 2 whose metric distance is the Riemannian distance. If the cost c = d²/2 satisfies weak MTW, meaning −(3/2)∂²_s∂²_t c(exp_x(tξ), exp_x(v+sη))|₀ ≥ 0 for all v ∈ I(x) and all ξ ⊥ η, then every tangent injectivity domain I(x) = {v : ∃a>1, d(x, exp_x(av)) = a|v|} is convex. This matches Theorem 1.1. The main caveat is that exp is built by hand from a locally-distance-realizing characterization of geodesics, and the norm/inner product on TangentSpace are assumed to resolve to the Riemannian ones. Both points are plausible but worth a quick probe. Theorem 1.2 is not formalized.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "current_main_convexity",
+    "relation": "equivalent",
+    "why": "Same hypotheses (compact, connected, boundaryless, smooth, n≥2, weak MTW) and same conclusion (linear convexity of I(x))."
+   },
+   {
+    "paper_ref": "Theorem 1.2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Only the convexity corollary is stated."
+   },
+   {
+    "paper_ref": "Theorem 4.9 (convexity of G_x)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Only I(x) convexity is stated."
+   }
+  ],
+  "flags_medium_high": [],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "WeakMTW.HasWeakMTW",
+    "line": 53,
+    "paper_ref": "(1.3)",
+    "explanation": "TangentSpace (model n) x is definitionally EuclideanSpace ℝ (Fin n). If `inner ℝ ξ η` or `‖v‖` (line 31) resolved to the chart Euclidean structure instead of the RiemannianBundle structure, then orthogonality and speed would be wrong. The resulting definitions would differ from the paper's. Most likely the bundle instance is used, since TangentSpace is not reducible.",
+    "polarity": "unclear",
+    "probe_idea": "example (x : M) (v w : TangentSpace (model n) x) : inner ℝ v w = (RiemannianBundle.g.inner x) v w := rfl"
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "WeakMTW.exp",
+    "line": 36,
+    "paper_ref": null,
+    "explanation": "exp is defined via choice over curves that are smooth, have velocity v at 0, and are locally distance-realizing at speed |v|. This agrees with the Riemannian exponential map only if such curves exist and are unique. That holds on compact Riemannian manifolds, but it is not checked definitionally.",
+    "polarity": "unclear",
+    "probe_idea": "Prove ∀ x v, ∃! y, ExpEndpoint x v y under the theorem's hypotheses."
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "current_main_convexity",
+    "line": 63,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The global support and intermediate geometry results are not formalized.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ]
+ },
+ {
+  "note": "222.md",
+  "config": "IsingFiniteness",
+  "lines": 63,
+  "summary": "The Lean theorem proves only that, for α ≥ 0 and a continuous bounded log-potential f, the bespoke EReal-valued variational value inf_q [α·P_f(q) + I(q)] is a finite real number. It is a finiteness/well-posedness lemma. The paper's main result (Theorem 2.3: the Ising perceptron pressure converges to this variational formula for bounded Borel f) is not formalized. The most important caveat is that the pattern functional is a bespoke limit along uniform discretizations, totalized via limUnder. Finiteness also follows almost directly from bounds such as I(q) ≥ 0 (take the zero field) and |P_f| ≤ K, so the statement says little about whether these definitions match the paper's.",
+  "coverage": [
+   {
+    "paper_ref": "Theorem 2.3",
+    "lean_theorem": "variationalValue_real_of_continuous",
+    "relation": "lean_weaker",
+    "why": "Lean proves only finiteness of the formula, not convergence of the pressure; it also restricts f to continuous functions."
+   }
+  ],
+  "flags_medium_high": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "high",
+    "decl": "variationalValue_real_of_continuous",
+    "line": 86,
+    "paper_ref": "Theorem 2.3",
+    "explanation": "The main result (the limiting free energy equals the variational formula) is not formalized. Only finiteness of the formula is proved.",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "patternFunctional",
+    "line": 75,
+    "paper_ref": "Section 2",
+    "explanation": "The pattern functional is defined as limUnder along uniform-grid discretizations. If the sequence fails to converge, it is a junk constant. The paper's definition is not in the excerpt. Finiteness holds regardless, so the theorem does not certify that the definition is meaningful.",
+    "polarity": "unclear",
+    "probe_idea": "Prove ∀ q, Tendsto (uniformPattern f q) atTop (𝓝 (patternFunctional f q)) for continuous bounded f."
+   },
+   {
+    "id": "F3",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "isingEntropy",
+    "line": 79,
+    "paper_ref": "Section 3",
+    "explanation": "The sign, normalization and indexing of the entropy dual cannot be checked against the excerpt. Finiteness follows from I ≥ 0 (zero field) plus I(0) ≤ 0, which would also hold for many mis-specified variants.",
+    "polarity": "unclear",
+    "probe_idea": "Evaluate isingEntropy at the constant path q ≡ c and compare with the replica-symmetric Ising entropy formula from the paper."
+   }
+  ],
+  "all_flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "high",
+    "decl": "variationalValue_real_of_continuous",
+    "line": 86,
+    "paper_ref": "Theorem 2.3",
+    "explanation": "The main result (the limiting free energy equals the variational formula) is not formalized. Only finiteness of the formula is proved.",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "patternFunctional",
+    "line": 75,
+    "paper_ref": "Section 2",
+    "explanation": "The pattern functional is defined as limUnder along uniform-grid discretizations. If the sequence fails to converge, it is a junk constant. The paper's definition is not in the excerpt. Finiteness holds regardless, so the theorem does not certify that the definition is meaningful.",
+    "polarity": "unclear",
+    "probe_idea": "Prove ∀ q, Tendsto (uniformPattern f q) atTop (𝓝 (patternFunctional f q)) for continuous bounded f."
+   },
+   {
+    "id": "F3",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "isingEntropy",
+    "line": 79,
+    "paper_ref": "Section 3",
+    "explanation": "The sign, normalization and indexing of the entropy dual cannot be checked against the excerpt. Finiteness follows from I ≥ 0 (zero field) plus I(0) ≤ 0, which would also hold for many mis-specified variants.",
+    "polarity": "unclear",
+    "probe_idea": "Evaluate isingEntropy at the constant path q ≡ c and compare with the replica-symmetric Ising entropy formula from the paper."
+   },
+   {
+    "id": "F4",
+    "category": "assumption",
+    "severity": "low",
+    "decl": "variationalValue_real_of_continuous",
+    "line": 87,
+    "paper_ref": "Theorem 2.3",
+    "explanation": "Lean requires f continuous, whereas the paper allows bounded Borel f. Lean also allows α = 0, whereas the paper requires α > 0; this part is harmless and slightly stronger.",
+    "polarity": "lean weaker",
+    "probe_idea": "Restate the theorem with hf : Measurable f in place of continuity."
+   }
+  ]
+ }
+]

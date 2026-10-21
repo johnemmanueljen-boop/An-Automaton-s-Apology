@@ -1,0 +1,815 @@
+{
+ "result": "H_GapCVP",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/H_GapCVP.lean",
+ "theorems": [
+  "GapCVP.Comparator.gapCVP400IsNPHard",
+  "GapCVP.Comparator.binaryNearestCodewordIsNPHard",
+  "GapCVP.Comparator.binarySyndromeDecodingIsNPHard",
+  "GapCVP.Comparator.finitePNormGapCVPIsNPHard"
+ ],
+ "lint": [
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.gapFactor400",
+   "decl_kind": "def",
+   "line": 99,
+   "snippet": "(I.dimension : ℝ) ^ ((1 : ℝ) / 400)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryCodeGapFactor",
+   "decl_kind": "def",
+   "line": 185,
+   "snippet": "(blockLength : ℝ) ^ ((1 : ℝ) / 200)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryNearestCodewordPromise",
+   "decl_kind": "def",
+   "line": 195,
+   "snippet": "(binaryNearestTarget record -",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryNearestCodewordPromise",
+   "decl_kind": "def",
+   "line": 207,
+   "snippet": "(binaryNearestTarget record -",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.IsNP",
+   "decl_kind": "def",
+   "line": 50,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.IsNP",
+   "decl_kind": "def",
+   "line": 57,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.wellFormed",
+   "decl_kind": "def",
+   "line": 81,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.wellFormed",
+   "decl_kind": "def",
+   "line": 83,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.hasIntegerTarget",
+   "decl_kind": "def",
+   "line": 86,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.hasIntegerTarget",
+   "decl_kind": "def",
+   "line": 89,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.gapFactor400",
+   "decl_kind": "def",
+   "line": 99,
+   "snippet": "(I.dimension : ℝ) ^ ((1 : ℝ) / 400)",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.gapYES400",
+   "decl_kind": "def",
+   "line": 102,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.gapYES400",
+   "decl_kind": "def",
+   "line": 106,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.gapNO400",
+   "decl_kind": "def",
+   "line": 109,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.gapNO400",
+   "decl_kind": "def",
+   "line": 114,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.yesLanguage",
+   "decl_kind": "def",
+   "line": 117,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.yesLanguage",
+   "decl_kind": "def",
+   "line": 121,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.noLanguage",
+   "decl_kind": "def",
+   "line": 124,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.noLanguage",
+   "decl_kind": "def",
+   "line": 128,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.PromiseProblem",
+   "decl_kind": "structure",
+   "line": 133,
+   "snippet": "disjoint : ∀ bits, yes bits → no bits → False",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.PromiseReduction",
+   "decl_kind": "structure",
+   "line": 144,
+   "snippet": "completeness : ∀ input, language input → problem.yes (map input)",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.PromiseReduction",
+   "decl_kind": "structure",
+   "line": 145,
+   "snippet": "soundness : ∀ input, ¬ language input → problem.no (map input)",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.IsNPHardPromise",
+   "decl_kind": "def",
+   "line": 148,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.IsNPHardPromise",
+   "decl_kind": "def",
+   "line": 151,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryCodeGapFactor",
+   "decl_kind": "def",
+   "line": 185,
+   "snippet": "(blockLength : ℝ) ^ ((1 : ℝ) / 200)",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryNearestCodewordPromise",
+   "decl_kind": "def",
+   "line": 189,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryNearestCodewordPromise",
+   "decl_kind": "def",
+   "line": 197,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryNearestCodewordPromise",
+   "decl_kind": "def",
+   "line": 199,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binaryNearestCodewordPromise",
+   "decl_kind": "def",
+   "line": 209,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binarySyndromeDecodingPromise",
+   "decl_kind": "def",
+   "line": 246,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binarySyndromeDecodingPromise",
+   "decl_kind": "def",
+   "line": 253,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binarySyndromeDecodingPromise",
+   "decl_kind": "def",
+   "line": 255,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.binarySyndromeDecodingPromise",
+   "decl_kind": "def",
+   "line": 265,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.finitePGapCVPPromise",
+   "decl_kind": "def",
+   "line": 289,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.finitePGapCVPPromise",
+   "decl_kind": "def",
+   "line": 295,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.finitePGapCVPPromise",
+   "decl_kind": "def",
+   "line": 297,
+   "snippet": "@decide",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  },
+  {
+   "rule": "decide-prop",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "H_GapCVP.lean",
+   "decl": "GapCVP.Comparator.finitePGapCVPPromise",
+   "decl_kind": "def",
+   "line": 304,
+   "snippet": "(Classical.propDecidable _)",
+   "explanation": "A Prop is turned into a Bool classically; fine logically, but the definition is not computable and can't be unit-tested by #eval.",
+   "suggested_probe": "Unit-test the Prop version instead."
+  }
+ ],
+ "audit": {
+  "summary": "Four promise problems are formalized as pairs of yes/no bit-string languages over explicit binary encodings of instances. Each is proved NP-hard in the Karp sense: every NP language, defined via a polynomial-time TM2 verifier with polynomially bounded certificates, poly-time many-one reduces to the promise problem. The problems are Euclidean GapCVP with gap n^{1/400} and integer targets, binary nearest codeword and binary syndrome decoding with gap n^{1/200}, and ℓ_p GapCVP with gap n^{1/(200p)} for every rational p ≥ 1. The definitions track the paper closely. The main caveats: the ℓ_p statement (gap exponent, p ranging only over rationals, rational targets allowed) cannot be checked against the excerpt, and the syndrome-decoding NO set additionally requires the system Hx=b to be consistent, which is a stronger (fine) choice.",
+  "glossary": [
+   {
+    "decl": "GapCVP.IsNP",
+    "line": 49,
+    "plain": "L ⊆ {0,1}* is in NP iff there are a polynomial bound q and a poly-time (TM2) verifier V such that x ∈ L ⇔ ∃ certificate c with |c| ≤ q(|x|) and V(x,c)=1.",
+    "standard_concept": "NP (verifier definition)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "GapCVP.Comparator.PromiseReduction",
+    "line": 140,
+    "plain": "A poly-time map f on bit strings such that x ∈ L ⇒ f(x) ∈ YES and x ∉ L ⇒ f(x) ∈ NO.",
+    "standard_concept": "Karp reduction to a promise problem",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "GapCVP.Comparator.IsNPHardPromise",
+    "line": 147,
+    "plain": "Every NP language Karp-reduces to the promise problem.",
+    "standard_concept": "NP-hardness of a promise problem under deterministic poly-time many-one reductions",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "GapCVP.Comparator.gapCVP400Promise",
+    "line": 135,
+    "plain": "YES: encodings of (n>0, nonsingular B∈Z^{n×n}, t∈Z^n, r∈Q>0) with dist_2(t,L(B)) ≤ r. NO: same shape with dist_2(t,L(B)) > n^{1/400} r. The lattice is generated by the columns of B.",
+    "standard_concept": "GapCVP_{n^{1/400}} in ℓ_2",
+    "matches_standard": "yes",
+    "note": "Distances are compared via squares, which is equivalent because both sides are nonnegative.",
+    "citation_ok": true
+   },
+   {
+    "decl": "GapCVP.Comparator.binaryNearestCodewordPromise",
+    "line": 187,
+    "plain": "YES: (G∈F2^{n×k}, u, R>0, n>0) with ∃c, wt(u−Gc) ≤ R. NO: ∀c, wt(u−Gc) > n^{1/200} R.",
+    "standard_concept": "Gap nearest codeword over F2",
+    "matches_standard": "yes",
+    "note": "The code is the column span of G rather than the row span; this is only a notational convention.",
+    "citation_ok": true
+   },
+   {
+    "decl": "GapCVP.Comparator.binarySyndromeDecodingPromise",
+    "line": 244,
+    "plain": "YES: (H, b, R>0, n>0) with ∃x, Hx=b and wt(x) ≤ R. NO: Hx=b is consistent and every solution has wt(x) > n^{1/200} R.",
+    "standard_concept": "Gap syndrome decoding over F2",
+    "matches_standard": "partly",
+    "note": "The NO set requires consistency of Hx=b, so it is smaller than a definition that treats inconsistent systems as NO. This makes Lean stronger.",
+    "citation_ok": true
+   },
+   {
+    "decl": "GapCVP.Comparator.finitePGapCVPPromise",
+    "line": 287,
+    "plain": "For rational p ≥ 1. YES: well-formed (B, t∈Q^n, r) with min_v ‖t−Bv‖_p ≤ r. NO: ‖t−Bv‖_p > n^{1/(200p)} r for all v.",
+    "standard_concept": "GapCVP in ℓ_p",
+    "matches_standard": "unclear",
+    "note": "The paper's exact ℓ_p statement is not in the excerpt. Targets are not required to be integral here, unlike the ℓ_2 version.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "gapCVP400IsNPHard",
+    "line": 153,
+    "plain": "Every NP language Karp-reduces to the promise problem (YES: dist_2(t,L(B)) ≤ r; NO: dist_2 > n^{1/400} r), with B nonsingular integer, t integer, r>0 rational, n>0.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "binaryNearestCodewordIsNPHard",
+    "line": 212,
+    "plain": "Every NP language Karp-reduces to binary nearest codeword with gap n^{1/200}, where n is the block length, R ≥ 1 and n ≥ 1.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "binarySyndromeDecodingIsNPHard",
+    "line": 268,
+    "plain": "Every NP language Karp-reduces to binary syndrome decoding with gap n^{1/200}. NO instances must have a consistent syndrome system.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "finitePNormGapCVPIsNPHard",
+    "line": 307,
+    "plain": "For every rational p ≥ 1, every NP language Karp-reduces to ℓ_p GapCVP with gap n^{1/(200p)}, using a nonsingular integer basis, rational target and positive rational radius.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1",
+    "plain": "There is a deterministic poly-time map from 3SAT formulas to (B nonsingular in Z^{n×n}, t∈Z^n, r∈Q>0). Satisfiable ⇒ dist_2 ≤ r; unsatisfiable ⇒ dist_2 > n^{1/400} r. Hence GapCVP_{n^{1/400}} is NP-hard."
+   },
+   {
+    "ref": "Corollary 15",
+    "plain": "Binary nearest codeword and binary syndrome decoding are NP-hard to approximate within n^{1/200}, with n the block length, under deterministic poly-time many-one reductions."
+   },
+   {
+    "ref": "Section 7 finite-norm consequence",
+    "plain": "Not in excerpt (fixed-finite-norm GapCVP hardness mentioned only)."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1",
+    "lean_theorem": "gapCVP400IsNPHard",
+    "relation": "equivalent",
+    "why": "Same instance shape and gap. NP-hardness is stated for all NP languages rather than via 3SAT, which is equivalent by Cook–Levin."
+   },
+   {
+    "paper_ref": "Corollary 15 (nearest codeword)",
+    "lean_theorem": "binaryNearestCodewordIsNPHard",
+    "relation": "equivalent",
+    "why": "Matches. Lean additionally requires R>0 and n>0, which is slightly stronger."
+   },
+   {
+    "paper_ref": "Corollary 15 (syndrome decoding)",
+    "lean_theorem": "binarySyndromeDecodingIsNPHard",
+    "relation": "lean_stronger",
+    "why": "The NO set additionally requires a consistent system."
+   },
+   {
+    "paper_ref": "Section 7 finite-norm consequence",
+    "lean_theorem": "finitePNormGapCVPIsNPHard",
+    "relation": "different",
+    "why": "The exact paper statement is not in the excerpt. Lean covers only rational p and allows rational targets."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "finitePNormGapCVPIsNPHard",
+    "line": 307,
+    "paper_ref": "Section 7",
+    "explanation": "The gap exponent 1/(200p) and the parameter range cannot be checked against the excerpt. Here p ranges only over rationals ≥ 1, whereas the paper likely says any fixed real p ∈ [1,∞).",
+    "polarity": "unclear",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "finitePGapCVPPromise",
+    "line": 290,
+    "paper_ref": "Section 7",
+    "explanation": "Unlike gapCVP400, no hasIntegerTarget requirement is imposed, so targets may be rational. This enlarges the YES/NO sets, which is a mildly weaker hardness claim than an integer-target version. Scaling B and t by a common denominator makes the two essentially equivalent.",
+    "polarity": "lean weaker",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F3",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "binarySyndromeDecodingPromise",
+    "line": 259,
+    "paper_ref": "Corollary 15",
+    "explanation": "The NO set requires Hx=b to be consistent, so the reduction must output consistent systems on unsatisfiable inputs. This is stronger than a definition treating inconsistent systems as NO.",
+    "polarity": "lean stronger",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F4",
+    "category": "other",
+    "severity": "low",
+    "decl": "gapCVP400Promise",
+    "line": 138,
+    "paper_ref": null,
+    "explanation": "The disjointness fields are sorry'd inside the target definitions. They are proof fields and do not affect the statement. Disjointness is in fact true, since n ≥ 1 and r > 0 give n^{1/400} r ≥ r.",
+    "polarity": "n/a",
+    "probe_idea": "Prove disjointness for each promise, using injectivity of encodeInstance and gap factor ≥ 1.",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 99,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "(1:ℝ)/400 is real division by a nonzero constant and equals 1/400."
+   },
+   {
+    "line": 185,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "(1:ℝ)/200 is a genuine real exponent."
+   },
+   {
+    "line": 195,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "This is subtraction of functions into ZMod 2, not ℕ."
+   },
+   {
+    "line": 207,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "This is subtraction in Fin n → ZMod 2."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F4",
+    "decl": "gapCVP400Promise",
+    "line": 138,
+    "explanation": "The disjointness fields are sorry'd inside the target definitions. They are proof fields and do not affect the statement. Disjointness is in fact true, since n ≥ 1 and r > 0 give n^{1/400} r ≥ r.",
+    "probe_idea": "Prove disjointness for each promise, using injectivity of encodeInstance and gap factor ≥ 1."
+   },
+   "result": {
+    "id": "F4-a1",
+    "status": "GREEN",
+    "claim": "The YES and NO promise predicates of GapCVP400 (gapYES400 and gapNO400) cannot hold simultaneously on an instance. This is the instance-level core of the sorry'd `disjoint` field of gapCVP400Promise, and it holds because the gap factor n^(1/400) is at least 1 and the radius is positive.",
+    "kind": "other",
+    "seconds": 26.6,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_yes_no_disjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_yes_no_disjoint (I : GapCVP.Comparator.Instance)\n    (h1 : GapCVP.Comparator.gapYES400 I = true)\n    (h2 : GapCVP.Comparator.gapNO400 I = true) : False := by\n  simp only [GapCVP.Comparator.gapYES400, GapCVP.Comparator.gapNO400,\n    GapCVP.Comparator.wellFormed, decide_eq_true_eq] at h1 h2\n  obtain ⟨⟨hd, hdet, hr⟩, v, hv⟩ := h1\n  obtain ⟨_, h⟩ := h2\n  have hf : 1 ≤ GapCVP.Comparator.gapFactor400 I := by\n    unfold GapCVP.Comparator.gapFactor400\n    apply Real.one_le_rpow\n    · exact Nat.one_le_cast.mpr hd\n    · norm_num\n  have hr' : (0:ℝ) < (I.radius : ℝ) := by exact_mod_cast hr\n  have h4 := h v\n  have h5 : (I.radius : ℝ) ≤ GapCVP.Comparator.gapFactor400 I * (I.radius : ℝ) := by nlinarith\n  have h3 : (I.radius : ℝ) ^ 2 ≤ (GapCVP.Comparator.gapFactor400 I * (I.radius : ℝ)) ^ 2 :=\n    pow_le_pow_left₀ (le_of_lt hr') h5 2\n  linarith",
+   "attempts": [
+    {
+     "lean": "theorem probe_yes_no_disjoint (I : GapCVP.Comparator.Instance)\n    (h1 : GapCVP.Comparator.gapYES400 I = true)\n    (h2 : GapCVP.Comparator.gapNO400 I = true) : False := by\n  simp only [GapCVP.Comparator.gapYES400, GapCVP.Comparator.gapNO400, decide_eq_true_eq] at h1 h2\n  obtain ⟨⟨hd, hdet, hr⟩, v, hv⟩ := h1\n  obtain ⟨_, h⟩ := h2\n  have hf : 1 ≤ GapCVP.Comparator.gapFactor400 I := by\n    unfold GapCVP.Comparator.gapFactor400\n    apply Real.one_le_rpow\n    · exact Nat.one_le_cast.mpr hd\n    · norm_num\n  have hr' : (0:ℝ) < (I.radius : ℝ) := by exact_mod_cast hr\n  have h4 := h v\n  have h5 : (I.radius : ℝ) ≤ GapCVP.Comparator.gapFactor400 I * (I.radius : ℝ) := by nlinarith\n  have h3 : (I.radius : ℝ) ^ 2 ≤ (GapCVP.Comparator.gapFactor400 I * (I.radius : ℝ)) ^ 2 :=\n    pow_le_pow_left₀ (le_of_lt hr') h5 2\n  linarith",
+     "status": "YELLOW",
+     "detail": "line 4: Tactic `cases` failed with a nested error:\nDependent elimination failed: Failed to solve equation\n  true =\n    Decidable.rec (fun h => (fun x => false) h) (fun h => (fun x => true) h)\n      (Classical.propDecidable (0 < I.dimension ∧ I.basis.det ≠ 0 ∧ 0 < I.radius))\nat case `Eq.refl`\n'probe_yes_no_disjoint' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'probe_yes_no_disjoint': ['sorryAx']}",
+     "seconds": 25.4
+    },
+    {
+     "lean": "theorem probe_yes_no_disjoint (I : GapCVP.Comparator.Instance)\n    (h1 : GapCVP.Comparator.gapYES400 I = true)\n    (h2 : GapCVP.Comparator.gapNO400 I = true) : False := by\n  simp only [GapCVP.Comparator.gapYES400, GapCVP.Comparator.gapNO400,\n    GapCVP.Comparator.wellFormed, decide_eq_true_eq] at h1 h2\n  obtain ⟨⟨hd, hdet, hr⟩, v, hv⟩ := h1\n  obtain ⟨_, h⟩ := h2\n  have hf : 1 ≤ GapCVP.Comparator.gapFactor400 I := by\n    unfold GapCVP.Comparator.gapFactor400\n    apply Real.one_le_rpow\n    · exact Nat.one_le_cast.mpr hd\n    · norm_num\n  have hr' : (0:ℝ) < (I.radius : ℝ) := by exact_mod_cast hr\n  have h4 := h v\n  have h5 : (I.radius : ℝ) ≤ GapCVP.Comparator.gapFactor400 I * (I.radius : ℝ) := by nlinarith\n  have h3 : (I.radius : ℝ) ^ 2 ≤ (GapCVP.Comparator.gapFactor400 I * (I.radius : ℝ)) ^ 2 :=\n    pow_le_pow_left₀ (le_of_lt hr') h5 2\n  linarith",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 26.6
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance of the main definition"
+   },
+   "result": {
+    "id": "NV-a1",
+    "status": "GREEN",
+    "claim": "The concrete instance with dimension 1, basis the identity matrix, target 0 and radius 1 is well-formed, has an integer target, is a GapCVP400 YES instance, and its encoding lies in yesLanguage. So the central definitions are satisfiable.",
+    "kind": "non-vacuity",
+    "seconds": 26.1,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_nv_yes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_nv_yes : ∃ I : GapCVP.Comparator.Instance,\n    GapCVP.Comparator.hasIntegerTarget I = true ∧\n    GapCVP.Comparator.gapYES400 I = true ∧\n    GapCVP.Comparator.yesLanguage (GapCVP.Comparator.encodeInstance I) = true := by\n  have hw : GapCVP.Comparator.wellFormed (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance) = true := by\n    unfold GapCVP.Comparator.wellFormed\n    exact @decide_eq_true _ (Classical.propDecidable _) ⟨by simp, by simp, by simp⟩\n  have h1 : GapCVP.Comparator.hasIntegerTarget (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance) = true := by\n    unfold GapCVP.Comparator.hasIntegerTarget\n    exact @decide_eq_true _ (Classical.propDecidable _) (fun _ => ⟨0, by simp⟩)\n  have h2 : GapCVP.Comparator.gapYES400 (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance) = true := by\n    unfold GapCVP.Comparator.gapYES400\n    exact @decide_eq_true _ (Classical.propDecidable _)\n      ⟨hw, fun _ => 0, by simp [GapCVP.Comparator.distanceSquared]⟩\n  have h3 : GapCVP.Comparator.yesLanguage (GapCVP.Comparator.encodeInstance (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance)) = true := by\n    unfold GapCVP.Comparator.yesLanguage\n    exact @decide_eq_true _ (Classical.propDecidable _) ⟨_, rfl, h1, h2⟩\n  exact ⟨_, h1, h2, h3⟩",
+   "attempts": [
+    {
+     "lean": "theorem probe_nv_yes : ∃ I : GapCVP.Comparator.Instance,\n    GapCVP.Comparator.hasIntegerTarget I = true ∧\n    GapCVP.Comparator.gapYES400 I = true ∧\n    GapCVP.Comparator.yesLanguage (GapCVP.Comparator.encodeInstance I) = true := by\n  obtain ⟨I, hI⟩ : ∃ I : GapCVP.Comparator.Instance,\n      I = ⟨1, 1, fun _ => 0, 1⟩ := ⟨_, rfl⟩\n  have hw : GapCVP.Comparator.wellFormed I = true := by\n    subst hI\n    unfold GapCVP.Comparator.wellFormed\n    rw [decide_eq_true_eq]\n    refine ⟨by simp, ?_, by simp⟩\n    simp\n  have h1 : GapCVP.Comparator.hasIntegerTarget I = true := by\n    subst hI\n    unfold GapCVP.Comparator.hasIntegerTarget\n    rw [decide_eq_true_eq]\n    intro i\n    exact ⟨0, by simp⟩\n  have h2 : GapCVP.Comparator.gapYES400 I = true := by\n    unfold GapCVP.Comparator.gapYES400\n    rw [decide_eq_true_eq]\n    refine ⟨hw, fun _ => 0, ?_⟩\n    subst hI\n    simp [GapCVP.Comparator.distanceSquared]\n  refine ⟨I, h1, h2, ?_⟩\n  unfold GapCVP.Comparator.yesLanguage\n  rw [decide_eq_true_eq]\n  exact ⟨I, rfl, h1, h2⟩",
+     "status": "YELLOW",
+     "detail": "line 9: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized\n  instDecidableAnd\ninferred\n  Classical.propDecidable\n    (0 < { dimension := 1, basis := 1, target := fun x => 0, radius := 1 }.dimension ∧\n      { dimension := 1, basis := 1, target := fun x => 0, radius := 1 }.basis.det ≠ 0 ∧\n        0 < { dimension := 1, basis := 1, target := fun x =",
+     "seconds": 26.2
+    },
+    {
+     "lean": "theorem probe_nv_yes : ∃ I : GapCVP.Comparator.Instance,\n    GapCVP.Comparator.hasIntegerTarget I = true ∧\n    GapCVP.Comparator.gapYES400 I = true ∧\n    GapCVP.Comparator.yesLanguage (GapCVP.Comparator.encodeInstance I) = true := by\n  have hw : GapCVP.Comparator.wellFormed (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance) = true := by\n    unfold GapCVP.Comparator.wellFormed\n    exact @decide_eq_true _ (Classical.propDecidable _) ⟨by simp, by simp, by simp⟩\n  have h1 : GapCVP.Comparator.hasIntegerTarget (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance) = true := by\n    unfold GapCVP.Comparator.hasIntegerTarget\n    exact @decide_eq_true _ (Classical.propDecidable _) (fun _ => ⟨0, by simp⟩)\n  have h2 : GapCVP.Comparator.gapYES400 (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance) = true := by\n    unfold GapCVP.Comparator.gapYES400\n    exact @decide_eq_true _ (Classical.propDecidable _)\n      ⟨hw, fun _ => 0, by simp [GapCVP.Comparator.distanceSquared]⟩\n  have h3 : GapCVP.Comparator.yesLanguage (GapCVP.Comparator.encodeInstance (⟨1, 1, fun _ => 0, 1⟩ : GapCVP.Comparator.Instance)) = true := by\n    unfold GapCVP.Comparator.yesLanguage\n    exact @decide_eq_true _ (Classical.propDecidable _) ⟨_, rfl, h1, h2⟩\n  exact ⟨_, h1, h2, h3⟩",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 26.1
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "GapCVP.Comparator.gapCVP400IsNPHard",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "IsNPHardPromise gapCVP400Promise",
+   "restated": "∀ language : BitLanguage, IsNP language = true → ∃ map : List Bool → List Bool, Nonempty (GapCVP.BitTM map) ∧ (∀ input : List Bool, language input = true → yesLanguage input = true) ∧ (∀ input : List Bool, ¬ (language input = true) → noLanguage input = true)",
+   "english": "Every language in NP has a polynomial-time computable map on bit strings that sends members of the language to encodings of YES instances of GapCVP (factor n^(1/400)) and non-members to encodings of NO instances.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "BitLanguage",
+    "BitTM",
+    "IsNP",
+    "noLanguage",
+    "yesLanguage"
+   ],
+   "detail": "line 10: Application type mismatch: The argument\n  r.completeness\nhas type\n  ∀ (input : List Bool), language input = true → gapCVP400Promise.yes (r.map input) = true\nbut is expected to have type\n  ∀ (input : List Bool), language input = true → yesLanguage input = true\nin the application\n  And.intro r.completeness | line 13: Application type mismatch: The argument\n  hc\nhas type\n  ∀ (input : List Bool), language input = true → yesLanguage input = true\nbut is expected to have type\n  ∀ (input : List Bool), language input = true → gapCVP400Promise.yes (m input) = true\nin the application\n  PromiseReduction.mk m hm hc\n'GapCVP.Comparator.probe_restate_2' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'GapCVP.Comparator.probe_restate_2': ['sorryAx']}",
+   "lean": "namespace GapCVP.Comparator\nopen scoped BigOperators\ntheorem probe_restate_2  :\n    (IsNPHardPromise gapCVP400Promise) ↔\n    (∀ language : BitLanguage, IsNP language = true → ∃ map : List Bool → List Bool, Nonempty (GapCVP.BitTM map) ∧ (∀ input : List Bool, language input = true → yesLanguage input = true) ∧ (∀ input : List Bool, ¬ (language input = true) → noLanguage input = true)) := by\n  unfold IsNPHardPromise\n  simp only [decide_eq_true_eq]\n  constructor\n  · intro h language hl\n    obtain ⟨r⟩ := h language hl\n    exact ⟨r.map, r.polynomial_time, r.completeness, r.soundness⟩\n  · intro h language hl\n    obtain ⟨m, hm, hc, hs⟩ := h language hl\n    exact ⟨⟨m, hm, hc, hs⟩⟩\nend GapCVP.Comparator\n",
+   "seconds": 26.5
+  },
+  {
+   "target": "GapCVP.Comparator.binaryNearestCodewordIsNPHard",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "IsNPHardPromise binaryNearestCodewordPromise",
+   "restated": "∀ language : BitLanguage, IsNP language = true → ∃ map : List Bool → List Bool, Nonempty (GapCVP.BitTM map) ∧ (∀ input : List Bool, language input = true → ∃ record : BinaryNearestCodewordInstance, encodeBinaryNearestCodewordInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ ∃ coefficients : Fin record.generatorRank → ZMod 2, hammingNorm (binaryNearestTarget record - binaryNearestCodeword record coefficients) ≤ record.radius) ∧ (∀ input : List Bool, ¬ language input = true → ∃ record : BinaryNearestCodewordInstance, encodeBinaryNearestCodewordInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ ∀ coefficients : Fin record.generatorRank → ZMod 2, binaryCodeGapFactor record.blockLength * (record.radius : ℝ) < (hammingNorm (binaryNearestTarget record - binaryNearestCodeword record coefficients) : ℝ))",
+   "english": "For every NP language L there is a polynomial-time computable map on bit strings sending each YES input of L to an encoded nearest-codeword instance with a codeword within the radius, and each NO input to an encoded instance where every codeword is farther than n^(1/200) times the radius.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "BinaryNearestCodewordInstance",
+    "BitLanguage",
+    "BitTM",
+    "IsNP",
+    "binaryCodeGapFactor",
+    "binaryNearestCodeword",
+    "binaryNearestTarget",
+    "encodeBinaryNearestCodewordInstance"
+   ],
+   "detail": "probe uses sorry | non-standard axioms: {'GapCVP.Comparator.probe_restate_12': ['sorryAx']}",
+   "lean": "namespace GapCVP.Comparator\nopen scoped BigOperators\ntheorem probe_restate_12  :\n    (IsNPHardPromise binaryNearestCodewordPromise) ↔\n    (∀ language : BitLanguage, IsNP language = true → ∃ map : List Bool → List Bool, Nonempty (GapCVP.BitTM map) ∧ (∀ input : List Bool, language input = true → ∃ record : BinaryNearestCodewordInstance, encodeBinaryNearestCodewordInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ ∃ coefficients : Fin record.generatorRank → ZMod 2, hammingNorm (binaryNearestTarget record - binaryNearestCodeword record coefficients) ≤ record.radius) ∧ (∀ input : List Bool, ¬ language input = true → ∃ record : BinaryNearestCodewordInstance, encodeBinaryNearestCodewordInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ ∀ coefficients : Fin record.generatorRank → ZMod 2, binaryCodeGapFactor record.blockLength * (record.radius : ℝ) < (hammingNorm (binaryNearestTarget record - binaryNearestCodeword record coefficients) : ℝ))) := by\n  simp only [IsNPHardPromise, binaryNearestCodewordPromise, decide_eq_true_eq]\n  constructor\n  · intro h language hl\n    obtain ⟨r⟩ := h language hl\n    refine ⟨r.map, r.polynomial_time, ?_, ?_⟩\n    · intro input hin\n      have := r.completeness input hin\n      simpa only [binaryNearestCodewordPromise, decide_eq_true_eq] using this\n    · intro input hin\n      have := r.soundness input hin\n      simpa only [binaryNearestCodewordPromise, decide_eq_true_eq] using this\n  · intro h language hl\n    obtain ⟨map, hmap, hc, hs⟩ := h language hl\n    refine ⟨{ map := map, polynomial_time := hmap, completeness := ?_, soundness := ?_ }⟩\n    · intro input hin\n      simpa only [binaryNearestCodewordPromise, decide_eq_true_eq] using hc input hin\n    · intro input hin\n      simpa only [binaryNearestCodewordPromise, decide_eq_true_eq] using hs input hin\nend GapCVP.Comparator\n",
+   "seconds": 26.4
+  },
+  {
+   "target": "GapCVP.Comparator.binarySyndromeDecodingIsNPHard",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "IsNPHardPromise binarySyndromeDecodingPromise",
+   "restated": "∀ language : BitLanguage, IsNP language = true → ∃ map : List Bool → List Bool, Nonempty (BitTM map) ∧ (∀ input : List Bool, language input = true → ∃ record : BinarySyndromeDecodingInstance, encodeBinarySyndromeDecodingInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ ∃ word : Fin record.blockLength → ZMod 2, binarySyndromeProduct record word = binarySyndromeTarget record ∧ hammingNorm word ≤ record.radius) ∧ (∀ input : List Bool, ¬ (language input = true) → ∃ record : BinarySyndromeDecodingInstance, encodeBinarySyndromeDecodingInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ (∃ word : Fin record.blockLength → ZMod 2, binarySyndromeProduct record word = binarySyndromeTarget record) ∧ ∀ word : Fin record.blockLength → ZMod 2, binarySyndromeProduct record word = binarySyndromeTarget record → binaryCodeGapFactor record.blockLength * (record.radius : ℝ) < (hammingNorm word : ℝ))",
+   "english": "Every language in NP has a polynomial-time computable map on bit strings that sends each input to the encoding of a binary syndrome-decoding instance. If the input is in the language, the instance is a YES instance: some word of Hamming weight at most the radius has syndrome equal to the target. If the input is not in the language, the instance is a NO instance: it is consistent (some word has the target syndrome), and every word with that syndrome has Hamming weight greater than n^(1/200) times the radius, where n is the block length.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "BinarySyndromeDecodingInstance",
+    "BitLanguage",
+    "BitTM",
+    "IsNP",
+    "binaryCodeGapFactor",
+    "binarySyndromeProduct",
+    "binarySyndromeTarget",
+    "encodeBinarySyndromeDecodingInstance"
+   ],
+   "detail": "probe uses sorry | non-standard axioms: {'GapCVP.Comparator.probe_restate_22': ['sorryAx']}",
+   "lean": "namespace GapCVP.Comparator\nopen scoped BigOperators\ntheorem probe_restate_22  :\n    (IsNPHardPromise binarySyndromeDecodingPromise) ↔\n    (∀ language : BitLanguage, IsNP language = true → ∃ map : List Bool → List Bool, Nonempty (BitTM map) ∧ (∀ input : List Bool, language input = true → ∃ record : BinarySyndromeDecodingInstance, encodeBinarySyndromeDecodingInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ ∃ word : Fin record.blockLength → ZMod 2, binarySyndromeProduct record word = binarySyndromeTarget record ∧ hammingNorm word ≤ record.radius) ∧ (∀ input : List Bool, ¬ (language input = true) → ∃ record : BinarySyndromeDecodingInstance, encodeBinarySyndromeDecodingInstance record = map input ∧ 0 < record.blockLength ∧ 0 < record.radius ∧ (∃ word : Fin record.blockLength → ZMod 2, binarySyndromeProduct record word = binarySyndromeTarget record) ∧ ∀ word : Fin record.blockLength → ZMod 2, binarySyndromeProduct record word = binarySyndromeTarget record → binaryCodeGapFactor record.blockLength * (record.radius : ℝ) < (hammingNorm word : ℝ))) := by\n  unfold IsNPHardPromise\n  simp only [decide_eq_true_eq]\n  constructor\n  · intro h language hl\n    obtain ⟨R⟩ := h language hl\n    refine ⟨R.map, R.polynomial_time, ?_, ?_⟩\n    · intro input hin\n      have := R.completeness input hin\n      simpa only [binarySyndromeDecodingPromise, decide_eq_true_eq] using this\n    · intro input hin\n      have := R.soundness input hin\n      simpa only [binarySyndromeDecodingPromise, decide_eq_true_eq] using this\n  · intro h language hl\n    obtain ⟨map, hp, hc, hs⟩ := h language hl\n    exact ⟨{ map := map, polynomial_time := hp, completeness := fun input hin => by simpa only [binarySyndromeDecodingPromise, decide_eq_true_eq] using hc input hin, soundness := fun input hin => by simpa only [binarySyndromeDecodingPromise, decide_eq_true_eq] using hs input hin }⟩\nend GapCVP.Comparator\n",
+   "seconds": 27.5
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 258,
+  "lines_needing_human_review": 197,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

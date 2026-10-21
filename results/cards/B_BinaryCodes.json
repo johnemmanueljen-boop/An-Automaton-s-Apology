@@ -1,0 +1,1500 @@
+{
+ "result": "B_BinaryCodes",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/B_BinaryCodes.lean",
+ "theorems": [
+  "MetricCodes.Hamming.binaryRate_lt_classicalRate",
+  "MetricCodes.Hamming.exists_binaryRate_improvement",
+  "MetricCodes.Johnson.binaryRate_le_combinedVariationalRate",
+  "MetricCodes.MRRW.strict_mrrw2",
+  "MetricCodes.Johnson.binaryRate_lt_mrrw",
+  "MetricCodes.Johnson.exists_binaryRate_mrrw_improvement"
+ ],
+ "lint": [
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.variationalRate",
+   "decl_kind": "def",
+   "line": 63,
+   "snippet": "def variationalRate (δ : ℝ) : ℝ := sInf (rateSet δ)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.variationalRate",
+   "decl_kind": "def",
+   "line": 149,
+   "snippet": "def variationalRate (δ : ℝ) : ℝ := sInf (rateSet δ)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwRate",
+   "decl_kind": "def",
+   "line": 166,
+   "snippet": "sInf (mrrwRateSet δ)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.hammingDist",
+   "decl_kind": "def",
+   "line": 14,
+   "snippet": "(Finset.univ.filter fun i => x i ≠ y i).card",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.binaryWeight",
+   "decl_kind": "def",
+   "line": 17,
+   "snippet": "(Finset.univ.filter fun i => x i = true).card",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.binaryEntropy",
+   "decl_kind": "def",
+   "line": 26,
+   "snippet": "-(u * Real.logb 2 u) -",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.binaryEntropy",
+   "decl_kind": "def",
+   "line": 27,
+   "snippet": "(1 - u) * Real.logb 2 (1 - u)",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.hammingGamma",
+   "decl_kind": "def",
+   "line": 30,
+   "snippet": "(2 * (a - b) * (1 - a - b)) /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.hammingGamma",
+   "decl_kind": "def",
+   "line": 30,
+   "snippet": "(2 * (a - b) * (1 - a - b)) /",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.hammingGamma",
+   "decl_kind": "def",
+   "line": 31,
+   "snippet": "Real.sqrt (a * (1 - a))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.codeNumber",
+   "decl_kind": "def",
+   "line": 40,
+   "snippet": "(validCodes n d).sup fun C => C.card",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.classicalParameter",
+   "decl_kind": "def",
+   "line": 43,
+   "snippet": "(1 : ℝ) / 2 - Real.sqrt (δ * (1 - δ))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.binaryRate",
+   "decl_kind": "def",
+   "line": 52,
+   "snippet": "(codeNumber n (Nat.ceil (δ * (n : ℝ))) : ℝ) / (n : ℝ))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "toNat-trunc",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.binaryRate",
+   "decl_kind": "def",
+   "line": 52,
+   "snippet": "(codeNumber n (Nat.ceil (δ * (n : ℝ))) : ℝ) / (n : ℝ))",
+   "explanation": "toNat / floor / ceil into ℕ truncate negatives to 0.",
+   "suggested_probe": "Check the argument is nonnegative."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.Feasible",
+   "decl_kind": "def",
+   "line": 56,
+   "snippet": "0 ≤ b ∧ b < a ∧ a ≤ (1 : ℝ) / 2 ∧",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.Feasible",
+   "decl_kind": "def",
+   "line": 57,
+   "snippet": "1 - 2 * δ < MetricCodes.hammingGamma a b",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.rateSet",
+   "decl_kind": "def",
+   "line": 61,
+   "snippet": "r = MetricCodes.binaryEntropy a - MetricCodes.binaryEntropy b}",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.binaryRate_lt_classicalRate",
+   "decl_kind": "theorem",
+   "line": 66,
+   "snippet": "(hδ : 0 < δ) (hδ' : δ < (1 : ℝ) / 2) :",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.exists_binaryRate_improvement",
+   "decl_kind": "theorem",
+   "line": 71,
+   "snippet": "(hδ : 0 < δ) (hδ' : δ < (1 : ℝ) / 2) :",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.binaryCodeNumber",
+   "decl_kind": "def",
+   "line": 85,
+   "snippet": "(binaryCodeFamily n d).sup (fun C => C.card)",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.shellCodeNumber",
+   "decl_kind": "def",
+   "line": 92,
+   "snippet": "(shellCodeFamily n w d).sup (fun C => C.card)",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.centeredEta",
+   "decl_kind": "def",
+   "line": 101,
+   "snippet": "1 - 2 * α + 2 * β - 2 * γ",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 108,
+   "snippet": "(σ * η - m * z ^ 2) ^ 2 /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 108,
+   "snippet": "(σ * η - m * z ^ 2) ^ 2 /",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 109,
+   "snippet": "(z ^ 2 * (1 - m ^ 2) * (1 - z ^ 2)) +",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 110,
+   "snippet": "((z ^ 2 - η ^ 2) * (σ ^ 2 - z ^ 2)) /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 110,
+   "snippet": "((z ^ 2 - η ^ 2) * (σ ^ 2 - z ^ 2)) /",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 111,
+   "snippet": "(z ^ 2 * (1 - m ^ 2) * Real.sqrt (1 - z ^ 2))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.asymptoticThreshold",
+   "decl_kind": "def",
+   "line": 114,
+   "snippet": "1 - δ / (2 * α * (1 - α))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.asymptoticThreshold",
+   "decl_kind": "def",
+   "line": 114,
+   "snippet": "1 - δ / (2 * α * (1 - α))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.rankPenalty",
+   "decl_kind": "def",
+   "line": 117,
+   "snippet": "α * MetricCodes.binaryEntropy (β / α) +",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.rankPenalty",
+   "decl_kind": "def",
+   "line": 118,
+   "snippet": "(1 - α) * MetricCodes.binaryEntropy (γ / (1 - α))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.rankPenalty",
+   "decl_kind": "def",
+   "line": 118,
+   "snippet": "(1 - α) * MetricCodes.binaryEntropy (γ / (1 - α))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.shellRate",
+   "decl_kind": "def",
+   "line": 121,
+   "snippet": "1 - MetricCodes.binaryEntropy α + MetricCodes.binaryEntropy u -",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 126,
+   "snippet": "distance_lt_half : δ < (1 : ℝ) / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 127,
+   "snippet": "weight_gt_distance : δ / 2 < α",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 128,
+   "snippet": "weight_lt_half : α < (1 : ℝ) / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 130,
+   "snippet": "support_lt_half : β < α / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 132,
+   "snippet": "complement_lt_half : γ < (1 - α) / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 132,
+   "snippet": "complement_lt_half : γ < (1 - α) / 2",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 135,
+   "snippet": "degree_lt_left : u < α - β + γ",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 136,
+   "snippet": "degree_lt_right : u < 1 - α + β - γ",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwG",
+   "decl_kind": "def",
+   "line": 155,
+   "snippet": "MetricCodes.binaryEntropy ((1 - Real.sqrt (1 - v)) / 2)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwG",
+   "decl_kind": "def",
+   "line": 155,
+   "snippet": "MetricCodes.binaryEntropy ((1 - Real.sqrt (1 - v)) / 2)",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwObjective",
+   "decl_kind": "def",
+   "line": 158,
+   "snippet": "1 + mrrwG (r ^ 2) -",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.binaryRate_le_combinedVariationalRate",
+   "decl_kind": "theorem",
+   "line": 169,
+   "snippet": "{d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 2) :",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.binaryRate_lt_mrrw",
+   "decl_kind": "theorem",
+   "line": 174,
+   "snippet": "{d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 2) :",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.exists_binaryRate_mrrw_improvement",
+   "decl_kind": "theorem",
+   "line": 179,
+   "snippet": "{d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 2) :",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.MRRW.strict_mrrw2",
+   "decl_kind": "theorem",
+   "line": 188,
+   "snippet": "{δ : ℝ} (hδ : 0 < δ) (hhalf : δ < (1 : ℝ) / 2) :",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.hammingGamma",
+   "decl_kind": "def",
+   "line": 31,
+   "snippet": "Real.sqrt (a * (1 - a))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.classicalParameter",
+   "decl_kind": "def",
+   "line": 43,
+   "snippet": "(1 : ℝ) / 2 - Real.sqrt (δ * (1 - δ))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Hamming.binaryRate",
+   "decl_kind": "def",
+   "line": 53,
+   "snippet": "Filter.atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 111,
+   "snippet": "(z ^ 2 * (1 - m ^ 2) * Real.sqrt (1 - z ^ 2))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 125,
+   "snippet": "distance_pos : 0 < δ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 126,
+   "snippet": "distance_lt_half : δ < (1 : ℝ) / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 127,
+   "snippet": "weight_gt_distance : δ / 2 < α",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 128,
+   "snippet": "weight_lt_half : α < (1 : ℝ) / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 129,
+   "snippet": "support_nonneg : 0 ≤ β",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 130,
+   "snippet": "support_lt_half : β < α / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 131,
+   "snippet": "complement_nonneg : 0 ≤ γ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 132,
+   "snippet": "complement_lt_half : γ < (1 - α) / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 133,
+   "snippet": "first_lt_degree : β + γ < u",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 134,
+   "snippet": "degree_lt_weight : u < α",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 135,
+   "snippet": "degree_lt_left : u < α - β + γ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 136,
+   "snippet": "degree_lt_right : u < 1 - α + β - γ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_BinaryCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwG",
+   "decl_kind": "def",
+   "line": 155,
+   "snippet": "MetricCodes.binaryEntropy ((1 - Real.sqrt (1 - v)) / 2)",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  }
+ ],
+ "audit": {
+  "summary": "The file proves, for every 0<δ<1/2, the following, where R₂(δ) is limsup (1/n) log₂ A(n, ⌈δn⌉):\n- R₂(δ) ≤ κ_bin(δ) = min{κ_H(δ), κ_CW(δ)}.\n- κ_bin(δ) < M₂(δ), the second MRRW bound.\n- R₂(δ) < M₂(δ), with an ε-gap variant.\n- R₂(δ) < M₁(δ), the first MRRW bound, with an ε-gap variant.\nThe MRRW objectives and the formula Λ in (6) match the standard and excerpted forms. The main caveat is that several ingredients are not in the excerpt and cannot be checked against the paper: κ_H (Γ and its feasibility), the parameter ranges (4)–(5), and the definitions of z, m, ζ, ξ. Inside the stated constraints, no junk division or sInf degeneracy occurs.",
+  "glossary": [
+   {
+    "decl": "hammingDist",
+    "line": 13,
+    "plain": "number of coordinates where x and y differ",
+    "standard_concept": "Hamming distance",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsBinaryCode",
+    "line": 22,
+    "plain": "C has minimum distance ≥ d",
+    "standard_concept": "binary code of minimum distance d",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "binaryEntropy",
+    "line": 25,
+    "plain": "H₂(u) = −u log₂u − (1−u)log₂(1−u)",
+    "standard_concept": "binary entropy",
+    "matches_standard": "yes",
+    "note": "Real.logb 2 0 = 0 gives H₂(0)=H₂(1)=0, which is the correct convention.",
+    "citation_ok": true
+   },
+   {
+    "decl": "hammingGamma",
+    "line": 29,
+    "plain": "Γ(a,b) = 2(a−b)(1−a−b)/√(a(1−a))",
+    "standard_concept": "spectral coordinate of the whole-cube harmonic construction (κ_H)",
+    "matches_standard": "unclear",
+    "note": "Definition not in excerpt. At b=0 it gives 2√(a(1−a)), consistent with recovering M₁.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Hamming.codeNumber",
+    "line": 39,
+    "plain": "A(n,d): max size of a binary length-n code with min distance d",
+    "standard_concept": "A(n,d)",
+    "matches_standard": "yes",
+    "note": "The empty and singleton codes are valid, so the value is ≥1.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Hamming.classicalRate",
+    "line": 45,
+    "plain": "M₁(δ) = H₂(1/2 − √(δ(1−δ)))",
+    "standard_concept": "first MRRW bound",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Hamming.binaryRate",
+    "line": 48,
+    "plain": "R₂(δ) = limsup_n log₂A(n,⌈δn⌉)/n",
+    "standard_concept": "asymptotic rate R₂(δ)",
+    "matches_standard": "yes",
+    "note": "The sequence lies in [0,1], so the limsup is genuine. Using ⌈δn⌉ is a standard choice.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Hamming.variationalRate",
+    "line": 63,
+    "plain": "κ_H(δ) = inf{H₂(a)−H₂(b) : 0≤b<a≤1/2, Γ(a,b) > 1−2δ}",
+    "standard_concept": "κ_H",
+    "matches_standard": "unclear",
+    "note": "κ_H is not in the excerpt. The set is nonempty (a=1/2, b=0) and bounded below by 0, so sInf is genuine.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Johnson.spectralLimit",
+    "line": 103,
+    "plain": "Λ_{α,β,γ}(u) as in (6), with σ=ζ and η=ξ",
+    "standard_concept": "Λ in eq. (6)",
+    "matches_standard": "partly",
+    "note": "The formula transcribes (6). The definitions of z, m, ζ, ξ (as 1−2u, 1−2α, 1−2β−2γ, 1−2α+2β−2γ) are not in the excerpt.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Johnson.asymptoticThreshold",
+    "line": 113,
+    "plain": "1 − δ/(2α(1−α))",
+    "standard_concept": "RHS of (7)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Johnson.shellRate",
+    "line": 120,
+    "plain": "1 − H₂(α) + H₂(u) − αH₂(β/α) − (1−α)H₂(γ/(1−α))",
+    "standard_concept": "objective of (8)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Johnson.AsymptoticParameters",
+    "line": 124,
+    "plain": "the following parameter ranges:\n- 0<δ<1/2 and δ/2<α<1/2;\n- 0≤β<α/2 and 0≤γ<(1−α)/2;\n- β+γ<u<α;\n- u<α−β+γ and u<1−α+β−γ",
+    "standard_concept": "ranges (4)–(5)",
+    "matches_standard": "unclear",
+    "note": "Ranges (4)–(5) are not in the excerpt.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Johnson.variationalRate",
+    "line": 149,
+    "plain": "κ_CW(δ) = inf of shellRate over D_δ",
+    "standard_concept": "κ_CW (8)",
+    "matches_standard": "partly",
+    "note": "Correct modulo the unverified ranges. All denominators are positive under the constraints.",
+    "citation_ok": false
+   },
+   {
+    "decl": "Johnson.combinedVariationalRate",
+    "line": 151,
+    "plain": "κ_bin(δ) = min{κ_H, κ_CW}",
+    "standard_concept": "κ_bin",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Johnson.mrrwRate",
+    "line": 165,
+    "plain": "M₂(δ) = min_{0≤r≤1−2δ} 1 + g(r²) − g(r²+2δr+2δ), with g(v)=H₂((1−√(1−v))/2)",
+    "standard_concept": "second MRRW bound",
+    "matches_standard": "yes",
+    "note": "The argument is ≤1 on the range, and the r=1−2δ endpoint gives M₁.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "Hamming.binaryRate_lt_classicalRate",
+    "line": 65,
+    "plain": "For 0<δ<1/2, R₂(δ) < M₁(δ).",
+    "citation_ok": true
+   },
+   {
+    "theorem": "Hamming.exists_binaryRate_improvement",
+    "line": 70,
+    "plain": "For 0<δ<1/2, there is ε>0 with R₂(δ) ≤ M₁(δ) − ε.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "Johnson.binaryRate_le_combinedVariationalRate",
+    "line": 168,
+    "plain": "For 0<d<1/2, R₂(d) ≤ min{κ_H(d), κ_CW(d)}.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "Johnson.binaryRate_lt_mrrw",
+    "line": 173,
+    "plain": "For 0<d<1/2, R₂(d) < M₂(d).",
+    "citation_ok": true
+   },
+   {
+    "theorem": "Johnson.exists_binaryRate_mrrw_improvement",
+    "line": 178,
+    "plain": "For 0<d<1/2, there is e>0 with R₂(d) ≤ M₂(d) − e.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "MRRW.strict_mrrw2",
+    "line": 187,
+    "plain": "For 0<δ<1/2, κ_bin(δ) < M₂(δ).",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "For every fixed 0<δ<1/2, R₂(δ) ≤ κ_bin(δ) < M₂(δ)."
+   },
+   {
+    "ref": "Theorem 2.3 / Proposition 3.7 (mentioned)",
+    "plain": "Positive harmonic degrees strictly improve M₁ and the classical constant-weight objective (statements not in excerpt)."
+   },
+   {
+    "ref": "Theorem 1.2, Corollaries 1.3–1.4",
+    "plain": "Spherical-code and sphere-packing results."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1 (first inequality)",
+    "lean_theorem": "Johnson.binaryRate_le_combinedVariationalRate",
+    "relation": "equivalent",
+    "why": "Matches, modulo the κ_H and ranges (4)–(5) definitions not in the excerpt."
+   },
+   {
+    "paper_ref": "Theorem 1.1 (second inequality)",
+    "lean_theorem": "MRRW.strict_mrrw2",
+    "relation": "equivalent",
+    "why": "κ_bin < M₂ with a standard M₂."
+   },
+   {
+    "paper_ref": "Theorem 1.1 (consequence R₂<M₂)",
+    "lean_theorem": "Johnson.binaryRate_lt_mrrw",
+    "relation": "equivalent",
+    "why": "The direct composite; the ε-version is equivalent."
+   },
+   {
+    "paper_ref": "Theorem 2.3 (R₂ < M₁)",
+    "lean_theorem": "Hamming.binaryRate_lt_classicalRate",
+    "relation": "equivalent",
+    "why": "The precise statement of Theorem 2.3 is not in the excerpt. R₂<M₁ also follows from Theorem 1.1 since M₂≤M₁."
+   },
+   {
+    "paper_ref": "Theorem 1.2, Corollaries 1.3, 1.4",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Covered elsewhere (sibling file B_SphericalCodes)."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "Johnson.AsymptoticParameters",
+    "line": 124,
+    "paper_ref": "eqs. (4)–(5)",
+    "explanation": "The parameter ranges defining D_δ are not in the excerpt and cannot be checked. Extra constraints would shrink D_δ and raise κ_CW. That makes R₂ ≤ κ_bin weaker but κ_bin < M₂ stronger, and vice versa for missing constraints.",
+    "polarity": "unclear",
+    "probe_idea": "Compare the structure fields against eqs. (4)–(5) of the paper by hand.",
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "Johnson.spectralLimit",
+    "line": 103,
+    "paper_ref": "eq. (6)",
+    "explanation": "The definitions of z, m, ζ, ξ as affine functions of u, α, β, γ are not in the excerpt. The algebraic shape of Λ matches (6), including √(1−z²) in the second denominator, though that reading comes from garbled pdftotext.",
+    "polarity": "unclear",
+    "probe_idea": "Check centeredDegree, centeredWeight, centeredSigma and centeredEta against the paper's definitions of z, m, ζ, ξ.",
+    "citation_ok": true
+   },
+   {
+    "id": "F3",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "Hamming.variationalRate",
+    "line": 63,
+    "paper_ref": "κ_H (not in excerpt)",
+    "explanation": "The whole-cube exponent κ_H (Γ and the feasibility 1−2δ < Γ) is not in the excerpt. Its b=0 specialisation correctly gives the M₁ boundary, which is a consistency check only.",
+    "polarity": "unclear",
+    "probe_idea": "Prove Γ(a,0) = 2√(a(1−a)) and that feasibility at b=0 ↔ a > 1/2−√(δ(1−δ)); compare with the paper's definition of κ_H.",
+    "citation_ok": true
+   },
+   {
+    "id": "F4",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "MRRW.strict_mrrw2",
+    "line": 187,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "If the Johnson rate set were empty or unbounded below, sInf would be 0 and κ_bin < M₂ would hold trivially. This is ruled out jointly: binaryRate_le_combinedVariationalRate together with R₂(δ)>0 (Gilbert–Varshamov) forces κ_CW > 0. Under the constraints all denominators are positive.",
+    "polarity": "lean weaker",
+    "probe_idea": "Prove (Johnson.rateSet δ).Nonempty ∧ BddBelow (Johnson.rateSet δ) for 0<δ<1/2.",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 63,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "The set is nonempty (a=1/2, b=0) and bounded below by 0."
+   },
+   {
+    "line": 149,
+    "rule": "junk-sInf",
+    "verdict": "needs-probe",
+    "why": "Nonemptiness is not obvious per se, though it is indirectly forced by the proven R₂ ≤ κ_bin together with R₂>0."
+   },
+   {
+    "line": 166,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "This is the continuous image of a nonempty compact interval."
+   },
+   {
+    "line": 14,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "This is a Finset card over Fin n, so the value is genuine."
+   },
+   {
+    "line": 17,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "This is a Finset card, so the value is genuine."
+   },
+   {
+    "line": 26,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 27,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 30,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Under the constraints 0<a≤1/2, so √(a(1−a))>0."
+   },
+   {
+    "line": 30,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 31,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ and the argument is nonnegative under the constraints."
+   },
+   {
+    "line": 40,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "The family is finite and nonempty, with sup ≥ 1."
+   },
+   {
+    "line": 43,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2 with the δ(1−δ) argument positive."
+   },
+   {
+    "line": 52,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Only n=0 is affected, which does not change the limsup."
+   },
+   {
+    "line": 52,
+    "rule": "toNat-trunc",
+    "verdict": "harmless",
+    "why": "⌈δn⌉ is a standard asymptotic choice."
+   },
+   {
+    "line": 56,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 57,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 61,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 66,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 71,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 85,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "This is a finite sup and is unused by the theorems."
+   },
+   {
+    "line": 92,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "This is a finite sup and is unused by the theorems."
+   },
+   {
+    "line": 101,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 108,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "z∈(0,1) and m∈(0,1) under the constraints, so the denominator is >0."
+   },
+   {
+    "line": 108,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 109,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 110,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The denominator is positive under the constraints."
+   },
+   {
+    "line": 110,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 111,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "1−z²>0 under the constraints."
+   },
+   {
+    "line": 114,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "2α(1−α)>0 since 0<α<1/2."
+   },
+   {
+    "line": 114,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 117,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "α>0."
+   },
+   {
+    "line": 118,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "1−α>0."
+   },
+   {
+    "line": 118,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 121,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 126,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 127,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 2."
+   },
+   {
+    "line": 128,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 130,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 2."
+   },
+   {
+    "line": 132,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 2."
+   },
+   {
+    "line": 132,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 135,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 136,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 155,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 2."
+   },
+   {
+    "line": 155,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "1−v ≥ 0 on the range, since the argument is ≤1 at r ≤ 1−2δ."
+   },
+   {
+    "line": 158,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ."
+   },
+   {
+    "line": 169,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 174,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 179,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 188,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "Johnson.AsymptoticParameters",
+    "line": 124,
+    "explanation": "The parameter ranges defining D_δ are not in the excerpt and cannot be checked. Extra constraints would shrink D_δ and raise κ_CW. That makes R₂ ≤ κ_bin weaker but κ_bin < M₂ stronger, and vice versa for missing constraints.",
+    "probe_idea": "Compare the structure fields against eqs. (4)–(5) of the paper by hand."
+   },
+   "result": {
+    "id": "F1-a0",
+    "status": "GREEN",
+    "claim": "The structure Johnson.AsymptoticParameters is satisfiable: for δ=1/5, α=3/10, β=0, γ=0, u=1/10 all twelve constraints hold. This shows the parameter domain is nonempty. It does not check the fields against the paper's eqs. (4)–(5).",
+    "kind": "non-vacuity",
+    "seconds": 35.9,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_asymptotic_params_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_asymptotic_params_nonempty :\n    MetricCodes.Johnson.AsymptoticParameters (1/5) (3/10) 0 0 (1/10) := by\n  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩ <;> norm_num",
+   "attempts": [
+    {
+     "lean": "theorem probe_asymptotic_params_nonempty :\n    MetricCodes.Johnson.AsymptoticParameters (1/5) (3/10) 0 0 (1/10) := by\n  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩ <;> norm_num",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 35.9
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "F2",
+    "decl": "Johnson.spectralLimit",
+    "line": 103,
+    "explanation": "The definitions of z, m, ζ, ξ as affine functions of u, α, β, γ are not in the excerpt. The algebraic shape of Λ matches (6), including √(1−z²) in the second denominator, though that reading comes from garbled pdftotext.",
+    "probe_idea": "Check centeredDegree, centeredWeight, centeredSigma and centeredEta against the paper's definitions of z, m, ζ, ξ."
+   },
+   "result": {
+    "id": "F2-a0",
+    "status": "GREEN",
+    "claim": "Johnson.spectralLimit unfolds definitionally to an explicit closed formula in which z = 1-2u, m = 1-2α, σ = 1-2β-2γ and η = 1-2α+2β-2γ are substituted. This makes the affine definitions of the centered quantities and the shape of Λ, including √(1-z²) in the second denominator, visible for comparison with the paper. It does not check them against the paper itself.",
+    "kind": "unit-test",
+    "seconds": 36.6,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_spectralLimit_unfold": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_spectralLimit_unfold (α β γ u : ℝ) :\n    MetricCodes.Johnson.spectralLimit α β γ u =\n      (((1 - 2*β - 2*γ) * (1 - 2*α + 2*β - 2*γ) - (1 - 2*α) * (1 - 2*u)^2)^2 /\n        ((1 - 2*u)^2 * (1 - (1 - 2*α)^2) * (1 - (1 - 2*u)^2))) +\n      (((1 - 2*u)^2 - (1 - 2*α + 2*β - 2*γ)^2) * ((1 - 2*β - 2*γ)^2 - (1 - 2*u)^2)) /\n        ((1 - 2*u)^2 * (1 - (1 - 2*α)^2) * Real.sqrt (1 - (1 - 2*u)^2)) := by\n  rfl",
+   "attempts": [
+    {
+     "lean": "theorem probe_spectralLimit_unfold (α β γ u : ℝ) :\n    MetricCodes.Johnson.spectralLimit α β γ u =\n      (((1 - 2*β - 2*γ) * (1 - 2*α + 2*β - 2*γ) - (1 - 2*α) * (1 - 2*u)^2)^2 /\n        ((1 - 2*u)^2 * (1 - (1 - 2*α)^2) * (1 - (1 - 2*u)^2))) +\n      (((1 - 2*u)^2 - (1 - 2*α + 2*β - 2*γ)^2) * ((1 - 2*β - 2*γ)^2 - (1 - 2*u)^2)) /\n        ((1 - 2*u)^2 * (1 - (1 - 2*α)^2) * Real.sqrt (1 - (1 - 2*u)^2)) := by\n  rfl",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 36.6
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "MetricCodes.Hamming.binaryRate_lt_classicalRate",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {δ : ℝ}\n    (hδ : 0 < δ) (hδ' : δ < (1 : ℝ) / 2), binaryRate δ < classicalRate δ",
+   "restated": "∀ δ : ℝ, 0 < δ → δ < (1 : ℝ) / 2 → Filter.limsup (fun n : ℕ => Real.logb 2 (MetricCodes.Hamming.codeNumber n (Nat.ceil (δ * (n : ℝ))) : ℝ) / (n : ℝ)) Filter.atTop < MetricCodes.binaryEntropy ((1 : ℝ) / 2 - Real.sqrt (δ * (1 - δ)))",
+   "english": "For every relative distance δ strictly between 0 and 1/2, the limsup of (log₂ A(n, ⌈δn⌉))/n, where A(n,d) is the maximum size of a binary code of length n and minimum distance d, is strictly less than H₂(1/2 − √(δ(1−δ))), the classical (MRRW-type) entropy bound.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "binaryEntropy",
+    "codeNumber"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace MetricCodes.Hamming\ntheorem probe_restate_2  :\n    (∀ {δ : ℝ}\n    (hδ : 0 < δ) (hδ' : δ < (1 : ℝ) / 2), binaryRate δ < classicalRate δ) ↔\n    (∀ δ : ℝ, 0 < δ → δ < (1 : ℝ) / 2 → Filter.limsup (fun n : ℕ => Real.logb 2 (MetricCodes.Hamming.codeNumber n (Nat.ceil (δ * (n : ℝ))) : ℝ) / (n : ℝ)) Filter.atTop < MetricCodes.binaryEntropy ((1 : ℝ) / 2 - Real.sqrt (δ * (1 - δ)))) := by\n  first | exact Iff.rfl | (unfold MetricCodes.Hamming.binaryRate MetricCodes.Hamming.classicalRate MetricCodes.Hamming.classicalParameter; exact Iff.rfl) | (simp only [MetricCodes.Hamming.binaryRate, MetricCodes.Hamming.classicalRate, MetricCodes.Hamming.classicalParameter])\nend MetricCodes.Hamming\n",
+   "seconds": 26.7
+  },
+  {
+   "target": "MetricCodes.Hamming.exists_binaryRate_improvement",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {δ : ℝ}\n    (hδ : 0 < δ) (hδ' : δ < (1 : ℝ) / 2), ∃ ε : ℝ, 0 < ε ∧ binaryRate δ ≤ classicalRate δ - ε",
+   "restated": "∀ {δ : ℝ}, 0 < δ → δ < (1 : ℝ) / 2 → binaryRate δ < classicalRate δ",
+   "english": "For every δ strictly between 0 and 1/2, the asymptotic optimal binary code rate at relative distance δ is strictly smaller than the classical rate bound, i.e. 1 - (the entropy of 1/2 - √(δ(1-δ))) is beaten.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "binaryRate",
+    "classicalRate"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace MetricCodes.Hamming\ntheorem probe_restate_11  :\n    (∀ {δ : ℝ}\n    (hδ : 0 < δ) (hδ' : δ < (1 : ℝ) / 2), ∃ ε : ℝ, 0 < ε ∧ binaryRate δ ≤ classicalRate δ - ε) ↔\n    (∀ {δ : ℝ}, 0 < δ → δ < (1 : ℝ) / 2 → binaryRate δ < classicalRate δ) := by\n  constructor\n  · intro h δ hδ hδ'\n    obtain ⟨ε, hε, h'⟩ := h hδ hδ'\n    linarith\n  · intro h δ hδ hδ'\n    have h1 := h hδ hδ'\n    exact ⟨classicalRate δ - binaryRate δ, by linarith, by linarith⟩\nend MetricCodes.Hamming\n",
+   "seconds": 46.9
+  },
+  {
+   "target": "MetricCodes.Johnson.binaryRate_le_combinedVariationalRate",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 2), MetricCodes.Hamming.binaryRate d ≤ combinedVariationalRate d",
+   "restated": "∀ d : ℝ, 0 < d → d < (1 : ℝ) / 2 → MetricCodes.Hamming.binaryRate d ≤ MetricCodes.Hamming.variationalRate d ∧ MetricCodes.Hamming.binaryRate d ≤ MetricCodes.Johnson.variationalRate d",
+   "english": "For every d with 0 < d < 1/2, the binary-code rate at relative distance d is at most the Hamming variational rate at d and also at most the Johnson variational rate at d.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "binaryRate",
+    "variationalRate"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace MetricCodes.Johnson\ntheorem probe_restate_22  :\n    (∀ {d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 2), MetricCodes.Hamming.binaryRate d ≤ combinedVariationalRate d) ↔\n    (∀ d : ℝ, 0 < d → d < (1 : ℝ) / 2 → MetricCodes.Hamming.binaryRate d ≤ MetricCodes.Hamming.variationalRate d ∧ MetricCodes.Hamming.binaryRate d ≤ MetricCodes.Johnson.variationalRate d) := by\n  constructor\n  · intro h d hd hd'\n    have := h hd hd'\n    unfold MetricCodes.Johnson.combinedVariationalRate at this\n    exact le_min_iff.mp this\n  · intro h d hd hd'\n    unfold MetricCodes.Johnson.combinedVariationalRate\n    exact le_min_iff.mpr (h d hd hd')\nend MetricCodes.Johnson\n",
+   "seconds": 35.1
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 142,
+  "lines_needing_human_review": 123,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

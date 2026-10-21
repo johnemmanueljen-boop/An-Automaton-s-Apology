@@ -1,0 +1,554 @@
+{
+ "result": "I_MulticolorTriangleRamsey",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/I_MulticolorTriangleRamsey.lean",
+ "theorems": [
+  "ErdosProblems.MulticolourTriangleRamsey.erdos_183",
+  "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+  "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+  "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta"
+ ],
+ "lint": [
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber",
+   "decl_kind": "def",
+   "line": 16,
+   "snippet": "sInf {n : ℕ | ForcesMonochromaticTriangle n k}",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_183",
+   "decl_kind": "theorem",
+   "line": 21,
+   "snippet": "(triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 27,
+   "snippet": "(((1 : ℝ) / (6 * Real.exp 38)) *",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 28,
+   "snippet": "(k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 28,
+   "snippet": "(k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 32,
+   "snippet": "(triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+   "decl_kind": "theorem",
+   "line": 39,
+   "snippet": "((1 / 3 : ℝ) - ε) * (k : ℝ) * Real.log (k : ℝ) ≤",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+   "decl_kind": "theorem",
+   "line": 39,
+   "snippet": "((1 / 3 : ℝ) - ε) * (k : ℝ) * Real.log (k : ℝ) ≤",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+   "decl_kind": "theorem",
+   "line": 40,
+   "snippet": "Real.log (triangleRamseyNumber k : ℝ) ∧",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+   "decl_kind": "theorem",
+   "line": 41,
+   "snippet": "Real.log (triangleRamseyNumber k : ℝ) ≤",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+   "decl_kind": "theorem",
+   "line": 42,
+   "snippet": "(1 + ε) * (k : ℝ) * Real.log (k : ℝ) := by",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta",
+   "decl_kind": "theorem",
+   "line": 46,
+   "snippet": "(fun k : ℕ => Real.log (triangleRamseyNumber k : ℝ))",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta",
+   "decl_kind": "theorem",
+   "line": 47,
+   "snippet": "=Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℝ)) := by",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_183",
+   "decl_kind": "theorem",
+   "line": 19,
+   "snippet": "Filter.Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_183",
+   "decl_kind": "theorem",
+   "line": 21,
+   "snippet": "(triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_183",
+   "decl_kind": "theorem",
+   "line": 22,
+   "snippet": "atTop atTop := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 28,
+   "snippet": "(k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 30,
+   "snippet": "Filter.Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 32,
+   "snippet": "(triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "decl_kind": "theorem",
+   "line": 33,
+   "snippet": "atTop atTop := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+   "decl_kind": "theorem",
+   "line": 38,
+   "snippet": "∀ᶠ k : ℕ in atTop,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "I_MulticolorTriangleRamsey.lean",
+   "decl": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta",
+   "decl_kind": "theorem",
+   "line": 47,
+   "snippet": "=Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℝ)) := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  }
+ ],
+ "audit": {
+  "summary": "The file defines R_k(3) as the least n such that every k-colouring of the edges of K_n has a monochromatic triangle. It then states four results: R_k(3)^{1/k} → ∞; an explicit lower bound R_k(3) ≥ ((1/(6e^{38})) k^{1/3}/log k)^k for every k ≥ 2; eventual bounds (1/3−ε) k log k ≤ log R_k(3) ≤ (1+ε) k log k; and log R_k(3) = Θ(k log k). These match Theorem 1.1, its corollaries, and (4) in the paper, with an explicit constant in place of the paper's 'there exists c'. No real caveats: the sInf/junk-value concerns are harmless because Ramsey numbers are finite and every statement is either asymptotic or restricted to k ≥ 2.",
+  "glossary": [
+   {
+    "decl": "TriangleFree",
+    "line": 8,
+    "plain": "A k-colouring C of E(K_n) in which no colour class contains a triangle (each colour graph is 3-clique-free).",
+    "standard_concept": "triangle-free k-colouring of K_n",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "ForcesMonochromaticTriangle",
+    "line": 12,
+    "plain": "Every k-colouring of E(K_n) contains a monochromatic triangle.",
+    "standard_concept": "n → (3)_k arrow property",
+    "matches_standard": "yes",
+    "note": "Upward closed in n, so sInf gives the threshold.",
+    "citation_ok": true
+   },
+   {
+    "decl": "triangleRamseyNumber",
+    "line": 15,
+    "plain": "R_k(3): the least n with the arrow property (sInf, which would be 0 if the set were empty).",
+    "standard_concept": "multicolour Ramsey number R(3,...,3)",
+    "matches_standard": "yes",
+    "note": "The set is nonempty for every k because Ramsey numbers are finite. k=0 gives a degenerate value (2), which is irrelevant to every target statement.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "erdos_183",
+    "line": 18,
+    "plain": "R_k(3)^{1/k} → +∞ as k → ∞ (real rpow).",
+    "citation_ok": true
+   },
+   {
+    "theorem": "erdos_problem_183_explicit",
+    "line": 25,
+    "plain": "For every integer k ≥ 2, ((1/(6e^{38})) · k^{1/3} / log k)^k ≤ R_k(3); and R_k(3)^{1/k} → ∞.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "triangleRamseyNumber_log_sharp_coefficients",
+    "line": 36,
+    "plain": "For every ε > 0 and all sufficiently large k, (1/3 − ε) k log k ≤ log R_k(3) ≤ (1 + ε) k log k.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "triangleRamseyNumber_log_isTheta",
+    "line": 45,
+    "plain": "log R_k(3) = Θ(k log k) as k → ∞.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1 (3)",
+    "plain": "There is an absolute constant c > 0 such that R_k(3) ≥ (c k^{1/3}/log k)^k for every integer k ≥ 2."
+   },
+   {
+    "ref": "Theorem 1.1 corollary",
+    "plain": "k^{(1/3−o(1))k} ≤ R_k(3) ≤ k^{(1+o(1))k}, and R_k(3) = k^{Θ(k)}."
+   },
+   {
+    "ref": "(4)",
+    "plain": "lim R_k(3)^{1/k} = +∞."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "(4)",
+    "lean_theorem": "erdos_183",
+    "relation": "equivalent",
+    "why": "Same limit statement."
+   },
+   {
+    "paper_ref": "Theorem 1.1 (3)",
+    "lean_theorem": "erdos_problem_183_explicit",
+    "relation": "lean_stronger",
+    "why": "Gives the explicit constant c = 1/(6e^{38}) instead of mere existence."
+   },
+   {
+    "paper_ref": "Theorem 1.1 corollary",
+    "lean_theorem": "triangleRamseyNumber_log_sharp_coefficients",
+    "relation": "equivalent",
+    "why": "The ε-form of the exponents (1/3 − o(1)) and (1 + o(1))."
+   },
+   {
+    "paper_ref": "Theorem 1.1 corollary",
+    "lean_theorem": "triangleRamseyNumber_log_isTheta",
+    "relation": "equivalent",
+    "why": "R_k(3) = k^{Θ(k)} is the same as log R_k(3) = Θ(k log k)."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "erdos_problem_183_explicit",
+    "line": 27,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The Lean statement fixes the explicit constant c = 1/(6e^{38}), whereas the paper only asserts existence of c. This makes Lean stronger than the paper, which is acceptable; the excerpt does not show which constant the paper actually obtains.",
+    "polarity": "lean stronger",
+    "probe_idea": null,
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 16,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "The set is nonempty for every k (R_k(3) ≤ e·k!+1 < ∞), so sInf is the true minimum."
+   },
+   {
+    "line": 21,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "1/k is junk only at k=0, which does not affect a limit at atTop."
+   },
+   {
+    "line": 27,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The divisor 6e^{38} is positive."
+   },
+   {
+    "line": 28,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "For k ≥ 2, log k > 0, so the division is genuine."
+   },
+   {
+    "line": 28,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "k ≥ 2, so log k is positive and genuine."
+   },
+   {
+    "line": 32,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Same as line 21: only k=0 is affected, and the statement is asymptotic."
+   },
+   {
+    "line": 39,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "1/3 is a real literal, not an ℕ division."
+   },
+   {
+    "line": 39,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "The statement is eventual in k, so log k > 0."
+   },
+   {
+    "line": 40,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "R_k(3) ≥ 3 for k ≥ 1, so the log is genuine."
+   },
+   {
+    "line": 41,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "Same as line 40."
+   },
+   {
+    "line": 42,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "The statement is eventual in k."
+   },
+   {
+    "line": 46,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "R_k(3) ≥ 3 eventually, so the log is genuine."
+   },
+   {
+    "line": 47,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "This is an asymptotic statement at atTop."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance of the main definition"
+   },
+   "result": {
+    "id": "NV-a0",
+    "status": "GREEN",
+    "claim": "There is a concrete edge labeling C of the complete graph on Fin 2 with Fin 1 colours for which TriangleFree C holds. So TriangleFree is satisfiable and ForcesMonochromaticTriangle 2 1 is false.",
+    "kind": "non-vacuity",
+    "seconds": 26.6,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_nv_trianglefree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_nv_trianglefree : ∃ C : SimpleGraph.TopEdgeLabeling (Fin 2) (Fin 1), ErdosProblems.MulticolourTriangleRamsey.TriangleFree C := by\n  refine ⟨fun _ => 0, ?_⟩\n  intro c s hs\n  have h1 := hs.card_eq\n  have h2 := Finset.card_le_univ s\n  simp at h2\n  omega",
+   "attempts": [
+    {
+     "lean": "theorem probe_nv_trianglefree : ∃ C : SimpleGraph.TopEdgeLabeling (Fin 2) (Fin 1), ErdosProblems.MulticolourTriangleRamsey.TriangleFree C := by\n  refine ⟨fun _ => 0, ?_⟩\n  intro c s hs\n  have h1 := hs.card_eq\n  have h2 := Finset.card_le_univ s\n  simp at h2\n  omega",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 26.6
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "ErdosProblems.MulticolourTriangleRamsey.erdos_183",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "Filter.Tendsto\n      (fun k : ℕ =>\n        (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))\n      atTop atTop",
+   "restated": "∀ M : ℝ, ∃ K : ℕ, ∀ k : ℕ, K ≤ k → M ≤ (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ))",
+   "english": "For every real bound M there is a threshold K such that for all k ≥ K, the k-th root of the k-colour triangle Ramsey number is at least M. In other words, R_k^(1/k) tends to infinity.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "triangleRamseyNumber"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace ErdosProblems.MulticolourTriangleRamsey\nopen Filter Finset SimpleGraph\nopen scoped Topology\ntheorem probe_restate_0  :\n    (Filter.Tendsto\n      (fun k : ℕ =>\n        (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))\n      atTop atTop) ↔\n    (∀ M : ℝ, ∃ K : ℕ, ∀ k : ℕ, K ≤ k → M ≤ (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ))) := by\n  simp only [Filter.tendsto_atTop, Filter.eventually_atTop]\nend ErdosProblems.MulticolourTriangleRamsey\n",
+   "seconds": 26.4
+  },
+  {
+   "target": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "(∀ k : ℕ, 2 ≤ k →\n      (((1 : ℝ) / (6 * Real.exp 38)) *\n        (k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤\n          (triangleRamseyNumber k : ℝ)) ∧\n      Filter.Tendsto\n        (fun k : ℕ =>\n          (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))\n        atTop atTop",
+   "restated": "(∀ k : ℕ, 2 ≤ k → (((1 : ℝ) / (6 * Real.exp 38)) * (k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤ (triangleRamseyNumber k : ℝ)) ∧ (∀ b : ℝ, ∃ N : ℕ, ∀ k : ℕ, N ≤ k → b ≤ (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))",
+   "english": "For every k ≥ 2, R(k) ≥ ((1/(6e^38)) · k^(1/3) / log k)^k, where R(k) is the least n such that every k-colouring of the edges of K_n has a monochromatic triangle. Also, for every real bound b there is N such that R(k)^(1/k) ≥ b for all k ≥ N, so R(k)^(1/k) tends to infinity.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "triangleRamseyNumber"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace ErdosProblems.MulticolourTriangleRamsey\nopen Filter Finset SimpleGraph\nopen scoped Topology\ntheorem probe_restate_10  :\n    ((∀ k : ℕ, 2 ≤ k →\n      (((1 : ℝ) / (6 * Real.exp 38)) *\n        (k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤\n          (triangleRamseyNumber k : ℝ)) ∧\n      Filter.Tendsto\n        (fun k : ℕ =>\n          (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))\n        atTop atTop) ↔\n    ((∀ k : ℕ, 2 ≤ k → (((1 : ℝ) / (6 * Real.exp 38)) * (k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤ (triangleRamseyNumber k : ℝ)) ∧ (∀ b : ℝ, ∃ N : ℕ, ∀ k : ℕ, N ≤ k → b ≤ (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))) := by\n  simp only [Filter.tendsto_atTop_atTop]\nend ErdosProblems.MulticolourTriangleRamsey\n",
+   "seconds": 26.0
+  },
+  {
+   "target": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_sharp_coefficients",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ ε : ℝ, 0 < ε →\n      ∀ᶠ k : ℕ in atTop,\n        ((1 / 3 : ℝ) - ε) * (k : ℝ) * Real.log (k : ℝ) ≤\n            Real.log (triangleRamseyNumber k : ℝ) ∧\n          Real.log (triangleRamseyNumber k : ℝ) ≤\n            (1 + ε) * (k : ℝ) * Real.log (k : ℝ)",
+   "restated": "∀ ε : ℝ, 0 < ε → ∃ N : ℕ, ∀ k : ℕ, N ≤ k → (((1 / 3 : ℝ) - ε) * (k : ℝ) * Real.log (k : ℝ) ≤ Real.log (triangleRamseyNumber k : ℝ) ∧ Real.log (triangleRamseyNumber k : ℝ) ≤ (1 + ε) * (k : ℝ) * Real.log (k : ℝ))",
+   "english": "For every ε > 0 there is N such that for all k ≥ N, log R(k) lies between (1/3 − ε)·k·log k and (1 + ε)·k·log k, where R(k) is the k-colour triangle Ramsey number.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "triangleRamseyNumber"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace ErdosProblems.MulticolourTriangleRamsey\nopen Filter Finset SimpleGraph\nopen scoped Topology\ntheorem probe_restate_20  :\n    (∀ ε : ℝ, 0 < ε →\n      ∀ᶠ k : ℕ in atTop,\n        ((1 / 3 : ℝ) - ε) * (k : ℝ) * Real.log (k : ℝ) ≤\n            Real.log (triangleRamseyNumber k : ℝ) ∧\n          Real.log (triangleRamseyNumber k : ℝ) ≤\n            (1 + ε) * (k : ℝ) * Real.log (k : ℝ)) ↔\n    (∀ ε : ℝ, 0 < ε → ∃ N : ℕ, ∀ k : ℕ, N ≤ k → (((1 / 3 : ℝ) - ε) * (k : ℝ) * Real.log (k : ℝ) ≤ Real.log (triangleRamseyNumber k : ℝ) ∧ Real.log (triangleRamseyNumber k : ℝ) ≤ (1 + ε) * (k : ℝ) * Real.log (k : ℝ))) := by\n  simp only [Filter.eventually_atTop]\nend ErdosProblems.MulticolourTriangleRamsey\n",
+   "seconds": 26.5
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 40,
+  "lines_needing_human_review": 28,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

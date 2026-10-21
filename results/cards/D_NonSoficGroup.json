@@ -1,0 +1,294 @@
+{
+ "result": "D_NonSoficGroup",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/D_NonSoficGroup.lean",
+ "theorems": [
+  "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group"
+ ],
+ "lint": [
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "D_NonSoficGroup.lean",
+   "decl": "SoficGroups.normalizedHamming",
+   "decl_kind": "def",
+   "line": 9,
+   "snippet": "(hammingDist (fun y => p y) (fun y => q y) : ℝ) / Fintype.card Y",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "D_NonSoficGroup.lean",
+   "decl": "SoficGroups.normalizedHamming",
+   "decl_kind": "def",
+   "line": 9,
+   "snippet": "(hammingDist (fun y => p y) (fun y => q y) : ℝ) / Fintype.card Y",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "D_NonSoficGroup.lean",
+   "decl": "SoficGroups.GoodOn",
+   "decl_kind": "structure",
+   "line": 22,
+   "snippet": "1 - ε < normalizedHamming (M.action g) 1",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "D_NonSoficGroup.lean",
+   "decl": "SoficGroups.PermutationModel",
+   "decl_kind": "structure",
+   "line": 13,
+   "snippet": "size_pos : 0 < size",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "D_NonSoficGroup.lean",
+   "decl": "SoficGroups.GoodOn",
+   "decl_kind": "structure",
+   "line": 19,
+   "snippet": "multiplicative : ∀ g ∈ F, ∀ h ∈ F,",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "D_NonSoficGroup.lean",
+   "decl": "SoficGroups.GoodOn",
+   "decl_kind": "structure",
+   "line": 21,
+   "snippet": "separated : ∀ g ∈ F, g ≠ 1 →",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "D_NonSoficGroup.lean",
+   "decl": "SoficGroups.Sofic",
+   "decl_kind": "class",
+   "line": 25,
+   "snippet": "approximation : ∀ (F : Finset G) (ε : ℝ), 0 < ε → ε < 1 →",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  }
+ ],
+ "audit": {
+  "summary": "The Lean target asserts that some group G (in Type) is finitely presented and not sofic. Sofic is a bespoke definition by finite permutation approximations with normalized Hamming distance, and it matches the standard definition. The main caveat is coverage. The paper's Theorem 1.1 names a specific group, the unit group L_{F2}(1,2)^×, while Lean only proves existence of an unnamed nonsofic group. Lean also adds that this group is finitely presented, a property the excerpt never states for L_{F2}(1,2)^×.",
+  "glossary": [
+   {
+    "decl": "normalizedHamming",
+    "line": 7,
+    "plain": "d_H(p,q) = |{y : p y ≠ q y}| / |Y| for permutations p,q of a finite set Y",
+    "standard_concept": "normalized Hamming distance on Sym(n)",
+    "matches_standard": "yes",
+    "note": "Dividing by |Y| = 0 gives junk only when Y is empty; every use here has Y = Fin size with size > 0.",
+    "citation_ok": true
+   },
+   {
+    "decl": "PermutationModel",
+    "line": 11,
+    "plain": "A positive integer n and an arbitrary map σ: G → Sym(n) with σ(1) = id",
+    "standard_concept": "candidate sofic approximation map",
+    "matches_standard": "yes",
+    "note": "Requiring σ(1) = 1 is a standard, harmless normalization.",
+    "citation_ok": true
+   },
+   {
+    "decl": "GoodOn",
+    "line": 17,
+    "plain": "For all g,h ∈ F, d_H(σ(gh), σ(g)σ(h)) < ε; and for all g ∈ F with g ≠ 1, d_H(σ(g), id) > 1-ε",
+    "standard_concept": "(F,ε)-sofic approximation",
+    "matches_standard": "yes",
+    "note": "Perm multiplication is composition, so σ(g)σ(h) = σ(g)∘σ(h), as in the standard definition.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Sofic",
+    "line": 24,
+    "plain": "For every finite F ⊆ G and every 0<ε<1 there is an (F,ε)-good permutation model",
+    "standard_concept": "sofic group",
+    "matches_standard": "yes",
+    "note": "The restriction ε<1 is harmless because the condition is monotone in ε. Countability is not required, but this is consistent with the local definition.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+    "line": 30,
+    "plain": "There exists a group G that is finitely presented (Mathlib Group.IsFinitelyPresented) and is not sofic in the sense defined above.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "The unit group of the binary Leavitt algebra L_{F2}(1,2) is not sofic."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+    "relation": "different",
+    "why": "Lean proves existence of some finitely presented nonsofic group. It does not identify that group as L_{F2}(1,2)^×. Finite presentation is an additional claim not in the excerpt."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+    "line": 30,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The theorem is existential and does not tie the witness to the Leavitt unit group. It certifies that some nonsofic group exists, not the paper's specific statement. It also asserts finite presentation, which the excerpt does not state for L_{F2}(1,2)^× (not in excerpt). This could stem from a different part of the paper or from a known fact.",
+    "polarity": "unclear",
+    "probe_idea": "Define the Leavitt algebra over ZMod 2 as a RingQuot of a FreeAlgebra and state ¬ SoficGroups.Sofic (RingQuot ...)ˣ.",
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "Sofic",
+    "line": 24,
+    "paper_ref": "Section 1",
+    "explanation": "This is a bespoke definition rather than a Mathlib one. Read carefully, it matches the standard definition: arbitrary maps, σ(1)=1, multiplicativity defect < ε, non-identity elements moving more than a (1-ε) fraction of points. It is neither trivially false nor too strong, so non-soficity here is genuine non-soficity.",
+    "polarity": "n/a",
+    "probe_idea": "Prove Sofic for a finite group, e.g. Sofic (Multiplicative (ZMod 3)), via the regular representation, to confirm the definition is satisfiable.",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 9,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "In every use Y = Fin M.size with size_pos, so the denominator is nonzero."
+   },
+   {
+    "line": 9,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "Fintype.card (Fin size) = size > 0 by size_pos."
+   },
+   {
+    "line": 22,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "ε is real, so 1 - ε is real subtraction with no truncation."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+    "line": 30,
+    "explanation": "The theorem is existential and does not tie the witness to the Leavitt unit group. It certifies that some nonsofic group exists, not the paper's specific statement. It also asserts finite presentation, which the excerpt does not state for L_{F2}(1,2)^× (not in excerpt). This could stem from a different part of the paper or from a known fact.",
+    "probe_idea": "Define the Leavitt algebra over ZMod 2 as a RingQuot of a FreeAlgebra and state ¬ SoficGroups.Sofic (RingQuot ...)ˣ."
+   },
+   "result": {
+    "id": "F1-a0",
+    "status": "GREEN",
+    "claim": "The Sofic definition is satisfiable: every subsingleton group, in particular the trivial group, is Sofic in the Lean sense. This is only a sanity check that the Sofic class is not vacuous. It does not prove or refute the existential nonsofic theorem, which is not tied to the Leavitt unit group.",
+    "kind": "other",
+    "seconds": 44.1,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_sofic_subsingleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_sofic_subsingleton (G : Type) [Group G] [Subsingleton G] : SoficGroups.Sofic G := by\n  refine ⟨fun F ε hε hε1 => ?_⟩\n  refine ⟨⟨1, Nat.one_pos, fun _ => 1, rfl⟩, ?_, ?_⟩\n  · intro g _ h _\n    simp [SoficGroups.normalizedHamming, hε]\n  · intro g _ hg\n    exact absurd (Subsingleton.elim g 1) hg",
+   "attempts": [
+    {
+     "lean": "theorem probe_sofic_subsingleton (G : Type) [Group G] [Subsingleton G] : SoficGroups.Sofic G := by\n  refine ⟨fun F ε hε hε1 => ?_⟩\n  refine ⟨⟨1, Nat.one_pos, fun _ => 1, rfl⟩, ?_, ?_⟩\n  · intro g _ h _\n    simp [SoficGroups.normalizedHamming, hε]\n  · intro g _ hg\n    exact absurd (Subsingleton.elim g 1) hg",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 44.1
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "F2",
+    "decl": "Sofic",
+    "line": 24,
+    "explanation": "This is a bespoke definition rather than a Mathlib one. Read carefully, it matches the standard definition: arbitrary maps, σ(1)=1, multiplicativity defect < ε, non-identity elements moving more than a (1-ε) fraction of points. It is neither trivially false nor too strong, so non-soficity here is genuine non-soficity.",
+    "probe_idea": "Prove Sofic for a finite group, e.g. Sofic (Multiplicative (ZMod 3)), via the regular representation, to confirm the definition is satisfiable."
+   },
+   "result": {
+    "id": "F2-a0",
+    "status": "GREEN",
+    "claim": "The bespoke Sofic class is satisfiable: the trivial group Unit is Sofic, using a one-point permutation model with trivial action. The multiplicativity defect is 0 < ε, and the separation condition is vacuous since Unit has no non-identity element. So the definition is not unsatisfiable.",
+    "kind": "non-vacuity",
+    "seconds": 28.2,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_sofic_unit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_sofic_unit : SoficGroups.Sofic Unit := by\n  refine ⟨fun F ε hε _ => ⟨⟨1, one_pos, fun _ => 1, rfl⟩, ?_⟩⟩\n  constructor\n  · intro g _ h _\n    simp [SoficGroups.normalizedHamming, hε]\n  · intro g _ hg\n    exact absurd (Subsingleton.elim g 1) hg",
+   "attempts": [
+    {
+     "lean": "theorem probe_sofic_unit : SoficGroups.Sofic Unit := by\n  refine ⟨fun F ε hε _ => ⟨⟨1, one_pos, fun _ => 1, rfl⟩, ?_⟩⟩\n  constructor\n  · intro g _ h _\n    simp [SoficGroups.normalizedHamming, hε]\n  · intro g _ hg\n    exact absurd (Subsingleton.elim g 1) hg",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 28.2
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ (G : Type) (_ : Group G),\n      Group.IsFinitelyPresented G ∧ ¬ SoficGroups.Sofic G",
+   "restated": "∃ (G : Type) (_ : Group G), Group.IsFinitelyPresented G ∧ ∃ (F : Finset G) (ε : ℝ), 0 < ε ∧ ε < 1 ∧ ∀ M : SoficGroups.PermutationModel G, ¬ SoficGroups.GoodOn M F ε",
+   "english": "There is a finitely presented group G and a finite subset F of G and an ε strictly between 0 and 1 such that no permutation model on a finite set Fin n is ε-good on F, meaning almost multiplicative on F and sending non-identity elements of F to permutations far from the identity, with both conditions in normalized Hamming distance.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "GoodOn",
+    "PermutationModel"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace SoficGroups.SourceTopLevelCompressionFinal\ntheorem probe_restate_0  :\n    (∃ (G : Type) (_ : Group G),\n      Group.IsFinitelyPresented G ∧ ¬ SoficGroups.Sofic G) ↔\n    (∃ (G : Type) (_ : Group G), Group.IsFinitelyPresented G ∧ ∃ (F : Finset G) (ε : ℝ), 0 < ε ∧ ε < 1 ∧ ∀ M : SoficGroups.PermutationModel G, ¬ SoficGroups.GoodOn M F ε) := by\n  constructor\n  · rintro ⟨G, inst, hfp, hns⟩\n    refine ⟨G, inst, hfp, ?_⟩\n    by_contra h\n    push_neg at h\n    exact hns ⟨fun F ε h0 h1 => h F ε h0 h1⟩\n  · rintro ⟨G, inst, hfp, F, ε, h0, h1, h⟩\n    refine ⟨G, inst, hfp, ?_⟩\n    rintro ⟨hs⟩\n    obtain ⟨M, hM⟩ := hs F ε h0 h1\n    exact h M hM\nend SoficGroups.SourceTopLevelCompressionFinal\n",
+   "seconds": 27.2
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 28,
+  "lines_needing_human_review": 4,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

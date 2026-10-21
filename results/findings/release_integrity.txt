@@ -1,0 +1,5 @@
+scope notes:            242
+statement links:        426 (0 broken)
+statement files:        416 (0 not linked from any note)
+target theorems:        537 (0 not found in their statement file)
+files with meta-code:   17: BenjaminiSchramm, BoltzmannNonuniqueness, CoordinateTrace, CylinderCovering, DefocusingNLS, EinsteinFour, InvariantIsing, IrrationalRotation, KMedianRefinedRecovery, KadisonSimilarity, LaughlinFock, ProductBrown, StandardMapComponents, StandardMapLyapunov, ThorpRemaining, ThorpRouting, WeightedSweepMoments

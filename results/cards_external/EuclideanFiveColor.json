@@ -1,0 +1,201 @@
+{
+ "challenge": "../ten-proofs/ComparatorChallengesExternal/EuclideanFiveColor.lean",
+ "checked_with_lean_repo": "ten-proofs",
+ "paper": "../oai-math/preprints/The-Euclidean-plane-is-not-five-colorable-September-23-2026/build/sections/introduction.tex",
+ "lines": "1:125",
+ "lint": [
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "EuclideanFiveColor.lean",
+   "decl": "OAI.EuclideanFiveColor.ProperColoring",
+   "decl_kind": "def",
+   "line": 8,
+   "snippet": "∀ point otherPoint : ℂ, ‖point - otherPoint‖ = 1 → coloring point ≠ coloring otherPoint",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  }
+ ],
+ "holes": [
+  {
+   "repo": "lean",
+   "config": "EuclideanFiveColor.json",
+   "hole": "OAI.EuclideanFiveColor.ProperColoring",
+   "status": "BODY_NOT_COMPARED",
+   "detail": "solution defines it in an imported module (not fetched)"
+  }
+ ],
+ "audit": {
+  "summary": "The Lean theorem states that no function from ℂ (the Euclidean plane ℝ²) to Fin 5 gives distinct colors to every pair of points at Euclidean distance exactly 1. No measurability or other regularity is imposed on the color classes. This matches the main claim of Theorem 1.1, χ(ℝ²) ≥ 6 for arbitrary colorings. The main caveat concerns coverage only: the upper bound χ(ℝ²) ≤ 7 and the intermediate theorems (transfer, weak measurable coloring) are not formalized.",
+  "glossary": [
+   {
+    "decl": "OAI.EuclideanFiveColor.ProperColoring",
+    "line": 7,
+    "plain": "A map c : ℂ → {0,…,k−1} such that for all x, y ∈ ℂ with |x − y| = 1 we have c(x) ≠ c(y).",
+    "standard_concept": "Proper k-coloring of the unit-distance graph of the Euclidean plane",
+    "matches_standard": "yes",
+    "note": "The norm on ℂ is the complex modulus, which equals the Euclidean norm on ℝ². Subtraction is in ℂ, so nothing truncates.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "OAI.EuclideanFiveColor.no_proper_five_coloring",
+    "line": 10,
+    "plain": "There is no function c : ℂ → Fin 5 such that c(x) ≠ c(y) for all x, y ∈ ℂ with |x − y| = 1.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "The Euclidean plane has no proper five-coloring, even with arbitrary color classes. Consequently 6 ≤ χ(ℝ²) ≤ 7."
+   },
+   {
+    "ref": "Theorem 1.2 (transfer)",
+    "plain": "For every positive integer k, a proper k-coloring of ℝ² exists iff a weak measurable k-coloring exists."
+   },
+   {
+    "ref": "Theorem 1.3",
+    "plain": "There is no weak measurable five-coloring of the plane."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "OAI.EuclideanFiveColor.no_proper_five_coloring",
+    "relation": "lean_weaker",
+    "why": "The non-existence of a proper 5-coloring (hence χ ≥ 6) is formalized exactly. The upper bound χ(ℝ²) ≤ 7 is not stated."
+   },
+   {
+    "paper_ref": "Theorem 1.2 (transfer)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Intermediate result; not among the targets."
+   },
+   {
+    "paper_ref": "Theorem 1.3",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Intermediate result; not among the targets."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "OAI.EuclideanFiveColor.no_proper_five_coloring",
+    "line": 10,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "Only the lower-bound half of Theorem 1.1 is formalized. The upper bound χ(ℝ²) ≤ 7 (Isbell/Hadwiger hexagonal coloring) is classical and is not part of the Lean statement.",
+    "polarity": "lean weaker",
+    "probe_idea": "∃ c : ℂ → Fin 7, ProperColoring 7 c",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 8,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction `point - otherPoint` is in ℂ, not ℕ, so no truncation occurs."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "OAI.EuclideanFiveColor.no_proper_five_coloring",
+    "line": 10,
+    "explanation": "Only the lower-bound half of Theorem 1.1 is formalized. The upper bound χ(ℝ²) ≤ 7 (Isbell/Hadwiger hexagonal coloring) is classical and is not part of the Lean statement.",
+    "probe_idea": "∃ c : ℂ → Fin 7, ProperColoring 7 c"
+   },
+   "result": {
+    "id": "F1-a0",
+    "status": "GREEN",
+    "claim": "The ProperColoring definition is non-trivial: no function ℂ → Fin 1 is a proper coloring, because 0 and 1 are at unit distance. This is a sanity check on the definition only. It does not formalize the upper bound χ(ℝ²) ≤ 7, which is the half of Theorem 1.1 absent from the Lean statement, and a compile does not establish that bound.",
+    "kind": "unit-test",
+    "seconds": 22.1,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_one_color": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_one_color (c : ℂ → Fin 1) : ¬ OAI.EuclideanFiveColor.ProperColoring 1 c := by\n  intro h\n  have h1 := h 0 1 (by simp)\n  exact h1 (Subsingleton.elim _ _)",
+   "attempts": [
+    {
+     "lean": "theorem probe_one_color (c : ℂ → Fin 1) : ¬ OAI.EuclideanFiveColor.ProperColoring 1 c := by\n  intro h\n  have h1 := h 0 1 (by simp)\n  exact h1 (Subsingleton.elim _ _)",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 22.1
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance"
+   },
+   "result": {
+    "id": "NV-a0",
+    "status": "GREEN",
+    "claim": "ProperColoring is satisfiable for some color count: an explicit proper 9-coloring of ℂ (grid cells of side 1/2, colored mod 3 in each coordinate) satisfies ProperColoring 9, so the definition is not vacuous/contradictory.",
+    "kind": "non-vacuity",
+    "seconds": 46.2,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_nv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_nv : ∃ coloring : ℂ → Fin 9, OAI.EuclideanFiveColor.ProperColoring 9 coloring := by\n  classical\n  let e : ZMod 3 × ZMod 3 ≃ Fin 9 := Fintype.equivFinOfCardEq (by simp [ZMod.card])\n  refine ⟨fun z => e (((⌊2*z.re⌋ : ℤ) : ZMod 3), ((⌊2*z.im⌋ : ℤ) : ZMod 3)), ?_⟩\n  intro p q hpq h\n  have h2 := e.injective h\n  simp only [Prod.mk.injEq] at h2\n  obtain ⟨h1, h3⟩ := h2\n  have key : ∀ a b : ℝ, |a - b| ≤ 1 → (((⌊2*a⌋:ℤ):ZMod 3) = ((⌊2*b⌋:ℤ):ZMod 3)) → |a-b| < 1/2 := by\n    intro a b hab h\n    rw [ZMod.intCast_eq_intCast_iff_dvd_sub] at h\n    obtain ⟨k, hk⟩ := h\n    have hk' : ((⌊2*b⌋:ℤ):ℝ) - ((⌊2*a⌋:ℤ):ℝ) = 3 * (k:ℝ) := by\n      have : ((⌊2*b⌋ - ⌊2*a⌋ : ℤ):ℝ) = ((3 * k : ℤ):ℝ) := by rw [hk]; simp\n      push_cast at this\n      linarith\n    have a1 := Int.floor_le (2*a)\n    have a2 := Int.lt_floor_add_one (2*a)\n    have b1 := Int.floor_le (2*b)\n    have b2 := Int.lt_floor_add_one (2*b)\n    have hab' := abs_le.mp hab\n    have k1 : (k:ℝ) < 1 := by linarith [hab'.1, hab'.2]\n    have k2 : (-1:ℝ) < (k:ℝ) := by linarith [hab'.1, hab'.2]\n    have k3 : k < 1 := by exact_mod_cast k1\n    have k4 : -1 < k := by exact_mod_cast k2\n    have k0 : k = 0 := by omega\n    subst k0\n    simp at hk'\n    rw [abs_lt]\n    constructor <;> linarith [hab'.1, hab'.2]\n  have hre : |p.re - q.re| ≤ 1 := by\n    have := Complex.abs_re_le_norm (p - q)\n    rw [hpq] at this\n    simpa using this\n  have him : |p.im - q.im| ≤ 1 := by\n    have := Complex.abs_im_le_norm (p - q)\n    rw [hpq] at this\n    simpa using this\n  have x1 := key _ _ hre h1\n  have y1 := key _ _ him h3\n  have hn : (p.re - q.re)^2 + (p.im - q.im)^2 = 1 := by\n    have := Complex.sq_norm (p - q)\n    rw [hpq, Complex.normSq_apply] at this\n    simp only [Complex.sub_re, Complex.sub_im] at this\n    nlinarith\n  rw [abs_lt] at x1 y1\n  nlinarith [x1.1, x1.2, y1.1, y1.2]",
+   "attempts": [
+    {
+     "lean": "theorem probe_nv : ∃ coloring : ℂ → Fin 9, OAI.EuclideanFiveColor.ProperColoring 9 coloring := by\n  classical\n  let e : ZMod 3 × ZMod 3 ≃ Fin 9 := Fintype.equivFinOfCardEq (by simp [ZMod.card])\n  refine ⟨fun z => e (((⌊2*z.re⌋ : ℤ) : ZMod 3), ((⌊2*z.im⌋ : ℤ) : ZMod 3)), ?_⟩\n  intro p q hpq h\n  have h2 := e.injective h\n  simp only [Prod.mk.injEq] at h2\n  obtain ⟨h1, h3⟩ := h2\n  have key : ∀ a b : ℝ, |a - b| ≤ 1 → (((⌊2*a⌋:ℤ):ZMod 3) = ((⌊2*b⌋:ℤ):ZMod 3)) → |a-b| < 1/2 := by\n    intro a b hab h\n    rw [ZMod.intCast_eq_intCast_iff_dvd_sub] at h\n    obtain ⟨k, hk⟩ := h\n    have hk' : ((⌊2*b⌋:ℤ):ℝ) - ((⌊2*a⌋:ℤ):ℝ) = 3 * (k:ℝ) := by\n      have : ((⌊2*b⌋ - ⌊2*a⌋ : ℤ):ℝ) = ((3 * k : ℤ):ℝ) := by rw [hk]; simp\n      push_cast at this\n      linarith\n    have a1 := Int.floor_le (2*a)\n    have a2 := Int.lt_floor_add_one (2*a)\n    have b1 := Int.floor_le (2*b)\n    have b2 := Int.lt_floor_add_one (2*b)\n    have hab' := abs_le.mp hab\n    have k1 : (k:ℝ) < 1 := by linarith [hab'.1, hab'.2]\n    have k2 : (-1:ℝ) < (k:ℝ) := by linarith [hab'.1, hab'.2]\n    have k3 : k < 1 := by exact_mod_cast k1\n    have k4 : -1 < k := by exact_mod_cast k2\n    have k0 : k = 0 := by omega\n    subst k0\n    simp at hk'\n    rw [abs_lt]\n    constructor <;> linarith [hab'.1, hab'.2]\n  have hre : |p.re - q.re| ≤ 1 := by\n    have := Complex.abs_re_le_norm (p - q)\n    rw [hpq] at this\n    simpa using this\n  have him : |p.im - q.im| ≤ 1 := by\n    have := Complex.abs_im_le_norm (p - q)\n    rw [hpq] at this\n    simpa using this\n  have x1 := key _ _ hre h1\n  have y1 := key _ _ him h3\n  have hn : (p.re - q.re)^2 + (p.im - q.im)^2 = 1 := by\n    have := Complex.sq_norm (p - q)\n    rw [hpq, Complex.normSq_apply] at this\n    simp only [Complex.sub_re, Complex.sub_im] at this\n    nlinarith\n  rw [abs_lt] at x1 y1\n  nlinarith [x1.1, x1.2, y1.1, y1.2]",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 46.2
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "OAI.EuclideanFiveColor.no_proper_five_coloring",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "¬ ∃ coloring : ℂ → Fin 5, ProperColoring 5 coloring",
+   "restated": "∀ coloring : ℂ → Fin 5, ∃ p q : ℂ, dist p q = 1 ∧ coloring p = coloring q",
+   "english": "For every way of assigning one of 5 colors to each point of the complex plane, there are two points at Euclidean distance exactly 1 that receive the same color.",
+   "mathlib_only": true,
+   "bespoke_used": [],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace OAI.EuclideanFiveColor\ntheorem probe_restate_0  :\n    (¬ ∃ coloring : ℂ → Fin 5, ProperColoring 5 coloring) ↔\n    (∀ coloring : ℂ → Fin 5, ∃ p q : ℂ, dist p q = 1 ∧ coloring p = coloring q) := by\n  constructor\n  · intro h coloring\n    by_contra hc\n    push_neg at hc\n    exact h ⟨coloring, fun p q hpq => hc p q (by rwa [dist_eq_norm])⟩\n  · rintro h ⟨coloring, hc⟩\n    obtain ⟨p, q, hpq, he⟩ := h coloring\n    exact hc p q (by rwa [dist_eq_norm] at hpq) he\nend OAI.EuclideanFiveColor\n",
+   "seconds": 21.2
+  },
+  {
+   "target": "OAI.EuclideanFiveColor.ProperColoring",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "@ProperColoring colorCount coloring",
+   "restated": "∀ p q : ℂ, dist p q = 1 → coloring p ≠ coloring q",
+   "english": "Any two points of the complex plane at Euclidean distance exactly 1 receive different colors under the coloring.",
+   "mathlib_only": true,
+   "bespoke_used": [],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace OAI.EuclideanFiveColor\ntheorem probe_restate_10 (colorCount : ℕ) (coloring : ℂ → Fin colorCount) :\n    (@ProperColoring colorCount coloring) ↔\n    (∀ p q : ℂ, dist p q = 1 → coloring p ≠ coloring q) := by\n  unfold ProperColoring\n  simp only [Complex.dist_eq]\nend OAI.EuclideanFiveColor\n",
+   "seconds": 26.4
+  }
+ ]
+}

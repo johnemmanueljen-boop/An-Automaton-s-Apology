@@ -1,0 +1,19 @@
+{
+ "audited": 18,
+ "clean": 11,
+ "confirmed_matches_openai_scope_note": {
+  "222 IsingFiniteness": "only finiteness of the variational value formalized, not convergence of the pressure (disclosed in lean/docs/222.md)",
+  "100 TriangularCovering": "only the regular tetrahedron; affine extension to every tetrahedron not formalized (disclosed in lean/docs/100.md)"
+ },
+ "minor_plausible": {
+  "100 TriangularCovering": "paper states explicit range eps<=1/2000 and remainder<=2 eps^4; Lean states only existence of some delta, C"
+ },
+ "false_alarms_from_test_setup": {
+  "157 ListHadwiger": "excerpt taken from the other linked paper (Hadwiger counterexample)",
+  "072 BrennanSharp": "excerpt from the main Brennan paper; the Koebe endpoint statement belongs to the formalization scope",
+  "049 AbhyankarSathaye": "stable-coordinate half is formalized in sibling file StableCoordinateFour.lean",
+  "174 StrongThinTree": "algorithmic half is formalized in sibling file AlgorithmicThinTrees.lean"
+ },
+ "lesson": "Audit whole results (all linked papers, all sibling statement files, and the scope note), not one file against one paper.",
+ "method": "experiments/fishing_run.py: one config per sampled result, smallest first, Opus via Batch API, budget-guarded; manual triage against lean/docs scope notes."
+}

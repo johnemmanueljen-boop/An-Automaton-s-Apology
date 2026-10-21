@@ -1,0 +1,456 @@
+{
+ "note": "Planted errors judged by the author not to change the statement's meaning. They are excluded from the 41 meaning-changing errors the benchmark rate is computed on. Rows: llm/lint = caught by the AI / by lint; fa_llm/fa_lint = a false alarm at the same site in the unmutated file.",
+ "equivalent_mutants_author_adjudicated": {
+  "A_SpherePacking-02-real-cast-to-int": "The cast is inside a real-valued expression, so Lean coerces the value back to ℝ: same number, same statement.",
+  "C_PermanentFormulaLowerBound-01-real-cast-to-nat": "variableLeaves is a natural number; ascribing ℕ instead of ℝ only moves where the coercion to ℝ happens.",
+  "C_PermanentFormulaLowerBound-04-real-cast-to-int": "n is a natural number, so (n : ℤ)^4 coerced to ℝ equals (n : ℝ)^4.",
+  "D_NonSoficGroup-05-strict-to-nonstrict-def": "A size-0 permutation model has normalized distance 0, so it can never separate a non-identity element; allowing size 0 adds no new witnesses and the class of sofic groups is unchanged.",
+  "I_MulticolorTriangleRamsey-00-real-cast-to-int": "Real.log takes a real argument, so (k : ℤ) is coerced to ℝ: same value.",
+  "I_MulticolorTriangleRamsey-04-real-cast-to-int": "Real.log takes a real argument, so (k : ℤ) is coerced to ℝ: same value.",
+  "J_TwoDegenerateGraphs-01-real-cast-to-nat": "extremalNumber is a natural number; ascribing ℕ instead of ℝ only moves where the coercion to ℝ happens.",
+  "NavierStokes-00-strict-to-nonstrict-def": "Under ∃ E, '< E' and '≤ E' are equivalent (take E + 1)."
+ },
+ "rows": [
+  {
+   "id": "A_SpherePacking-00-const-bump",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "A_SpherePacking-02-real-cast-to-int",
+   "pattern": "type-default",
+   "equiv": true,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "A_SpherePacking-03-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "equiv": false,
+   "llm": true,
+   "lint": true,
+   "fa_llm": false,
+   "fa_lint": true
+  },
+  {
+   "id": "A_SpherePacking-04-exists-to-forall",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "B_BinaryCodes-00-const-bump",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "B_BinaryCodes-01-real-cast-to-int",
+   "pattern": "type-default",
+   "equiv": false,
+   "llm": false,
+   "lint": true,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "B_BinaryCodes-02-exists-to-forall",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "B_BinaryCodes-04-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "B_SphericalCodes-02-real-cast-to-nat",
+   "pattern": "type-default",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "B_SphericalCodes-03-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": true,
+   "fa_llm": true,
+   "fa_lint": true
+  },
+  {
+   "id": "B_SphericalCodes-04-eventually-to-frequently",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "C_PermanentFormulaLowerBound-01-real-cast-to-nat",
+   "pattern": "type-default",
+   "equiv": true,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "C_PermanentFormulaLowerBound-03-const-bump",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "C_PermanentFormulaLowerBound-04-real-cast-to-int",
+   "pattern": "type-default",
+   "equiv": true,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "C_PermanentFormulaLowerBound-06-le-to-lt",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "D_NonSoficGroup-01-one-minus-eps",
+   "pattern": "definition-mismatch",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "D_NonSoficGroup-05-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "equiv": true,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "E_ConnesRigidity-02-exists-to-forall",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "E_ConnesRigidity-07-forall-to-exists",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "F_EhrhartVolumeInequality-00-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "F_EhrhartVolumeInequality-02-le-to-lt",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "F_EhrhartVolumeInequality-03-succ-shift",
+   "pattern": "definition-mismatch",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "F_EhrhartVolumeInequality-05-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "G_QuantumParallelRepetition-01-forall-to-exists",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "G_QuantumParallelRepetition-02-le-to-lt",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "G_QuantumParallelRepetition-06-exists-to-forall",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "G_QuantumParallelRepetition-07-lt-to-le",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "H_GapCVP-00-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "H_GapCVP-02-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "H_GapCVP-03-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "H_GapCVP-05-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "I_MulticolorTriangleRamsey-00-real-cast-to-int",
+   "pattern": "type-default",
+   "equiv": true,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "I_MulticolorTriangleRamsey-02-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "I_MulticolorTriangleRamsey-04-real-cast-to-int",
+   "pattern": "type-default",
+   "equiv": true,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "I_MulticolorTriangleRamsey-05-eventually-to-frequently",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "J_CompactnessConjecture-00-real-cast-to-int",
+   "pattern": "type-default",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "J_CompactnessConjecture-01-exists-to-forall",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "J_CompactnessConjecture-02-lt-to-le",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "J_CompactnessConjecture-03-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "J_TwoDegenerateGraphs-01-real-cast-to-nat",
+   "pattern": "type-default",
+   "equiv": true,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "J_TwoDegenerateGraphs-03-forall-to-exists",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "J_TwoDegenerateGraphs-05-lt-to-le",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": false,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "Euler-00-le-to-lt",
+   "pattern": "goal-substitution",
+   "equiv": false,
+   "llm": false,
+   "lint": true,
+   "fa_llm": false,
+   "fa_lint": true
+  },
+  {
+   "id": "Euler-01-forall-to-exists",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": false,
+   "lint": true,
+   "fa_llm": false,
+   "fa_lint": true
+  },
+  {
+   "id": "Euler-02-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "NavierStokes-00-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "equiv": true,
+   "llm": false,
+   "lint": true,
+   "fa_llm": false,
+   "fa_lint": true
+  },
+  {
+   "id": "NavierStokes-01-add-false-hyp",
+   "pattern": "assumption",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "NavierStokes-02-exists-to-forall",
+   "pattern": "quantifier",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  },
+  {
+   "id": "NavierStokes-03-real-cast-to-nat",
+   "pattern": "type-default",
+   "equiv": false,
+   "llm": true,
+   "lint": false,
+   "fa_llm": false,
+   "fa_lint": false
+  }
+ ]
+}

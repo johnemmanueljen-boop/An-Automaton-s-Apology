@@ -1,0 +1,2608 @@
+{
+ "summary": {
+  "model": "claude-opus-5-5",
+  "with_lint": true,
+  "mutants_evaluated": 49,
+  "strict": {
+   "detected": 29,
+   "rate": 0.592,
+   "false_alarms_on_clean": 1,
+   "false_alarm_rate": 0.02
+  },
+  "loose": {
+   "detected": 30,
+   "rate": 0.612,
+   "false_alarms_on_clean": 1,
+   "false_alarm_rate": 0.02
+  },
+  "by_pattern": {
+   "goal-substitution": {
+    "strict": 5,
+    "loose": 5,
+    "total": 10
+   },
+   "type-default": {
+    "strict": 3,
+    "loose": 4,
+    "total": 10
+   },
+   "definition-mismatch": {
+    "strict": 2,
+    "loose": 2,
+    "total": 8
+   },
+   "quantifier": {
+    "strict": 10,
+    "loose": 10,
+    "total": 12
+   },
+   "assumption": {
+    "strict": 9,
+    "loose": 9,
+    "total": 9
+   }
+  },
+  "note": "strict = a medium/high flag within ±2 lines of the planted bug; loose = strict or a flag naming the mutated declaration. False alarms apply the same rule to the unmutated file."
+ },
+ "rows": [
+  {
+   "mutant": "A_SpherePacking-00-const-bump",
+   "pattern": "goal-substitution",
+   "operator": "const-bump",
+   "line": 158,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The claimed limit is −(1/3)·log₂(2π/e), but the paper gives −α* = −(1/2)·log₂(2π/e). Since LP_d > 0 and LP_d^{1/d} → √(e/2π) (exact_limit), log₂ LP_d / d must tend to −(1/2)·log₂(2π/e) ≠ −(1/3)·log₂(2π/e). This target therefore contradicts exact_limit and the structure field base_two_logarithmic_rate (line 130). It cannot faithfully represent the paper, and if all targets are genuinely proved, the environment is inconsistent.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "goal-substitution",
+     "severity": "high",
+     "decl": "PackingBounds.FullMain.exact_binary_exponent",
+     "line": 158,
+     "paper_ref": "Corollary after Theorem 1.1",
+     "explanation": "The claimed limit is −(1/3)·log₂(2π/e), but the paper gives −α* = −(1/2)·log₂(2π/e). Since LP_d > 0 and LP_d^{1/d} → √(e/2π) (exact_limit), log₂ LP_d / d must tend to −(1/2)·log₂(2π/e) ≠ −(1/3)·log₂(2π/e). This target therefore contradicts exact_limit and the structure field base_two_logarithmic_rate (line 130). It cannot faithfully represent the paper, and if all targets are genuinely proved, the environment is inconsistent.",
+     "polarity": "unclear",
+     "probe_idea": "Prove exact_limit → ¬ exact_binary_exponent, using Real.logb_rpow-style manipulation plus tendsto_nhds_unique and base_two_exponent_positive."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+     "line": 82,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "Theorem 1.2, on A_+(d) and A_−(d), is not formalized. Only the packing-quotient version inf (f(0)/f̂(0))^{1/d}/√d → 1/π is stated.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "low",
+     "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+     "line": 124,
+     "paper_ref": "Corollary after Theorem 1.1",
+     "explanation": "The 30-digit decimal certificate for α* goes beyond the paper's '0.6044…'. It is consistent with the stated prefix, but the extra digits are not in the excerpt.",
+     "polarity": "lean stronger",
+     "probe_idea": "Check numerically with interval arithmetic: (1/2)·log₂(2π/e) ∈ the stated interval."
+    }
+   ],
+   "original": "(nhds (-(1 / 2 : ℝ) *",
+   "mutated": "(nhds (-(1 / 3 : ℝ) *"
+  },
+  {
+   "mutant": "A_SpherePacking-02-real-cast-to-int",
+   "pattern": "type-default",
+   "operator": "real-cast-to-int",
+   "line": 156,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "PackingBounds.sharpFullCohnElkiesManuscriptConclusions",
+     "line": 81,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The paper's second main theorem, A₊(d)/√d → 1/π and A₋(d)/√d → 1/π, is absent. The bundled field root_before_infimum gives a 1/π limit for (f(0)/f̂(0))^{1/d}/√d over packing functions, which is a different quantity.",
+     "polarity": "lean weaker",
+     "probe_idea": "Define r(g) and A_ς(d) as in (5)–(6) and state Tendsto (fun d => A_ς d / √d) atTop (𝓝 (1/π)) for ς = ±1."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+     "line": 121,
+     "paper_ref": "Corollary after Thm 1.1",
+     "explanation": "The 30-digit enclosure of α* goes beyond the excerpt, which gives only 0.6044…. It is plausible numerically (½log₂(2.31146…) ≈ 0.6044), but its correctness rests solely on the proof.",
+     "polarity": "lean stronger",
+     "probe_idea": "Independently evaluate ½·log₂(2π/e) to 35 digits, e.g. with mpmath."
+    }
+   ],
+   "original": "Real.logb 2 (PackingBounds.fullLinearProgram d) / (d : ℝ))",
+   "mutated": "Real.logb 2 (PackingBounds.fullLinearProgram d) / (d : ℤ))"
+  },
+  {
+   "mutant": "A_SpherePacking-03-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "operator": "strict-to-nonstrict-def",
+   "line": 92,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The field quantifies over all d, including d = 0. At d = 0, (0:ℝ)⁻¹ = 0 and q^0 = 1, so the set is {1} if FullAdmissible 0 is nonempty, giving sInf = 1. The right side is (1/π+err 0)·√0 = 0. On a 0-dimensional space the constant function 1 appears admissible, because Fourier is the identity under Dirac volume and the exterior condition is vacuous. If so, the field would be false. If it was nonetheless proved, the set must be empty and sInf ∅ = 0. Either way the d = 0 instance is junk, not mathematics. For d ≥ 1 the field is equivalent to the limit field, since err can be defined as the difference.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "junk-value",
+     "severity": "medium",
+     "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+     "line": 92,
+     "paper_ref": "§1 proof sketch",
+     "explanation": "The field quantifies over all d, including d = 0. At d = 0, (0:ℝ)⁻¹ = 0 and q^0 = 1, so the set is {1} if FullAdmissible 0 is nonempty, giving sInf = 1. The right side is (1/π+err 0)·√0 = 0. On a 0-dimensional space the constant function 1 appears admissible, because Fourier is the identity under Dirac volume and the exterior condition is vacuous. If so, the field would be false. If it was nonetheless proved, the set must be empty and sInf ∅ = 0. Either way the d = 0 instance is junk, not mathematics. For d ≥ 1 the field is equivalent to the limit field, since err can be defined as the difference.",
+     "polarity": "unclear",
+     "probe_idea": "example : Nonempty (PackingBounds.FullAdmissible 0) ; and evaluate sInf {q | ∃ f : FullAdmissible 0, fullQuotient f ^ ((0:ℝ)⁻¹) = q}"
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "PackingBounds.sharpFullCohnElkiesManuscriptConclusions",
+     "line": 179,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The sign-uncertainty theorem for Fourier eigenfunctions is not formalized; only the packing-side consequences are.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "low",
+     "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+     "line": 105,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The 'vanishing error' fields at lines 105 and 131 are trivially equivalent to the limit statements, since err can be defined as LP_d^{1/d} − c. They add no content beyond the limits, which is fine.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "other",
+     "severity": "low",
+     "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+     "line": 121,
+     "paper_ref": "Corollary after Thm 1.1 / (4)",
+     "explanation": "The 30-digit decimal enclosure of α* goes beyond the paper's '0.6044…'. A rough check gives 0.60440… and is consistent. This is a stronger numeric claim than the paper's, so it is fine.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "∀ d : ℕ, 0 < d →",
+   "mutated": "∀ d : ℕ, 0 ≤ d →"
+  },
+  {
+   "mutant": "A_SpherePacking-04-exists-to-forall",
+   "pattern": "quantifier",
+   "operator": "exists-to-forall",
+   "line": 167,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "`∀ e : ℕ → ℝ, IsLittleO e 1 ∧ ∀ d>0, Δ_d ≤ ...` claims every function e is o(1) and satisfies the bound. This fails for e ≡ 1, and also for e(d) = −√(e/2π), where the right side is ofReal(0) = 0. The intended statement is ∃ e with e = o(1) and Δ_d ≤ (√(e/2π)+e(d))^d. As written it cannot be a faithful (or even true) formalization. If Comparator really accepted a proof, that warrants independent scrutiny.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+     "line": 167,
+     "paper_ref": "Corollary after Thm 1.1",
+     "explanation": "`∀ e : ℕ → ℝ, IsLittleO e 1 ∧ ∀ d>0, Δ_d ≤ ...` claims every function e is o(1) and satisfies the bound. This fails for e ≡ 1, and also for e(d) = −√(e/2π), where the right side is ofReal(0) = 0. The intended statement is ∃ e with e = o(1) and Δ_d ≤ (√(e/2π)+e(d))^d. As written it cannot be a faithful (or even true) formalization. If Comparator really accepted a proof, that warrants independent scrutiny.",
+     "polarity": "unclear",
+     "probe_idea": "theorem neg : ¬ (∀ e : ℕ → ℝ, Asymptotics.IsLittleO atTop e (fun _ => (1:ℝ)) ∧ ∀ d, 0 < d → SpherePackingConstant d ≤ ENNReal.ofReal ((Real.sqrt (Real.exp 1/(2*Real.pi)) + e d)^d)) — instantiate e := fun _ => 1 and refute the little-o."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+     "line": 82,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "Theorem 1.2 on the Fourier-eigenfunction sign-uncertainty constants A_±(d) is not formalized. The `root_before_infimum` field concerns inf (f(0)/f̂(0))^{1/d}, a packing quantity. It shares the 1/π constant but is not A_±(d).",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "PackingBounds.FullMain.exact_limit",
+     "line": 145,
+     "paper_ref": "eq. (4)",
+     "explanation": "The Cohn–Elkies inequality Δ_d ≤ LP_d linking SpherePackingConstant to fullLinearProgram is not stated as its own target. Its only appearance is the flawed F1 statement.",
+     "polarity": "lean weaker",
+     "probe_idea": "theorem bridge (d : ℕ) (hd : 0 < d) : SpherePackingConstant d ≤ ENNReal.ofReal (PackingBounds.fullLinearProgram d)"
+    }
+   ],
+   "original": "∃ e : ℕ → ℝ,",
+   "mutated": "∀ e : ℕ → ℝ,"
+  },
+  {
+   "mutant": "B_BinaryCodes-00-const-bump",
+   "pattern": "goal-substitution",
+   "operator": "const-bump",
+   "line": 179,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "junk-value",
+     "severity": "medium",
+     "decl": "MRRW.strict_mrrw2",
+     "line": 187,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "κ_H and κ_CW are defined via sInf (lines 63 and 149). If either feasible set were empty, the min would be 0 and κ_bin < M₂ would hold trivially. Taken in isolation, this theorem does not certify that the variational problem is nontrivial. Combined with binaryRate_le_combinedVariationalRate and R₂>0, nonemptiness follows indirectly.",
+     "polarity": "lean weaker",
+     "probe_idea": "∀ δ, 0<δ → δ<1/2 → (Johnson.rateSet δ).Nonempty ∧ BddBelow (Johnson.rateSet δ) ∧ (Hamming.rateSet δ).Nonempty"
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "medium",
+     "decl": "Johnson.AsymptoticParameters",
+     "line": 124,
+     "paper_ref": "Theorem 1.1 (eqs. (2)–(5))",
+     "explanation": "The following cannot be verified against the excerpt: the ranges (4)–(5), the coordinates z, m, ζ, ξ (Lean uses σ=1−2β−2γ and η=1−2α+2β−2γ), the Hamming feasibility constraint with hammingGamma, and the paper's M₂ (3). Narrower ranges in Lean raise κ_CW, making R₂ ≤ κ_bin weaker and κ_bin < M₂ stronger; wider ranges have the opposite effect.",
+     "polarity": "unclear",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "quantifier",
+     "severity": "low",
+     "decl": "Johnson.exists_binaryRate_mrrw_improvement",
+     "line": 179,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "Restricted to δ<1/3 even though the strict inequality is claimed for all δ<1/2. This theorem is strictly weaker than binaryRate_lt_mrrw, which is also a target.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "Hamming.binaryRate_lt_classicalRate",
+     "line": 65,
+     "paper_ref": "Theorem 2.3",
+     "explanation": "Compares R₂ with M₁ rather than κ_H with M₁. The excerpt only describes Theorem 2.3 informally.",
+     "polarity": "unclear",
+     "probe_idea": "Hamming.variationalRate δ < Hamming.classicalRate δ for 0<δ<1/2"
+    }
+   ],
+   "original": "{d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 2) :",
+   "mutated": "{d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 3) :"
+  },
+  {
+   "mutant": "B_BinaryCodes-01-real-cast-to-int",
+   "pattern": "type-default",
+   "operator": "real-cast-to-int",
+   "line": 71,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "definition-mismatch",
+     "severity": "medium",
+     "decl": "Johnson.AsymptoticParameters",
+     "line": 124,
+     "paper_ref": "Theorem 1.1, (4)–(5), (8)",
+     "explanation": "D_δ is meant to encode ranges (4)–(5), which are not in the excerpt. Likewise, the mapping σ,η ↔ ζ,ξ inside Λ cannot be confirmed, and the second term of Λ is asymmetric in σ,η. If D_δ is smaller than the paper's set, κ_CW is larger: the first inequality becomes weaker and the strict inequality stronger. The opposite holds if D_δ is larger.",
+     "polarity": "unclear",
+     "probe_idea": "Compare against the paper's (4)–(5). Also check numerically that a known feasible point from the paper satisfies `Johnson.Feasible δ α β γ u`."
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "Hamming.variationalRate",
+     "line": 63,
+     "paper_ref": "Theorem 1.1 (κ_H)",
+     "explanation": "κ_H is not defined in the excerpt. The Lean Γ = 2(a−b)(1−a−b)/√(a(1−a)) and range 0 ≤ b < a ≤ 1/2 are consistent with the remark that b=0 recovers M₁, but they are otherwise unverified.",
+     "polarity": "unclear",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "type-default",
+     "severity": "low",
+     "decl": "Hamming.exists_binaryRate_improvement",
+     "line": 71,
+     "paper_ref": null,
+     "explanation": "The hypothesis is written `δ < (1 : ℤ) / 2`. The binop elaborator should cast the leaf (1:ℤ) to ℝ, giving the real 1/2. If instead it were ℤ division (1/2 = 0), the hypotheses would be contradictory and the theorem vacuous.",
+     "polarity": "lean weaker",
+     "probe_idea": "example (δ : ℝ) : (δ < (1 : ℤ) / 2) ↔ δ < 1/2 := by norm_num"
+    },
+    {
+     "id": "F4",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "Johnson.variationalRate",
+     "line": 149,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "If Johnson.rateSet δ is empty, sInf = 0, which would make κ_bin ≤ 0 and render strict_mrrw2 trivial. However, binaryRate_le_combinedVariationalRate together with GV positivity of R₂ rules this out.",
+     "polarity": "unclear",
+     "probe_idea": "theorem : ∀ δ, 0<δ → δ<1/2 → (Johnson.rateSet δ).Nonempty"
+    }
+   ],
+   "original": "(hδ : 0 < δ) (hδ' : δ < (1 : ℝ) / 2) :",
+   "mutated": "(hδ : 0 < δ) (hδ' : δ < (1 : ℤ) / 2) :"
+  },
+  {
+   "mutant": "B_BinaryCodes-02-exists-to-forall",
+   "pattern": "quantifier",
+   "operator": "exists-to-forall",
+   "line": 180,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The conclusion is ∀ e, 0 < e ∧ R₂ ≤ M₂ − e. This is false (take e = 0, or e very large). The intended statement is ∃ e > 0. As written it is unprovable in a consistent setting and does not express the paper's claim.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "Johnson.exists_binaryRate_mrrw_improvement",
+     "line": 180,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The conclusion is ∀ e, 0 < e ∧ R₂ ≤ M₂ − e. This is false (take e = 0, or e very large). The intended statement is ∃ e > 0. As written it is unprovable in a consistent setting and does not express the paper's claim.",
+     "polarity": "lean stronger",
+     "probe_idea": "theorem : ¬ ∀ e : ℝ, 0 < e ∧ True := fun h => lt_irrefl 0 (h 0).1"
+    },
+    {
+     "id": "F2",
+     "category": "junk-value",
+     "severity": "medium",
+     "decl": "Johnson.variationalRate",
+     "line": 149,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "κ_CW is sInf over a set whose nonemptiness and lower boundedness are not evident. If it is empty or unbounded, sInf = 0, so κ_bin ≤ 0 and strict_mrrw2 becomes trivial. If such a value arose, binaryRate_le_combined would then need R₂ ≤ 0, which is false. Nonemptiness for every δ in (0,1/2) should be verified.",
+     "polarity": "unclear",
+     "probe_idea": "∀ δ, 0<δ → δ<1/2 → (Johnson.rateSet δ).Nonempty ∧ BddBelow (Johnson.rateSet δ)"
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "Johnson.AsymptoticParameters",
+     "line": 124,
+     "paper_ref": "(4)–(5)",
+     "explanation": "The parameter ranges (4)–(5) and the centered coordinates z, m, ζ, ξ are not in the excerpt, so they cannot be verified against the paper.",
+     "polarity": "unclear",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "Hamming.variationalRate",
+     "line": 63,
+     "paper_ref": "κ_H",
+     "explanation": "The definition of κ_H (hammingGamma and the feasibility constraint) is not in the excerpt. The b = 0 specialization recovers M₁, which is consistent with the paper's remark.",
+     "polarity": "unclear",
+     "probe_idea": null
+    }
+   ],
+   "original": "∃ e : ℝ, 0 < e ∧ MetricCodes.Hamming.binaryRate d ≤ mrrwRate d - e := by",
+   "mutated": "∀ e : ℝ, 0 < e ∧ MetricCodes.Hamming.binaryRate d ≤ mrrwRate d - e := by"
+  },
+  {
+   "mutant": "B_BinaryCodes-04-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 178,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem is vacuously true and certifies nothing. The intended content is still implied by `binaryRate_lt_mrrw` (take e = M2 − R2).",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "Johnson.exists_binaryRate_mrrw_improvement",
+     "line": 178,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem is vacuously true and certifies nothing. The intended content is still implied by `binaryRate_lt_mrrw` (take e = M2 − R2).",
+     "polarity": "lean weaker",
+     "probe_idea": "Restate without hbase and derive it from binaryRate_lt_mrrw with e := mrrwRate d - binaryRate d."
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "medium",
+     "decl": "Hamming.Feasible",
+     "line": 55,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "κH's constraint set (b < a ≤ 1/2, 1 − 2δ < Γ(a,b)) is not stated in the excerpt, so it cannot be checked against the paper. The same applies to the Johnson ranges (4)–(5) encoded in AsymptoticParameters at line 124.",
+     "polarity": "unclear",
+     "probe_idea": "Check the boundary cases: b = 0 should recover M1, and β = γ = 0 should recover the classical constant-weight objective F_δ. For example, prove variationalRate δ ≤ classicalRate δ."
+    },
+    {
+     "id": "F3",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "Johnson.variationalRate",
+     "line": 149,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "If D_δ were empty, sInf ∅ = 0 would make strict_mrrw2 trivial. However, binaryRate_le_combinedVariationalRate would then force R2 ≤ 0, contradicting the Gilbert–Varshamov bound. So the proved pair excludes this degenerate case.",
+     "polarity": "n/a",
+     "probe_idea": "Prove (Johnson.rateSet δ).Nonempty ∧ BddBelow (Johnson.rateSet δ) for 0 < δ < 1/2."
+    }
+   ],
+   "original": "theorem exists_binaryRate_mrrw_improvement",
+   "mutated": "theorem exists_binaryRate_mrrw_improvement (hbase : (1 : ℕ) = 0) {d : ℝ} (hd : 0 < d) (hdhalf : d < (1 : ℝ) / 2) :"
+  },
+  {
+   "mutant": "B_SphericalCodes-02-real-cast-to-nat",
+   "pattern": "type-default",
+   "operator": "real-cast-to-nat",
+   "line": 290,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The constant 0.39661 does not appear in the excerpt, so the statement cannot be checked against the paper. The bound is ≤ eventually, not including an o(1).",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "levelRate",
+     "line": 248,
+     "paper_ref": "Theorem 1.2 / Corollary 1.3",
+     "explanation": "The paper's κ_r is the inner infimum with 2Γ_r ≥ s; Lean uses s < 2Γ_r. The two agree only if closed-boundary points at a fixed level r can be approximated by strictly feasible ones at the same level. The paper states this approximation without specifying the level; it is not shown at fixed r in the excerpt.",
+     "polarity": "unclear",
+     "probe_idea": "∀ r s, 0<s → s<1 → levelRate r s = sInf {R | ∃ a b, Interlacing a b ∧ s ≤ 2*Gamma a b ∧ R = Phi a b}"
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "strict_hierarchy",
+     "line": 275,
+     "paper_ref": "Corollary 7.6",
+     "explanation": "The non-localized inequalities κ_1 < κ_row < κ_0 are not stated.",
+     "polarity": "lean weaker",
+     "probe_idea": "levelRate 1 s < Spherical.variationalRate s ∧ Spherical.variationalRate s < levelRate 0 s"
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "medium",
+     "decl": "eventually_kissingNumber_lt_published",
+     "line": 288,
+     "paper_ref": null,
+     "explanation": "The constant 0.39661 does not appear in the excerpt, so the statement cannot be checked against the paper. The bound is ≤ eventually, not including an o(1).",
+     "polarity": "unclear",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "main_binary_theorem",
+     "line": 139,
+     "paper_ref": null,
+     "explanation": "The Hamming and Johnson variational rates (spectralLimit, rankPenalty, AsymptoticParameters) are bespoke and absent from this excerpt; their fidelity must be checked against the sibling paper section. The MRRW definition matches the standard one.",
+     "polarity": "unclear",
+     "probe_idea": null
+    },
+    {
+     "id": "F5",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "variationalRate (various)",
+     "line": 62,
+     "paper_ref": null,
+     "explanation": "All rates use sInf in ℝ. If a set were empty or unbounded below, the rate would be 0, which would change meaning. The sets appear nonempty (e.g. level 0 with large a gives 2Γ→1) and bounded below, but this is not stated.",
+     "polarity": "unclear",
+     "probe_idea": "∀ r s, 0<s → s<1 → (levelRateSet r s).Nonempty ∧ BddBelow (levelRateSet r s)"
+    }
+   ],
+   "original": "((SpherePacking.kissingNumber n).toNat : ℝ) ≤",
+   "mutated": "((SpherePacking.kissingNumber n).toNat : ℕ) ≤"
+  },
+  {
+   "mutant": "B_SphericalCodes-03-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 139,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem is therefore vacuously true and certifies nothing about binary rates, Johnson-shell rates or MRRW.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "MetricCodes.Johnson.main_binary_theorem",
+     "line": 139,
+     "paper_ref": "binary main theorem",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem is therefore vacuously true and certifies nothing about binary rates, Johnson-shell rates or MRRW.",
+     "polarity": "lean weaker",
+     "probe_idea": "example : ¬ ((1 : ℕ) = 0) := by decide; then restate the theorem without hbase."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "MetricCodes.Spherical.HigherHierarchy.strict_hierarchy",
+     "line": 281,
+     "paper_ref": "Corollary 7.6",
+     "explanation": "The unlocalized inequalities κ_1<κ_row<κ_0 are not included; only the localized versions are.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "medium",
+     "decl": "MetricCodes.Spherical.HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published",
+     "line": 288,
+     "paper_ref": null,
+     "explanation": "The constant 0.39661 and the lack of an o(1) term cannot be checked against the excerpt. If the paper's exponent is 0.39661 + o(1) exactly, the Lean statement is stronger than the paper.",
+     "polarity": "unclear",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "MetricCodes.Spherical.HigherHierarchy.closedHierarchyVariationalRate",
+     "line": 236,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "sInf of an empty or unbounded-below set is 0. The set should be nonempty (level 0 with large a makes 2Γ→1>s) and bounded below by 0 (Φ≥0 under interlacing), but this is unverified.",
+     "polarity": "unclear",
+     "probe_idea": "Prove (closedHierarchyRateSet s).Nonempty ∧ BddBelow (closedHierarchyRateSet s) for 0<s<1."
+    }
+   ],
+   "original": "theorem main_binary_theorem {δ : ℝ}",
+   "mutated": "theorem main_binary_theorem (hbase : (1 : ℕ) = 0) {δ : ℝ}"
+  },
+  {
+   "mutant": "B_SphericalCodes-04-eventually-to-frequently",
+   "pattern": "quantifier",
+   "operator": "eventually-to-frequently",
+   "line": 289,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The name says 'eventually', but the statement uses `∃ᶠ n in atTop`: the bound need only hold for infinitely many n. An upper bound on kissing numbers should hold for all large n. As written, this is far weaker than any published-style bound.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "MetricCodes.Spherical.HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published",
+     "line": 289,
+     "paper_ref": null,
+     "explanation": "The name says 'eventually', but the statement uses `∃ᶠ n in atTop`: the bound need only hold for infinitely many n. An upper bound on kissing numbers should hold for all large n. As written, this is far weaker than any published-style bound.",
+     "polarity": "lean weaker",
+     "probe_idea": "State `∀ᶠ n : ℕ in atTop, ((SpherePacking.kissingNumber n).toNat : ℝ) ≤ 2 ^ ((0.39661:ℝ) * n)` and check it follows from the real proof."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "MetricCodes.Johnson.main_binary_theorem",
+     "line": 139,
+     "paper_ref": null,
+     "explanation": "The binary theorem and its Hamming/Johnson feasibility regions (hammingGamma, spectralLimit, AsymptoticParameters) are not in the excerpt, so they cannot be checked against the paper. sInf junk values could only make the combined rate 0. That would contradict the first conjunct, because R(δ) > 0 for δ < 1/2, so the inequalities are genuine.",
+     "polarity": "unclear",
+     "probe_idea": "Compare the definitions against the sibling file's paper excerpt; prove `(rateSet δ).Nonempty ∧ BddBelow (rateSet δ)` for the Johnson rateSet."
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "MetricCodes.Spherical.HigherHierarchy.levelRate",
+     "line": 246,
+     "paper_ref": "Theorem 1.2 / Corollary 1.3",
+     "explanation": "κ_r uses the strict constraint 2Γ_r > s, while the paper's inner infimum uses 2Γ_r ≥ s. The paper says these agree by approximation, so the difference is likely immaterial.",
+     "polarity": "unclear",
+     "probe_idea": "Prove levelRate r s = sInf {Φ a b | Interlacing a b ∧ s ≤ 2·Gamma a b} for 0<s<1."
+    },
+    {
+     "id": "F4",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "MetricCodes.Spherical.HigherHierarchy.classicalLocalizedRate",
+     "line": 262,
+     "paper_ref": "Corollary 1.3",
+     "explanation": "B_KL is encoded as the cap-localized envelope of H_sph((1/sqrt(1−t²) − 1)/2). Equation (10), which defines B_KL, is not in the excerpt.",
+     "polarity": "n/a",
+     "probe_idea": null
+    }
+   ],
+   "original": "∀ᶠ n : ℕ in atTop,",
+   "mutated": "∃ᶠ n : ℕ in atTop,"
+  },
+  {
+   "mutant": "C_PermanentFormulaLowerBound-01-real-cast-to-nat",
+   "pattern": "type-default",
+   "operator": "real-cast-to-nat",
+   "line": 99,
+   "detected_strict": false,
+   "detected_loose": true,
+   "matching_flag": "The gate-count bound G(Φ) ≥ n⁴/(384 log₂ n) for formulas with division is not formalized.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+     "line": 82,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The gate-count bound G(Φ) ≥ n⁴/(256 log₂ n) is not formalized. No gate-count function is defined, and the bound does not follow formally from the stated L_var bound without an additional leaf-versus-gate argument.",
+     "polarity": "lean weaker",
+     "probe_idea": "Define an internal-gate count and prove n^4/(256*logb 2 n) ≤ gates f under the same hypotheses."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "permanent_rational_formula_logarithmic_lower_bound",
+     "line": 90,
+     "paper_ref": "Theorem 1.3",
+     "explanation": "The gate-count bound G(Φ) ≥ n⁴/(384 log₂ n) for formulas with division is not formalized.",
+     "polarity": "lean weaker",
+     "probe_idea": "Define gates for RationalFormula and prove n^4/(384*logb 2 n) ≤ gates f."
+    },
+    {
+     "id": "F3",
+     "category": "coverage",
+     "severity": "low",
+     "decl": null,
+     "line": 1,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The circuit lower bound of Theorem 1.1 is entirely absent.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "other",
+     "severity": "low",
+     "decl": "Formula",
+     "line": 9,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "Constant leaves range over all of ℂ. The excerpt is truncated before the input description, so the paper's exact constant model is not in excerpt. Allowing arbitrary constants is the most general choice, so the lower bound is if anything stronger.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "(RationalFormula.variableLeaves f : ℝ) := by",
+   "mutated": "(RationalFormula.variableLeaves f : ℕ) := by"
+  },
+  {
+   "mutant": "C_PermanentFormulaLowerBound-03-const-bump",
+   "pattern": "goal-substitution",
+   "operator": "const-bump",
+   "line": 86,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "Lean states n^5/(128 log₂ n), while the paper states n^4/(128 log₂ n). The Lean bound is much stronger than the paper's claim, so the formal target is not the paper's theorem. A bound of order n^5/log n for the permanent is beyond the paper's stated result. This is likely a typo.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "goal-substitution",
+     "severity": "medium",
+     "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+     "line": 86,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "Lean states n^5/(128 log₂ n), while the paper states n^4/(128 log₂ n). The Lean bound is much stronger than the paper's claim, so the formal target is not the paper's theorem. A bound of order n^5/log n for the permanent is beyond the paper's stated result. This is likely a typo.",
+     "polarity": "lean stronger",
+     "probe_idea": "Check that the intended statement is `(n:ℝ)^4 / (128 * Real.logb 2 n) ≤ Formula.variableLeaves f`; compare the proof's final step against the n^4 constant."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "permanent_rational_formula_logarithmic_lower_bound",
+     "line": 90,
+     "paper_ref": "Theorem 1.2 / 1.3",
+     "explanation": "The gate-count bounds G(Φ) ≥ n^4/(256 log₂ n) and G(Φ) ≥ n^4/(384 log₂ n) are not formalized, nor are the total-leaf and vertex versions. The circuit Theorem 1.1 is also absent.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    }
+   ],
+   "original": "(n : ℝ) ^ 4 / (128 * Real.logb 2 (n : ℝ)) ≤",
+   "mutated": "(n : ℝ) ^ 5 / (128 * Real.logb 2 (n : ℝ)) ≤"
+  },
+  {
+   "mutant": "C_PermanentFormulaLowerBound-04-real-cast-to-int",
+   "pattern": "type-default",
+   "operator": "real-cast-to-int",
+   "line": 86,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+     "line": 82,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The gate-count bound G(Φ) ≥ n⁴/(256 log₂ n) is not stated. It also does not follow directly from the leaf bound without the binary-tree fact that the number of gates equals total leaves minus 1.",
+     "polarity": "lean weaker",
+     "probe_idea": "Define gate count and state G f ≥ n^4/(256 log₂ n)."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "permanent_rational_formula_logarithmic_lower_bound",
+     "line": 90,
+     "paper_ref": "Theorem 1.3",
+     "explanation": "The gate-count bound G(Φ) ≥ n⁴/(384 log₂ n) for formulas with division is not stated.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "coverage",
+     "severity": "low",
+     "decl": null,
+     "line": 0,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The circuit lower bound C(per_n) = Ω(n² log log n) is not formalized at all.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "type-default",
+     "severity": "low",
+     "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+     "line": 86,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The numerator is written as (n : ℤ)^4 while the denominator is real. The unified binop elaboration should cast it to ℝ, so the division is real division with no truncation. This is worth confirming.",
+     "polarity": "unclear",
+     "probe_idea": "Check that the elaborated term equals ((n:ℝ)^4 / (128 * Real.logb 2 n)), e.g. via `example : ((n:ℤ)^4 / (128 * Real.logb 2 (n:ℝ)) : ℝ) = (n:ℝ)^4 / (128 * Real.logb 2 n) := by push_cast; rfl`."
+    }
+   ],
+   "original": "(n : ℝ) ^ 4 / (128 * Real.logb 2 (n : ℝ)) ≤",
+   "mutated": "(n : ℤ) ^ 4 / (128 * Real.logb 2 (n : ℝ)) ≤"
+  },
+  {
+   "mutant": "C_PermanentFormulaLowerBound-06-le-to-lt",
+   "pattern": "goal-substitution",
+   "operator": "le-to-lt",
+   "line": 91,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis is 32 < n, but the paper states n ≥ 32, so the case n = 32 is not covered.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "medium",
+     "decl": "permanent_rational_formula_logarithmic_lower_bound",
+     "line": 91,
+     "paper_ref": "Theorem 1.3",
+     "explanation": "The hypothesis is 32 < n, but the paper states n ≥ 32, so the case n = 32 is not covered.",
+     "polarity": "lean weaker",
+     "probe_idea": "Restate the theorem with (hn : 32 ≤ n) and check whether the proof still goes through."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+     "line": 82,
+     "paper_ref": "Theorems 1.2/1.3",
+     "explanation": "The gate-count bounds G(Φ) ≥ n^4/(256 log2 n) and n^4/(384 log2 n) are not formalized. These do not follow trivially from L_var, because many leaves can be constants.",
+     "polarity": "lean weaker",
+     "probe_idea": "Define a gates function on Formula and state the bound n^4/(256·logb 2 n) ≤ gates f."
+    }
+   ],
+   "original": "{n : ℕ} (hn : 32 ≤ n)",
+   "mutated": "{n : ℕ} (hn : 32 < n)"
+  },
+  {
+   "mutant": "D_NonSoficGroup-01-one-minus-eps",
+   "pattern": "definition-mismatch",
+   "operator": "one-minus-eps",
+   "line": 22,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "goal-substitution",
+     "severity": "medium",
+     "decl": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+     "line": 30,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The Lean statement is an existence claim for a finitely presented non-sofic group, not the non-soficity of L_{F2}(1,2)^×. It adds a finite-presentation requirement that the excerpt does not establish for L^×, and it loses the identification of the group. Possible routes would be finite presentability of L^×, or a Higman-type embedding into a finitely presented group (soficity passes to subgroups). Neither is in the excerpt.",
+     "polarity": "unclear",
+     "probe_idea": "Formalize L_{F2}(1,2)^× as a concrete group and state `¬ SoficGroups.Sofic (Units LeavittAlg)`; separately, check whether the paper claims `Group.IsFinitelyPresented (Units LeavittAlg)`."
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "SoficGroups.GoodOn",
+     "line": 21,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The separation condition is d(σ(g), id) > ε rather than the standard > 1−ε, with the same ε as the multiplicative error. Standard soficity implies this Sofic, so ¬Sofic implies standard non-soficity. The Lean conclusion is therefore at least as strong as the paper's notion.",
+     "polarity": "lean stronger",
+     "probe_idea": "Prove that standard soficity (mult < δ, sep > 1−δ for all δ > 0) implies `SoficGroups.Sofic G`, giving `¬ Sofic G → ¬ StandardSofic G`."
+    }
+   ],
+   "original": "1 - ε < normalizedHamming (M.action g) 1",
+   "mutated": "ε < normalizedHamming (M.action g) 1"
+  },
+  {
+   "mutant": "D_NonSoficGroup-05-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "operator": "strict-to-nonstrict-def",
+   "line": 13,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "goal-substitution",
+     "severity": "medium",
+     "decl": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+     "line": 30,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "Theorem 1.1 concerns a specific group, the unit group of the Leavitt algebra. The Lean statement only asserts existence of some nonsofic group, so it does not certify that L_{F2}(1,2)^× in particular is nonsofic. It does additionally require finite presentation, which is stronger in that respect. Whether the paper proves that L_{F2}(1,2)^× is finitely presented is not in the excerpt.",
+     "polarity": "unclear",
+     "probe_idea": "State ¬ SoficGroups.Sofic (Units (LeavittAlgebra F2 1 2)), with the Leavitt algebra built e.g. as FreeAlgebra (ZMod 2) (Fin 4) modulo the ideal of relations (1). Separately state Group.IsFinitelyPresented of that group."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "SoficGroups.PermutationModel",
+     "line": 13,
+     "paper_ref": null,
+     "explanation": "size_pos : 0 ≤ size is vacuous, so models of size 0 are allowed. With size 0 every distance is 0/0 = 0. Separation would then require 1−ε < 0, which is impossible for ε<1. So such models only satisfy GoodOn when F ⊆ {1}, a trivial case. The definition is not weakened.",
+     "polarity": "n/a",
+     "probe_idea": "Prove: for M with M.size = 0, g ∈ F, g ≠ 1, 0<ε<1, ¬ GoodOn M F ε."
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "SoficGroups.PermutationModel",
+     "line": 15,
+     "paper_ref": null,
+     "explanation": "The model requires σ(1)=1, which the paper's informal definition does not mention. This normalization is standard and equivalent to the usual definition. Under the ¬∃-style use here (¬Sofic), an extra requirement could only make the theorem weaker, but the equivalence is well known.",
+     "polarity": "lean weaker",
+     "probe_idea": "Show Sofic G is equivalent to the same definition without map_one."
+    }
+   ],
+   "original": "size_pos : 0 < size",
+   "mutated": "size_pos : 0 ≤ size"
+  },
+  {
+   "mutant": "E_ConnesRigidity-02-exists-to-forall",
+   "pattern": "quantifier",
+   "operator": "exists-to-forall",
+   "line": 210,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The statement begins with ∀ (Λ) (Γ : ℕ → …) instead of ∃. It therefore asserts that every group is f.g., ICC and has property (T), and so on. This is false: the trivial group is not infinite, hence not ICC. The statement does not capture Theorem 1.2 and is unprovable.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+     "line": 210,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The statement begins with ∀ (Λ) (Γ : ℕ → …) instead of ∃. It therefore asserts that every group is f.g., ICC and has property (T), and so on. This is false: the trivial group is not infinite, hence not ICC. The statement does not capture Theorem 1.2 and is unprovable.",
+     "polarity": "lean stronger",
+     "probe_idea": "Prove the negation: take Λ the trivial group (e.g. PUnit with a Countable instance) and derive ¬ IsICC Λ from ¬ Infinite PUnit."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+     "line": 208,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The 'moreover' part is omitted: Γ_n has a subgroup ≅ Γ_0 of index 2^{4n}, so the Γ_n are mutually commensurable.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "IsNormalStarAlgEquiv",
+     "line": 169,
+     "paper_ref": null,
+     "explanation": "The 'normality' condition uses suprema defined purely algebraically within the algebra. It is therefore preserved by any *-isomorphism and is vacuous rather than a genuine normality condition. This is harmless because *-isomorphisms of von Neumann algebras are automatically normal.",
+     "polarity": "n/a",
+     "probe_idea": "Prove that every A ≃⋆ₐ[ℂ] B satisfies IsNormalStarAlgEquiv."
+    }
+   ],
+   "original": "∃ (Λ : CountableDiscreteGroup.{0}) (Γ : ℕ → CountableDiscreteGroup.{0}),",
+   "mutated": "∀ (Λ : CountableDiscreteGroup.{0}) (Γ : ℕ → CountableDiscreteGroup.{0}),"
+  },
+  {
+   "mutant": "E_ConnesRigidity-07-forall-to-exists",
+   "pattern": "quantifier",
+   "operator": "forall-to-exists",
+   "line": 214,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "`(∃ n, IsICC (Γ n))` requires only one Γ_n to be ICC, whereas the paper asserts that every Γ_n is ICC. Mathematically, ICC of Γ_n follows from L(Γ_n) ≅ L(Λ) being a factor. However, the formal statement as written is weaker than the paper and does not directly assert the infinite ICC fiber.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "medium",
+     "decl": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+     "line": 214,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "`(∃ n, IsICC (Γ n))` requires only one Γ_n to be ICC, whereas the paper asserts that every Γ_n is ICC. Mathematically, ICC of Γ_n follows from L(Γ_n) ≅ L(Λ) being a factor. However, the formal statement as written is weaker than the paper and does not directly assert the infinite ICC fiber.",
+     "polarity": "lean weaker",
+     "probe_idea": "Replace line 214 with `(∀ n, IsICC (Γ n))` and check that the proof still goes through."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+     "line": 208,
+     "paper_ref": "Theorem 1.2 (moreover)",
+     "explanation": "The claim that Γ_n has a subgroup isomorphic to Γ_0 of index 2^{4n} (commensurability) is not formalized.",
+     "polarity": "lean weaker",
+     "probe_idea": "Add `∀ n, ∃ K : Subgroup (Γ n), Nonempty (K ≃* Γ 0) ∧ K.index = 2^(4*n)`."
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "TracialGroupFactorsIsomorphic",
+     "line": 179,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The isomorphism of group factors is encoded as an algebraic *-isomorphism with an ad hoc projection-supremum normality condition and trace preservation. Both extra conditions are automatic for II_1 factors, so this only strengthens the existential claim relative to plain L(G) ≅ L(H).",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "HasKazhdanPropertyT",
+     "line": 49,
+     "paper_ref": null,
+     "explanation": "Property (T) quantifies only over Hilbert spaces in the same universe as G (Type 0). For countable groups this is equivalent to the standard definition, since one can reduce to separable subrepresentations.",
+     "polarity": "unclear",
+     "probe_idea": null
+    }
+   ],
+   "original": "(∀ n, IsICC (Γ n)) ∧",
+   "mutated": "(∃ n, IsICC (Γ n)) ∧"
+  },
+  {
+   "mutant": "F_EhrhartVolumeInequality-00-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 56,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis hbase : (1 : ℕ) = 0 is false, so the theorem holds vacuously and says nothing about the existence of an extremal body.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+     "line": 56,
+     "paper_ref": "Sharpness remark (after Thm 1.1)",
+     "explanation": "The hypothesis hbase : (1 : ℕ) = 0 is false, so the theorem holds vacuously and says nothing about the existence of an extremal body.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove `example : ¬ ((1:ℕ) = 0) := by decide` to confirm vacuity. Then restate the theorem without hbase."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "Ehrhart.SimplexVolume.barycenter_centeredSimplex",
+     "line": 48,
+     "paper_ref": "Sharpness remark (after Thm 1.1)",
+     "explanation": "No target theorem asserts that the centered simplex is convex, compact, has nonempty interior, or satisfies int ∩ ℤⁿ = {0}. Sharpness of the bound is therefore not formally established.",
+     "polarity": "lean weaker",
+     "probe_idea": "theorem : ∀ n > 0, interiorLatticePoints (centeredSimplex n) = {0}"
+    }
+   ],
+   "original": "theorem exists_centeredBody_sharp (n : ℕ) (hn : 0 < n) :",
+   "mutated": "theorem exists_centeredBody_sharp (hbase : (1 : ℕ) = 0) (n : ℕ) (hn : 0 < n) :"
+  },
+  {
+   "mutant": "F_EhrhartVolumeInequality-02-le-to-lt",
+   "pattern": "goal-substitution",
+   "operator": "le-to-lt",
+   "line": 72,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The conclusion uses `<` instead of `≤`. The paper explicitly states the bound is attained by the centered simplex. The body supplied by exists_centeredBody_sharp (line 56) satisfies every hypothesis of this theorem yet has volume exactly sharpConstant n. So the strict statement is false and contradicts another target theorem. If both were actually kernel-checked, the environment would be inconsistent, or some proof would rely on sorry or an extra axiom. The statement should read `≤`.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "goal-substitution",
+     "severity": "high",
+     "decl": "Ehrhart.Volume.ehrhart_volume_inequality_for_sets",
+     "line": 72,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The conclusion uses `<` instead of `≤`. The paper explicitly states the bound is attained by the centered simplex. The body supplied by exists_centeredBody_sharp (line 56) satisfies every hypothesis of this theorem yet has volume exactly sharpConstant n. So the strict statement is false and contradicts another target theorem. If both were actually kernel-checked, the environment would be inconsistent, or some proof would rely on sorry or an extra axiom. The statement should read `≤`.",
+     "polarity": "lean stronger",
+     "probe_idea": "example (n : ℕ) (hn : 0 < n) : False := by obtain ⟨K, hK⟩ := Ehrhart.SimplexVolume.exists_centeredBody_sharp n hn; have := Ehrhart.Volume.ehrhart_volume_inequality_for_sets hn K.carrier K.convex K.compact K.fullDimensional K.centered K.uniqueInteriorLatticePoint; unfold Ehrhart.sharpConstant at hK; linarith"
+    }
+   ],
+   "original": "normalizedVolume S ≤",
+   "mutated": "normalizedVolume S <"
+  },
+  {
+   "mutant": "F_EhrhartVolumeInequality-03-succ-shift",
+   "pattern": "definition-mismatch",
+   "operator": "succ-shift",
+   "line": 42,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "sharpConstant is (n+2)ⁿ/n!, but the paper's sharp value is (n+1)ⁿ/n!, the volume of the centered simplex. Both sharpness theorems inherit this error.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "definition-mismatch",
+     "severity": "high",
+     "decl": "Ehrhart.sharpConstant",
+     "line": 42,
+     "paper_ref": "Theorem 1.1 (sharpness remark)",
+     "explanation": "sharpConstant is (n+2)ⁿ/n!, but the paper's sharp value is (n+1)ⁿ/n!, the volume of the centered simplex. Both sharpness theorems inherit this error.",
+     "polarity": "unclear",
+     "probe_idea": "example : sharpConstant 1 = 3 := by norm_num [sharpConstant]"
+    },
+    {
+     "id": "F2",
+     "category": "goal-substitution",
+     "severity": "high",
+     "decl": "Ehrhart.SimplexVolume.normalizedVolume_centeredSimplex",
+     "line": 53,
+     "paper_ref": "Theorem 1.1 (sharpness remark)",
+     "explanation": "The centered simplex has volume (n+1)ⁿ·vol(Δₙ) = (n+1)ⁿ/n!. For n=1 it is [-1,1] with length 2, whereas sharpConstant 1 = 3. The statement as written is false, so a genuine proof should be impossible.",
+     "polarity": "lean stronger",
+     "probe_idea": "theorem : normalizedVolume (centeredSimplex 1) = 2  (then 2 ≠ 3 refutes the stated theorem)"
+    },
+    {
+     "id": "F3",
+     "category": "goal-substitution",
+     "severity": "high",
+     "decl": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+     "line": 58,
+     "paper_ref": "Theorem 1.1 (sharpness remark)",
+     "explanation": "Asserts a CenteredBody with volume (n+2)ⁿ/n! > (n+1)ⁿ/n!. This directly contradicts ehrhart_volume_inequality_for_sets. If both are kernel-checked without sorry, something is inconsistent, so the target set needs auditing.",
+     "polarity": "lean stronger",
+     "probe_idea": "example : False := by obtain ⟨K, hK⟩ := exists_centeredBody_sharp 1 one_pos; have := ehrhart_volume_inequality_for_sets one_pos K.carrier K.convex K.compact K.fullDimensional K.centered K.uniqueInteriorLatticePoint; norm_num [sharpConstant] at *; linarith"
+    },
+    {
+     "id": "F4",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "Ehrhart.SimplexVolume.barycenter_centeredSimplex",
+     "line": 48,
+     "paper_ref": "Theorem 1.1 (sharpness remark)",
+     "explanation": "The claim that the centered simplex has no other interior lattice point is formalized only inside exists_centeredBody_sharp (via the CenteredBody structure), which has the wrong volume.",
+     "polarity": "n/a",
+     "probe_idea": "theorem : interiorLatticePoints (centeredSimplex n) = {0}"
+    }
+   ],
+   "original": "((n : ℝ) + 1) ^ n / (n.factorial : ℝ)",
+   "mutated": "((n : ℝ) + 2) ^ n / (n.factorial : ℝ)"
+  },
+  {
+   "mutant": "F_EhrhartVolumeInequality-05-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 65,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem holds vacuously and says nothing about convex bodies. The paper's main inequality is not formalized.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "Ehrhart.Volume.ehrhart_volume_inequality_for_sets",
+     "line": 65,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem holds vacuously and says nothing about convex bodies. The paper's main inequality is not formalized.",
+     "polarity": "lean weaker",
+     "probe_idea": "example : ¬ ((1:ℕ) = 0) := by decide; then remove hbase and require a proof of the inequality without it."
+    }
+   ],
+   "original": "theorem ehrhart_volume_inequality_for_sets",
+   "mutated": "theorem ehrhart_volume_inequality_for_sets (hbase : (1 : ℕ) = 0) {n : ℕ} (hn : 0 < n) (S : Set (Space n))"
+  },
+  {
+   "mutant": "G_QuantumParallelRepetition-01-forall-to-exists",
+   "pattern": "quantifier",
+   "operator": "forall-to-exists",
+   "line": 119,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The statement says `∃ n : ℕ, 0 < n → bound` instead of `∀ n : ℕ, 0 < n → bound`. Taking n = 0 makes the implication vacuous, so the theorem holds with any c > 0 (e.g. c = 1). The quantitative Theorem 1.1 is therefore not captured at all.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "distributionUniformExponential",
+     "line": 119,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The statement says `∃ n : ℕ, 0 < n → bound` instead of `∀ n : ℕ, 0 < n → bound`. Taking n = 0 makes the implication vacuous, so the theorem holds with any c > 0 (e.g. c = 1). The quantitative Theorem 1.1 is therefore not captured at all.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove the statement trivially: `exact ⟨1, one_pos, fun G _ _ _ => ⟨0, fun h => absurd h (lt_irrefl 0)⟩⟩`."
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "HasExponentialBound",
+     "line": 104,
+     "paper_ref": "Quantum Parallel Repetition Conjecture",
+     "explanation": "The Lean bound allows a multiplicative constant C > 0, while the paper's conjecture asks for ω*(G^{⊗n}) ≤ exp(−c_G n) with no prefactor. With C, the statement is slightly weaker. Equivalence would need ω*(G^{⊗n}) < 1 for every n ≥ 1, which is not encoded here.",
+     "polarity": "lean weaker",
+     "probe_idea": "Show that HasExponentialBound plus `∀ n ≥ 1, repeatedEntangledValue G n < 1` implies ∃ c' > 0, ∀ n ≥ 1, v n ≤ exp(−c' n)."
+    },
+    {
+     "id": "F3",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "entangledValue",
+     "line": 96,
+     "paper_ref": null,
+     "explanation": "If A or B is empty, no POVM exists on a nonempty space, so the strategy set is empty and sSup ∅ = 0. Then ω*(G) = 0 < 1 by convention. This only affects the degenerate case the paper excludes, and the conclusion stays true there (the n ≥ 1 values are 0).",
+     "polarity": "n/a",
+     "probe_idea": "Prove `IsEmpty A → entangledValue G = 0`."
+    }
+   ],
+   "original": "∀ n : ℕ, 0 < n →",
+   "mutated": "∃ n : ℕ, 0 < n →"
+  },
+  {
+   "mutant": "G_QuantumParallelRepetition-02-le-to-lt",
+   "pattern": "goal-substitution",
+   "operator": "le-to-lt",
+   "line": 120,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "HasExponentialBound",
+     "line": 102,
+     "paper_ref": "QPR Conjecture",
+     "explanation": "A prefactor C > 0 is allowed, while the paper uses exp(−c_G n) with no prefactor. This is formally weaker. It is mathematically equivalent via monotonicity of the repeated value, and Theorem 1.1's formalization already gives the C = 1 form.",
+     "polarity": "lean weaker",
+     "probe_idea": "Derive ∃ c>0, ∀ n≥1, repeatedEntangledValue G n ≤ exp(-c n) from distributionUniformExponential."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "distributionUniformExponential",
+     "line": 120,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "Strict < is used where the paper states ≤.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "Strategy",
+     "line": 62,
+     "plain": "",
+     "explanation": "Strategies are restricted to finite-dimensional Hilbert spaces in Type 0, i.e., the tensor-product ω*. The paper's precise model is not in the excerpt; commuting-operator values would differ.",
+     "polarity": "unclear",
+     "probe_idea": null
+    }
+   ],
+   "original": "repeatedEntangledValue G n ≤",
+   "mutated": "repeatedEntangledValue G n <"
+  },
+  {
+   "mutant": "G_QuantumParallelRepetition-06-exists-to-forall",
+   "pattern": "quantifier",
+   "operator": "exists-to-forall",
+   "line": 113,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The statement reads `∀ c : ℝ, 0 < c ∧ …` where the paper has 'there exists a universal constant c_qs > 0'. Instantiating c = 0 demands 0 < 0, so the Lean statement is false. It therefore cannot express Theorem 1.1, and any claimed proof must be suspect (sorry, or an inconsistency).",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "distributionUniformExponential",
+     "line": 113,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The statement reads `∀ c : ℝ, 0 < c ∧ …` where the paper has 'there exists a universal constant c_qs > 0'. Instantiating c = 0 demands 0 < 0, so the Lean statement is false. It therefore cannot express Theorem 1.1, and any claimed proof must be suspect (sorry, or an inconsistency).",
+     "polarity": "lean stronger",
+     "probe_idea": "theorem neg : ¬ (∀ c : ℝ, 0 < c ∧ True) := fun h => lt_irrefl _ (h 0).1 — more precisely, prove ¬(statement of distributionUniformExponential) by specializing c := 0."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "HasExponentialBound",
+     "line": 102,
+     "paper_ref": "Quantum Parallel Repetition Conjecture",
+     "explanation": "There is an extra multiplicative constant C > 0, and the bound runs over all n including 0. The paper's form has no C and n ≥ 1. Removing C requires knowing ω*(G^n) < 1 for each n ≥ 1, which the Lean statement does not give.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove HasExponentialBound v ∧ (∀ n ≥ 1, v n < 1) → ∃ c>0, ∀ n ≥ 1, v n ≤ exp(-c n)."
+    },
+    {
+     "id": "F3",
+     "category": "type-default",
+     "severity": "low",
+     "decl": "standardQuantumParallelRepetition",
+     "line": 131,
+     "paper_ref": null,
+     "explanation": "The game types are restricted to Type (universe 0), and strategy spaces to Type. This is harmless for finite games.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    }
+   ],
+   "original": "∃ c : ℝ, 0 < c ∧",
+   "mutated": "∀ c : ℝ, 0 < c ∧"
+  },
+  {
+   "mutant": "G_QuantumParallelRepetition-07-lt-to-le",
+   "pattern": "goal-substitution",
+   "operator": "lt-to-le",
+   "line": 113,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The statement asks for ∃ c, 0 ≤ c rather than 0 < c. Taking c = 0, the right-hand side is exp(0) = 1. Every winning probability is ≤ 1, and sSup ∅ = 0, so ω*(G^{⊗n}) ≤ 1 always holds. The quantitative theorem therefore becomes vacuous.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "distributionUniformExponential",
+     "line": 113,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The statement asks for ∃ c, 0 ≤ c rather than 0 < c. Taking c = 0, the right-hand side is exp(0) = 1. Every winning probability is ≤ 1, and sSup ∅ = 0, so ω*(G^{⊗n}) ≤ 1 always holds. The quantitative theorem therefore becomes vacuous.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove distributionUniformExponential by `refine ⟨0, le_rfl, ?_⟩` followed by showing entangledValue ≤ 1 (simp; Real.exp_zero)."
+    },
+    {
+     "id": "F2",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "entangledValue",
+     "line": 96,
+     "paper_ref": null,
+     "explanation": "With an empty answer set no POVM or strategy exists, so ω* = sSup ∅ = 0. This only affects degenerate games; Theorem 1.1 assumes Nonempty, and in standardQuantumParallelRepetition the empty case is trivially true.",
+     "polarity": "n/a",
+     "probe_idea": "Prove BddAbove (Set.range winProbability), and that the range is Nonempty when A and B are nonempty."
+    }
+   ],
+   "original": "∃ c : ℝ, 0 < c ∧",
+   "mutated": "∃ c : ℝ, 0 ≤ c ∧"
+  },
+  {
+   "mutant": "H_GapCVP-00-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "operator": "strict-to-nonstrict-def",
+   "line": 249,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "gapCVP400Promise",
+     "line": 138,
+     "paper_ref": null,
+     "explanation": "The disjointness fields of all four promise problems are `sorry`'d. They appear true: the gap factor is ≥1 for n≥1, and the length-prefixed encoding with leading dimension looks injective. Still, they are unproved obligations inside the definitions.",
+     "polarity": "n/a",
+     "probe_idea": "Prove `Function.Injective encodeInstance`, and the analogous injectivity for the code encodings, then derive disjointness."
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "binarySyndromeDecodingPromise",
+     "line": 259,
+     "paper_ref": "Corollary 15",
+     "explanation": "NO requires the system Hx=b to be consistent and R>0. In the paper an inconsistent system has infinite distance, so it counts as NO. Lean's NO set is smaller, so soundness is harder and the theorem is stronger.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "finitePGapCVPPromise",
+     "line": 287,
+     "paper_ref": "Section 7 fixed-finite-norm consequence",
+     "explanation": "The ℓp statement is not in the excerpt, so its gap exponent 1/(200p) and the rational-p restriction cannot be checked. Its instances also omit the integer-target restriction used in the ℓ2 version, which slightly enlarges the YES and NO sets.",
+     "polarity": "unclear",
+     "probe_idea": null
+    }
+   ],
+   "original": "0 < record.blockLength ∧ 0 < record.radius ∧",
+   "mutated": "0 < record.blockLength ∧ 0 ≤ record.radius ∧"
+  },
+  {
+   "mutant": "H_GapCVP-02-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 268,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem is trivially provable and says nothing about syndrome decoding.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "binarySyndromeDecodingIsNPHard",
+     "line": 268,
+     "paper_ref": "Corollary 15",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem is trivially provable and says nothing about syndrome decoding.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove `binarySyndromeDecodingIsNPHard` without the hypothesis, i.e. `theorem : IsNPHardPromise binarySyndromeDecodingPromise`."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "gapCVP400Promise",
+     "line": 138,
+     "paper_ref": null,
+     "explanation": "The `disjoint` fields of all four promise definitions are discharged by `sorry` (lines 138, 210, 266, 305). The fields appear true, since the gap factor is ≥ 1 for dimension ≥ 1, provided the encodings are injective. That injectivity is unverified.",
+     "polarity": "n/a",
+     "probe_idea": "Prove `Function.Injective encodeInstance` and then the disjointness lemmas."
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "finitePGapCVPPromise",
+     "line": 287,
+     "paper_ref": "Section 7 fixed finite norm consequence",
+     "explanation": "Targets may be rational here, unlike Theorem 1, which uses integer targets. Rational targets can be scaled to integers, so this is minor. The exponent 1/(200p) cannot be checked against the excerpt.",
+     "polarity": "unclear",
+     "probe_idea": null
+    }
+   ],
+   "original": "theorem binarySyndromeDecodingIsNPHard :",
+   "mutated": "theorem binarySyndromeDecodingIsNPHard (hbase : (1 : ℕ) = 0) :"
+  },
+  {
+   "mutant": "H_GapCVP-03-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "operator": "strict-to-nonstrict-def",
+   "line": 82,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "finitePGapCVPPromise",
+     "line": 287,
+     "paper_ref": null,
+     "explanation": "The ℓp result (gap n^{1/(200p)}, p rational ≥ 1) is not in the excerpt, so the exponent and the range of p cannot be checked. Unlike gapCVP400, this promise omits hasIntegerTarget, so the YES/NO sets admit rational targets. Larger target sets make a reduction easier, so this is slightly weaker than an integer-target version.",
+     "polarity": "lean weaker",
+     "probe_idea": "Compare with the paper's ℓp corollary; optionally add hasIntegerTarget to the YES and NO conditions."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "gapCVP400Promise",
+     "line": 138,
+     "plain": null,
+     "explanation": "The disjointness fields of all four promises are `sorry`. If one were false, the promise would be ill-formed. They appear true: encodings are injective, the gap factor is ≥ 1 when n ≥ 1, and the n = 0 cases give 0^x = 0, which makes NO false.",
+     "polarity": "n/a",
+     "probe_idea": "Prove each disjoint field, e.g. ∀ bits, yesLanguage bits → noLanguage bits → False, using injectivity of encodeInstance."
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "low",
+     "decl": "wellFormed",
+     "line": 82,
+     "paper_ref": "Theorem 1",
+     "explanation": "Dimension 0 is allowed (det of the empty matrix = 1), and the conjunct 0 ≤ dimension is vacuous. Such instances can only be YES, so this is harmless.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "other",
+     "severity": "low",
+     "decl": "binarySyndromeDecodingPromise",
+     "line": 259,
+     "paper_ref": "Corollary 15",
+     "explanation": "NO requires Hx = b to be solvable. This shrinks the NO set, making the Lean statement slightly stronger, and it matches the paper's proof setup.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "(0 < record.dimension ∧ record.basis.det ≠ 0 ∧ 0 < record.radius)",
+   "mutated": "(0 ≤ record.dimension ∧ record.basis.det ≠ 0 ∧ 0 < record.radius)"
+  },
+  {
+   "mutant": "H_GapCVP-05-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "operator": "strict-to-nonstrict-def",
+   "line": 249,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "binarySyndromeDecodingPromise",
+     "line": 249,
+     "paper_ref": "Corollary 15",
+     "explanation": "The YES set uses the vacuous `0 ≤ record.blockLength` while the NO set uses `0 < record.blockLength`. So YES includes block-length-0 instances with zero syndrome. This enlarges YES, which slightly eases completeness. It cannot trivialize the reduction, because the map must still separate YES from NO.",
+     "polarity": "lean weaker",
+     "probe_idea": "Show the theorem still holds with `0 < record.blockLength` in YES, i.e., prove a variant using the modified promise."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "binarySyndromeDecodingPromise",
+     "line": 259,
+     "paper_ref": "Corollary 15",
+     "explanation": "NO instances must be consistent (∃x, Hx = b). This shrinks the NO set, so the reduction must output solvable systems.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "low",
+     "decl": "gapCVP400Promise / binaryNearestCodewordPromise / binarySyndromeDecodingPromise / finitePGapCVPPromise",
+     "line": 138,
+     "paper_ref": null,
+     "explanation": "The `disjoint` fields are proved by `sorry`, so they are unchecked obligations in the target definitions. They appear true: the gap factor is ≥ 1 for n ≥ 1, and the encodings are prefix-free and hence injective. The theorems do not depend on them.",
+     "polarity": "n/a",
+     "probe_idea": "Prove `Function.Injective encodeInstance` and fill in each disjoint proof."
+    },
+    {
+     "id": "F4",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "finitePNormGapCVPIsNPHard",
+     "line": 307,
+     "paper_ref": "Section 7 (finite-norm consequence)",
+     "explanation": "p is restricted to ℚ with p ≥ 1, and rational targets are allowed. The paper's exact p-norm statement and gap are not in the excerpt. If the paper covers all real p ≥ 1, the Lean result is weaker.",
+     "polarity": "unclear",
+     "probe_idea": null
+    }
+   ],
+   "original": "0 < record.blockLength ∧ 0 < record.radius ∧",
+   "mutated": "0 ≤ record.blockLength ∧ 0 < record.radius ∧"
+  },
+  {
+   "mutant": "I_MulticolorTriangleRamsey-00-real-cast-to-int",
+   "pattern": "type-default",
+   "operator": "real-cast-to-int",
+   "line": 42,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "erdos_problem_183_explicit",
+     "line": 27,
+     "paper_ref": "Theorem 1.1 (3)",
+     "explanation": "Lean fixes c = 1/(6e^{38}), whereas the excerpt only claims that some absolute c > 0 exists. This makes Lean stronger than the excerpt; whether the paper body uses this specific constant is not in the excerpt.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "triangleRamseyNumber_log_sharp_coefficients",
+     "line": 36,
+     "paper_ref": "Shannon capacity corollary",
+     "explanation": "The Shannon-capacity consequence is not formalized. The explicit factorial upper bound (2) is also only reflected through its asymptotic consequence.",
+     "polarity": "n/a",
+     "probe_idea": null
+    }
+   ],
+   "original": "(1 + ε) * (k : ℝ) * Real.log (k : ℝ) := by",
+   "mutated": "(1 + ε) * (k : ℝ) * Real.log (k : ℤ) := by"
+  },
+  {
+   "mutant": "I_MulticolorTriangleRamsey-02-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 45,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem is therefore vacuously true and certifies nothing about R_k = k^{Θ(k)}. The content is recovered by `triangleRamseyNumber_log_sharp_coefficients`, but this target as stated is meaningless.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "triangleRamseyNumber_log_isTheta",
+     "line": 45,
+     "paper_ref": "Theorem 1.1 (consequence with (2))",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem is therefore vacuously true and certifies nothing about R_k = k^{Θ(k)}. The content is recovered by `triangleRamseyNumber_log_sharp_coefficients`, but this target as stated is meaningless.",
+     "polarity": "lean weaker",
+     "probe_idea": "example : ¬ ((1 : ℕ) = 0) := by decide — and restate the theorem without hbase."
+    },
+    {
+     "id": "F2",
+     "category": "type-default",
+     "severity": "low",
+     "decl": "triangleRamseyNumber",
+     "line": 15,
+     "paper_ref": null,
+     "explanation": "At k = 0 the definition yields 2: K_1 admits the empty colouring, while K_2 has no 0-colourings, so it is vacuously forcing. The paper does not discuss k = 0. Every theorem is either asymptotic or restricted to k ≥ 2, so this is harmless.",
+     "polarity": "n/a",
+     "probe_idea": "example : triangleRamseyNumber 0 = 2"
+    }
+   ],
+   "original": "theorem triangleRamseyNumber_log_isTheta :",
+   "mutated": "theorem triangleRamseyNumber_log_isTheta (hbase : (1 : ℕ) = 0) :"
+  },
+  {
+   "mutant": "I_MulticolorTriangleRamsey-04-real-cast-to-int",
+   "pattern": "type-default",
+   "operator": "real-cast-to-int",
+   "line": 47,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "erdos_problem_183_explicit",
+     "line": 27,
+     "paper_ref": "Theorem 1.1 (3)",
+     "explanation": "Lean fixes c = 1/(6e^{38}), whereas the excerpt only claims that some absolute c exists. This makes Lean stronger; whether this constant is the paper's is not in the excerpt.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "erdos_183",
+     "line": 18,
+     "paper_ref": "Abstract (Shannon capacity)",
+     "explanation": "The Shannon-capacity reformulation is not formalised.",
+     "polarity": "n/a",
+     "probe_idea": null
+    }
+   ],
+   "original": "=Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℝ)) := by",
+   "mutated": "=Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℤ)) := by"
+  },
+  {
+   "mutant": "I_MulticolorTriangleRamsey-05-eventually-to-frequently",
+   "pattern": "quantifier",
+   "operator": "eventually-to-frequently",
+   "line": 38,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The paper's k^{(1/3−o(1))k} ≤ R_k ≤ k^{(1+o(1))k} holds for all sufficiently large k. The Lean statement uses ∃ᶠ, which only asserts the two-sided bound for infinitely many k. The eventual lower bound follows from the explicit theorem. However, the eventual upper bound with coefficient 1+ε is not stated anywhere; the Θ statement gives only some constant.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "medium",
+     "decl": "triangleRamseyNumber_log_sharp_coefficients",
+     "line": 38,
+     "paper_ref": "Theorem 1.1 (asymptotics)",
+     "explanation": "The paper's k^{(1/3−o(1))k} ≤ R_k ≤ k^{(1+o(1))k} holds for all sufficiently large k. The Lean statement uses ∃ᶠ, which only asserts the two-sided bound for infinitely many k. The eventual lower bound follows from the explicit theorem. However, the eventual upper bound with coefficient 1+ε is not stated anywhere; the Θ statement gives only some constant.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove the version with ∀ᶠ k in atTop in place of ∃ᶠ, i.e. ∀ ε>0, ∀ᶠ k in atTop, ((1/3−ε) k log k ≤ log R_k ∧ log R_k ≤ (1+ε) k log k)."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "erdos_problem_183_explicit",
+     "line": 27,
+     "paper_ref": "Theorem 1.1 (3)",
+     "explanation": "A specific constant 1/(6e^{38}) is asserted where the paper asserts only existence of some c. This makes the Lean statement stronger, which is acceptable; whether the paper's proof yields this constant is not in the excerpt.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "∀ᶠ k : ℕ in atTop,",
+   "mutated": "∃ᶠ k : ℕ in atTop,"
+  },
+  {
+   "mutant": "J_CompactnessConjecture-00-real-cast-to-int",
+   "pattern": "type-default",
+   "operator": "real-cast-to-int",
+   "line": 66,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "`(0 : ℤ) < 1 / 48` uses integer division, so 1/48 = 0 and the conjunct is 0 < 0, which is false. The whole existential is therefore false and should be unprovable. If a proof was accepted, investigate it. The intended claim ε = 1/48 > 0 would need ℚ or ℝ.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "junk-value",
+     "severity": "high",
+     "decl": "quantitativeCompactnessCounterexample",
+     "line": 66,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "`(0 : ℤ) < 1 / 48` uses integer division, so 1/48 = 0 and the conjunct is 0 < 0, which is false. The whole existential is therefore false and should be unprovable. If a proof was accepted, investigate it. The intended claim ε = 1/48 > 0 would need ℚ or ℝ.",
+     "polarity": "unclear",
+     "probe_idea": "example : ¬ ((0 : ℤ) < 1 / 48) := by decide"
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "quantitativeCompactnessCounterexample",
+     "line": 61,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The bound e(G)^16 ≤ C·n^21 for all n (not just large n) is stronger than the paper's O-bound. This is fine, apart from F1.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "(0 : ℝ) < 1 / 48 ∧",
+   "mutated": "(0 : ℤ) < 1 / 48 ∧"
+  },
+  {
+   "mutant": "J_CompactnessConjecture-01-exists-to-forall",
+   "pattern": "quantifier",
+   "operator": "exists-to-forall",
+   "line": 53,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The statement begins `∀ (family) (c C : ℝ)` and its body is a pure conjunction, so it claims every finset of graphs is nonempty, every c is positive, and so on. This is refutable: family = ∅ violates `family.Nonempty`, and c = 0 violates `0 < c`. The paper's claim is existential (∃ F, c, C). As written the theorem is false, so a kernel-accepted proof of it would signal an inconsistency or a mis-specified challenge. It does not formalize the paper's quantitative claim.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "quantitativeCompactnessCounterexample",
+     "line": 53,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The statement begins `∀ (family) (c C : ℝ)` and its body is a pure conjunction, so it claims every finset of graphs is nonempty, every c is positive, and so on. This is refutable: family = ∅ violates `family.Nonempty`, and c = 0 violates `0 < c`. The paper's claim is existential (∃ F, c, C). As written the theorem is false, so a kernel-accepted proof of it would signal an inconsistency or a mis-specified challenge. It does not formalize the paper's quantitative claim.",
+     "polarity": "lean stronger",
+     "probe_idea": "theorem probe : ¬ (∀ (family : Finset FiniteGraph) (c C : ℝ), family.Nonempty ∧ ...) := fun h => by simpa using (h ∅ 1 1).1"
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "UniformMemberLower",
+     "line": 40,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "A single constant c is used for all members, whereas the paper's Ω implicitly allows constants depending on F. This is equivalent for finite families.",
+     "polarity": "n/a",
+     "probe_idea": null
+    }
+   ],
+   "original": "∃ (family : Finset FiniteGraph) (c C : ℝ),",
+   "mutated": "∀ (family : Finset FiniteGraph) (c C : ℝ),"
+  },
+  {
+   "mutant": "J_CompactnessConjecture-02-lt-to-le",
+   "pattern": "goal-substitution",
+   "operator": "lt-to-le",
+   "line": 59,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "quantitativeCompactnessCounterexample",
+     "line": 66,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The conjuncts 0<1/48 and 21/16 = 4/3-1/48 are pure arithmetic padding. They are true and harmless; they only document that the exponent 21/16 equals 4/3-ε.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "quantitativeCompactnessCounterexample",
+     "line": 61,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The upper bound is stated for all n, including n=0, rather than asymptotically. This is stronger than the paper's O-bound, which is fine.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "0 < C ∧",
+   "mutated": "0 ≤ C ∧"
+  },
+  {
+   "mutant": "J_CompactnessConjecture-03-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 72,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem holds trivially and certifies nothing. The big-O content is still implied by `quantitativeCompactnessCounterexample`, but this target as stated is vacuous.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "compactnessCounterexample_bigO",
+     "line": 72,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false, so the theorem holds trivially and certifies nothing. The big-O content is still implied by `quantitativeCompactnessCounterexample`, but this target as stated is vacuous.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove `¬ ((1:ℕ) = 0)` by `decide`. Restate the theorem without `hbase` and derive it from `quantitativeCompactnessCounterexample`."
+    }
+   ],
+   "original": "theorem compactnessCounterexample_bigO :",
+   "mutated": "theorem compactnessCounterexample_bigO (hbase : (1 : ℕ) = 0) :"
+  },
+  {
+   "mutant": "J_TwoDegenerateGraphs-01-real-cast-to-nat",
+   "pattern": "type-default",
+   "operator": "real-cast-to-nat",
+   "line": 40,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "twoDegenerateExtremalCounterexample",
+     "line": 33,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "Extra conjunct not in Theorem 1.2: under every proper 2-colouring, each side has a vertex of degree > 2. This rules out the known Füredi/AKS case. It only strengthens the statement. It also forces both colour classes to be nonempty, since the sup over an empty side is 0.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "(SimpleGraph.extremalNumber n H : ℝ) := by",
+   "mutated": "(SimpleGraph.extremalNumber n H : ℕ) := by"
+  },
+  {
+   "mutant": "J_TwoDegenerateGraphs-03-forall-to-exists",
+   "pattern": "quantifier",
+   "operator": "forall-to-exists",
+   "line": 33,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "twoDegenerateExtremalCounterexample",
+     "line": 33,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "The extra clause requires, for some proper 2-colouring, a vertex of degree > 2 in each colour class. This rules out the Füredi/AKS known case. It goes beyond the paper's stated theorem but only strengthens the Lean claim.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "(∀ coloring : H.Coloring (Fin 2), ∀ side : Fin 2,",
+   "mutated": "(∃ coloring : H.Coloring (Fin 2), ∀ side : Fin 2,"
+  },
+  {
+   "mutant": "J_TwoDegenerateGraphs-05-lt-to-le",
+   "pattern": "goal-substitution",
+   "operator": "lt-to-le",
+   "line": 34,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "twoDegenerateExtremalCounterexample",
+     "line": 33,
+     "paper_ref": "Theorem 1.2",
+     "explanation": "There is an extra conjunct: in every 2-colouring, each colour class has max degree ≥ 2. The paper does not state this, but it follows for any counterexample. A connected bipartite H with superlinear ex must contain a cycle, and a cycle has degree-2 vertices on both sides. This strengthens the existential and so is harmless. Note it does NOT exclude the known Füredi/AKS case (one class has max degree ≤ r = 2).",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "2 < (Finset.univ.filter",
+   "mutated": "2 ≤ (Finset.univ.filter"
+  },
+  {
+   "mutant": "Euler-00-le-to-lt",
+   "pattern": "goal-substitution",
+   "operator": "le-to-lt",
+   "line": 173,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "velocityC1Norm",
+     "line": 181,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "Lean asserts limsup of ‖v‖_∞+‖∇v‖_∞ = ∞, whereas the paper asserts limsup ‖∇u‖_∞ = ∞. Literally weaker, since ‖v‖_∞ could in principle carry the blow-up. However, with the asserted uniform L² bound, ‖v‖_∞ ≲ ‖v‖₂^{2/5}‖∇v‖_∞^{3/5}, so the two are equivalent.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove from the theorem's conclusions: Filter.limsup (fun t => ⨆ x, ENNReal.ofReal ‖fderiv ℝ (v · t) x‖) (𝓝[<] Tstar) = ⊤."
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "EulerSobolevExistenceAndSmoothnessR3On",
+     "line": 136,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The maximal lifespan T* is characterized in an H^∞ (C_t L² jets) class with only spatial differentiability of the pressure. The paper's 'smooth Euler solution' class is not specified in the excerpt. Both the broader closed-interval class and the stated iff make the claim self-contained and if anything stronger, but T* is defined relative to this class.",
+     "polarity": "unclear",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "low",
+     "decl": "exists_compact_smooth_euler_singularity",
+     "line": 182,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "∫⁻ of t ↦ ‖curl v(t)‖_∞ is a lower integral when the integrand is non-measurable. For this continuous-in-time H^∞ solution the integrand should be measurable (lower semicontinuous), so this is likely harmless.",
+     "polarity": "n/a",
+     "probe_idea": "Measurable (fun t => vorticityNorm (v · t)) restricted to Ico 0 Tstar, for the witness v."
+    },
+    {
+     "id": "F4",
+     "category": "other",
+     "severity": "low",
+     "decl": "exists_compact_smooth_euler_singularity",
+     "line": 173,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "Several clauses are not in the excerpt and strengthen the claim: T* < 1, u₀ ≠ 0, exact characterization of closed-interval existence, local finiteness of the norms, and global nonexistence. This is fine.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "0 < Tstar ∧ Tstar ≤ 1 ∧",
+   "mutated": "0 < Tstar ∧ Tstar < 1 ∧"
+  },
+  {
+   "mutant": "Euler-01-forall-to-exists",
+   "pattern": "quantifier",
+   "operator": "forall-to-exists",
+   "line": 175,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "Euler.velocityC1Norm",
+     "line": 181,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The limsup blow-up is stated for ‖v‖_∞+‖∇v‖_∞, not ‖∇v‖_∞. Formally this is weaker: it would also hold if only ‖v‖_∞ blew up. For Euler this cannot happen (by BKM and energy-type arguments), and the vorticity clause independently pins the singularity.",
+     "polarity": "lean weaker",
+     "probe_idea": "Replace with Filter.limsup (fun t => ⨆ x, ENNReal.ofReal ‖fderiv ℝ (v · t) x‖) (𝓝[<] Tstar) = ⊤"
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "Euler.exists_compact_smooth_euler_singularity",
+     "line": 175,
+     "paper_ref": null,
+     "explanation": "The clause ∃ E, ∃ t ∈ [0,T*), ∫|v(t)|² < E is trivially true (take t = 0 and E = integral+1). The docstring's 'finite-energy' claim is vacuous. The paper excerpt does not claim it.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove the clause trivially with t = 0, E = (∫ ‖v x 0‖^2) + 1"
+    },
+    {
+     "id": "F3",
+     "category": "quantifier",
+     "severity": "low",
+     "decl": "Euler.exists_compact_smooth_euler_singularity",
+     "line": 171,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "v is existentially chosen rather than being 'the' solution; uniqueness is not asserted. This is harmless given uniqueness in the H^∞ class, but formally it only asserts some solution blows up as stated.",
+     "polarity": "lean weaker",
+     "probe_idea": "Add uniqueness: ∀ w q, EulerSobolevExistenceAndSmoothnessR3On (Ico 0 Tstar) u₀ w q → ∀ t ∈ Ico 0 Tstar, (w · t) = (v · t)"
+    },
+    {
+     "id": "F4",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "Euler.vorticityNorm",
+     "line": 180,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "lintegral of a possibly non-measurable t ↦ sup_x|ω| is a lower integral. The finiteness claim at line 180 could be weaker if the map were non-measurable; continuity in H^∞ makes it measurable in practice.",
+     "polarity": "unclear",
+     "probe_idea": "Measurable (fun t => vorticityNorm (v · t)) on Ico 0 Tstar"
+    }
+   ],
+   "original": "(∃ E : ℝ, ∀ t ∈ Ico (0 : ℝ) Tstar, (∫ x : ℝ³, ‖v x t‖ ^ 2) < E) ∧",
+   "mutated": "(∃ E : ℝ, ∃ t ∈ Ico (0 : ℝ) Tstar, (∫ x : ℝ³, ‖v x t‖ ^ 2) < E) ∧"
+  },
+  {
+   "mutant": "Euler-02-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 170,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem therefore follows trivially and certifies none of the quantitative blow-up content: compact support, finite T*, ‖∇u‖ blow-up, or vorticity integral divergence.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "Euler.exists_compact_smooth_euler_singularity",
+     "line": 170,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem therefore follows trivially and certifies none of the quantitative blow-up content: compact support, finite T*, ‖∇u‖ blow-up, or vorticity integral divergence.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove `Euler.exists_compact_smooth_euler_singularity` via `fun h => absurd h (by decide)` to confirm the statement is vacuous; restate it without `hbase`."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "Euler.euler_breakdown_R3",
+     "line": 85,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The only non-vacuous target asserts global non-existence for some Schwartz-decaying datum. It does not assert compact support, a finite positive T*, or the BKM-type blow-up quantities of Theorem 1.1.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F3",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "Euler.velocityC1Norm",
+     "line": 157,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The blow-up is stated for sup|v| + sup|Dv| rather than ‖∇u‖_∞ alone. This is a weaker conclusion than the paper's. The point is moot while F1 stands.",
+     "polarity": "lean weaker",
+     "probe_idea": "Replace velocityC1Norm with ⨆ x, ENNReal.ofReal ‖fderiv ℝ (v · t) x‖ in the limsup clause."
+    },
+    {
+     "id": "F4",
+     "category": "other",
+     "severity": "low",
+     "decl": "Euler.exists_compact_smooth_euler_singularity",
+     "line": 173,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The extra clause T* ≤ 1 and the closed-interval iff characterization go beyond the excerpt. This would be stronger, which is acceptable, but it is moot while F1 stands.",
+     "polarity": "lean stronger",
+     "probe_idea": null
+    }
+   ],
+   "original": "theorem exists_compact_smooth_euler_singularity :",
+   "mutated": "theorem exists_compact_smooth_euler_singularity (hbase : (1 : ℕ) = 0) :"
+  },
+  {
+   "mutant": "NavierStokes-00-strict-to-nonstrict-def",
+   "pattern": "definition-mismatch",
+   "operator": "strict-to-nonstrict-def",
+   "line": 253,
+   "detected_strict": false,
+   "detected_loose": false,
+   "matching_flag": null,
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "NavierStokesExistenceAndSmoothnessPeriodic",
+     "line": 269,
+     "paper_ref": "Corollary 10.6",
+     "explanation": "The solution notion additionally requires the pressure to be 1-periodic. Inside ¬∃ this extra requirement makes the nonexistence claim weaker than Fefferman's original (D), where only u is required to be periodic. It matches the Clay errata, and the paper's Corollary speaks of 'the periodic solution (U, P_per)', so this is consistent with the intended version.",
+     "polarity": "lean weaker",
+     "probe_idea": "Restate navier_stokes_breakdown_periodic with isOnePeriodic_pressure removed, i.e. using a structure without that field, and check that the submitted proof still adapts."
+    },
+    {
+     "id": "F2",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "navier_stokes_breakdown_R3",
+     "line": 273,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "Only the alternative (C) consequence is formalized. The paper's quantitative content (u₀ = 0, compactly supported f, L^∞ blowup at t = 1) is not stated in Lean.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    }
+   ],
+   "original": "globally_bounded_energy : ∃ E, ∀ t ≥ 0, (∫ x : ℝ^n, ‖v x t‖ ^ 2) < E",
+   "mutated": "globally_bounded_energy : ∃ E, ∀ t ≥ 0, (∫ x : ℝ^n, ‖v x t‖ ^ 2) ≤ E"
+  },
+  {
+   "mutant": "NavierStokes-01-add-false-hyp",
+   "pattern": "assumption",
+   "operator": "add-false-hyp",
+   "line": 273,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem is therefore trivially provable (e.g. `absurd hbase (by decide)`) and says nothing about alternative (C).",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "assumption",
+     "severity": "high",
+     "decl": "navier_stokes_breakdown_R3",
+     "line": 273,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The hypothesis `hbase : (1 : ℕ) = 0` is false. The theorem is therefore trivially provable (e.g. `absurd hbase (by decide)`) and says nothing about alternative (C).",
+     "polarity": "lean weaker",
+     "probe_idea": "example (h : (1:ℕ)=0) (nu : ℝ) (hnu : nu > 0) : <goal> := absurd h (by decide) — showing the target is vacuous; then require a proof of the statement without hbase."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "NavierStokesExistenceAndSmoothnessPeriodic",
+     "line": 269,
+     "paper_ref": "Corollary 10.6",
+     "explanation": "Periodic pressure is required of the hypothetical solution. Inside ¬∃ this extra requirement slightly weakens the claim. It matches the Clay errata and the paper's notion of a periodic solution.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    }
+   ],
+   "original": "theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :",
+   "mutated": "theorem navier_stokes_breakdown_R3 (hbase : (1 : ℕ) = 0) (nu : ℝ) (hnu : nu > 0) :"
+  },
+  {
+   "mutant": "NavierStokes-02-exists-to-forall",
+   "pattern": "quantifier",
+   "operator": "exists-to-forall",
+   "line": 281,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The statement uses ∀ (u₀) (f) where alternative (D) and the paper require ∃. As written it claims every function u₀ is smooth, periodic and divergence-free. It also claims that for u₀ = 0, f = 0 no solution exists, but (v,p) = (0,0) is a solution. The statement is false and does not formalize the paper's corollary. It is a different (unprovable) claim, not merely a stronger one.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "navier_stokes_breakdown_periodic",
+     "line": 281,
+     "paper_ref": "Corollary 10.6",
+     "explanation": "The statement uses ∀ (u₀) (f) where alternative (D) and the paper require ∃. As written it claims every function u₀ is smooth, periodic and divergence-free. It also claims that for u₀ = 0, f = 0 no solution exists, but (v,p) = (0,0) is a solution. The statement is false and does not formalize the paper's corollary. It is a different (unprovable) claim, not merely a stronger one.",
+     "polarity": "lean stronger",
+     "probe_idea": "Prove ¬ (∀ ν>0, ∀ u₀ f, InitialVelocityConditionPeriodic u₀ ∧ ...) by instantiating u₀ = fun x => x (not periodic), or u₀ = 0, f = 0 with solution v = 0, p = 0."
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "NavierStokesExistenceAndSmoothnessRn",
+     "line": 250,
+     "paper_ref": "Theorem 1.1",
+     "explanation": "The solution class additionally requires v(·,t) ∈ L² for each t. This adds requirements inside ¬∃, so the theorem is slightly weaker than 'no bounded-energy smooth solution'. It is harmless, since bounded energy for a measurable v essentially implies L², and it matches Fefferman (7).",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    }
+   ],
+   "original": "∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),",
+   "mutated": "∀ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),"
+  },
+  {
+   "mutant": "NavierStokes-03-real-cast-to-nat",
+   "pattern": "type-default",
+   "operator": "real-cast-to-nat",
+   "line": 280,
+   "detected_strict": true,
+   "detected_loose": true,
+   "matching_flag": "The viscosity is typed `nu : ℕ` and coerced to ℝ. The theorem therefore only asserts breakdown for ν = 1, 2, 3, …, not for every real ν > 0 as the paper and Fefferman's (D) state. This is inconsistent with the ℝ³ version, where `nu : ℝ`.",
+   "all_flags": [
+    {
+     "id": "F1",
+     "category": "quantifier",
+     "severity": "high",
+     "decl": "navier_stokes_breakdown_periodic",
+     "line": 280,
+     "paper_ref": "Corollary 10.6",
+     "explanation": "The viscosity is typed `nu : ℕ` and coerced to ℝ. The theorem therefore only asserts breakdown for ν = 1, 2, 3, …, not for every real ν > 0 as the paper and Fefferman's (D) state. This is inconsistent with the ℝ³ version, where `nu : ℝ`.",
+     "polarity": "lean weaker",
+     "probe_idea": "Restate with `(nu : ℝ) (hnu : nu > 0)` and check that the submitted proof still goes through."
+    },
+    {
+     "id": "F2",
+     "category": "assumption",
+     "severity": "low",
+     "decl": "NavierStokesExistenceAndSmoothnessPeriodic",
+     "line": 269,
+     "paper_ref": "Corollary 10.6",
+     "explanation": "Requiring the pressure to be periodic adds a condition inside ¬∃. That makes the non-existence claim slightly weaker than the original Fefferman (D), which did not require periodic pressure. It matches the Clay errata, and the paper's own construction has compactly supported pressure.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    }
+   ],
+   "original": "theorem navier_stokes_breakdown_periodic (nu : ℝ) (hnu : nu > 0) :",
+   "mutated": "theorem navier_stokes_breakdown_periodic (nu : ℕ) (hnu : nu > 0) :"
+  }
+ ],
+ "clean_flags": {
+  "A_SpherePacking": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "PackingBounds.sharpFullCohnElkiesManuscriptConclusions",
+    "line": 81,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The sign-uncertainty Theorem 1.2 (A₊, A₋ asymptotics) is not formalized anywhere. The root_before_infimum field concerns inf (f(0)/f̂(0))^{1/d} over A_d, not the Fourier-eigenfunction constants A_ς(d).",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+    "line": 121,
+    "paper_ref": null,
+    "explanation": "The 30-digit interval for α* is more precise than anything in the excerpt (which gives only 0.6044…). My hand computation agrees to about 10 digits. This is a stronger extra claim and harmless.",
+    "polarity": "lean stronger",
+    "probe_idea": "norm_num/interval check of (1/2)·logb 2 (2π/e) against the stated bounds"
+   },
+   {
+    "id": "F3",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "PackingBounds.fullLinearProgram",
+    "line": 54,
+    "paper_ref": "(3)",
+    "explanation": "sInf over ℝ would be 0 if the quotient set were empty or unbounded below. Neither happens: the set is bounded below by 0 because f(0) > 0, and it is nonempty because A_d contains a Cohn–Elkies function. A degenerate LP_d = 0 would in any case contradict the stated limit.",
+    "polarity": "n/a",
+    "probe_idea": "∀ d ≥ 1, (fullQuotientSet d).Nonempty ∧ BddBelow (fullQuotientSet d) ∧ 0 < fullLinearProgram d"
+   }
+  ],
+  "B_BinaryCodes": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "Johnson.AsymptoticParameters",
+    "line": 124,
+    "paper_ref": "eqs. (4)–(5)",
+    "explanation": "The parameter ranges defining D_δ are not in the excerpt and cannot be checked. Extra constraints would shrink D_δ and raise κ_CW. That makes R₂ ≤ κ_bin weaker but κ_bin < M₂ stronger, and vice versa for missing constraints.",
+    "polarity": "unclear",
+    "probe_idea": "Compare the structure fields against eqs. (4)–(5) of the paper by hand."
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "Johnson.spectralLimit",
+    "line": 103,
+    "paper_ref": "eq. (6)",
+    "explanation": "The definitions of z, m, ζ, ξ as affine functions of u, α, β, γ are not in the excerpt. The algebraic shape of Λ matches (6), including √(1−z²) in the second denominator, though that reading comes from garbled pdftotext.",
+    "polarity": "unclear",
+    "probe_idea": "Check centeredDegree, centeredWeight, centeredSigma and centeredEta against the paper's definitions of z, m, ζ, ξ."
+   },
+   {
+    "id": "F3",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "Hamming.variationalRate",
+    "line": 63,
+    "paper_ref": "κ_H (not in excerpt)",
+    "explanation": "The whole-cube exponent κ_H (Γ and the feasibility 1−2δ < Γ) is not in the excerpt. Its b=0 specialisation correctly gives the M₁ boundary, which is a consistency check only.",
+    "polarity": "unclear",
+    "probe_idea": "Prove Γ(a,0) = 2√(a(1−a)) and that feasibility at b=0 ↔ a > 1/2−√(δ(1−δ)); compare with the paper's definition of κ_H."
+   },
+   {
+    "id": "F4",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "MRRW.strict_mrrw2",
+    "line": 187,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "If the Johnson rate set were empty or unbounded below, sInf would be 0 and κ_bin < M₂ would hold trivially. This is ruled out jointly: binaryRate_le_combinedVariationalRate together with R₂(δ)>0 (Gilbert–Varshamov) forces κ_CW > 0. Under the constraints all denominators are positive.",
+    "polarity": "lean weaker",
+    "probe_idea": "Prove (Johnson.rateSet δ).Nonempty ∧ BddBelow (Johnson.rateSet δ) for 0<δ<1/2."
+   }
+  ],
+  "B_SphericalCodes": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "MetricCodes.Johnson.main_binary_theorem",
+    "line": 139,
+    "paper_ref": null,
+    "explanation": "The binary theorem and its bespoke definitions (hammingGamma, spectralLimit, AsymptoticParameters, shellRate) are not in the excerpt. Their faithfulness to the paper cannot be checked here. MRRW and binaryRate do match the standard notions.",
+    "polarity": "unclear",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "HigherHierarchy.levelRate",
+    "line": 250,
+    "paper_ref": "Corollary 1.3",
+    "explanation": "κ_r is defined with the strict constraint s<2Γ_r, whereas the paper's κ_r takes the infimum under 2Γ_r ≥ s. The paper states that the infima coincide by approximation. Strict inequalities between the open versions could in principle differ at boundaries.",
+    "polarity": "unclear",
+    "probe_idea": "∀ r s, 0<s → s<1 → levelRate r s = sInf {R | ∃ a b, Interlacing a b ∧ s ≤ 2*Gamma a b ∧ R = Phi a b}"
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "HigherHierarchy.strict_hierarchy",
+    "line": 275,
+    "paper_ref": "Corollary 7.6",
+    "explanation": "The unlocalized level-1 chain κ_1 < κ_row < κ_0 from Cor 7.6 is not stated.",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   },
+   {
+    "id": "F4",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published",
+    "line": 288,
+    "paper_ref": null,
+    "explanation": "The constant 0.39661 is not in the excerpt. The name says 'lt' but the statement uses ≤; this is immaterial asymptotically. The kissing-number definition itself is standard.",
+    "polarity": "n/a",
+    "probe_idea": null
+   },
+   {
+    "id": "F5",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "HigherHierarchy.closedHierarchyVariationalRate",
+    "line": 236,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "sInf would return 0 if the set were empty or unbounded below. Neither occurs: level 0 with large a is feasible since 2Γ_0→1>s, and Φ_r should be ≥0. Even if it occurred, the Lean claim would only become stronger.",
+    "polarity": "lean stronger",
+    "probe_idea": "BddBelow (closedHierarchyRateSet s) ∧ (closedHierarchyRateSet s).Nonempty for 0<s<1"
+   }
+  ],
+  "C_PermanentFormulaLowerBound": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+    "line": 82,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The gate-count bound G(Φ) ≥ n^4/(256 log₂ n) is not stated. This is separate from the leaf bound: it does not follow from the L_var bound alone, since that only gives G ≥ L_var − 1 when L_var ≥ 1.",
+    "polarity": "lean weaker",
+    "probe_idea": "Define an internal-gate count for Formula and state n^4/(256·logb 2 n) ≤ gates f under the same hypotheses."
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "permanent_rational_formula_logarithmic_lower_bound",
+    "line": 90,
+    "paper_ref": "Theorem 1.3",
+    "explanation": "The gate-count bound G(Φ) ≥ n^4/(384 log₂ n) is not stated.",
+    "polarity": "lean weaker",
+    "probe_idea": "Define gates for RationalFormula and state the 384 bound."
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "permanentPolynomial",
+    "line": 78,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The circuit lower bound (Theorem 1.1) is not formalized in this file.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ],
+  "D_NonSoficGroup": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+    "line": 30,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The theorem is existential and does not tie the witness to the Leavitt unit group. It certifies that some nonsofic group exists, not the paper's specific statement. It also asserts finite presentation, which the excerpt does not state for L_{F2}(1,2)^× (not in excerpt). This could stem from a different part of the paper or from a known fact.",
+    "polarity": "unclear",
+    "probe_idea": "Define the Leavitt algebra over ZMod 2 as a RingQuot of a FreeAlgebra and state ¬ SoficGroups.Sofic (RingQuot ...)ˣ."
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "Sofic",
+    "line": 24,
+    "paper_ref": "Section 1",
+    "explanation": "This is a bespoke definition rather than a Mathlib one. Read carefully, it matches the standard definition: arbitrary maps, σ(1)=1, multiplicativity defect < ε, non-identity elements moving more than a (1-ε) fraction of points. It is neither trivially false nor too strong, so non-soficity here is genuine non-soficity.",
+    "polarity": "n/a",
+    "probe_idea": "Prove Sofic for a finite group, e.g. Sofic (Multiplicative (ZMod 3)), via the regular representation, to confirm the definition is satisfiable."
+   }
+  ],
+  "E_ConnesRigidity": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+    "line": 208,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The commensurability clause (Γ_0 embeds in Γ_n with index 2^{4n}) is omitted, so Lean covers only the main part of Theorem 1.2.",
+    "polarity": "lean weaker",
+    "probe_idea": "Add the conjunct ∀ n, ∃ H : Subgroup (Γ n), Nonempty (H ≃* Γ 0) ∧ H.index = 2^(4*n)."
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "TracialGroupFactorEquiv",
+    "line": 179,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The isomorphism is required to be normal (preserve projection suprema) and trace-preserving. The paper only says L(Γ_n) ≅ L(Λ). This is an extra requirement inside an existential, so Lean is stronger.",
+    "polarity": "lean stronger",
+    "probe_idea": null
+   },
+   {
+    "id": "F3",
+    "category": "other",
+    "severity": "low",
+    "decl": "HasKazhdanPropertyT",
+    "line": 49,
+    "paper_ref": null,
+    "explanation": "Property (T) quantifies only over Hilbert spaces in Type 0. This is equivalent to the standard definition for countable groups, since separable representations suffice.",
+    "polarity": "n/a",
+    "probe_idea": "Prove that HasKazhdanPropertyT G implies the analogous property for Hilbert spaces in Type 1."
+   }
+  ],
+  "Euler": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "Euler.velocityC1Norm",
+    "line": 181,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper asserts limsup ‖∇u‖_{L∞}=∞. Lean asserts limsup(‖u‖_∞+‖∇u‖_∞)=∞, which could hold through ‖u‖_∞ alone. Under the bounded-energy clause, Gagliardo–Nirenberg (‖u‖_∞ ≲ ‖u‖_2^{2/5}‖∇u‖_∞^{3/5}) makes the two equivalent, but the Lean statement does not say so directly.",
+    "polarity": "lean weaker",
+    "probe_idea": "From the theorem's conclusions derive Filter.limsup (fun t => ⨆ x, ENNReal.ofReal ‖fderiv ℝ (v · t) x‖) (𝓝[<] Tstar) = ⊤."
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "Euler.exists_compact_smooth_euler_singularity",
+    "line": 180,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "lintegral of a possibly non-measurable function is a lower integral. The '=⊤' claim is therefore at least as strong as intended, and the '<⊤' local claim may be weaker than an outer-integral reading. t↦‖curl v(t)‖_∞ is lower semicontinuous here, so this is likely harmless.",
+    "polarity": "unclear",
+    "probe_idea": "Prove Measurable (fun t => vorticityNorm (v · t)) restricted to Ico 0 Tstar for the witness."
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "Euler.euler_breakdown_R3",
+    "line": 85,
+    "paper_ref": null,
+    "explanation": "Global nonexistence in the jointly smooth finite-energy class is not stated in the excerpt; it is a derived consequence. Paper support beyond Theorem 1.1 is not in excerpt.",
+    "polarity": "n/a",
+    "probe_idea": null
+   },
+   {
+    "id": "F4",
+    "category": "other",
+    "severity": "low",
+    "decl": "Euler.exists_compact_smooth_euler_singularity",
+    "line": 173,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "There are extra claims beyond the paper: Tstar ≤ 1, u₀ ≠ 0, the iff-maximality in the H^∞ class, and local finiteness of C¹ norms and vorticity integrals. This makes Lean stronger.",
+    "polarity": "lean stronger",
+    "probe_idea": null
+   }
+  ],
+  "F_EhrhartVolumeInequality": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+    "line": 56,
+    "paper_ref": "Sharpness remark",
+    "explanation": "There is no standalone statement that interiorLatticePoints (centeredSimplex n) = {0}. Sharpness is captured only existentially, so the witness need not be the simplex. This still suffices for sharpness of the bound.",
+    "polarity": "lean weaker",
+    "probe_idea": "theorem : interiorLatticePoints (centeredSimplex n) = {0}"
+   }
+  ],
+  "G_QuantumParallelRepetition": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "HasExponentialBound",
+    "line": 104,
+    "paper_ref": "Quantum Parallel Repetition Conjecture",
+    "explanation": "The bound C·exp(−cn) with arbitrary C>0 is formally weaker than exp(−c_G n) for n≥1. It is recoverable because ω*(G^n) ≤ ω*(G) < 1. Theorem 1.1 is formalized separately in exact form.",
+    "polarity": "lean weaker",
+    "probe_idea": "Prove ∀ G, entangledValue G < 1 → ∃ c>0, ∀ n ≥ 1, repeatedEntangledValue G n ≤ Real.exp (-c*n)."
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "Strategy",
+    "line": 62,
+    "paper_ref": null,
+    "explanation": "Strategies are finite-dimensional and tensor-product, with Alice/Bob types restricted to universe Type. This is the standard ω*. The excerpt does not specify the model explicitly.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ],
+  "H_GapCVP": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "finitePNormGapCVPIsNPHard",
+    "line": 307,
+    "paper_ref": "Section 7",
+    "explanation": "The gap exponent 1/(200p) and the parameter range cannot be checked against the excerpt. Here p ranges only over rationals ≥ 1, whereas the paper likely says any fixed real p ∈ [1,∞).",
+    "polarity": "unclear",
+    "probe_idea": null
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "finitePGapCVPPromise",
+    "line": 290,
+    "paper_ref": "Section 7",
+    "explanation": "Unlike gapCVP400, no hasIntegerTarget requirement is imposed, so targets may be rational. This enlarges the YES/NO sets, which is a mildly weaker hardness claim than an integer-target version. Scaling B and t by a common denominator makes the two essentially equivalent.",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   },
+   {
+    "id": "F3",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "binarySyndromeDecodingPromise",
+    "line": 259,
+    "paper_ref": "Corollary 15",
+    "explanation": "The NO set requires Hx=b to be consistent, so the reduction must output consistent systems on unsatisfiable inputs. This is stronger than a definition treating inconsistent systems as NO.",
+    "polarity": "lean stronger",
+    "probe_idea": null
+   },
+   {
+    "id": "F4",
+    "category": "other",
+    "severity": "low",
+    "decl": "gapCVP400Promise",
+    "line": 138,
+    "paper_ref": null,
+    "explanation": "The disjointness fields are sorry'd inside the target definitions. They are proof fields and do not affect the statement. Disjointness is in fact true, since n ≥ 1 and r > 0 give n^{1/400} r ≥ r.",
+    "polarity": "n/a",
+    "probe_idea": "Prove disjointness for each promise, using injectivity of encodeInstance and gap factor ≥ 1."
+   }
+  ],
+  "I_MulticolorTriangleRamsey": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "erdos_problem_183_explicit",
+    "line": 27,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The Lean statement fixes the explicit constant c = 1/(6e^{38}), whereas the paper only asserts existence of c. This makes Lean stronger than the paper, which is acceptable; the excerpt does not show which constant the paper actually obtains.",
+    "polarity": "lean stronger",
+    "probe_idea": null
+   }
+  ],
+  "J_CompactnessConjecture": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "quantitativeCompactnessCounterexample",
+    "line": 61,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The upper bound e^16 ≤ C n^21 is stated for all n rather than eventually. This is stronger than the paper's O(·) and fine, since finitely many small n can be absorbed into C. Lines 66–67 are trivial arithmetic padding, and line 65 is redundant given line 63.",
+    "polarity": "lean stronger",
+    "probe_idea": null
+   }
+  ],
+  "J_TwoDegenerateGraphs": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "twoDegenerateExtremalCounterexample",
+    "line": 33,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The extra conjunct requires that, under every proper 2-colouring, each colour class contains a vertex of degree > 2. This also forces both classes to be nonempty, since sup over an empty class is 0. The paper's Theorem 1.2 does not state this, though it is presumably meant to rule out the Füredi/AKS case. It only strengthens the Lean statement.",
+    "polarity": "lean stronger",
+    "probe_idea": null
+   }
+  ],
+  "NavierStokes": [
+   {
+    "id": "F1",
+    "category": "assumption",
+    "severity": "low",
+    "decl": "NavierStokesExistenceAndSmoothnessPeriodic",
+    "line": 269,
+    "paper_ref": "Corollary 10.6",
+    "explanation": "The solution must also have 1-periodic pressure. This is an extra requirement inside ¬∃, so the breakdown claim is weaker than Fefferman's original (D), which constrains only u. It follows the Clay errata and the paper's periodic pressure P_per. Without it, solutions with non-periodic pressure (e.g. a spatially constant velocity g(t) with p = −g'(t)·x) could exist.",
+    "polarity": "lean weaker",
+    "probe_idea": "State a variant without isOnePeriodic_pressure and compare. The constant-velocity/linear-pressure example shows the field is necessary for a meaningful (D)."
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "navier_stokes_breakdown_R3",
+    "line": 273,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper's main content (an explicit smooth solution on [0,1) with compact support, bounded energy, and L∞ blow-up) is not formalized. Only the non-existence consequence is.",
+    "polarity": "lean weaker",
+    "probe_idea": null
+   },
+   {
+    "id": "F3",
+    "category": "other",
+    "severity": "low",
+    "decl": "NavierStokesExistenceAndSmoothness",
+    "line": 223,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The time derivative is derivWithin on Ici 0 (one-sided at t = 0), and smoothness is ContDiffOn on univ ×ˢ Ici 0. This is a faithful encoding of C^∞(ℝ³×[0,∞)). Because v and p are required smooth, the fderiv, Δ and gradient terms are never junk.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ]
+ }
+}

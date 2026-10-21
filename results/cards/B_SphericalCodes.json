@@ -1,0 +1,2014 @@
+{
+ "result": "B_SphericalCodes",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/B_SphericalCodes.lean",
+ "theorems": [
+  "MetricCodes.Johnson.main_binary_theorem",
+  "MetricCodes.Spherical.HigherHierarchy.main_general",
+  "MetricCodes.Spherical.HigherHierarchy.strict_hierarchy",
+  "MetricCodes.Spherical.HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published"
+ ],
+ "lint": [
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.variationalRate",
+   "decl_kind": "def",
+   "line": 62,
+   "snippet": "def variationalRate (δ : ℝ) : ℝ := sInf (rateSet δ)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.variationalRate",
+   "decl_kind": "def",
+   "line": 122,
+   "snippet": "def variationalRate (δ : ℝ) : ℝ := sInf (rateSet δ)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwRate",
+   "decl_kind": "def",
+   "line": 137,
+   "snippet": "def mrrwRate (δ : ℝ) : ℝ := sInf (mrrwRateSet δ)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.sphericalCodeNumber",
+   "decl_kind": "def",
+   "line": 160,
+   "snippet": "⨆ C : SphericalCode n s, (C.points.card : ℕ∞)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.variationalRate",
+   "decl_kind": "def",
+   "line": 178,
+   "snippet": "def variationalRate (s : ℝ) : ℝ := sInf (rateSet s)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.SidelnikovLocalization.localizedEnvelope",
+   "decl_kind": "def",
+   "line": 186,
+   "snippet": "sInf ((fun t => κ t + sliceCost s t) '' Set.Icc 0 s)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.hierarchyVariationalRate",
+   "decl_kind": "def",
+   "line": 230,
+   "snippet": "def hierarchyVariationalRate (s : ℝ) : ℝ := sInf (hierarchyRateSet s)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.closedHierarchyVariationalRate",
+   "decl_kind": "def",
+   "line": 237,
+   "snippet": "sInf (closedHierarchyRateSet s)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.levelRate",
+   "decl_kind": "def",
+   "line": 250,
+   "snippet": "def levelRate (r : ℕ) (s : ℝ) : ℝ := sInf (levelRateSet r s)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.localizedHierarchyRate",
+   "decl_kind": "def",
+   "line": 256,
+   "snippet": "sInf (Set.range fun r : ℕ => localizedLevelRate r s)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.hammingDist",
+   "decl_kind": "def",
+   "line": 17,
+   "snippet": "(Finset.univ.filter fun i => x i ≠ y i).card",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.binaryEntropy",
+   "decl_kind": "def",
+   "line": 23,
+   "snippet": "-(u * Real.logb 2 u) - (1 - u) * Real.logb 2 (1 - u)",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.hammingGamma",
+   "decl_kind": "def",
+   "line": 26,
+   "snippet": "(2 * (a - b) * (1 - a - b)) / Real.sqrt (a * (1 - a))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.hammingGamma",
+   "decl_kind": "def",
+   "line": 26,
+   "snippet": "(2 * (a - b) * (1 - a - b)) / Real.sqrt (a * (1 - a))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.sphericalEntropy",
+   "decl_kind": "def",
+   "line": 29,
+   "snippet": "(1 + u) * Real.logb 2 (1 + u) - u * Real.logb 2 u",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Gamma",
+   "decl_kind": "def",
+   "line": 31,
+   "snippet": "def Gamma (a b : ℝ) : ℝ :=",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Gamma",
+   "decl_kind": "def",
+   "line": 32,
+   "snippet": "((a - b) * (1 + a + b)) /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Gamma",
+   "decl_kind": "def",
+   "line": 32,
+   "snippet": "((a - b) * (1 + a + b)) /",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.classicalThreshold",
+   "decl_kind": "def",
+   "line": 36,
+   "snippet": "(1 / Real.sqrt (1 - s ^ 2) - 1) / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.classicalThreshold",
+   "decl_kind": "def",
+   "line": 36,
+   "snippet": "(1 / Real.sqrt (1 - s ^ 2) - 1) / 2",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.codeNumber",
+   "decl_kind": "def",
+   "line": 45,
+   "snippet": "(validCodes n d).sup fun C => C.card",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.binaryRate",
+   "decl_kind": "def",
+   "line": 51,
+   "snippet": "(codeNumber n (Nat.ceil (δ * (n : ℝ))) : ℝ) / (n : ℝ))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "toNat-trunc",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.binaryRate",
+   "decl_kind": "def",
+   "line": 51,
+   "snippet": "(codeNumber n (Nat.ceil (δ * (n : ℝ))) : ℝ) / (n : ℝ))",
+   "explanation": "toNat / floor / ceil into ℕ truncate negatives to 0.",
+   "suggested_probe": "Check the argument is nonnegative."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.Feasible",
+   "decl_kind": "def",
+   "line": 55,
+   "snippet": "0 ≤ b ∧ b < a ∧ a ≤ (1 : ℝ) / 2 ∧",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.Feasible",
+   "decl_kind": "def",
+   "line": 56,
+   "snippet": "1 - 2 * δ < MetricCodes.hammingGamma a b",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.rateSet",
+   "decl_kind": "def",
+   "line": 60,
+   "snippet": "r = MetricCodes.binaryEntropy a - MetricCodes.binaryEntropy b}",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 81,
+   "snippet": "(σ * η - m * z ^ 2) ^ 2 /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 81,
+   "snippet": "(σ * η - m * z ^ 2) ^ 2 /",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 82,
+   "snippet": "(z ^ 2 * (1 - m ^ 2) * (1 - z ^ 2)) +",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 83,
+   "snippet": "((z ^ 2 - η ^ 2) * (σ ^ 2 - z ^ 2)) /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 83,
+   "snippet": "((z ^ 2 - η ^ 2) * (σ ^ 2 - z ^ 2)) /",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 84,
+   "snippet": "(z ^ 2 * (1 - m ^ 2) * Real.sqrt (1 - z ^ 2))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.asymptoticThreshold",
+   "decl_kind": "def",
+   "line": 87,
+   "snippet": "1 - δ / (2 * α * (1 - α))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.asymptoticThreshold",
+   "decl_kind": "def",
+   "line": 87,
+   "snippet": "1 - δ / (2 * α * (1 - α))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.rankPenalty",
+   "decl_kind": "def",
+   "line": 90,
+   "snippet": "α * MetricCodes.binaryEntropy (β / α) +",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.rankPenalty",
+   "decl_kind": "def",
+   "line": 91,
+   "snippet": "(1 - α) * MetricCodes.binaryEntropy (γ / (1 - α))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.rankPenalty",
+   "decl_kind": "def",
+   "line": 91,
+   "snippet": "(1 - α) * MetricCodes.binaryEntropy (γ / (1 - α))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.shellRate",
+   "decl_kind": "def",
+   "line": 94,
+   "snippet": "1 - MetricCodes.binaryEntropy α + MetricCodes.binaryEntropy u -",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 99,
+   "snippet": "distance_lt_half : δ < (1 : ℝ) / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 100,
+   "snippet": "weight_gt_distance : δ / 2 < α",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 101,
+   "snippet": "weight_lt_half : α < (1 : ℝ) / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 103,
+   "snippet": "support_lt_half : β < α / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 105,
+   "snippet": "complement_lt_half : γ < (1 - α) / 2",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 105,
+   "snippet": "complement_lt_half : γ < (1 - α) / 2",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 108,
+   "snippet": "degree_lt_left : u < α - β + γ",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 109,
+   "snippet": "degree_lt_right : u < 1 - α + β - γ",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwG",
+   "decl_kind": "def",
+   "line": 128,
+   "snippet": "MetricCodes.binaryEntropy ((1 - Real.sqrt (1 - v)) / 2)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwG",
+   "decl_kind": "def",
+   "line": 128,
+   "snippet": "MetricCodes.binaryEntropy ((1 - Real.sqrt (1 - v)) / 2)",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwObjective",
+   "decl_kind": "def",
+   "line": 131,
+   "snippet": "1 + mrrwG (r ^ 2) - mrrwG (r ^ 2 + 2 * δ * r + 2 * δ)",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.main_binary_theorem",
+   "decl_kind": "theorem",
+   "line": 140,
+   "snippet": "(hδ : 0 < δ) (hhalf : δ < (1 : ℝ) / 2) :",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.sphericalCodeNumber",
+   "decl_kind": "def",
+   "line": 159,
+   "snippet": "def sphericalCodeNumber (n : ℕ) (s : ℝ) : ℕ∞ :=",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.sphericalCodeNumber",
+   "decl_kind": "def",
+   "line": 160,
+   "snippet": "⨆ C : SphericalCode n s, (C.points.card : ℕ∞)",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.sphericalCodeNumber",
+   "decl_kind": "def",
+   "line": 160,
+   "snippet": "⨆ C : SphericalCode n s, (C.points.card : ℕ∞)",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.kissingNumber",
+   "decl_kind": "def",
+   "line": 162,
+   "snippet": "def kissingNumber (n : ℕ) : ℕ∞ :=",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.kissingNumber",
+   "decl_kind": "def",
+   "line": 163,
+   "snippet": "sphericalCodeNumber n ((1 : ℝ) / 2)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.Feasible",
+   "decl_kind": "def",
+   "line": 172,
+   "snippet": "0 < b ∧ b < a ∧ s < 2 * MetricCodes.Gamma a b",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.rateSet",
+   "decl_kind": "def",
+   "line": 176,
+   "snippet": "r = MetricCodes.sphericalEntropy a - MetricCodes.sphericalEntropy b}",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.SidelnikovLocalization.sliceCost",
+   "decl_kind": "def",
+   "line": 183,
+   "snippet": "(1 / 2 : ℝ) * Real.logb 2 ((1 - t) / (1 - s))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.spectralAtom",
+   "decl_kind": "def",
+   "line": 195,
+   "snippet": "Real.sqrt (quadraticCoordinate u) / (1 + 2 * u)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.lagrangeNumerator",
+   "decl_kind": "def",
+   "line": 205,
+   "snippet": "∏ m : Fin r, (quadraticCoordinate (a ℓ) - quadraticCoordinate (b m))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.lagrangeDenominator",
+   "decl_kind": "def",
+   "line": 210,
+   "snippet": "(quadraticCoordinate (a ℓ) - quadraticCoordinate (a (ℓ.succAbove m)))",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.lagrangeWeight",
+   "decl_kind": "def",
+   "line": 215,
+   "snippet": "lagrangeNumerator a b ℓ / lagrangeDenominator a ℓ",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.Gamma",
+   "decl_kind": "def",
+   "line": 217,
+   "snippet": "def Gamma {r : ℕ}",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.Phi",
+   "decl_kind": "def",
+   "line": 223,
+   "snippet": "(∑ ℓ : Fin (r + 1), MetricCodes.sphericalEntropy (a ℓ)) -",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.hierarchyRateSet",
+   "decl_kind": "def",
+   "line": 228,
+   "snippet": "Interlacing a b ∧ s < 2 * Gamma a b ∧ z = Phi a b}",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.closedHierarchyRateSet",
+   "decl_kind": "def",
+   "line": 234,
+   "snippet": "Interlacing a b ∧ s ≤ 2 * Gamma a b ∧ z = Phi a b}",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.sphericalCodeRate",
+   "decl_kind": "def",
+   "line": 243,
+   "snippet": "((SpherePacking.sphericalCodeNumber n s).toNat : ℝ) / (n : ℝ))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "toNat-trunc",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.sphericalCodeRate",
+   "decl_kind": "def",
+   "line": 243,
+   "snippet": "((SpherePacking.sphericalCodeNumber n s).toNat : ℝ) / (n : ℝ))",
+   "explanation": "toNat / floor / ceil into ℕ truncate negatives to 0.",
+   "suggested_probe": "Check the argument is nonnegative."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.levelRateSet",
+   "decl_kind": "def",
+   "line": 248,
+   "snippet": "Interlacing a b ∧ s < 2 * Gamma a b ∧ R = Phi a b}",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.main_general",
+   "decl_kind": "theorem",
+   "line": 269,
+   "snippet": "Interlacing a b → s < 2 * Gamma a b → Phi a b < R →",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.main_general",
+   "decl_kind": "theorem",
+   "line": 271,
+   "snippet": "(C.points.card : ℝ) < (2 : ℝ) ^ (R * (n : ℝ))) ∧",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "toNat-trunc",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published",
+   "decl_kind": "theorem",
+   "line": 290,
+   "snippet": "((SpherePacking.kissingNumber n).toNat : ℝ) ≤",
+   "explanation": "toNat / floor / ceil into ℕ truncate negatives to 0.",
+   "suggested_probe": "Check the argument is nonnegative."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.hammingGamma",
+   "decl_kind": "def",
+   "line": 26,
+   "snippet": "(2 * (a - b) * (1 - a - b)) / Real.sqrt (a * (1 - a))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Gamma",
+   "decl_kind": "def",
+   "line": 33,
+   "snippet": "((1 + 2 * a) * Real.sqrt (a * (1 + a)))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.classicalThreshold",
+   "decl_kind": "def",
+   "line": 36,
+   "snippet": "(1 / Real.sqrt (1 - s ^ 2) - 1) / 2",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Hamming.binaryRate",
+   "decl_kind": "def",
+   "line": 52,
+   "snippet": "Filter.atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.spectralLimit",
+   "decl_kind": "def",
+   "line": 84,
+   "snippet": "(z ^ 2 * (1 - m ^ 2) * Real.sqrt (1 - z ^ 2))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 98,
+   "snippet": "distance_pos : 0 < δ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 99,
+   "snippet": "distance_lt_half : δ < (1 : ℝ) / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 100,
+   "snippet": "weight_gt_distance : δ / 2 < α",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 101,
+   "snippet": "weight_lt_half : α < (1 : ℝ) / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 102,
+   "snippet": "support_nonneg : 0 ≤ β",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 103,
+   "snippet": "support_lt_half : β < α / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 104,
+   "snippet": "complement_nonneg : 0 ≤ γ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 105,
+   "snippet": "complement_lt_half : γ < (1 - α) / 2",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 106,
+   "snippet": "first_lt_degree : β + γ < u",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 107,
+   "snippet": "degree_lt_weight : u < α",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 108,
+   "snippet": "degree_lt_left : u < α - β + γ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.AsymptoticParameters",
+   "decl_kind": "structure",
+   "line": 109,
+   "snippet": "degree_lt_right : u < 1 - α + β - γ",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Johnson.mrrwG",
+   "decl_kind": "def",
+   "line": 128,
+   "snippet": "MetricCodes.binaryEntropy ((1 - Real.sqrt (1 - v)) / 2)",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.SphericalCode",
+   "decl_kind": "structure",
+   "line": 155,
+   "snippet": "unit_norm : ∀ x ∈ points, ‖x‖ = 1",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "SpherePacking.SphericalCode",
+   "decl_kind": "structure",
+   "line": 156,
+   "snippet": "inner_le : ∀ x ∈ points, ∀ y ∈ points, x ≠ y →",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.spectralAtom",
+   "decl_kind": "def",
+   "line": 195,
+   "snippet": "Real.sqrt (quadraticCoordinate u) / (1 + 2 * u)",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.sphericalCodeRate",
+   "decl_kind": "def",
+   "line": 244,
+   "snippet": "Filter.atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.main_general",
+   "decl_kind": "theorem",
+   "line": 270,
+   "snippet": "∀ᶠ n : ℕ in atTop, ∀ C : SpherePacking.SphericalCode n s,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "B_SphericalCodes.lean",
+   "decl": "MetricCodes.Spherical.HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published",
+   "decl_kind": "theorem",
+   "line": 289,
+   "snippet": "∀ᶠ n : ℕ in atTop,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  }
+ ],
+ "audit": {
+  "summary": "The file states four results. (1) A binary-code bound: R(δ) ≤ min(Hamming variational rate, Johnson variational rate) < MRRW second bound, for 0<δ<1/2. (2) The spherical Theorem 1.2: for interlacing (a,b) with 2Γ_r>s, A(n,s) eventually lies below 2^{Rn} for every R>Φ_r, and R_sph(s) ≤ the closed-constraint hierarchy infimum. (3) The strict hierarchy of Corollary 1.3, including the cap-localized exponents κ̄_r, κ̄_row and κ̄_0 = B_KL. (4) The numerical bound kissing number ≤ 2^{0.39661 n} for large n. The definitions match the excerpt well. I hand-checked that level 1 with a₂=0 reproduces the one-row Gamma, and that level 0 reproduces the KL threshold. The main caveat is that the binary theorem and the 0.39661 constant are not in the excerpt and cannot be checked against the paper. A minor caveat is that levelRate uses the strict constraint s<2Γ_r where the paper's κ_r uses ≥; the paper asserts these have equal infima.",
+  "glossary": [
+   {
+    "decl": "MetricCodes.hammingDist / IsBinaryCode",
+    "line": 16,
+    "plain": "Hamming distance; a code is a set of words with pairwise distance ≥ d",
+    "standard_concept": "binary code of minimum distance d",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": false
+   },
+   {
+    "decl": "MetricCodes.Hamming.codeNumber",
+    "line": 44,
+    "plain": "A(n,d): the maximum size of a binary code of length n and distance d",
+    "standard_concept": "A(n,d)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "MetricCodes.Hamming.binaryRate",
+    "line": 47,
+    "plain": "limsup_n (1/n) log₂ A(n, ⌈δn⌉)",
+    "standard_concept": "asymptotic binary rate R(δ)",
+    "matches_standard": "yes",
+    "note": "The Real limsup is junk unless the sequence is bounded; it is bounded in [0,1].",
+    "citation_ok": true
+   },
+   {
+    "decl": "MetricCodes.Hamming.variationalRate",
+    "line": 62,
+    "plain": "inf of H(a)-H(b) over 0≤b<a≤1/2 with 1-2δ < 2(a-b)(1-a-b)/√(a(1-a))",
+    "standard_concept": "Hamming-scheme variational bound (paper, not in excerpt)",
+    "matches_standard": "unclear",
+    "note": "The binary definitions are not in the excerpt.",
+    "citation_ok": true
+   },
+   {
+    "decl": "MetricCodes.Johnson.variationalRate",
+    "line": 122,
+    "plain": "inf of shellRate over parameters (α,β,γ,u) satisfying AsymptoticParameters and spectralLimit > 1-δ/(2α(1-α))",
+    "standard_concept": "Johnson-scheme variational bound (not in excerpt)",
+    "matches_standard": "unclear",
+    "note": "Not in excerpt.",
+    "citation_ok": true
+   },
+   {
+    "decl": "MetricCodes.Johnson.mrrwRate",
+    "line": 137,
+    "plain": "min over 0≤r≤1-2δ of 1+g(r²)-g(r²+2δr+2δ), where g(v)=H((1-√(1-v))/2)",
+    "standard_concept": "MRRW second (Levenshtein form) bound",
+    "matches_standard": "yes",
+    "note": "r²+2δr+2δ ≤ 1 on the range, so no sqrt junk occurs.",
+    "citation_ok": true
+   },
+   {
+    "decl": "SpherePacking.SphericalCode / sphericalCodeNumber",
+    "line": 153,
+    "plain": "Finite set of unit vectors in ℝⁿ with pairwise inner product ≤ s; A(n,s) is the supremum of sizes in ℕ∞",
+    "standard_concept": "A(n,s)",
+    "matches_standard": "yes",
+    "note": "The value is finite for s<1, so the later toNat is harmless.",
+    "citation_ok": false
+   },
+   {
+    "decl": "SpherePacking.kissingNumber",
+    "line": 162,
+    "plain": "A(n,1/2)",
+    "standard_concept": "kissing number",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "HigherHierarchy.Interlacing",
+    "line": 197,
+    "plain": "a₁>b₁>a₂>…>b_r>a_{r+1}≥0",
+    "standard_concept": "interlacing nonnegative tuples of Thm 1.2",
+    "matches_standard": "yes",
+    "note": "Nonnegativity of all entries follows from a_{r+1}≥0 and the strict chain.",
+    "citation_ok": true
+   },
+   {
+    "decl": "HigherHierarchy.Gamma / Phi",
+    "line": 217,
+    "plain": "Γ_r = Σ_ℓ R_ℓ·√(a_ℓ(1+a_ℓ))/(1+2a_ℓ), with Lagrange weights in x=a(1+a); Φ_r = Σ_ℓ H(a_ℓ) − Σ_m H(b_m), where H(u)=(1+u)log(1+u)−u log u",
+    "standard_concept": "paper's Γ_r, Φ_r",
+    "matches_standard": "partly",
+    "note": "The defining display is garbled in the excerpt. Structure is consistent with it, and denominators are nonzero under Interlacing.",
+    "citation_ok": false
+   },
+   {
+    "decl": "HigherHierarchy.levelRate",
+    "line": 250,
+    "plain": "κ_r(s) = inf Φ_r subject to interlacing and s < 2Γ_r (strict)",
+    "standard_concept": "κ_r(s), defined with 2Γ_r ≥ s",
+    "matches_standard": "partly",
+    "note": "Uses a strict rather than a non-strict constraint. The paper claims equal infima by approximation.",
+    "citation_ok": true
+   },
+   {
+    "decl": "SidelnikovLocalization.localizedEnvelope",
+    "line": 185,
+    "plain": "κ̄(s) = inf_{0≤t≤s} [κ(t) + ½ log₂((1−t)/(1−s))]",
+    "standard_concept": "equation (12)",
+    "matches_standard": "yes",
+    "note": "κ_r(0) is computed rather than set to 0; it is plausibly 0 by letting a→0.",
+    "citation_ok": true
+   },
+   {
+    "decl": "HigherHierarchy.localizedRowRate",
+    "line": 258,
+    "plain": "Envelope of the one-row rate: inf H(a)−H(b) over 0<b<a with s < 2(a−b)(1+a+b)/((1+2a)√(a(1+a)))",
+    "standard_concept": "κ̄_row",
+    "matches_standard": "yes",
+    "note": "Equals level 1 with a₂=0.",
+    "citation_ok": true
+   },
+   {
+    "decl": "HigherHierarchy.classicalLocalizedRate",
+    "line": 262,
+    "plain": "Envelope of t ↦ H((1/√(1−t²) − 1)/2)",
+    "standard_concept": "B_KL(s)",
+    "matches_standard": "yes",
+    "note": "Level-0 feasibility a > classicalThreshold(s) checks out algebraically.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "MetricCodes.Johnson.main_binary_theorem",
+    "line": 139,
+    "plain": "For 0<δ<1/2: binaryRate δ ≤ min(HammingVarRate δ, JohnsonVarRate δ), and this min < mrrwRate δ.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "MetricCodes.Spherical.HigherHierarchy.main_general",
+    "line": 266,
+    "plain": "For 0<s<1, the following hold. For every r, every interlacing (a,b) with s<2Γ_r(a,b), and every R>Φ_r(a,b): for all large n, every spherical code in ℝⁿ with max inner product ≤ s has fewer than 2^{Rn} points. Also, limsup (1/n)log₂A(n,s) ≤ inf over r and interlacing (a,b) with s≤2Γ_r of Φ_r.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "MetricCodes.Spherical.HigherHierarchy.strict_hierarchy",
+    "line": 275,
+    "plain": "For 0<s<1 and all r: κ_{r+1}(s)<κ_r(s) and κ̄_{r+1}(s)<κ̄_r(s). Also R_sph(s) ≤ inf_r κ̄_r(s) < κ̄_1(s) < κ̄_row(s) < κ̄_0(s), and κ̄_0(s) equals the localized KL bound.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "MetricCodes.Spherical.HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published",
+    "line": 288,
+    "plain": "For all sufficiently large n, the kissing number in dimension n is ≤ 2^{0.39661 n}.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.2",
+    "plain": "If 2Γ_r(a,b) > s, then A(n,s) ≤ 2^{(Φ_r+o(1))n}; consequently R_sph(s) ≤ inf_r inf_{interlacing, 2Γ_r≥s} Φ_r."
+   },
+   {
+    "ref": "Corollary 1.3",
+    "plain": "κ_{r+1}<κ_r and κ̄_{r+1}<κ̄_r; R_sph ≤ inf κ̄_r < κ̄_1 < κ̄_row < κ̄_0 = B_KL."
+   },
+   {
+    "ref": "Corollary 7.6",
+    "plain": "Same as Corollary 1.3, plus the unlocalized chain κ_1 < κ_row < κ_0."
+   },
+   {
+    "ref": "Corollary 1.4 / Theorem 8.3",
+    "plain": "Δ_n ≤ 2^{−(λ*+o(1))n} with λ* = ½log₂(2π/e); lim γ_r = λ*."
+   },
+   {
+    "ref": "binary main theorem",
+    "plain": "Not in excerpt."
+   },
+   {
+    "ref": "kissing number 0.39661",
+    "plain": "Not in excerpt."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.2",
+    "lean_theorem": "main_general",
+    "relation": "equivalent",
+    "why": "The eventual bound for every R>Φ is the o(1) statement, and the closed-constraint infimum matches."
+   },
+   {
+    "paper_ref": "Corollary 1.3",
+    "lean_theorem": "strict_hierarchy",
+    "relation": "equivalent",
+    "why": "Same chain. κ_r uses a strict constraint, which the paper says gives the same infimum."
+   },
+   {
+    "paper_ref": "Corollary 7.6",
+    "lean_theorem": "strict_hierarchy",
+    "relation": "lean_weaker",
+    "why": "The unlocalized chain κ_1 < κ_row < κ_0 is omitted."
+   },
+   {
+    "paper_ref": "Corollary 1.4 / Theorem 8.3",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Sphere-packing density is not addressed in this file."
+   },
+   {
+    "paper_ref": "binary main theorem",
+    "lean_theorem": "main_binary_theorem",
+    "relation": "different",
+    "why": "Not in excerpt; the paper statement cannot be compared (possibly covered elsewhere, sibling file)."
+   },
+   {
+    "paper_ref": "kissing number 0.39661",
+    "lean_theorem": "eventually_kissingNumber_lt_published",
+    "relation": "different",
+    "why": "Not in excerpt."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "MetricCodes.Johnson.main_binary_theorem",
+    "line": 139,
+    "paper_ref": null,
+    "explanation": "The binary theorem and its bespoke definitions (hammingGamma, spectralLimit, AsymptoticParameters, shellRate) are not in the excerpt. Their faithfulness to the paper cannot be checked here. MRRW and binaryRate do match the standard notions.",
+    "polarity": "unclear",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "HigherHierarchy.levelRate",
+    "line": 250,
+    "paper_ref": "Corollary 1.3",
+    "explanation": "κ_r is defined with the strict constraint s<2Γ_r, whereas the paper's κ_r takes the infimum under 2Γ_r ≥ s. The paper states that the infima coincide by approximation. Strict inequalities between the open versions could in principle differ at boundaries.",
+    "polarity": "unclear",
+    "probe_idea": "∀ r s, 0<s → s<1 → levelRate r s = sInf {R | ∃ a b, Interlacing a b ∧ s ≤ 2*Gamma a b ∧ R = Phi a b}",
+    "citation_ok": true
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "HigherHierarchy.strict_hierarchy",
+    "line": 275,
+    "paper_ref": "Corollary 7.6",
+    "explanation": "The unlocalized level-1 chain κ_1 < κ_row < κ_0 from Cor 7.6 is not stated.",
+    "polarity": "lean weaker",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F4",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "HigherHierarchy.NumericalMaximum.eventually_kissingNumber_lt_published",
+    "line": 288,
+    "paper_ref": null,
+    "explanation": "The constant 0.39661 is not in the excerpt. The name says 'lt' but the statement uses ≤; this is immaterial asymptotically. The kissing-number definition itself is standard.",
+    "polarity": "n/a",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F5",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "HigherHierarchy.closedHierarchyVariationalRate",
+    "line": 236,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "sInf would return 0 if the set were empty or unbounded below. Neither occurs: level 0 with large a is feasible since 2Γ_0→1>s, and Φ_r should be ≥0. Even if it occurred, the Lean claim would only become stronger.",
+    "polarity": "lean stronger",
+    "probe_idea": "BddBelow (closedHierarchyRateSet s) ∧ (closedHierarchyRateSet s).Nonempty for 0<s<1",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 62,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "The set is nonempty and bounded below by 0 because H is increasing on [0,1/2]; junk 0 would also contradict the proved binaryRate bound."
+   },
+   {
+    "line": 122,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "A junk 0 would force binaryRate ≤ 0, which is false for δ<1/2, so the proved theorem rules it out."
+   },
+   {
+    "line": 137,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Infimum of a continuous function over a nonempty compact interval."
+   },
+   {
+    "line": 160,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "This is an ℕ∞ supremum and is finite for s<1."
+   },
+   {
+    "line": 178,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Feasible set nonempty; entropy differences are positive."
+   },
+   {
+    "line": 186,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Image of a nonempty interval; the slice cost is ≥0 and κ≥0."
+   },
+   {
+    "line": 230,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Not used by the targets."
+   },
+   {
+    "line": 237,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Nonempty and bounded below; junk would only strengthen the claim."
+   },
+   {
+    "line": 250,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Nonempty for s<1 and bounded below."
+   },
+   {
+    "line": 256,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Range over ℕ of nonnegative values."
+   },
+   {
+    "line": 17,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "Finset card, no infinite types."
+   },
+   {
+    "line": 23,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real arithmetic; logb 0 = 0 gives the standard H(0)=0."
+   },
+   {
+    "line": 26,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "a>b≥0 and a≤1/2 make the denominator positive."
+   },
+   {
+    "line": 26,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 29,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real; the u=0 value is 0 as intended."
+   },
+   {
+    "line": 31,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "Feasible requires a>b>0, so the denominator is positive."
+   },
+   {
+    "line": 32,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Same as line 31."
+   },
+   {
+    "line": 32,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 36,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Used only for t∈[0,s] with s<1."
+   },
+   {
+    "line": 36,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 45,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "Finite sup over finite codes."
+   },
+   {
+    "line": 51,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "n=0 is irrelevant for limsup."
+   },
+   {
+    "line": 51,
+    "rule": "toNat-trunc",
+    "verdict": "harmless",
+    "why": "This is a ℕ→ℝ cast, not a truncation."
+   },
+   {
+    "line": 55,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Literal 1/2 in ℝ."
+   },
+   {
+    "line": 56,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 60,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 81,
+    "rule": "junk-div",
+    "verdict": "needs-probe",
+    "why": "z ≠ 0 and |m|<1 under the parameter constraints, but this is not checked against the paper (not in excerpt)."
+   },
+   {
+    "line": 81,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 82,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 83,
+    "rule": "junk-div",
+    "verdict": "needs-probe",
+    "why": "Same concern as line 81."
+   },
+   {
+    "line": 83,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 84,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 87,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "0<α<1/2."
+   },
+   {
+    "line": 87,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 90,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "α>0."
+   },
+   {
+    "line": 91,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "1−α>0."
+   },
+   {
+    "line": 91,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 94,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 99,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real literal."
+   },
+   {
+    "line": 100,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 2."
+   },
+   {
+    "line": 101,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real literal."
+   },
+   {
+    "line": 103,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 2."
+   },
+   {
+    "line": 105,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 2."
+   },
+   {
+    "line": 105,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 108,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 109,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 128,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The argument is ≤1 on the range."
+   },
+   {
+    "line": 128,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 131,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 140,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real literal."
+   },
+   {
+    "line": 159,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "Finite for s<1."
+   },
+   {
+    "line": 160,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "Finite for s<1."
+   },
+   {
+    "line": 160,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "Finset card."
+   },
+   {
+    "line": 162,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "The kissing number is finite."
+   },
+   {
+    "line": 163,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real 1/2."
+   },
+   {
+    "line": 172,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "b>0 forces a positive denominator."
+   },
+   {
+    "line": 176,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 183,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "s<1."
+   },
+   {
+    "line": 195,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "u≥0."
+   },
+   {
+    "line": 205,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 210,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 215,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Interlacing gives distinct a_ℓ ≥ 0, so q(a_ℓ) values are distinct."
+   },
+   {
+    "line": 217,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "No poles under Interlacing."
+   },
+   {
+    "line": 223,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "Real."
+   },
+   {
+    "line": 228,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "Interlacing excludes degenerate cases."
+   },
+   {
+    "line": 234,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "Same as line 228."
+   },
+   {
+    "line": 243,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "n=0 is irrelevant to limsup."
+   },
+   {
+    "line": 243,
+    "rule": "toNat-trunc",
+    "verdict": "harmless",
+    "why": "Finite for s<1."
+   },
+   {
+    "line": 248,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "Same as line 228."
+   },
+   {
+    "line": 269,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "Same as line 228."
+   },
+   {
+    "line": 271,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "Finset card."
+   },
+   {
+    "line": 290,
+    "rule": "toNat-trunc",
+    "verdict": "harmless",
+    "why": "The kissing number is finite."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F2",
+    "decl": "HigherHierarchy.levelRate",
+    "line": 250,
+    "explanation": "κ_r is defined with the strict constraint s<2Γ_r, whereas the paper's κ_r takes the infimum under 2Γ_r ≥ s. The paper states that the infima coincide by approximation. Strict inequalities between the open versions could in principle differ at boundaries.",
+    "probe_idea": "∀ r s, 0<s → s<1 → levelRate r s = sInf {R | ∃ a b, Interlacing a b ∧ s ≤ 2*Gamma a b ∧ R = Phi a b}"
+   },
+   "result": {
+    "id": "F2-a0",
+    "status": "GREEN",
+    "claim": "For r = 0 the level-0 rate set (strict constraint s < 2Γ) reduces to {sphericalEntropy u | 0 ≤ u, s < 2·spectralAtom u}. This checks that the degenerate Fin 1 / Fin 0 indexing in Interlacing, Gamma and Phi behaves as expected. It does not prove the open and closed infima agree.",
+    "kind": "unit-test",
+    "seconds": 45.1,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_level0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "open MetricCodes.Spherical.HigherHierarchy in\ntheorem probe_level0 (s : ℝ) :\n    levelRateSet 0 s = {R | ∃ u : ℝ, 0 ≤ u ∧ s < 2 * spectralAtom u ∧ R = MetricCodes.sphericalEntropy u} := by\n  ext R\n  constructor\n  · rintro ⟨a, b, hI, hG, hR⟩\n    refine ⟨a 0, ?_, ?_, ?_⟩\n    · have := hI.1\n      simpa using this\n    · simpa [Gamma, lagrangeWeight, lagrangeNumerator, lagrangeDenominator] using hG\n    · simpa [Phi] using hR\n  · rintro ⟨u, h0, hs, hR⟩\n    refine ⟨fun _ => u, Fin.elim0, ⟨by simpa using h0, fun i => Fin.elim0 i⟩, ?_, ?_⟩\n    · simpa [Gamma, lagrangeWeight, lagrangeNumerator, lagrangeDenominator] using hs\n    · simpa [Phi] using hR",
+   "attempts": [
+    {
+     "lean": "open MetricCodes.Spherical.HigherHierarchy in\ntheorem probe_level0 (s : ℝ) :\n    levelRateSet 0 s = {R | ∃ u : ℝ, 0 ≤ u ∧ s < 2 * spectralAtom u ∧ R = MetricCodes.sphericalEntropy u} := by\n  ext R\n  constructor\n  · rintro ⟨a, b, hI, hG, hR⟩\n    refine ⟨a 0, ?_, ?_, ?_⟩\n    · have := hI.1\n      simpa using this\n    · simpa [Gamma, lagrangeWeight, lagrangeNumerator, lagrangeDenominator] using hG\n    · simpa [Phi] using hR\n  · rintro ⟨u, h0, hs, hR⟩\n    refine ⟨fun _ => u, Fin.elim0, ⟨by simpa using h0, fun i => Fin.elim0 i⟩, ?_, ?_⟩\n    · simpa [Gamma, lagrangeWeight, lagrangeNumerator, lagrangeDenominator] using hs\n    · simpa [Phi] using hR",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 45.1
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "F5",
+    "decl": "HigherHierarchy.closedHierarchyVariationalRate",
+    "line": 236,
+    "explanation": "sInf would return 0 if the set were empty or unbounded below. Neither occurs: level 0 with large a is feasible since 2Γ_0→1>s, and Φ_r should be ≥0. Even if it occurred, the Lean claim would only become stronger.",
+    "probe_idea": "BddBelow (closedHierarchyRateSet s) ∧ (closedHierarchyRateSet s).Nonempty for 0<s<1"
+   },
+   "result": {
+    "id": "F5-a0",
+    "status": "GREEN",
+    "claim": "For 0<s<1 the closed hierarchy rate set is nonempty: a level-0 witness (r=0, a = 1/(1-s^2)) satisfies Interlacing and s ≤ 2*Gamma. This covers only the nonemptiness half of the claim, not boundedness below.",
+    "kind": "non-vacuity",
+    "seconds": 482.8,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_closed_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_closed_nonempty {s : ℝ} (hs : 0 < s) (hs' : s < 1) :\n    (MetricCodes.Spherical.HigherHierarchy.closedHierarchyRateSet s).Nonempty := by\n  have hk : 0 < 1 - s ^ 2 := by nlinarith\n  obtain ⟨a, ha0, ha⟩ : ∃ a : ℝ, 0 ≤ a ∧ a * (1 - s ^ 2) = 1 :=\n    ⟨1 / (1 - s ^ 2), by positivity, by field_simp⟩\n  have e : a ^ 2 * s ^ 2 = a ^ 2 - a := by linear_combination (-a) * ha\n  have h3 : (s * (1 + 2 * a) / 2) ^ 2 ≤ a * (1 + a) := by\n    nlinarith [e, ha, hs, hs', sq_nonneg s]\n  have h4 : s * (1 + 2 * a) / 2 ≤ Real.sqrt (a * (1 + a)) :=\n    le_trans (le_abs_self _) (Real.abs_le_sqrt h3)\n  have key : s ≤ 2 * (Real.sqrt (a * (1 + a)) / (1 + 2 * a)) := by\n    rw [← mul_div_assoc, le_div_iff₀ (by positivity)]\n    linarith\n  refine ⟨_, 0, fun _ => a, fun i => i.elim0, ?_, ?_, rfl⟩\n  · refine ⟨?_, fun i => i.elim0⟩\n    simpa using ha0\n  · simpa [MetricCodes.Spherical.HigherHierarchy.Gamma,\n      MetricCodes.Spherical.HigherHierarchy.lagrangeWeight,\n      MetricCodes.Spherical.HigherHierarchy.lagrangeNumerator,\n      MetricCodes.Spherical.HigherHierarchy.lagrangeDenominator,\n      MetricCodes.Spherical.HigherHierarchy.spectralAtom,\n      MetricCodes.Spherical.HigherHierarchy.quadraticCoordinate] using key",
+   "attempts": [
+    {
+     "lean": "theorem probe_closed_nonempty {s : ℝ} (hs : 0 < s) (hs' : s < 1) :\n    (MetricCodes.Spherical.HigherHierarchy.closedHierarchyRateSet s).Nonempty := by\n  have hk : 0 < 1 - s ^ 2 := by nlinarith\n  obtain ⟨a, ha0, ha⟩ : ∃ a : ℝ, 0 ≤ a ∧ a * (1 - s ^ 2) = 1 :=\n    ⟨1 / (1 - s ^ 2), by positivity, by field_simp⟩\n  have e : a ^ 2 * s ^ 2 = a ^ 2 - a := by linear_combination (-a) * ha\n  have h3 : (s * (1 + 2 * a) / 2) ^ 2 ≤ a * (1 + a) := by\n    nlinarith [e, ha, hs, hs', sq_nonneg s]\n  have h4 : s * (1 + 2 * a) / 2 ≤ Real.sqrt (a * (1 + a)) :=\n    le_trans (le_abs_self _) (Real.abs_le_sqrt h3)\n  have key : s ≤ 2 * (Real.sqrt (a * (1 + a)) / (1 + 2 * a)) := by\n    rw [← mul_div_assoc, le_div_iff₀ (by positivity)]\n    linarith\n  refine ⟨_, 0, fun _ => a, fun i => i.elim0, ?_, ?_, rfl⟩\n  · refine ⟨?_, fun i => i.elim0⟩\n    simpa using ha0\n  · simpa [MetricCodes.Spherical.HigherHierarchy.Gamma,\n      MetricCodes.Spherical.HigherHierarchy.lagrangeWeight,\n      MetricCodes.Spherical.HigherHierarchy.lagrangeNumerator,\n      MetricCodes.Spherical.HigherHierarchy.lagrangeDenominator,\n      MetricCodes.Spherical.HigherHierarchy.spectralAtom,\n      MetricCodes.Spherical.HigherHierarchy.quadraticCoordinate] using key",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 482.8
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "MetricCodes.Johnson.main_binary_theorem",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {δ : ℝ}\n    (hδ : 0 < δ) (hhalf : δ < (1 : ℝ) / 2), MetricCodes.Hamming.binaryRate δ ≤ combinedVariationalRate δ ∧\n      combinedVariationalRate δ < mrrwRate δ",
+   "restated": "∀ {δ : ℝ}, 0 < δ → δ < (1 : ℝ) / 2 → ((MetricCodes.Hamming.binaryRate δ ≤ MetricCodes.Hamming.variationalRate δ ∧ MetricCodes.Hamming.binaryRate δ ≤ MetricCodes.Johnson.variationalRate δ) ∧ (MetricCodes.Hamming.variationalRate δ < MetricCodes.Johnson.mrrwRate δ ∨ MetricCodes.Johnson.variationalRate δ < MetricCodes.Johnson.mrrwRate δ))",
+   "english": "For every 0 < δ < 1/2, the binary code rate is at most both the Hamming variational rate and the Johnson variational rate, and at least one of those two variational rates is strictly below the MRRW rate.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "binaryRate",
+    "mrrwRate",
+    "variationalRate"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace MetricCodes.Johnson\nopen Filter Metric\nopen scoped BigOperators InnerProductSpace Topology\ntheorem probe_restate_1  :\n    (∀ {δ : ℝ}\n    (hδ : 0 < δ) (hhalf : δ < (1 : ℝ) / 2), MetricCodes.Hamming.binaryRate δ ≤ combinedVariationalRate δ ∧\n      combinedVariationalRate δ < mrrwRate δ) ↔\n    (∀ {δ : ℝ}, 0 < δ → δ < (1 : ℝ) / 2 → ((MetricCodes.Hamming.binaryRate δ ≤ MetricCodes.Hamming.variationalRate δ ∧ MetricCodes.Hamming.binaryRate δ ≤ MetricCodes.Johnson.variationalRate δ) ∧ (MetricCodes.Hamming.variationalRate δ < MetricCodes.Johnson.mrrwRate δ ∨ MetricCodes.Johnson.variationalRate δ < MetricCodes.Johnson.mrrwRate δ))) := by\n  simp only [MetricCodes.Johnson.combinedVariationalRate, le_min_iff, min_lt_iff]\nend MetricCodes.Johnson\n",
+   "seconds": 312.9
+  },
+  {
+   "target": "MetricCodes.Spherical.HigherHierarchy.main_general",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {s : ℝ} (hs : 0 < s) (hs' : s < 1), (∀ {r : ℕ} {R : ℝ}\n      (a : Fin (r + 1) → ℝ) (b : Fin r → ℝ),\n      Interlacing a b → s < 2 * Gamma a b → Phi a b < R →\n        ∀ᶠ n : ℕ in atTop, ∀ C : SpherePacking.SphericalCode n s,\n          (C.points.card : ℝ) < (2 : ℝ) ^ (R * (n : ℝ))) ∧\n      sphericalCodeRate s ≤ closedHierarchyVariationalRate s",
+   "restated": "∀ {s : ℝ}, 0 < s → s < 1 → (∀ {r : ℕ} {R : ℝ} (a : Fin (r + 1) → ℝ) (b : Fin r → ℝ), MetricCodes.Spherical.HigherHierarchy.Interlacing a b → s < 2 * MetricCodes.Spherical.HigherHierarchy.Gamma a b → MetricCodes.Spherical.HigherHierarchy.Phi a b < R → ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∀ C : SpherePacking.SphericalCode n s, (C.points.card : ℝ) < (2 : ℝ) ^ (R * (n : ℝ))) ∧ MetricCodes.Spherical.HigherHierarchy.sphericalCodeRate s ≤ MetricCodes.Spherical.HigherHierarchy.closedHierarchyVariationalRate s",
+   "english": "For every spherical-code parameter s with 0 < s < 1, the following two statements hold. First, for any interlacing pair (a, b) with s < 2·Γ(a, b) and any R > Φ(a, b), there is an N such that every n ≥ N and every spherical code in dimension n with inner-product bound s has fewer than 2^(R·n) points. Second, the exponential rate of spherical codes is at most the closed hierarchy variational rate.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "Gamma",
+    "Interlacing",
+    "Phi",
+    "SphericalCode",
+    "closedHierarchyVariationalRate",
+    "sphericalCodeRate"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace MetricCodes.Spherical.HigherHierarchy\nopen Filter Metric\nopen scoped BigOperators InnerProductSpace Topology\ntheorem probe_restate_11  :\n    (∀ {s : ℝ} (hs : 0 < s) (hs' : s < 1), (∀ {r : ℕ} {R : ℝ}\n      (a : Fin (r + 1) → ℝ) (b : Fin r → ℝ),\n      Interlacing a b → s < 2 * Gamma a b → Phi a b < R →\n        ∀ᶠ n : ℕ in atTop, ∀ C : SpherePacking.SphericalCode n s,\n          (C.points.card : ℝ) < (2 : ℝ) ^ (R * (n : ℝ))) ∧\n      sphericalCodeRate s ≤ closedHierarchyVariationalRate s) ↔\n    (∀ {s : ℝ}, 0 < s → s < 1 → (∀ {r : ℕ} {R : ℝ} (a : Fin (r + 1) → ℝ) (b : Fin r → ℝ), MetricCodes.Spherical.HigherHierarchy.Interlacing a b → s < 2 * MetricCodes.Spherical.HigherHierarchy.Gamma a b → MetricCodes.Spherical.HigherHierarchy.Phi a b < R → ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∀ C : SpherePacking.SphericalCode n s, (C.points.card : ℝ) < (2 : ℝ) ^ (R * (n : ℝ))) ∧ MetricCodes.Spherical.HigherHierarchy.sphericalCodeRate s ≤ MetricCodes.Spherical.HigherHierarchy.closedHierarchyVariationalRate s) := by\n  simp only [Filter.eventually_atTop]\nend MetricCodes.Spherical.HigherHierarchy\n",
+   "seconds": 285.1
+  },
+  {
+   "target": "MetricCodes.Spherical.HigherHierarchy.strict_hierarchy",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {s : ℝ} (hs : 0 < s) (hs' : s < 1), (∀ r : ℕ,\n      levelRate (r + 1) s < levelRate r s ∧\n        localizedLevelRate (r + 1) s < localizedLevelRate r s) ∧\n      sphericalCodeRate s ≤ localizedHierarchyRate s ∧\n      localizedHierarchyRate s < localizedLevelRate 1 s ∧\n      localizedLevelRate 1 s < localizedRowRate s ∧\n      localizedRowRate s < localizedLevelRate 0 s ∧\n      localizedLevelRate 0 s = classicalLocalizedRate s",
+   "restated": "∀ s : ℝ, 0 < s → s < 1 → (StrictAnti (fun r : ℕ => levelRate r s) ∧ StrictAnti (fun r : ℕ => localizedLevelRate r s)) ∧ sphericalCodeRate s ≤ localizedHierarchyRate s ∧ localizedHierarchyRate s < localizedLevelRate 1 s ∧ localizedLevelRate 1 s < localizedRowRate s ∧ localizedRowRate s < localizedLevelRate 0 s ∧ localizedLevelRate 0 s = classicalLocalizedRate s",
+   "english": "For every 0 < s < 1, the sequences r ↦ levelRate r s and r ↦ localizedLevelRate r s are strictly decreasing in r, and the remaining chain of inequalities holds: sphericalCodeRate s ≤ localizedHierarchyRate s < localizedLevelRate 1 s < localizedRowRate s < localizedLevelRate 0 s, with localizedLevelRate 0 s equal to classicalLocalizedRate s.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "classicalLocalizedRate",
+    "levelRate",
+    "localizedHierarchyRate",
+    "localizedLevelRate",
+    "localizedRowRate",
+    "sphericalCodeRate"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace MetricCodes.Spherical.HigherHierarchy\nopen Filter Metric\nopen scoped BigOperators InnerProductSpace Topology\ntheorem probe_restate_21  :\n    (∀ {s : ℝ} (hs : 0 < s) (hs' : s < 1), (∀ r : ℕ,\n      levelRate (r + 1) s < levelRate r s ∧\n        localizedLevelRate (r + 1) s < localizedLevelRate r s) ∧\n      sphericalCodeRate s ≤ localizedHierarchyRate s ∧\n      localizedHierarchyRate s < localizedLevelRate 1 s ∧\n      localizedLevelRate 1 s < localizedRowRate s ∧\n      localizedRowRate s < localizedLevelRate 0 s ∧\n      localizedLevelRate 0 s = classicalLocalizedRate s) ↔\n    (∀ s : ℝ, 0 < s → s < 1 → (StrictAnti (fun r : ℕ => levelRate r s) ∧ StrictAnti (fun r : ℕ => localizedLevelRate r s)) ∧ sphericalCodeRate s ≤ localizedHierarchyRate s ∧ localizedHierarchyRate s < localizedLevelRate 1 s ∧ localizedLevelRate 1 s < localizedRowRate s ∧ localizedRowRate s < localizedLevelRate 0 s ∧ localizedLevelRate 0 s = classicalLocalizedRate s) := by\n  constructor\n  · intro h s hs hs'\n    obtain ⟨h1, h2, h3, h4, h5, h6⟩ := h hs hs'\n    exact ⟨⟨strictAnti_nat_of_succ_lt fun r => (h1 r).1, strictAnti_nat_of_succ_lt fun r => (h1 r).2⟩, h2, h3, h4, h5, h6⟩\n  · intro h s hs hs'\n    obtain ⟨⟨h1, h2⟩, h3, h4, h5, h6, h7⟩ := h s hs hs'\n    exact ⟨fun r => ⟨h1 (Nat.lt_succ_self r), h2 (Nat.lt_succ_self r)⟩, h3, h4, h5, h6, h7⟩\nend MetricCodes.Spherical.HigherHierarchy\n",
+   "seconds": 266.3
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 215,
+  "lines_needing_human_review": 180,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

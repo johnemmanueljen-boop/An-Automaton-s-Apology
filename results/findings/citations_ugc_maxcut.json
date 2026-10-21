@@ -1,0 +1,26 @@
+{
+ "result": "102.md: The Unique Games Conjecture and optimal approximation thresholds (openai/math @ fd4aeeb)",
+ "linked_papers": [
+  "A-Direct-Proof-of-Optimal-Max-Cut-Hardness",
+  "Constant-factor-hardness-of-Min-UnCut",
+  "Constant-factor-hardness-of-directed-feedback-vertex-set",
+  "The-Factor-Two-Hardness-Threshold-for-Vertex-Cover",
+  "The-Unique-Games-Theorem"
+ ],
+ "absent_from_all_linked_papers": {
+  "Definition 4.6": "lean/OAI/Computability/MaxCut/Games/NoiseEnumeration.lean:58",
+  "Lemma 6.3": "lean/OAI/Computability/MaxCut/Games/ActualAdviceStochasticBridge.lean:236",
+  "Lemma 6.7": "lean/OAI/Computability/MaxCut/Games/Information.lean:599",
+  "Lemma 6.8": "lean/OAI/Computability/MaxCut/Games/AdviceImageLaw.lean:300",
+  "Proposition 4.3": "lean/OAI/Computability/MaxCut/Games/Incidence.lean:441",
+  "Proposition 6.9": "lean/OAI/Computability/MaxCut/PCP/RepetitionUpper.lean:214",
+  "equation (6.25)": "lean/OAI/Computability/MaxCut/PCP/RepetitionUpper.lean (docstring above line 214)"
+ },
+ "excluded_as_external_or_ambiguous": {
+  "KMS Lemma 2.7/2.8/2.14/3.19/3.20": "cites Khot–Minzer–Safra, another paper",
+  "Corollary 4.3": "Max-Cut paper cites [16, Corollary 4.3]; Lean docstring plausibly refers to that",
+  "Theorem 3.4": "mentioned once in the Factor-Two paper text; ambiguous"
+ },
+ "observation": "The published Max-Cut paper's section 6 states only Lemma 6.1, while the Lean code cites Lemmas 6.3-6.8, Proposition 6.9 and equation (6.25): consistent with formalizing an earlier, longer draft, as in Navier-Stokes.",
+ "method": "experiments/citations_release.py random sample 2 (seed 2027), then manual check: grep of all five linked papers' full text for each label, and the header comment of each citing file for references to other papers."
+}

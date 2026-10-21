@@ -1,0 +1,471 @@
+[
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.E",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.uniformMeasure",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.IsSupported",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.IsCoupling",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.quadraticPlanCost",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.wasserstein2",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.graphPlan",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.IsQuadraticOptimalMap",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.IsUniqueQuadraticOptimalMap",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.mapL2Dist",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.cube",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Brenier.json",
+  "hole": "OAI.Problem358.HasExactlyThreeAtoms",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "DefocusingNLS.json",
+  "hole": "OAI.DefocusingNLS.sobolevProduct",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "DefocusingNLS.json",
+  "hole": "OAI.DefocusingNLS.schrodingerFlow",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "DefocusingNLS.json",
+  "hole": "OAI.DefocusingNLS.sobolevOddPower",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "ElementaryPositivity.json",
+  "hole": "OAI.elementaryPositivityWitness",
+  "status": "UNSPECIFIED_IN_CHALLENGE",
+  "detail": "challenge leaves the body as sorry: the statement does not pin this definition down"
+ },
+ {
+  "repo": "lean",
+  "config": "EuclideanFiveColor.json",
+  "hole": "OAI.EuclideanFiveColor.ProperColoring",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.Configuration",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.LabelDistribution",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.Policy",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.serve",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.serviceCost",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.pathProbability",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.expectedCost",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.optimalCost",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "KServer.json",
+  "hole": "OAI.KServer.MainStatement",
+  "status": "TEXT_DIFFERS_RENAMING_ONLY?",
+  "solution_line": 123,
+  "first_differences": [
+   [
+    "(∃ embedding : Fin (k + 1) → X, Function.Injective embedding) →",
+    "(∃ e : Fin (k + 1) → X, Function.Injective e) →"
+   ],
+   [
+    "∀ requests : List X,",
+    "∀ σ : List X,"
+   ],
+   [
+    "expectedCost A s requests ≤",
+    "expectedCost A s σ ≤ C * (Real.log (k + 1)) ^ 2 * optimalCost s σ + B"
+   ]
+  ]
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Word",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Language",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.CoinTape",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Direction.move",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Direction.moveInput",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.readInput",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.initial",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.step",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.run",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.spaceThrough",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.LogSpace",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.Deterministic",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.HaltsBy",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.Decides",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.extendCoins",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.Machine.acceptanceProbability",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.polynomialClock",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.L",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.RL",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "LogspaceEquality.json",
+  "hole": "OAI.ExactDerandomization.BPL",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Naimark.json",
+  "hole": "OAI.NaimarkZFC.IsSimpleCStar",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Naimark.json",
+  "hole": "OAI.NaimarkZFC.IsState",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Naimark.json",
+  "hole": "OAI.NaimarkZFC.IsFaithfulTracialState",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Naimark.json",
+  "hole": "OAI.NaimarkZFC.IsIrreducible",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Naimark.json",
+  "hole": "OAI.NaimarkZFC.UnitarilyEquivalent",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Naimark.json",
+  "hole": "OAI.NaimarkZFC.HasUniqueIrreducibleRepresentation",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Naimark.json",
+  "hole": "OAI.NaimarkZFC.IsIsomorphicToCompacts",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "OccupiedOverlap.json",
+  "hole": "OAI.CubeShuffle.UnitaryFinite.IsUnitary",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "OccupiedOverlap.json",
+  "hole": "OAI.CubeShuffle.Specht.hilbertSpace",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "OccupiedOverlap.json",
+  "hole": "OAI.CubeShuffle.Specht.unitaryRepresentation",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "OccupiedOverlap.json",
+  "hole": "OAI.CubeShuffle.Specht.relabelledUnitary",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "OccupiedOverlap.json",
+  "hole": "OAI.RowColumn.OccupiedOverlapEndpoint",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Rokhlin.json",
+  "hole": "OAI.Rokhlin.timeMap",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Rokhlin.json",
+  "hole": "OAI.Rokhlin.IsMixing",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Rokhlin.json",
+  "hole": "OAI.Rokhlin.layoutTime",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "Rokhlin.json",
+  "hole": "OAI.Rokhlin.MixingOfOrder",
+  "status": "BODY_NOT_COMPARED",
+  "detail": "solution defines it in an imported module (not fetched)"
+ },
+ {
+  "repo": "lean",
+  "config": "SpinAngle.json",
+  "hole": "OAI.SpinAngle.TypeAngle.row",
+  "status": "MATCH",
+  "solution_line": 35
+ },
+ {
+  "repo": "lean",
+  "config": "SpinAngle.json",
+  "hole": "OAI.SpinAngle.TypeAngle.column",
+  "status": "MATCH",
+  "solution_line": 36
+ },
+ {
+  "repo": "lean",
+  "config": "SpinAngle.json",
+  "hole": "OAI.SpinAngle.TypeAngle.phi",
+  "status": "MATCH",
+  "solution_line": 38
+ }
+]

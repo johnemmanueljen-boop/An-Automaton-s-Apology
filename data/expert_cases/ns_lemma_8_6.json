@@ -1,0 +1,64 @@
+{
+ "id": "ns-lemma-8.6",
+ "source": "openai/NavierStokesAndEuler @ f9e8bc5; paper: OpenAI 'Finite time blowup for Navier-Stokes', Lemma 8.6 / eq. (8.19)",
+ "lean_target": "norm_derivativeWord_inverse_le",
+ "lean_context": "-- SmoothFourierData.lean\n\n/-- The genuine first coordinate derivative. -/\nnoncomputable def partialX (f : Plane → ℂ) (z : Plane) : ℂ := fderiv ℝ f z (1, 0)\n\nnoncomputable def xJet (p : ℕ) (f : Plane → ℂ) : Plane → ℂ := partialX^[p] f\n\n-- TorusInverse.lean\ndef derivativeWord : List Bool → (Plane → ℂ) → Plane → ℂ\n  | [], f => f\n  | j :: js, f => coordinatePartial j (derivativeWord js f)\n\n-- ParametricTorusInverse.lean\nnoncomputable def mixedLossConstant (r : ℕ) : ℝ :=\n  ((6 * ‖omega⁻¹‖) * ‖omega‖ ^ r) * 3 ^ (r + 5) *\n    ∑' k : Frequency, (weight k ^ 4)⁻¹\n\n-- SmoothFamilyTorusInverse.lean (statement only; proof omitted, already kernel-checked)\ntheorem norm_derivativeWord_inverse_le (d : Direction) {f : Source P}\n    (hf : ContDiff ℝ ∞ f) (hp : Periodic f) (w : List Bool) (p : P) (Y : Plane) {C : ℝ}\n    (hzero : ∀ x ∈ Icc (0 : ℝ) 1, ∀ y ∈ Icc (0 : ℝ) 1, ‖f (p, (x, y))‖ ≤ C)\n    (hfirst : ∀ x ∈ Icc (0 : ℝ) 1, ∀ y ∈ Icc (0 : ℝ) 1,\n      ‖SmoothFourierData.xJet (w.length + 5) (slice f p) (x, y)‖ ≤ C)\n    (hsecond : ∀ x ∈ Icc (0 : ℝ) 1, ∀ y ∈ Icc (0 : ℝ) 1,\n      ‖SmoothFourierData.xJet (w.length + 5)\n        (SmoothFourierData.swapFunction (slice f p)) (x, y)‖ ≤ C) :\n    ‖derivativeWord w (slice (inverse d f) p) Y‖ ≤\n      ParametricTorusInverse.mixedLossConstant w.length * C := by\n  -- (proof omitted)",
+ "paper_ref": "Lemma 8.6, eq. (8.19)",
+ "paper_excerpt": "Lemma 8.6. Let N = vt · ∂y on T2 , with vt as in (6.2), and let F be a smooth function of zero Haar\nmean. Then N φ = F has a unique smooth zero-mean solution φ = N −1 F. This solution is given by\nthe following Fourier series and satisfies the displayed norm bound for every integer m ≥ 0:\n                                        Fˆ︁(k ) 2πik·y\n                 N −1 F =      ∑       2πivt · k\n                                                 e     ,     ∥ N −1 F ∥Cym ≤ Cm ∥ F ∥Cym+4 .        (8.19)\n                            k ∈Z2 \\{0}\n\nFor a pair Eθ , Ez ∈ Mα of normalized angularly invariant residual coefficients, use this inverse in the\n                                                                            −1     ◦         ◦\noriginal auxiliary coordinate Y to define the physical tangential update − Nabs ( Eθ,phys , Ez,phys ). Here\n\f96                                                     OPENAI\n\nresiduals and velocities have the normalizations in (8.11). This physical definition ensures agreement\non chart overlaps. Its chart representatives are\n                    ∆v = −ci−0 1 Ni−0 1 Eθ◦ ,     γd = −ci−0 1 Ni−0 1 Ez◦ ,    ci−0 1 ≤ CS∗ .           (8.20)\n   Both desired increments ∆v, γd lie in Mα and have zero auxiliary mean at each slow and radial\npoint. The realization of γd by (8.14) gives the actual velocity increment\n                           (∆β, ∆v, ∆γ) = −ε∂ Z T1 γd , ∆v, γd − A1 γd ,\n                                            (︁                             )︁\n                                                                                          (8.21)\n                           (∆β, ∆v, ∆γ) ∈ Mα+1 × Mα × Mα .\nThis field is divergence-free and its addition preserves both integral constraints in (8.2). If a = −A1 γd\ndenotes the cutoff remainder in the axial increment, then its fast-time cancellation equations are\n                          ci0 Ni0 ∆v = − Eθ◦ ,         ci0 Ni0 ∆γ = − Ez◦ + ci0 Ni0 a.                  (8.22)\nThe angular cancellation is exact, and ci0 Ni0 a is flat at every fixed coefficient derivative order.\nProof. The divisor bound (6.7) gives |vt · k |−1 ≤ C (1 + |k |). Four more derivatives of F than\nthe requested output leave a summable (1 + |k|)−3 bound on the Fourier series in two\ndimensions. This proves (8.19), smoothness, and uniqueness after fixing the zero Fourier\ncoefficient. The multiplier commutes with every slow coefficient derivative and preserves",
+ "ground_truth": [
+  {
+   "id": "GT1",
+   "category": "assumption",
+   "label": "Lean needs m+5 derivatives of F where the paper's (8.19) uses m+4 (C^{m+4} norm)",
+   "keywords": [
+    [
+     "+ 5",
+     "+5",
+     "m+5",
+     "m + 5",
+     "order m+5",
+     "loss of 5",
+     "length + 5",
+     "five"
+    ],
+    [
+     "+ 4",
+     "+4",
+     "m+4",
+     "m + 4",
+     "loss of 4",
+     "four"
+    ]
+   ]
+  },
+  {
+   "id": "GT2",
+   "category": "quantifier",
+   "label": "Lean bounds one derivative word w at a time; (8.19) is a C^m norm, i.e. a sup over all multi-indices of order <= m",
+   "keywords": [
+    [
+     "supremum",
+     "sup over",
+     "sup_{",
+     "maximum over",
+     "all multi-ind",
+     "every multi-ind",
+     "each word",
+     "single word",
+     "one word",
+     "per-word",
+     "per word",
+     "fixed word",
+     "particular word",
+     "one derivative word",
+     "each derivative word",
+     "single multi-index",
+     "one multi-index",
+     "multi-index at a time",
+     "word at a time"
+    ]
+   ]
+  }
+ ],
+ "found_by": "Bastounis, Circelli & Hansen, 'Navier-Stokes lost in translation', arXiv:2610.08144 (about two weeks of expert work)"
+}

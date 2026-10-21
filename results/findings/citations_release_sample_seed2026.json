@@ -1,0 +1,400 @@
+[
+ {
+  "note": "072.md",
+  "title": "Brennan's conjecture and the integral-means spectrum",
+  "pdfs": [
+   "preprints/A-strict-inverse-first-power-bound-for-univalent-functions-September-24-2026/paper.pdf",
+   "preprints/Brennans-conjecture-and-sharp-inverse-square-integral-means-September-24-2026/paper.pdf"
+  ],
+  "configs": [
+   "Brennan",
+   "BrennanSharp",
+   "StrictMeans"
+  ],
+  "modules": [
+   "OAI.Analysis.IntegralMeans.Main",
+   "OAI.Analysis.IntegralMeans.SharpEndpoints",
+   "OAI.Analysis.StrictMeans.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Analysis/IntegralMeans/",
+   "lean/OAI/Analysis/StrictMeans/"
+  ],
+  "paper_headers": 28,
+  "lean_files_scanned": 141,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "081.md",
+  "title": "Riesz transforms and rectifiability in higher codimension",
+  "pdfs": [
+   "preprints/Riesz-transforms-and-uniform-rectifiability-in-higher-codimension-September-24-2026/paper.pdf"
+  ],
+  "configs": [
+   "RieszQuantitative"
+  ],
+  "modules": [
+   "OAI.Analysis.RieszRectifiability.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Analysis/RieszRectifiability/"
+  ],
+  "paper_headers": 30,
+  "lean_files_scanned": 824,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "112.md",
+  "title": "Beyond the square-root exponent for depth-three circuits",
+  "pdfs": [
+   "preprints/Beyond-the-Square-Root-Exponent-for-Depth-Three-Boolean-Circuits-September-23-2026/main.pdf"
+  ],
+  "configs": [
+   "DepthThree"
+  ],
+  "modules": [
+   "OAI.Computability.DepthThree.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Computability/DepthThree/"
+  ],
+  "paper_headers": 7,
+  "lean_files_scanned": 179,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "140.md",
+  "title": "Memory–sample lower bounds for noiseless Gaussian regression",
+  "pdfs": [
+   "preprints/Localization-costs-and-information-growth-for-exact-Gaussian-observations-September-27-2026/paper.pdf",
+   "preprints/Memory-and-precision-in-noiseless-Gaussian-regression-September-27-2026/paper.pdf",
+   "preprints/Posterior-replicas-and-conditional-information-in-Gaussian-regression-September-27-2026/paper.pdf",
+   "preprints/Projection-moments-positive-cap-domination-and-Riesz-estimates-on-the-sphere-September-27-2026/paper.pdf",
+   "preprints/Replacing-Gaussian-observations-in-memory-constrained-inference-September-27-2026/paper.pdf",
+   "preprints/Subsphere-methods-for-memory-sample-lower-bounds-in-noiseless-Gaussian-regression-September-27-2026/paper.pdf"
+  ],
+  "configs": [
+   "GaussianFiniteEntropy",
+   "GaussianInformation",
+   "GaussianReplacement",
+   "MemoryPrecision",
+   "NoiselessRegression",
+   "PosteriorReplicas",
+   "ProjectionMoments",
+   "SubsphereCurrent"
+  ],
+  "modules": [
+   "OAI.Probability.Localization.Main",
+   "OAI.Probability.GaussianInformation.Main",
+   "OAI.Probability.GaussianReplacement.FiberEquality",
+   "OAI.Probability.MemoryPrecision.Main",
+   "OAI.Probability.GaussianRegression.Main",
+   "OAI.Probability.PosteriorReplicas.Main",
+   "OAI.Probability.ProjectionMoments.Main",
+   "OAI.Probability.Subsphere.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Probability/GaussianInformation/",
+   "lean/OAI/Probability/GaussianRegression/",
+   "lean/OAI/Probability/GaussianReplacement/",
+   "lean/OAI/Probability/Localization/",
+   "lean/OAI/Probability/MemoryPrecision/",
+   "lean/OAI/Probability/PosteriorReplicas/",
+   "lean/OAI/Probability/ProjectionMoments/",
+   "lean/OAI/Probability/Subsphere/"
+  ],
+  "paper_headers": 128,
+  "lean_files_scanned": 430,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "175.md",
+  "title": "Talagrand’s expectation thresholds, discrete convexity, and graph decompositions",
+  "pdfs": [
+   "preprints/Integral-and-fractional-expectation-thresholds-are-equivalent-September-23-2026/paper.pdf",
+   "preprints/Talagrands-discrete-convexity-conjecture-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "TalagrandDiscreteConvexity",
+   "TalagrandExpectationThreshold"
+  ],
+  "modules": [
+   "OAI.Combinatorics.DiscreteConvexity.Main",
+   "OAI.Combinatorics.ExpectationThreshold.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Combinatorics/DiscreteConvexity/",
+   "lean/OAI/Combinatorics/ExpectationThreshold/"
+  ],
+  "paper_headers": 8,
+  "lean_files_scanned": 83,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "198.md",
+  "title": "A counterexample to finitistic-dimension finiteness",
+  "pdfs": [
+   "preprints/An-algebra-of-infinite-little-finitistic-dimension-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "FinitisticAsymmetry",
+   "LittleFinitistic"
+  ],
+  "modules": [
+   "OAI.Algebra.FinitisticAsymmetry.Main",
+   "OAI.Algebra.Finitistic.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Algebra/Finitistic/",
+   "lean/OAI/Algebra/FinitisticAsymmetry/"
+  ],
+  "paper_headers": 18,
+  "lean_files_scanned": 588,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "206.md",
+  "title": "Finite lattice representation and undecidability",
+  "pdfs": [
+   "preprints/Finite-Congruence-Lattices-Characterization-and-Undecidability-September-24-2026/paper.pdf"
+  ],
+  "configs": [
+   "FiniteCongruenceGraph"
+  ],
+  "modules": [
+   "OAI.Algebra.Universal.GraphCriterion"
+  ],
+  "dirs": [
+   "lean/OAI/Algebra/Universal/"
+  ],
+  "paper_headers": 196,
+  "lean_files_scanned": 4,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "222.md",
+  "title": "Perceptron free energies and microscopic jamming exponents",
+  "pdfs": [
+   "preprints/The-free-energy-of-the-Ising-random-perceptron-September-24-2026/The-free-energy-of-the-Ising-random-perceptron-September-24-2026.pdf",
+   "preprints/The-free-energy-of-the-spherical-random-perceptron-September-24-2026/The-free-energy-of-the-spherical-random-perceptron-September-24-2026.pdf"
+  ],
+  "configs": [
+   "IsingFiniteness",
+   "PerceptronFreeEnergy",
+   "SphericalField"
+  ],
+  "modules": [
+   "OAI.Probability.IsingPerceptron.VariationalFiniteness",
+   "OAI.Probability.Perceptron.Main",
+   "OAI.Probability.SphericalField.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Probability/IsingPerceptron/",
+   "lean/OAI/Probability/Perceptron/",
+   "lean/OAI/Probability/SphericalField/"
+  ],
+  "paper_headers": 36,
+  "lean_files_scanned": 606,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "240.md",
+  "title": "Shelah's eventual categoricity and the prescribed-threshold obstruction",
+  "pdfs": [
+   "preprints/A-CH-Obstruction-to-a-Prescribed-Categoricity-Threshold-September-24-2026/paper.pdf"
+  ],
+  "configs": [
+   "CHObstruction"
+  ],
+  "modules": [
+   "OAI.ModelTheory.Categoricity.Main"
+  ],
+  "dirs": [
+   "lean/OAI/ModelTheory/Categoricity/"
+  ],
+  "paper_headers": 37,
+  "lean_files_scanned": 15,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "246.md",
+  "title": "Cannon's conjecture",
+  "pdfs": [
+   "preprints/A-Modulus-Proof-of-Cannons-Conjecture-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "CannonGeometricAction"
+  ],
+  "modules": [
+   "OAI.Geometry.Cannon.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Geometry/Cannon/"
+  ],
+  "paper_headers": 31,
+  "lean_files_scanned": 299,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "252.md",
+  "title": "A torsion-free hyperbolic group that is neither residually finite nor linear over any field",
+  "pdfs": [
+   "preprints/a-torsion-free-hyperbolic-group-that-is-not-residually-finite-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "TorsionFreeHyperbolic"
+  ],
+  "modules": [
+   "OAI.GroupTheory.Hyperbolic.Main"
+  ],
+  "dirs": [
+   "lean/OAI/GroupTheory/Hyperbolic/"
+  ],
+  "paper_headers": 13,
+  "lean_files_scanned": 29,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "299.md",
+  "title": "The Kirchberg–Rørdam character criterion and infinite tensor-power Jiang–Su stability",
+  "pdfs": [
+   "preprints/The-Kirchberg-Rordam-character-criterion-September-25-2026/paper.pdf"
+  ],
+  "configs": [
+   "CharacterCriterion"
+  ],
+  "modules": [
+   "OAI.Analysis.CharacterCriterion.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Analysis/CharacterCriterion/"
+  ],
+  "paper_headers": 18,
+  "lean_files_scanned": 62,
+  "labels_cited": 1,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "343.md",
+  "title": "Symplectic ball packing in higher dimensions",
+  "pdfs": [
+   "preprints/Symplectic-Ball-Packings-in-Higher-Dimensions-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "BallPacking",
+   "BallPackingNecessity"
+  ],
+  "modules": [
+   "OAI.Geometry.BallPacking.Main",
+   "OAI.Geometry.BallPacking.Necessity.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Geometry/BallPacking/",
+   "lean/OAI/Geometry/BallPacking/Necessity/"
+  ],
+  "paper_headers": 24,
+  "lean_files_scanned": 245,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "356.md",
+  "title": "Gigli’s characterization of Alexandrov curvature",
+  "pdfs": [
+   "preprints/Weak-Hessian-bounds-along-every-geodesic-in-RCD-spaces-September-24-2026/weak-hessian-geodesics.pdf"
+  ],
+  "configs": [
+   "WeakHessian"
+  ],
+  "modules": [
+   "OAI.Geometry.WeakHessian.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Geometry/WeakHessian/"
+  ],
+  "paper_headers": 6,
+  "lean_files_scanned": 542,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "360.md",
+  "title": "Weak MTW curvature gives convexity and regular optimal transport",
+  "pdfs": [
+   "preprints/Global-Support-and-Convex-Injectivity-Domains-under-Weak-MTW-September-25-2026/paper.pdf",
+   "preprints/Uniform-Bi-Holder-Transport-from-Weak-MTW-September-25-2026/paper.pdf"
+  ],
+  "configs": [
+   "BiholderTransport",
+   "WeakMTWGlobalSupport"
+  ],
+  "modules": [
+   "OAI.Analysis.BiholderTransport.Main",
+   "OAI.Geometry.WeakMTW.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Analysis/BiholderTransport/",
+   "lean/OAI/Geometry/WeakMTW/"
+  ],
+  "paper_headers": 45,
+  "lean_files_scanned": 855,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ }
+]

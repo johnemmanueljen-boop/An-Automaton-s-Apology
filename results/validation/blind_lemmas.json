@@ -1,0 +1,752 @@
+[
+ {
+  "label": "Lemma 10.4",
+  "decl": "candidate_energy_estimates",
+  "file": "NavierStokes/R3/IntegratedDissipation.lean",
+  "line": 279,
+  "audit": {
+   "summary": "Assume ν > 0 and that (u, p, f, K) satisfies the bundled CandidateProperties: smooth periodic fields on the pre-singular domain, zero initial velocity, divergence-free, solving Navier–Stokes with force f on 0<t<1, and speed unbounded at t=1. Under these assumptions the Lean theorem proves four energy conclusions: ‖f(t)‖_{L²} is interval-integrable on [0,1]; the dissipation is integrable on [0,1); for every T∈[0,1), ‖u(T)‖² + 2ν∫₀ᵀ D ≤ (∫₀ᵀ‖f‖)²; and the analogous total bound 2ν∫_{[0,1)} D ≤ (∫₀¹‖f‖)² holds. The excerpt only says Lemma 10.4 gives 'global energy and integrated dissipation bounds for the localized fields directly from their equation'. That is consistent with this declaration, but the exact statement is not in the excerpt. The main caveat is that l2Norm, l2Sq, dissipation, the domain helpers and SpeedUnboundedAtOne are not shown, so the normalisations and integration domain cannot be checked.",
+   "glossary": [
+    {
+     "decl": "CandidateProperties",
+     "line": 4,
+     "plain": "Bundle of hypotheses on (ν,u,p,f,K): u, p smooth on the pre-singular domain and f smooth everywhere; unit spatial periodicity (u, p for t∈[0,1), f for t≥0); spatial supports inside a compact K in the open fundamental cube; u(0,·)=0; f vanishes for t≤0 and has compact future time support; div u=0 on [0,1); NS residual = f on (0,1); speed unbounded at t=1.",
+     "standard_concept": "Properties of the constructed periodic blow-up candidate (smooth forced NS solution on [0,1) with zero data)",
+     "matches_standard": "unclear",
+     "note": "Helper definitions (preSingularDomain, UnitSpatialPeriodsOn, fundamentalCube/Interior, navierStokesResidual, SpeedUnboundedAtOne, CompactFutureTimeSupport) are not shown."
+    },
+    {
+     "decl": "cumulativeForceNorm",
+     "line": 45,
+     "plain": "F(T) = ∫₀ᵀ ‖f(t)‖_{L²} dt",
+     "standard_concept": "Cumulative L¹_t L²_x norm of the force",
+     "matches_standard": "yes",
+     "note": "Depends on the unshown l2Norm; the junk value 0 for a non-integrable integrand is excluded because integrability is the first conjunct."
+    },
+    {
+     "decl": "VelocityField / PressureField / Space",
+     "line": 41,
+     "plain": "Maps SpaceTime → ℝ³ and SpaceTime → ℝ",
+     "standard_concept": "Velocity and pressure fields",
+     "matches_standard": "yes",
+     "note": ""
+    }
+   ],
+   "lean_claims": [
+    {
+     "theorem": "candidate_energy_estimates",
+     "line": 53,
+     "plain": "For ν>0 and any u, f, p, K satisfying CandidateProperties ν u p f K, the following four conclusions hold: (i) t ↦ ‖f(t)‖_{L²} is interval-integrable on [0,1]; (ii) t ↦ dissipation u t is Lebesgue-integrable on [0,1); (iii) for every T∈[0,1), ‖u(T)‖²_{L²} + 2ν∫₀ᵀ dissipation u ≤ (∫₀ᵀ‖f‖_{L²})²; (iv) 2ν∫_{[0,1)} dissipation u ≤ (∫₀¹‖f‖_{L²})²."
+    }
+   ],
+   "paper_claims": [
+    {
+     "ref": "Lemma 10.4",
+     "plain": "Global energy and integrated dissipation bounds for the localized fields, derived directly from their equation (exact statement not in excerpt)."
+    }
+   ],
+   "coverage": [
+    {
+     "paper_ref": "Lemma 10.4",
+     "lean_theorem": "candidate_energy_estimates",
+     "relation": "equivalent",
+     "why": "The only paper description (energy and integrated dissipation bounds) matches the Lean conclusions. Exact constants and form are not in the excerpt, so this is a tentative match."
+    }
+   ],
+   "flags": [
+    {
+     "id": "F1",
+     "category": "definition-mismatch",
+     "severity": "low",
+     "decl": "candidate_energy_estimates",
+     "line": 56,
+     "paper_ref": "Lemma 10.4",
+     "explanation": "l2Norm, l2Sq and dissipation are not visible. The meaning depends on two things: whether they integrate over the fundamental cube (rather than all of ℝ³, which for periodic fields would be infinite or a junk value), and whether dissipation = ‖∇u‖² rather than ½‖∇u‖². The inequality ‖u(T)‖² + 2ν∫‖∇u‖² ≤ (∫‖f‖)² is the standard sharp consequence of ½d/dt‖u‖² + ν‖∇u‖² = ⟨f,u⟩, so the constants are consistent if dissipation = ‖∇u‖² over the cube.",
+     "polarity": "unclear",
+     "probe_idea": "#print l2Sq; #print l2Norm; #print dissipation — check integration over fundamentalCube and dissipation u t = ∫_cube ‖∇ₓu(t,x)‖²."
+    },
+    {
+     "id": "F2",
+     "category": "assumption",
+     "severity": "low",
+     "decl": "CandidateProperties",
+     "line": 25,
+     "paper_ref": "Lemma 10.4",
+     "explanation": "The hypothesis bundles assumptions not needed for an energy estimate, such as speed_unbounded and periodicity. Extra hypotheses weaken the theorem. They are faithful to the paper's setting of a specific candidate, but they also make the result vacuous if no candidate exists; vacuity is not settled here.",
+     "polarity": "lean weaker",
+     "probe_idea": "Exhibit or reference a theorem constructing some (u,p,f,K) with CandidateProperties ν u p f K."
+    }
+   ],
+   "lint_verdicts": []
+  }
+ },
+ {
+  "label": "Lemma 4.4",
+  "decl": "profile_eq_integral",
+  "file": "NavierStokes/RadialHeatProfile.lean",
+  "line": 689,
+  "audit": {
+   "summary": "The Lean theorem states that, for all real a and z with no hypotheses, `profile a z` equals Γ(a)⁻¹ · ∫_{v>0} e^{-v} v^{a-1} (1+z v)^{1-a} dv. This is a Tricomi/Kummer-type integral representation of a one-variable profile. The paper text labelled Lemma 4.4 is a different result: a uniqueness and difference-estimate lemma for cumulative integrals (M, I, J, S, C_p) and the derived quantities Q_s, N_s, p_s in the Navier–Stokes construction. The pairing is therefore a mismatch caused by the docstring's 'candidate manuscript' numbering. The most important caveat is that the `profile` actually used here cannot be the repo definition shown, so its meaning is not visible.",
+   "glossary": [
+    {
+     "decl": "profile",
+     "line": 5,
+     "plain": "The shown definition is a power series ∑' n, p.1^n · coefficient I (weight ε) A n p.2. It takes a Window, ε, an AxisSpace and a point in ℝ×ℝ.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "The theorem applies `profile` to two reals (`profile a z`), which does not typecheck against this signature. The definition actually used must be a different `profile`, likely in another namespace, and it is not visible. A plausible risk is that it is defined directly as the right-hand integral, making the theorem definitional."
+    },
+    {
+     "decl": "a",
+     "line": 2,
+     "plain": "a(h) = 1/2 + h.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "This definition is not used in the theorem. The binder `a : ℝ` in the theorem shadows it."
+    },
+    {
+     "decl": "v",
+     "line": 10,
+     "plain": "A private Expr input variable.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "This definition is irrelevant here. `v` in the theorem is a bound integration variable."
+    }
+   ],
+   "lean_claims": [
+    {
+     "theorem": "profile_eq_integral",
+     "line": 14,
+     "plain": "For every a, z ∈ ℝ (no constraints), profile(a,z) = Γ(a)⁻¹ ∫_0^∞ e^{-v} v^{a-1} (1+zv)^{1-a} dv. Here Real.rpow is applied to possibly negative bases, and the Bochner integral is 0 if the integrand is not integrable."
+    }
+   ],
+   "paper_claims": [
+    {
+     "ref": "Lemma 4.4",
+     "plain": "Fix h ∈ (0,1/2). Part (i): if (U1,E1) = (U2,E2) for X ≥ X_h and Δm(X_h,·) = 0, then m1 = m2 and all derived quantities agree for X ≥ X_h. Part (ii): on [X0,X1]×[−1,1], ‖Δ(Q_s,N_s,p_s)‖_k ≤ C_k(‖Δ(U,E)‖_{k+1} + ‖Δm‖_{k+1}), with C_k depending only on the stated data."
+    }
+   ],
+   "coverage": [
+    {
+     "paper_ref": "Lemma 4.4",
+     "lean_theorem": "profile_eq_integral",
+     "relation": "different",
+     "why": "Mispaired: Lean proves a Gamma-function integral representation of a scalar profile. The paper's Lemma 4.4 concerns uniqueness and C^k difference estimates for Navier–Stokes cumulative integrals. No displayed integral of this form appears in the excerpt."
+    }
+   ],
+   "flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "profile_eq_integral",
+     "line": 14,
+     "paper_ref": "Lemma 4.4",
+     "explanation": "The docstring claims this is 'exactly the displayed integral in Lemma 4.4'. The excerpted Lemma 4.4 contains only ∫_0^X differences of U and H, not this Gamma integral. This is a numbering mismatch, so the paper's Lemma 4.4 is not formalized by this declaration.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F2",
+     "category": "definition-mismatch",
+     "severity": "medium",
+     "decl": "profile",
+     "line": 5,
+     "explanation": "The shown `profile` takes (I, ε, A, p), but the theorem calls `profile a z` with real arguments. The definition actually in use is not visible. If it is defined as the right-hand side, the theorem is trivially true by definition and carries no content.",
+     "polarity": "unclear",
+     "probe_idea": "#check @profile and #print profile in the context of line 689. Then test whether `profile_eq_integral` closes by `rfl` or `unfold profile; rfl`.",
+     "paper_ref": null
+    },
+    {
+     "id": "F3",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "profile_eq_integral",
+     "line": 15,
+     "paper_ref": null,
+     "explanation": "There are no hypotheses on a or z. For a ≤ 0, v^{a-1} is not integrable at 0 and Γ has poles, so the integral is junk 0. For z < 0, (1+zv) is negative for large v and rpow of a negative base is a cos-modified junk value. The identity holds in those regimes only through Lean conventions, or because `profile` is defined to match. The mathematically meaningful range (e.g. a > 0, z ≥ 0) is not singled out.",
+     "polarity": "unclear",
+     "probe_idea": "Evaluate both sides at a = -1, z = 0 and at a = 1/2, z = -1 to see whether the identity is meaningful or junk-driven there."
+    }
+   ],
+   "lint_verdicts": []
+  }
+ },
+ {
+  "label": "Lemma 5.2",
+  "decl": "exists_reference_bounds",
+  "file": "NavierStokes/ReferenceBounds.lean",
+  "line": 1180,
+  "audit": {
+   "summary": "Mispaired: the Lean theorem is not the paper's Lemma 5.2. Lean proves the existence of thresholds M, then C₀, then r. For every Λ ≥ M, every C ≥ C₀ and every 0 < δ < r, it gives an entrance profile E for which the reference profiles satisfy a list of bounds on a 'hold region': a source lower bound, a logarithmic slope bound, positivity of p1, a cone margin, and p1(100,η) > 3. The paper's Lemma 5.2 is an induction lemma: it builds smooth order-n extensions of inner solutions with vanishing moments m_n, compact X-support, and support and derivative bounds on the stress T_n. Many objects the Lean statement uses are not shown (holdRegion, referenceProfiles, sourceQ, logSlope, coneSize, CoefficientProfile, window, etc.), so even its intended meaning cannot be fully checked.",
+   "glossary": [
+    {
+     "decl": "AnalyticInputs",
+     "line": 5,
+     "plain": "A coefficient family together with a radius exceeding its epsilon and a compact set K ⊂ ℂ. K contains every closed ball of that radius centred on the window interval. The axis phase is complex-analytic on a neighbourhood of K, with derivative complexGradient.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "window.interval, CoefficientFamily, axisPhase and complexGradient are not shown."
+    },
+    {
+     "decl": "EntranceProfile",
+     "line": 24,
+     "plain": "A coefficient profile satisfying three conditions on the rescaled entrance set: a strict source lower bound (19/20)·L·Λ·χ + 5/2 < Sq, positivity of p1 for p.1 > 0, and a cone size > 9/4 at X = 4/Λ for all |η| ≤ 1.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "entranceSet, Sq, p1 and coneSize are not shown."
+    },
+    {
+     "decl": "ReferenceBoundsOnHold",
+     "line": 40,
+     "plain": "On holdRegion, the reference profiles satisfy: a source lower bound with constants 47/50 and 12/5; logSlope ≤ 1; p1 > 0 when p.1 > 0; coneSize > 9/4 when p.1 ≥ 4/Λ; and p1(100, η) > 3 for |η| ≤ 1.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "holdRegion, referenceProfiles, sourceQ and logSlope are not shown."
+    },
+    {
+     "decl": "SmallParameters",
+     "line": 59,
+     "plain": "0 < h ≤ 1/1000 and 0 < j ≤ 1/1000.",
+     "standard_concept": "smallness regime for parameters",
+     "matches_standard": "unclear",
+     "note": "Not in excerpt."
+    },
+    {
+     "decl": "E",
+     "line": 18,
+     "plain": "heatE plus patch increment.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "Shadowed by the local binder E in the theorem; unused in the statement."
+    },
+    {
+     "decl": "M",
+     "line": 37,
+     "plain": "Alias of HeatedOutgoing.M.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "Shadowed by the local binder M in the theorem; unused in the statement."
+    }
+   ],
+   "lean_claims": [
+    {
+     "theorem": "exists_reference_bounds",
+     "line": 71,
+     "plain": "Assume: analytic inputs d; 0 < h, j ≤ 1/1000; σ > 0; P0 smooth; ν > 0; and for every |η| ≤ 1 with |Z(η)| ≤ ν we have χ(η) > 99/100. Then there exists M > 0 such that for all Λ ≥ M there exists C₀ > 0 such that for all C ≥ C₀ there exist an EntranceProfile E for (d, Λ, C) and r > 0 such that for all 0 < δ < r: 2δ < rampLimit, and ReferenceBoundsOnHold holds for E.profile at (Λ, δ)."
+    }
+   ],
+   "paper_claims": [
+    {
+     "ref": "Lemma 5.2",
+     "plain": "There are radii X_a < X_− < X_+ < X_b, independent of n, with the following property. Given lower-order profiles satisfying (5.2), (5.5) and (5.12), the order-n inner solution extends smoothly to X ≥ 0, |η| ≤ 1, agreeing with it on [0, X_−]. The extension satisfies (5.2) and (5.5), has m_n = 0, and has supp_X P_n ⊂ [0, X_+]. V_n/X and F_n/X extend smoothly to X = 0. The stress T_n has the stated support and obeys the derivative bounds (5.13)."
+    }
+   ],
+   "coverage": [
+    {
+     "paper_ref": "Lemma 5.2",
+     "lean_theorem": "exists_reference_bounds",
+     "relation": "different",
+     "why": "Mispaired: Lean concerns reference-path source, slope and cone bounds on a hold region with Λ, C and δ thresholds. The paper's Lemma 5.2 concerns inductive smooth extension of order-n inner solutions, moment vanishing and stress support/derivative bounds. The Lean docstring follows an earlier candidate-manuscript numbering."
+    }
+   ],
+   "flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "exists_reference_bounds",
+     "line": 71,
+     "paper_ref": "Lemma 5.2",
+     "explanation": "The Lean statement and the paper excerpt state unrelated results; the label is shared only through the differing manuscript numbering. Faithfulness cannot be assessed against the shown text.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F2",
+     "category": "assumption",
+     "severity": "low",
+     "decl": "exists_reference_bounds",
+     "line": 74,
+     "paper_ref": null,
+     "explanation": "Hypothesis hcut (χ > 99/100 wherever |Z| ≤ ν) is an explicit nontrivial input. AnalyticInputs also packages analyticity of the phase on a compact neighbourhood. Whether the source manuscript assumes these is not in excerpt.",
+     "polarity": "lean weaker",
+     "probe_idea": "Check whether hcut is derivable from SmallParameters and the definitions of Z and chi for some ν > 0."
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "low",
+     "decl": "ReferenceBoundsOnHold",
+     "line": 44,
+     "paper_ref": null,
+     "explanation": "The meaning depends on unseen definitions (holdRegion, referenceProfiles, sourceQ, logSlope, coneSize). If holdRegion were empty or degenerate, the first four fields would be vacuous.",
+     "polarity": "unclear",
+     "probe_idea": "example : (holdRegion).Nonempty, plus a check that holdRegion contains points with p.1 ≥ 4/Λ."
+    }
+   ],
+   "lint_verdicts": []
+  }
+ },
+ {
+  "label": "Lemma 8.7",
+  "decl": "primary_covariance_average",
+  "file": "NavierStokes/TorusAverages.lean",
+  "line": 656,
+  "audit": {
+   "summary": "Mispaired: paper Lemma 8.7 is about choosing five bump profiles so that an axisymmetric increment (∆v, γd) uniquely solves the integral constraints (8.25). The Lean theorem is an unrelated torus-averaging identity. It says that the square-average over z of the angular mean of a(z)·cos²(jθ+phase(z)) equals (|det(vr,vt)|/2)·(∫χ²)·actualColumn_i, where a is a periodized native slot field composed with an n-fold covering map. Most components (periodize, nativeField, slotChart, transverseStretch, pulseProfile, squareAverage, covering, period) are not visible, so even the Lean statement's own meaning cannot be fully checked.",
+   "glossary": [
+    {
+     "decl": "actualColumn",
+     "line": 12,
+     "plain": "Vector with i-th entry ci·∫_ℝ ψ(v)²·x(v)·t(v)_i dv.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "Bespoke. The integrand is integrable here because ψ is compactly supported and ψ, x, t are continuous, so the junk value 0 does not arise."
+    },
+    {
+     "decl": "angularMean",
+     "line": 18,
+     "plain": "(1/period)·∫_0^period f(θ) dθ.",
+     "standard_concept": "normalized angular average",
+     "matches_standard": "unclear",
+     "note": "`period` is not shown. The theorem uses SmoothLoop.angularMean, and it is not visible whether that is this definition."
+    },
+    {
+     "decl": "a",
+     "line": 9,
+     "plain": "a(h) = 1/2 + h.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "Not used by the theorem: it is shadowed by the local `let a` on line 39."
+    },
+    {
+     "decl": "center",
+     "line": 25,
+     "plain": "Slot center plus a lattice point.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "The theorem takes `center` as an arbitrary Plane parameter, which shadows this definition."
+    }
+   ],
+   "lean_claims": [
+    {
+     "theorem": "primary_covariance_average",
+     "line": 33,
+     "plain": "Hypotheses: vectors vr, vt with det(vr,vt) ≠ 0; any center; ci > 0 and any r0; χ, ψ, x, t continuous; χ and ψ compactly supported; i ∈ Fin 2; n ∈ ℕ; any phase function; integer j ≠ 0. Let a(z) be the periodization of the native field of the transverse-stretched pulse profile in the slot chart, evaluated at covering^[n](z). Conclusion: squareAverage_z of angularMean_θ[a(z)·cos²(jθ+phase z)] = (|det|/2)·∫χ²·actualColumn(ci,ψ,x,t)_i."
+    }
+   ],
+   "paper_claims": [
+    {
+     "ref": "Lemma 8.7",
+     "plain": "Assume the slow base satisfies (8.24) with λ > 0 and |a(η)| ≥ a0 > 0. Then there are three azimuthal and two axial bump profiles such that, for arbitrary targets (P, Jθ, Jz), a unique linear combination (∆v, γd) satisfies the five integral constraints (8.25). The resulting increments are linear in the targets, lie in the stated classes, and preserve the integral constraints."
+    }
+   ],
+   "coverage": [
+    {
+     "paper_ref": "Lemma 8.7",
+     "lean_theorem": "primary_covariance_average",
+     "relation": "different",
+     "why": "mispaired: the Lean statement is a torus/angular averaging identity for periodized slot coefficients; the paper's Lemma 8.7 concerns invertibility of a bump-profile system for axisymmetric increments (8.25). They share only the label."
+    }
+   ],
+   "flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "low",
+     "decl": "primary_covariance_average",
+     "line": 33,
+     "paper_ref": "Lemma 8.7",
+     "explanation": "The paper Lemma 8.7 shown is a different result, so the docstring's citation refers to a candidate-manuscript numbering. Nothing in the published Lemma 8.7 is formalized by this declaration.",
+     "polarity": "n/a",
+     "probe_idea": null
+    },
+    {
+     "id": "F2",
+     "category": "other",
+     "severity": "low",
+     "decl": "primary_covariance_average",
+     "line": 39,
+     "paper_ref": null,
+     "explanation": "Key definitions are not visible: periodize, nativeField, slotChart, transverseStretch, pulseProfile, squareAverage, covering, SmoothLoop.angularMean and period. Also, a(z) does not depend on θ, so the angular mean reduces to a(z)·(average of cos²). That average is 1/2 only if period is a multiple of 2π (or of π/|j|); the theorem's content depends on this hidden constant.",
+     "polarity": "unclear",
+     "probe_idea": "example : SmoothLoop.angularMean (fun θ => (Real.cos θ : ℂ)^2) = 1/2"
+    },
+    {
+     "id": "F3",
+     "category": "type-default",
+     "severity": "low",
+     "decl": "primary_covariance_average",
+     "line": 43,
+     "paper_ref": null,
+     "explanation": "The LHS is built from a ℂ-valued angular mean, while the RHS is a real product. The equality involves an implicit cast whose direction depends on squareAverage's signature, which is not shown.",
+     "polarity": "unclear",
+     "probe_idea": "#check @squareAverage"
+    }
+   ],
+   "lint_verdicts": []
+  }
+ },
+ {
+  "label": "Lemma 8.8",
+  "decl": "normalized_double_cross",
+  "file": "NavierStokes/CurlGeometry.lean",
+  "line": 75,
+  "audit": {
+   "summary": "The Lean theorem proves an algebraic vector identity over any field R. If n, a ∈ R³ with n·n ≠ 0 and n·a = 0, then (−1/(n·n))·(n×(n×a)) = a. This is the triple-product (BAC−CAB) identity specialised to a ⊥ n. The paper text labelled Lemma 8.8 is a quite different result: it computes the radial remainder R_g and the updated defects (P, J_θ, J_z) after a mean correction, and gives their M/S-class membership. The pairing is therefore a mismatch caused by the candidate-manuscript numbering. The Lean statement is correct for what it says, but it does not formalize the shown Lemma 8.8.",
+   "glossary": [
+    {
+     "decl": "cross",
+     "line": 12,
+     "plain": "Standard cross product u×v in R³ (indices 0,1,2), over any commutative ring",
+     "standard_concept": "vector cross product",
+     "matches_standard": "yes",
+     "note": ""
+    },
+    {
+     "decl": "dot",
+     "line": 19,
+     "plain": "Standard bilinear dot product u·v = Σ u_i v_i in R³",
+     "standard_concept": "Euclidean dot product",
+     "matches_standard": "yes",
+     "note": ""
+    },
+    {
+     "decl": "a",
+     "line": 9,
+     "plain": "a(h) = 1/2 + h; not used by the theorem, whose variable `a` shadows it",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "Irrelevant to this statement; the binder `a : Vec3 R` shadows it."
+    },
+    {
+     "decl": "Field",
+     "line": 2,
+     "plain": "Repo abbreviation Field := ℝ×ℝ → ℝ (a scalar field on the plane)",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "The theorem's `[Field R]` must resolve to Mathlib's algebraic Field class, since the repo abbrev cannot take R as an argument. Namespace resolution is not visible to me."
+    }
+   ],
+   "lean_claims": [
+    {
+     "theorem": "normalized_double_cross",
+     "line": 25,
+     "plain": "For any field R and n, a ∈ R³: if n·n ≠ 0 and n·a = 0, then −(1/(n·n)) · n×(n×a) = a."
+    }
+   ],
+   "paper_claims": [
+    {
+     "ref": "Lemma 8.8",
+     "plain": "Setting: a slow base satisfying (8.24) with |a(η)| ≥ a0 > 0, and a divergence-free mean correction corrected via Lemma 8.7. Claims: the radial remainder R_g = g_{r,new} − g_r − (2V/R)Δv is given by formula (8.26); the new defects P_new, (J_θ)_new, (J_z)_new are given by the integrals (8.27); and under derivative bounds and class assumptions, R_g ∈ M_{α+0.9−2κs} and the new defects lie in S_{α+0.9−2κs}."
+    }
+   ],
+   "coverage": [
+    {
+     "paper_ref": "Lemma 8.8",
+     "lean_theorem": "normalized_double_cross",
+     "relation": "different",
+     "why": "mispaired: the Lean result is a pointwise vector triple-product identity. The shown Lemma 8.8 concerns mean-correction defect formulas and function-class estimates, and no double cross product appears in the excerpt."
+    }
+   ],
+   "flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "normalized_double_cross",
+     "line": 25,
+     "paper_ref": null,
+     "explanation": "The repo defines `abbrev Field := ℝ × ℝ → ℝ`, yet the theorem uses `[Field R]` as a typeclass. Since it compiles, it presumably refers to Mathlib's `_root_.Field`; I cannot see the namespace context. If it resolves to Mathlib Field, the statement is the intended general algebraic identity. In any case the identity holds over any field, so the statement is not weakened.",
+     "polarity": "n/a",
+     "probe_idea": "#check @normalized_double_cross  -- confirm the instance argument is `_root_.Field R`"
+    }
+   ],
+   "lint_verdicts": []
+  }
+ },
+ {
+  "label": "Lemma 9.2",
+  "decl": "curlRemainder_waveClass",
+  "file": "NavierStokes/CurlClassBounds.lean",
+  "line": 758,
+  "audit": {
+   "summary": "The Lean theorem says the following. Take a wave amplitude `a` in the wave class W_α, with weight √ζ·P. Assume the phase normal of the field (V_r, V_θ, V_z, Φ) has polynomial jet bounds and satisfies 0 < b ≤ |n_Φ| ≤ M on the strip domain. Assume V_r ∈ M_{-κ}, V_θ ∈ M_0, V_z ∈ M_1 and 1/R ∈ M_0 (all unweighted), and 1/K_n = O(ε_n^{1/2}·slow^p). Then the curl remainder of the curl-generated coefficient lies in W_{α+1/2-κ}. The quoted paper Lemma 9.2 is a different result, so the declaration appears mispaired with the excerpt. The paper lemma concerns mean–wave and wave–wave transport products (w·∇*)v + (v·∇*)w, with exponent α+μ−1/2. The Lean result is about a curl remainder with exponent α+1/2−κ. The key caveat is that the core objects (`curlRemainder`, `coefficient`, `phaseNormal`, `MemClass`, `StripData`) are not visible, so faithfulness even to the candidate-manuscript lemma cannot be checked here.",
+   "glossary": [
+    {
+     "decl": "BandBound",
+     "line": 4,
+     "plain": "A band-indexed scalar sequence a_n satisfies |a_n| ≤ C·ε_n^β·slow_n^p for some C ≥ 0 and some p ∈ ℕ.",
+     "standard_concept": "Band-uniform size bound of order ε^β up to polynomial slow factors",
+     "matches_standard": "unclear",
+     "note": "The meaning of s.epsilon and s.slow is not visible."
+    },
+    {
+     "decl": "PolynomialJets",
+     "line": 15,
+     "plain": "Each f_i is C^∞ on its chart. For every N, all derivatives up to order N are bounded by C·scale_i^m, uniformly in i.",
+     "standard_concept": "Uniform polynomial jet bounds",
+     "matches_standard": "yes",
+     "note": ""
+    },
+    {
+     "decl": "UnweightedClass",
+     "line": 24,
+     "plain": "Membership in MemClass with weight 1 and exponent α (a mean class M_α).",
+     "standard_concept": "Mean class M_α",
+     "matches_standard": "unclear",
+     "note": "MemClass is not shown."
+    },
+    {
+     "decl": "WaveClass",
+     "line": 29,
+     "plain": "Membership in MemClass with weight √ζ(x)·P_n(x) and exponent α.",
+     "standard_concept": "Wave class W_α",
+     "matches_standard": "unclear",
+     "note": "MemClass is not shown. Real.sqrt of a negative ζ would give 0."
+    },
+    {
+     "decl": "M",
+     "line": 10,
+     "plain": "A repo function HeatedOutgoing.M.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "In the theorem it is shadowed by the bound variable {M : ℝ}, so it is irrelevant to the statement."
+    },
+    {
+     "decl": "a",
+     "line": 35,
+     "plain": "The repo function h ↦ 1/2 + h.",
+     "standard_concept": null,
+     "matches_standard": "unclear",
+     "note": "In the theorem, `a` is used as an ℕ → D → E sequence satisfying WaveClass. It is presumably an auto-bound variable, not this def."
+    }
+   ],
+   "lean_claims": [
+    {
+     "theorem": "curlRemainder_waveClass",
+     "line": 39,
+     "plain": "Hypotheses: the phase normals n_Φ^(n) have uniform polynomial jets on the phase domain; a ∈ W_α (weight √ζ·P); b > 0 and b ≤ |n_Φ^(n)(x)| ≤ M for x in s.domain; κ ≥ 0; V_r ∈ M_{-κ}, V_θ ∈ M_0, V_z ∈ M_1, 1/R ∈ M_0; and |1/K_n| ≤ C·ε_n^{1/2}·slow_n^p. Conclusion: n ↦ curlRemainder(K_n, R, V^(n), coefficient(R, V^(n), Φ_n, a_n)) belongs to W_{α+1/2−κ} with the same weight √ζ·P."
+    }
+   ],
+   "paper_claims": [
+    {
+     "ref": "Lemma 9.2",
+     "plain": "If w ∈ W_α is a wave and v is a mean field with tangential components in M_μ and radial component in M_{μ+1}, then the nonzero harmonics of (w·∇*)v + (v·∇*)w lie in W_{α+μ−1/2}. For two curl-generated waves with the same label, the nonzero harmonics of the symmetric product lie in W_{α+α′−κs} and the zero harmonic lies in M_{α+α′−κs}. Distinct labels give zero products."
+    }
+   ],
+   "coverage": [
+    {
+     "paper_ref": "Lemma 9.2",
+     "lean_theorem": "curlRemainder_waveClass",
+     "relation": "different",
+     "why": "mispaired: the Lean statement bounds a curl remainder of a curl-generated coefficient, giving exponent α+1/2−κ. The paper's Lemma 9.2 bounds mean–wave and wave–wave transport products, with exponents α+μ−1/2 and α+α′−κs. The candidate-manuscript numbering likely differs."
+    }
+   ],
+   "flags": [
+    {
+     "id": "F1",
+     "category": "other",
+     "severity": "low",
+     "decl": "curlRemainder_waveClass",
+     "line": 50,
+     "paper_ref": null,
+     "explanation": "The definitions of curlRemainder, coefficient, phaseNormal, MemClass and StripData are not visible. Whether the statement captures the intended curl-remainder estimate cannot be judged from the excerpt.",
+     "polarity": "unclear",
+     "probe_idea": "#print curlRemainder; #print coefficient; #print MemClass — then check them against the candidate manuscript's definitions."
+    },
+    {
+     "id": "F2",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "BandBound",
+     "line": 47,
+     "paper_ref": null,
+     "explanation": "The hypothesis hK bounds 1/K n, and in Lean 1/0 = 0. So K n = 0 satisfies the hypothesis vacuously. If K is meant to be a large wavenumber, this permits a degenerate K n = 0 case. That makes the theorem stronger, not weaker, but it is worth knowing.",
+     "polarity": "lean stronger",
+     "probe_idea": "Check whether curlRemainder 0 R ... is well-behaved, or whether a separate positivity hypothesis on K n appears elsewhere."
+    },
+    {
+     "id": "F3",
+     "category": "other",
+     "severity": "low",
+     "decl": "curlRemainder_waveClass",
+     "line": 42,
+     "paper_ref": null,
+     "explanation": "The names `a` and `M` collide with the repo definitions shown at lines 10 and 35. In the statement they appear to be bound or auto-implicit variables, so the shown definitions do not affect the statement.",
+     "polarity": "n/a",
+     "probe_idea": "#check @curlRemainder_waveClass to confirm that `a` and `M` are binders."
+    }
+   ],
+   "lint_verdicts": []
+  }
+ },
+ {
+  "label": "Proposition 9.3",
+  "decl": "constructed_linear_wave_with_flat_error",
+  "file": "NavierStokes/LinearWaveBounds.lean",
+  "line": 898,
+  "audit": {
+   "summary": "The Lean theorem is a one-step, coefficient-level statement about a single harmonic, under many structural hypotheses. A corrected linear wave is built from a source in WaveClass α. The theorem proves three things: the 'good' part lies in WaveClass (α + 1/2 − 3κ); an excluded-slot error lies in UnweightedClass for every real N; and an exact pointwise identity holds, residual + source·carrier = (good + error)·carrier. Paper Proposition 9.3 is a statement about the full iterated construction (u^[j], p^[j]), and the pairing may be loose. It covers the physical decomposition R = G + F, harmonic support structure, the physical flat bound |F|_m ≤ C q^N, and exact mean equations. Lean captures at most a single-step analogue of the 'G + F with F flat' part. Key caveats: (iii) and most of (i) are not formalized, and several hypotheses (ExactConditions on the corrected coefficients, hsolve, a band-independent radius) assume properties of the construction.",
+   "glossary": [
+    {
+     "decl": "BandBound",
+     "line": 4,
+     "plain": "a_n is O(ε_n^β · slow_n^p) uniformly in the band n, for some constant C ≥ 0 and some p ∈ ℕ.",
+     "standard_concept": "band-uniform weighted bound",
+     "matches_standard": "yes",
+     "note": "Used in hK with a_n = 1/frequency_n. If frequency_n = 0, the junk value 1/0 = 0 makes the bound trivial at that n."
+    },
+    {
+     "decl": "BandScaleControl",
+     "line": 12,
+     "plain": "Data with ε_n = Q_n^power for a real exponent, and slow_n ≤ C(1+S_n)^deg with C ≥ 1.",
+     "standard_concept": "scale identity ε = Q^{power} with polynomial slow-scale control",
+     "matches_standard": "unclear",
+     "note": "Paper scale conventions are not in the excerpt."
+    },
+    {
+     "decl": "D",
+     "line": 26,
+     "plain": "The shown definition is D(h) = 1/2 − h, a real function.",
+     "standard_concept": "presumably the spatial domain type",
+     "matches_standard": "unclear",
+     "note": "The theorem uses D as a type (StripData D, D → ℝ), so this extracted definition cannot be the one in scope. The actual D is not visible."
+    },
+    {
+     "decl": "ExactConditions",
+     "line": 31,
+     "plain": "On s.domain: the phases are smooth; the radius is nonzero and has unit radial derivative; the base, amplitude and pressure are annihilated by the angular field; and each phase has constant angular derivative.",
+     "standard_concept": "local geometric/angular conditions for the exact residual identity",
+     "matches_standard": "unclear",
+     "note": "Imposed on the corrected coefficients (an output of the construction)."
+    },
+    {
+     "decl": "FlatEdges",
+     "line": 47,
+     "plain": "Two positive decay rates, a width, and a position map into (0, width) on the domain, with δ given by the radial primitive formula and ζ bounded by the two-sided exponential-flat profile.",
+     "standard_concept": "two-sided exponentially flat edge cutoff",
+     "matches_standard": "unclear",
+     "note": "WeightedRadialPrimitive.delta and zeta are not shown."
+    },
+    {
+     "decl": "ComplexVector",
+     "line": 22,
+     "plain": "Alias of HarmonicCalculus.ComplexVector, presumably ℂ^3.",
+     "standard_concept": "C^3-valued coefficients",
+     "matches_standard": "unclear",
+     "note": "Definition not shown."
+    }
+   ],
+   "lean_claims": [
+    {
+     "theorem": "constructed_linear_wave_with_flat_error",
+     "line": 63,
+     "plain": "Assume the following hypotheses:\n- InputBounds s P α κ d a, and κ ≤ 1/2.\n- A slot family g with linear(fastScale·fast) = 1/length.\n- Flat edges and band-scale control data.\n- source ∈ WaveClass s P α.\n- A Gaussian bound P_n(x) ≤ exp(−c(coord_n(x) − 1/2)^2 · length_n) with c > 0.\n- A band-independent radius R.\n- Polynomial jet bounds on the normal, and 0 < b ≤ |normal| ≤ M on the domain.\n- 1/frequency_n bounded by ε_n^{1/2} times a slow polynomial.\n- principal = −source on the domain.\n- ExactConditions for the corrected coefficients.\nThen three conclusions hold:\n(1) constructedGood ∈ WaveClass s P (α + 1/2 − 3κ);\n(2) the excluded-slot error lies in UnweightedClass s N for every real N;\n(3) for all n and x in the domain, harmonicResidual(corrected)_n(x) + source_n(x)·carrier = (constructedGood_n(x) + error_n(x))·carrier."
+    }
+   ],
+   "paper_claims": [
+    {
+     "ref": "Proposition 9.3",
+     "plain": "After any finite sequence of the construction steps, with pressure reconstructed, the physical residual decomposes as R(u^[j], p^[j]) = G^[j] + F^[j]. (i) The nonzero harmonics of G* are a finite band-independent set of harmonics, with supported smooth coefficients in W_α and mean in M_µ. (ii) |F^[j]|_m ≤ C_{j,m,N} q^N for all m and N, uniformly over bands, labels and points. (iii) Exact mean equations (9.6) hold."
+    }
+   ],
+   "coverage": [
+    {
+     "paper_ref": "Proposition 9.3 (overall, iterated construction)",
+     "lean_theorem": "constructed_linear_wave_with_flat_error",
+     "relation": "lean_weaker",
+     "why": "Lean treats one wave-construction step for one harmonic coefficient, not the finite iterated sequence with pressure reconstruction."
+    },
+    {
+     "paper_ref": "Proposition 9.3 (i) coefficient class",
+     "lean_theorem": "constructed_linear_wave_with_flat_error",
+     "relation": "lean_weaker",
+     "why": "Only the W-class membership of the good coefficient is formalized, with an explicit exponent α + 1/2 − 3κ. The finite harmonic set H_j, supports and smooth zero extension are not formalized."
+    },
+    {
+     "paper_ref": "Proposition 9.3 (ii) flat remainder",
+     "lean_theorem": "constructed_linear_wave_with_flat_error",
+     "relation": "lean_weaker",
+     "why": "Lean gives UnweightedClass for all N at coefficient level. Whether this equals the physical |F|_m ≤ C q^N uniform bound cannot be checked, because UnweightedClass is not shown."
+    },
+    {
+     "paper_ref": "Proposition 9.3 (iii) mean equations",
+     "lean_theorem": null,
+     "relation": "not_formalized",
+     "why": "No mean-equation statement appears."
+    }
+   ],
+   "flags": [
+    {
+     "id": "F1",
+     "category": "coverage",
+     "severity": "medium",
+     "decl": "constructed_linear_wave_with_flat_error",
+     "line": 63,
+     "paper_ref": "Proposition 9.3",
+     "explanation": "The paper result concerns the full iterated construction and the physical residual R(u^[j], p^[j]), with parts (i)–(iii). Lean is a single-step coefficient identity. The excerpt's proof mentions Propositions 9.1, 7.2, 6.6, so the Lean statement may better match one of those (e.g. a pulse-inverse step). Part (iii) and the support/harmonic-finiteness claims of (i) are absent.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F2",
+     "category": "assumption",
+     "severity": "medium",
+     "decl": "constructed_linear_wave_with_flat_error",
+     "line": 80,
+     "paper_ref": "Proposition 9.3",
+     "explanation": "hg assumes ExactConditions for a.corrected s d g.cutoff, i.e. smoothness, angular invariance and radial normalization of the constructed (output) coefficients. The paper presents these as properties of the construction, not as hypotheses. If they are not discharged elsewhere, the result is conditional on them.",
+     "polarity": "lean weaker",
+     "probe_idea": "Prove ExactConditions s d (a.corrected s d g.cutoff) from InputBounds and ExactConditions on a, or locate a repo lemma that does."
+    },
+    {
+     "id": "F3",
+     "category": "assumption",
+     "severity": "low",
+     "decl": "constructed_linear_wave_with_flat_error",
+     "line": 73,
+     "paper_ref": null,
+     "explanation": "hR forces a.radius to be the same function R for every band n. hsolve requires principal = −source exactly. hP imposes a Gaussian bound on P. These are plausible setup properties, but this is not in excerpt.",
+     "polarity": "lean weaker",
+     "probe_idea": null
+    },
+    {
+     "id": "F4",
+     "category": "definition-mismatch",
+     "severity": "medium",
+     "decl": "constructed_linear_wave_with_flat_error",
+     "line": 82,
+     "paper_ref": "Proposition 9.3 (ii)",
+     "explanation": "The flat-error claim relies on UnweightedClass, and the goodness claim on WaveClass and InputBounds; none of these is shown. It cannot be verified that UnweightedClass s N encodes all-derivative bounds |·|_m ≤ C q^N uniform over bands, labels and points. It might, for instance, fix the derivative order or use a different small parameter.",
+     "polarity": "unclear",
+     "probe_idea": "Unfold UnweightedClass s N and check it states ∀ m, ∃ C, ∀ n x, ‖D^m f n x‖ ≤ C · q_n^N (or the paper's equivalent)."
+    },
+    {
+     "id": "F5",
+     "category": "other",
+     "severity": "low",
+     "decl": "D",
+     "line": 26,
+     "paper_ref": null,
+     "explanation": "The extracted D is a real function, yet the theorem uses D as a type. The true domain type is not visible, so domain-related content cannot be audited.",
+     "polarity": "n/a",
+     "probe_idea": "#check (D : Type) in the theorem's namespace."
+    },
+    {
+     "id": "F6",
+     "category": "junk-value",
+     "severity": "low",
+     "decl": "constructed_linear_wave_with_flat_error",
+     "line": 78,
+     "paper_ref": null,
+     "explanation": "hK bounds 1/a.frequency n. If any frequency is 0, then 1/0 = 0 and the hypothesis is silent about it. Whether frequency ≠ 0 is enforced elsewhere (e.g. in InputBounds) is not shown.",
+     "polarity": "lean weaker",
+     "probe_idea": "Derive ∀ n, a.frequency n ≠ 0 from InputBounds."
+    }
+   ],
+   "lint_verdicts": []
+  }
+ }
+]

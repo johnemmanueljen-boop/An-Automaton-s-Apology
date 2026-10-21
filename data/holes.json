@@ -1,0 +1,30 @@
+[
+ {
+  "repo": "ten-proofs",
+  "config": "H_GapCVP.json",
+  "hole": "GapCVP.Comparator.gapCVP400Promise",
+  "status": "MATCH",
+  "solution_line": 129888
+ },
+ {
+  "repo": "ten-proofs",
+  "config": "H_GapCVP.json",
+  "hole": "GapCVP.Comparator.binaryNearestCodewordPromise",
+  "status": "MATCH",
+  "solution_line": 130066
+ },
+ {
+  "repo": "ten-proofs",
+  "config": "H_GapCVP.json",
+  "hole": "GapCVP.Comparator.binarySyndromeDecodingPromise",
+  "status": "MATCH",
+  "solution_line": 130111
+ },
+ {
+  "repo": "ten-proofs",
+  "config": "H_GapCVP.json",
+  "hole": "GapCVP.Comparator.finitePGapCVPPromise",
+  "status": "MATCH",
+  "solution_line": 130166
+ }
+]

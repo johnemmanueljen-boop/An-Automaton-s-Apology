@@ -1,0 +1,24 @@
+[
+ {
+  "id": "sofic-nonvacuity-trivial-group",
+  "repo": "ten-proofs",
+  "challenge_file": "ComparatorChallenges/D_NonSoficGroup.lean",
+  "kind": "non-vacuity",
+  "claim": "OpenAI's bespoke `Sofic` definition is satisfiable: the trivial group is sofic. (If it weren't, 'there is a non-sofic group' would be trivially true.)",
+  "lean": "theorem probe_trivial_sofic : SoficGroups.Sofic (Multiplicative Unit) := by\n  constructor\n  intro F ε hε _\n  refine ⟨⟨1, one_pos, fun _ => 1, rfl⟩, ⟨?_, ?_⟩⟩\n  · intro g _ h _\n    simpa [SoficGroups.normalizedHamming] using hε\n  · intro g _ hg\n    exact absurd (Subsingleton.elim g 1) hg",
+  "check_decls": [
+   "probe_trivial_sofic"
+  ]
+ },
+ {
+  "id": "sofic-nonvacuity-finite-groups",
+  "repo": "ten-proofs",
+  "challenge_file": "ComparatorChallenges/D_NonSoficGroup.lean",
+  "kind": "non-vacuity",
+  "claim": "Every finite group is sofic under OpenAI's definition (the regular representation works), matching the standard fact.",
+  "lean": "theorem probe_finite_sofic (G : Type) [Group G] [Fintype G] [DecidableEq G] : SoficGroups.Sofic G := by\n  sorry",
+  "check_decls": [
+   "probe_finite_sofic"
+  ]
+ }
+]

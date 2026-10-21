@@ -1,0 +1,137 @@
+{
+ "challenge": "../oai-math/lean/ComparatorChallenges/QuasiRiemannHypothesis.lean",
+ "paper": "../oai-math/preprints/The-Quasi-Riemann-Hypothesis-September-30-2026/build/paper.tex",
+ "lines": "64:118",
+ "lint": [
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "QuasiRiemannHypothesis.lean",
+   "decl": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+   "decl_kind": "theorem",
+   "line": 6,
+   "snippet": "{s : ℂ} (hs : (7 / 8 : ℝ) < s.re) : riemannZeta s ≠ 0 := by",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "QuasiRiemannHypothesis.lean",
+   "decl": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+   "decl_kind": "theorem",
+   "line": 5,
+   "snippet": "theorem riemannZeta_ne_zero_of_seven_eighths_lt_re",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "QuasiRiemannHypothesis.lean",
+   "decl": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+   "decl_kind": "theorem",
+   "line": 6,
+   "snippet": "{s : ℂ} (hs : (7 / 8 : ℝ) < s.re) : riemannZeta s ≠ 0 := by",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  }
+ ],
+ "audit": {
+  "summary": "The Lean statement says that for every complex s with Re s > 7/8, Mathlib's `riemannZeta s ≠ 0`. This is exactly the ζ-case of the paper's main theorem, i.e. the quasi-Riemann hypothesis with σ₀ = 7/8. The most important caveat is coverage: the Hecke L-functions over ℚ(√-3) and general Dirichlet L-functions in Theorem 1 are not formalized. A minor point is that the Lean statement also asserts nonvanishing at the pole s = 1, where it refers to Mathlib's convention value. That value is known to be nonzero (`riemannZeta_one_ne_zero`), so the extra claim is true and costless.",
+  "glossary": [
+   {
+    "decl": "riemannZeta",
+    "line": 6,
+    "plain": "Mathlib's Riemann zeta function on ℂ: the meromorphic continuation of Σ n^{-s}, totalized at s = 1 by the value (γ − log 4π)/2.",
+    "standard_concept": "Riemann zeta function ζ(s)",
+    "matches_standard": "yes",
+    "note": "Agrees with ζ away from s = 1. At s = 1 it takes a finite, nonzero convention value."
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+    "line": 5,
+    "plain": "For all s ∈ ℂ with 7/8 < Re s, riemannZeta s ≠ 0. This includes s = 1, where the claim is about the convention value."
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1 (thm:main)",
+    "plain": "Every finite-order Hecke L-function over F = ℚ(√-3) has no zero in Re s > 7/8. The same holds for every Dirichlet L-function, including ζ(s). A pole at s = 1 for a principal character is allowed."
+   },
+   {
+    "ref": "Corollary following Theorem 1 (quasi-RH)",
+    "plain": "ζ(s) ≠ 0 for Re s > 7/8. Equivalently, the supremum of the real parts of the nontrivial zeros of ζ is at most 7/8."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1, ζ case / quasi-RH corollary",
+    "lean_theorem": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+    "relation": "equivalent",
+    "why": "Same half-plane and same nonvanishing claim. The additional assertion at s = 1 is the true Mathlib fact `riemannZeta_one_ne_zero`."
+   },
+   {
+    "paper_ref": "Theorem 1, Hecke L-functions over ℚ(√-3)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "No Hecke L-function statement appears in the Lean file."
+   },
+   {
+    "paper_ref": "Theorem 1, general Dirichlet L-functions",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Only the trivial character (ζ) is covered. No statement about DirichletCharacter.LFunction is made."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+    "line": 5,
+    "paper_ref": "Theorem 1",
+    "explanation": "The paper's main theorem is uniform over all Dirichlet L-functions and all finite-order Hecke L-functions over ℚ(√-3). The Lean statement covers only ζ. The quasi-RH corollary is fully captured, but the uniform statement is not.",
+    "polarity": "lean weaker",
+    "probe_idea": "Formalize: ∀ {q} (χ : DirichletCharacter ℂ q) (s : ℂ), 7/8 < s.re → (χ ≠ 1 ∨ s ≠ 1) → DirichletCharacter.LFunction χ s ≠ 0"
+   },
+   {
+    "id": "F2",
+    "category": "junk-value",
+    "severity": "medium",
+    "decl": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+    "line": 6,
+    "paper_ref": "Theorem 1 ('A pole at s = 1 ... is allowed')",
+    "explanation": "The hypotheses do not exclude the pole s = 1, so the statement also asserts riemannZeta 1 ≠ 0, a convention value the paper says nothing about. In practice this is harmless: Mathlib already proves `riemannZeta_one_ne_zero` (the value is (γ − log 4π)/2 < 0). The extra claim is true and adds no substantive content.",
+    "polarity": "lean stronger",
+    "probe_idea": "example : riemannZeta 1 ≠ 0 := riemannZeta_one_ne_zero"
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 6,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "(7 / 8 : ℝ) is real division and equals 0.875; there is no truncation."
+   },
+   {
+    "line": 5,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "The region contains the pole s = 1, but Mathlib's convention value there is provably nonzero (`riemannZeta_one_ne_zero`)."
+   },
+   {
+    "line": 6,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "Same as line 5: the claim at s = 1 is the known true fact riemannZeta 1 ≠ 0."
+   }
+  ]
+ }
+}

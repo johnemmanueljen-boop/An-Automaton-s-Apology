@@ -1,0 +1,1482 @@
+{
+ "result": "A_SpherePacking",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/A_SpherePacking.lean",
+ "theorems": [
+  "PackingBounds.FullMain.exact_limit",
+  "PackingBounds.FullMain.exact_binary_exponent",
+  "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+  "PackingBounds.sharpFullCohnElkiesManuscriptConclusions"
+ ],
+ "lint": [
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.fullLinearProgram",
+   "decl_kind": "def",
+   "line": 54,
+   "snippet": "sInf (fullQuotientSet d)",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePackingConstant",
+   "decl_kind": "def",
+   "line": 77,
+   "snippet": "⨆ S : SpherePacking d, S.upperPackingDensity",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 85,
+   "snippet": "sInf {q : ℝ | ∃ f : FullAdmissible d,",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-sInf",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 93,
+   "snippet": "sInf {q : ℝ | ∃ f : FullAdmissible d,",
+   "explanation": "sInf/sSup (and ⨅/⨆) return a junk value when the set is empty or unbounded (sInf ∅ = 0 in ℕ; sSup of an unbounded set in ℝ is 0).",
+   "suggested_probe": "Prove the set is nonempty / bounded for the parameters the theorem talks about."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "CohnElkies.unitBallVolume",
+   "decl_kind": "def",
+   "line": 17,
+   "snippet": "Real.pi ^ ((d : ℝ) / 2) / Real.Gamma ((d : ℝ) / 2 + 1)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "CohnElkies.unitBallVolume",
+   "decl_kind": "def",
+   "line": 17,
+   "snippet": "Real.pi ^ ((d : ℝ) / 2) / Real.Gamma ((d : ℝ) / 2 + 1)",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.fullQuotient",
+   "decl_kind": "def",
+   "line": 46,
+   "snippet": "(f.function (0 : CohnElkies.Euclidean d)).re /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.fullLinearProgram",
+   "decl_kind": "def",
+   "line": 53,
+   "snippet": "CohnElkies.unitBallVolume d / (2 : ℝ) ^ d *",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePacking.occupiedBallRegion",
+   "decl_kind": "def",
+   "line": 66,
+   "snippet": "⋃ x : S.centers, ball (x : EuclideanSpace ℝ (Fin d)) (S.separation / 2)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePacking.densityInsideRadius",
+   "decl_kind": "def",
+   "line": 69,
+   "snippet": "(S : SpherePacking d) (R : ℝ) : ℝ≥0∞ :=",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePacking.densityInsideRadius",
+   "decl_kind": "def",
+   "line": 70,
+   "snippet": "volume (S.occupiedBallRegion ∩ ball 0 R) / volume (ball (0 : EuclideanSpace ℝ (Fin d)) R)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePacking.upperPackingDensity",
+   "decl_kind": "def",
+   "line": 73,
+   "snippet": "(S : SpherePacking d) : ℝ≥0∞ :=",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePackingConstant",
+   "decl_kind": "def",
+   "line": 76,
+   "snippet": "def SpherePackingConstant (d : ℕ) : ℝ≥0∞ :=",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 86,
+   "snippet": "fullQuotient f ^ ((d : ℝ)⁻¹) = q} /",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 88,
+   "snippet": "atTop (𝓝 (1 / Real.pi))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 95,
+   "snippet": "(1 / Real.pi + err d) * Real.sqrt (d : ℝ)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 99,
+   "snippet": "atTop (𝓝 (Real.sqrt (Real.exp 1 / (2 * Real.pi))))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 102,
+   "snippet": "(fun d : ℕ => Real.log (fullLinearProgram d) / (d : ℝ))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 102,
+   "snippet": "(fun d : ℕ => Real.log (fullLinearProgram d) / (d : ℝ))",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 104,
+   "snippet": "(𝓝 ((1 / 2 : ℝ) * Real.log (Real.exp 1 / (2 * Real.pi))))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-log",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 104,
+   "snippet": "(𝓝 ((1 / 2 : ℝ) * Real.log (Real.exp 1 / (2 * Real.pi))))",
+   "explanation": "Real.log 0 = 0 and Real.log (-x) = Real.log x, so bounds involving log can hold vacuously at small arguments.",
+   "suggested_probe": "Check the arguments of log are > 1 (or > 0) in the range the theorem quantifies over."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 110,
+   "snippet": "(Real.sqrt (Real.exp 1 / (2 * Real.pi)) + err d) ^ d)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 116,
+   "snippet": "(2 : ℝ) ^ d / CohnElkies.unitBallVolume d *",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 117,
+   "snippet": "(Real.sqrt (Real.exp 1 / (2 * Real.pi)) - δ d) ^ d ≤",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 117,
+   "snippet": "(Real.sqrt (Real.exp 1 / (2 * Real.pi)) - δ d) ^ d ≤",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 120,
+   "snippet": "0 < (1 / 2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 122,
+   "snippet": "(1 / 2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) ∈",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 128,
+   "snippet": "(fun d : ℕ => Real.logb 2 (fullLinearProgram d) / (d : ℝ))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 130,
+   "snippet": "(𝓝 (-((1 / 2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1))))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 137,
+   "snippet": "(-((1 / 2 : ℝ) *",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 138,
+   "snippet": "Real.logb 2 (2 * Real.pi / Real.exp 1) + err d) *",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_limit",
+   "decl_kind": "theorem",
+   "line": 150,
+   "snippet": "(nhds (Real.sqrt (Real.exp 1 / (2 * Real.pi)))) := by",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_binary_exponent",
+   "decl_kind": "theorem",
+   "line": 156,
+   "snippet": "Real.logb 2 (PackingBounds.fullLinearProgram d) / (d : ℝ))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_binary_exponent",
+   "decl_kind": "theorem",
+   "line": 158,
+   "snippet": "(nhds (-(1 / 2 : ℝ) *",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_binary_exponent",
+   "decl_kind": "theorem",
+   "line": 159,
+   "snippet": "Real.logb 2 (2 * Real.pi / Real.exp 1))) := by",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+   "decl_kind": "theorem",
+   "line": 171,
+   "snippet": "ENNReal.ofReal",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+   "decl_kind": "theorem",
+   "line": 172,
+   "snippet": "((Real.sqrt (Real.exp 1 / (2 * Real.pi)) + e d) ^ d) := by",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullAdmissible",
+   "decl_kind": "structure",
+   "line": 35,
+   "snippet": "real : ∀ x : CohnElkies.Euclidean d, (function x).im = 0",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullAdmissible",
+   "decl_kind": "structure",
+   "line": 36,
+   "snippet": "fourier_real :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullAdmissible",
+   "decl_kind": "structure",
+   "line": 38,
+   "snippet": "fourier_nonneg :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullAdmissible",
+   "decl_kind": "structure",
+   "line": 40,
+   "snippet": "fourier_zero_pos :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullAdmissible",
+   "decl_kind": "structure",
+   "line": 42,
+   "snippet": "outside_nonpos :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePacking",
+   "decl_kind": "structure",
+   "line": 61,
+   "snippet": "separation_pos : 0 < separation := by positivity",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePacking",
+   "decl_kind": "structure",
+   "line": 62,
+   "snippet": "centers_dist : Pairwise (separation ≤ dist · · : centers → centers → Prop)",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "SpherePacking.upperPackingDensity",
+   "decl_kind": "def",
+   "line": 74,
+   "snippet": "limsup S.densityInsideRadius atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 83,
+   "snippet": "Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 87,
+   "snippet": "Real.sqrt (d : ℝ))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 88,
+   "snippet": "atTop (𝓝 (1 / Real.pi))",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 89,
+   "snippet": "root_before_infimum_vanishing_error :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 91,
+   "snippet": "Tendsto err atTop (𝓝 0) ∧",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 95,
+   "snippet": "(1 / Real.pi + err d) * Real.sqrt (d : ℝ)",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 97,
+   "snippet": "Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 99,
+   "snippet": "atTop (𝓝 (Real.sqrt (Real.exp 1 / (2 * Real.pi))))",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 99,
+   "snippet": "atTop (𝓝 (Real.sqrt (Real.exp 1 / (2 * Real.pi))))",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 101,
+   "snippet": "Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 103,
+   "snippet": "atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 105,
+   "snippet": "natural_vanishing_exponential_error :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 107,
+   "snippet": "Tendsto err atTop (𝓝 0) ∧",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 108,
+   "snippet": "(∀ᶠ d : ℕ in atTop,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 110,
+   "snippet": "(Real.sqrt (Real.exp 1 / (2 * Real.pi)) + err d) ^ d)",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 111,
+   "snippet": "universal_nonnegative_delta :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 113,
+   "snippet": "Tendsto δ atTop (𝓝 0) ∧",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 115,
+   "snippet": "(∀ᶠ d : ℕ in atTop, ∀ f : FullAdmissible d,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 117,
+   "snippet": "(Real.sqrt (Real.exp 1 / (2 * Real.pi)) - δ d) ^ d ≤",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 119,
+   "snippet": "base_two_exponent_positive :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 127,
+   "snippet": "Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 129,
+   "snippet": "atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 131,
+   "snippet": "base_two_vanishing_exponential_error :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 133,
+   "snippet": "Tendsto err atTop (𝓝 0) ∧",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+   "decl_kind": "structure",
+   "line": 134,
+   "snippet": "(∀ᶠ d : ℕ in atTop,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_limit",
+   "decl_kind": "theorem",
+   "line": 146,
+   "snippet": "Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_limit",
+   "decl_kind": "theorem",
+   "line": 149,
+   "snippet": "atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_limit",
+   "decl_kind": "theorem",
+   "line": 150,
+   "snippet": "(nhds (Real.sqrt (Real.exp 1 / (2 * Real.pi)))) := by",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_binary_exponent",
+   "decl_kind": "theorem",
+   "line": 154,
+   "snippet": "Tendsto",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.FullMain.exact_binary_exponent",
+   "decl_kind": "theorem",
+   "line": 157,
+   "snippet": "atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+   "decl_kind": "theorem",
+   "line": 168,
+   "snippet": "Asymptotics.IsLittleO atTop e (fun _ : ℕ => (1 : ℝ)) ∧",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-sqrt",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "A_SpherePacking.lean",
+   "decl": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+   "decl_kind": "theorem",
+   "line": 172,
+   "snippet": "((Real.sqrt (Real.exp 1 / (2 * Real.pi)) + e d) ^ d) := by",
+   "explanation": "Real.sqrt of a negative number is 0.",
+   "suggested_probe": "Check the radicand is nonnegative."
+  }
+ ],
+ "audit": {
+  "summary": "The Lean statements prove that the Cohn–Elkies linear-programming bound LP_d = (v_d/2^d)·inf_{f∈A_d} f(0)/f̂(0) satisfies LP_d^{1/d} → √(e/(2π)), together with its base-2 log-rate form. They also prove the derived sphere-packing bound Δ_d ≤ (√(e/(2π)) + o(1))^d. A bundle of equivalent and auxiliary reformulations is included: root-of-infimum ~ √d/π, a uniform lower bound for all admissible f, and a 30-digit numeric certificate for α*. The definitions of A_d, LP_d, v_d and packing density match the paper's (1)–(4), and the Mathlib Fourier convention matches (1). The main caveat is coverage: Theorem 1.2 (the sign-uncertainty constants A±(d)/√d → 1/π) is not formalized.",
+  "glossary": [
+   {
+    "decl": "CohnElkies.unitBallVolume",
+    "line": 16,
+    "plain": "v_d = π^{d/2}/Γ(d/2+1)",
+    "standard_concept": "volume of the unit ball in R^d",
+    "matches_standard": "yes",
+    "note": "Γ(d/2+1) > 0 for d ≥ 0, so no pole and no junk division.",
+    "citation_ok": true
+   },
+   {
+    "decl": "PackingBounds.FullAdmissible",
+    "line": 33,
+    "plain": "A ℂ-valued Schwartz f on R^d that is real-valued, has real f̂ with f̂ ≥ 0 and f̂(0) > 0, and has f ≤ 0 on |x| ≥ 1.",
+    "standard_concept": "A_d in (2)",
+    "matches_standard": "yes",
+    "note": "Requiring f̂ to be real is implicit in the paper's condition f̂ ≥ 0. The Mathlib 𝓕 convention e^{-2πi⟨x,ξ⟩} matches (1).",
+    "citation_ok": true
+   },
+   {
+    "decl": "PackingBounds.fullQuotient",
+    "line": 45,
+    "plain": "f(0)/f̂(0)",
+    "standard_concept": "Cohn–Elkies quotient",
+    "matches_standard": "yes",
+    "note": "The denominator is positive by fourier_zero_pos, so there is no junk division.",
+    "citation_ok": true
+   },
+   {
+    "decl": "PackingBounds.fullQuotientSet",
+    "line": 49,
+    "plain": "{f(0)/f̂(0) : f ∈ A_d}",
+    "standard_concept": null,
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "PackingBounds.fullLinearProgram",
+    "line": 52,
+    "plain": "LP_d = (v_d/2^d)·inf_{f∈A_d} f(0)/f̂(0)",
+    "standard_concept": "LP_d in (3)",
+    "matches_standard": "yes",
+    "note": "sInf is real-valued. The set is nonempty (A_d ≠ ∅) and bounded below by 0, since f(0) > 0 by Fourier inversion. Hence there is no junk value, at least asymptotically.",
+    "citation_ok": true
+   },
+   {
+    "decl": "SpherePacking",
+    "line": 58,
+    "plain": "A set of centers in R^d with pairwise distance ≥ separation > 0.",
+    "standard_concept": "sphere packing with balls of radius separation/2",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "SpherePacking.upperPackingDensity",
+    "line": 72,
+    "plain": "limsup_{R→∞} vol(∪ balls ∩ B(0,R)) / vol B(0,R)",
+    "standard_concept": "upper density of a packing",
+    "matches_standard": "yes",
+    "note": "For R ≤ 0 the ratio is 0/0 = 0 in ℝ≥0∞, which does not affect the limsup at atTop.",
+    "citation_ok": true
+   },
+   {
+    "decl": "SpherePackingConstant",
+    "line": 76,
+    "plain": "Δ_d = sup over packings of the upper density",
+    "standard_concept": "sphere-packing density Δ_d",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "PackingBounds.FullMain.exact_limit",
+    "line": 145,
+    "plain": "LP_d^{1/d} → √(e/(2π)) as d → ∞ over ℕ.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "PackingBounds.FullMain.exact_binary_exponent",
+    "line": 153,
+    "plain": "log₂(LP_d)/d → −(1/2)·log₂(2π/e).",
+    "citation_ok": true
+   },
+   {
+    "theorem": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+    "line": 166,
+    "plain": "There is e(d) = o(1) such that for all d ≥ 1, Δ_d ≤ max(0, (√(e/(2π)) + e(d))^d).",
+    "citation_ok": true
+   },
+   {
+    "theorem": "PackingBounds.sharpFullCohnElkiesManuscriptConclusions",
+    "line": 179,
+    "plain": "All of the following hold: (i) inf_f (f(0)/f̂(0))^{1/d} / √d → 1/π, and this equals (1/π + err(d))√d for all d > 0 with err → 0; (ii) LP_d^{1/d} → √(e/2π); (iii) log LP_d / d → (1/2) log(e/2π); (iv) eventually LP_d = (√(e/2π) + err(d))^d; (v) there is δ ≥ 0 with δ → 0 such that eventually f(0)/f̂(0) ≥ (2^d/v_d)(√(e/2π) − δ(d))^d for every f ∈ A_d; (vi) α* = (1/2) log₂(2π/e) > 0 and lies in (0.604400544291677695341677307053, …054); (vii) log₂ LP_d / d → −α*; (viii) eventually LP_d = 2^{−(α* + err(d)) d} with err → 0.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "LP_d^{1/d} → √(e/(2π)) as d → ∞."
+   },
+   {
+    "ref": "Corollary after Thm 1.1 / (4)",
+    "plain": "Δ_d ≤ LP_d = 2^{−(α* + o(1))d}, where α* = (1/2) log₂(2π/e) = 0.6044…"
+   },
+   {
+    "ref": "Theorem 1.2",
+    "plain": "lim A₊(d)/√d = lim A₋(d)/√d = 1/π."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "PackingBounds.FullMain.exact_limit",
+    "relation": "equivalent",
+    "why": "Same limit, with the same definitions of LP_d, A_d and v_d."
+   },
+   {
+    "paper_ref": "Corollary after Thm 1.1 / (4)",
+    "lean_theorem": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+    "relation": "equivalent",
+    "why": "(√(e/2π) + o(1))^d is the same as 2^{−(α* + o(1))d}. Also covered for LP_d by exact_binary_exponent."
+   },
+   {
+    "paper_ref": "Theorem 1.2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "No definition of r(g) or A_ς(d) appears. root_before_infimum is a packing-quotient analogue, not A±(d)."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "PackingBounds.sharpFullCohnElkiesManuscriptConclusions",
+    "line": 81,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The sign-uncertainty Theorem 1.2 (A₊, A₋ asymptotics) is not formalized anywhere. The root_before_infimum field concerns inf (f(0)/f̂(0))^{1/d} over A_d, not the Fourier-eigenfunction constants A_ς(d).",
+    "polarity": "lean weaker",
+    "probe_idea": null,
+    "citation_ok": false
+   },
+   {
+    "id": "F2",
+    "category": "other",
+    "severity": "low",
+    "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+    "line": 121,
+    "paper_ref": null,
+    "explanation": "The 30-digit interval for α* is more precise than anything in the excerpt (which gives only 0.6044…). My hand computation agrees to about 10 digits. This is a stronger extra claim and harmless.",
+    "polarity": "lean stronger",
+    "probe_idea": "norm_num/interval check of (1/2)·logb 2 (2π/e) against the stated bounds",
+    "citation_ok": true
+   },
+   {
+    "id": "F3",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "PackingBounds.fullLinearProgram",
+    "line": 54,
+    "paper_ref": "(3)",
+    "explanation": "sInf over ℝ would be 0 if the quotient set were empty or unbounded below. Neither happens: the set is bounded below by 0 because f(0) > 0, and it is nonempty because A_d contains a Cohn–Elkies function. A degenerate LP_d = 0 would in any case contradict the stated limit.",
+    "polarity": "n/a",
+    "probe_idea": "∀ d ≥ 1, (fullQuotientSet d).Nonempty ∧ BddBelow (fullQuotientSet d) ∧ 0 < fullLinearProgram d",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 54,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "The set is nonempty and bounded below by 0, so sInf is the genuine infimum."
+   },
+   {
+    "line": 77,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "This is an iSup in complete ℝ≥0∞, which is the genuine supremum."
+   },
+   {
+    "line": 85,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Same set up to the monotone map q ↦ q^{1/d}, which preserves the real infimum."
+   },
+   {
+    "line": 93,
+    "rule": "junk-sInf",
+    "verdict": "harmless",
+    "why": "Same reasoning as line 85."
+   },
+   {
+    "line": 17,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Γ(d/2+1) > 0."
+   },
+   {
+    "line": 17,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "The argument d/2+1 ≥ 1 never hits a pole."
+   },
+   {
+    "line": 46,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The denominator is positive by fourier_zero_pos."
+   },
+   {
+    "line": 53,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "2^d ≠ 0."
+   },
+   {
+    "line": 66,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Division by 2 is fine."
+   },
+   {
+    "line": 69,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "The density ratio in ℝ≥0∞ is the standard definition."
+   },
+   {
+    "line": 70,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Only R ≤ 0 gives 0/0 = 0, which is irrelevant for limsup at atTop."
+   },
+   {
+    "line": 73,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "limsup in ℝ≥0∞ is standard."
+   },
+   {
+    "line": 76,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "The supremum is taken in ℝ≥0∞."
+   },
+   {
+    "line": 86,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "√d > 0 for d ≥ 1; only d = 0 is affected, which is irrelevant asymptotically."
+   },
+   {
+    "line": 88,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "π ≠ 0."
+   },
+   {
+    "line": 95,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "π ≠ 0."
+   },
+   {
+    "line": 99,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "2π ≠ 0."
+   },
+   {
+    "line": 102,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "d ≠ 0 eventually."
+   },
+   {
+    "line": 102,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "LP_d > 0, so the log is genuine."
+   },
+   {
+    "line": 104,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant with nonzero denominators."
+   },
+   {
+    "line": 104,
+    "rule": "junk-log",
+    "verdict": "harmless",
+    "why": "e/(2π) > 0."
+   },
+   {
+    "line": 110,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant with nonzero denominators."
+   },
+   {
+    "line": 116,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "v_d > 0."
+   },
+   {
+    "line": 117,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant with nonzero denominators."
+   },
+   {
+    "line": 117,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℝ, not ℕ."
+   },
+   {
+    "line": 120,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant; e ≠ 0."
+   },
+   {
+    "line": 122,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant; e ≠ 0."
+   },
+   {
+    "line": 128,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "d ≠ 0 eventually, and LP_d > 0."
+   },
+   {
+    "line": 130,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant."
+   },
+   {
+    "line": 137,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant."
+   },
+   {
+    "line": 138,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant."
+   },
+   {
+    "line": 150,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant."
+   },
+   {
+    "line": 156,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "d ≠ 0 eventually, and LP_d > 0."
+   },
+   {
+    "line": 158,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "(−1/2)·x parses to the same value as −(1/2·x)."
+   },
+   {
+    "line": 159,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant."
+   },
+   {
+    "line": 171,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "ofReal clamps negatives to 0, but e is existential, so this only makes the statement harder."
+   },
+   {
+    "line": 172,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Constant."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F2",
+    "decl": "PackingBounds.SharpFullCohnElkiesManuscriptConclusions",
+    "line": 121,
+    "explanation": "The 30-digit interval for α* is more precise than anything in the excerpt (which gives only 0.6044…). My hand computation agrees to about 10 digits. This is a stronger extra claim and harmless.",
+    "probe_idea": "norm_num/interval check of (1/2)·logb 2 (2π/e) against the stated bounds"
+   },
+   "result": {
+    "id": "F2-a2",
+    "status": "YELLOW",
+    "claim": "A coarse numeric sanity check of the manuscript constant: 0.6 < (1/2)·logb 2 (2π/e) < 0.61. This is consistent with the stated 0.6044… and shows the 30-digit interval is at least in the right place. It does not verify the 30 digits.",
+    "kind": "other",
+    "seconds": 43.9,
+    "detail": "line 27: Application type mismatch: The argument\n  y\nhas type\n  ℝ\nbut is expected to have type\n  ℕ\nin the application\n  Real.logb_pow 2 5 y | line 28: Application type mismatch: The argument\n  y\nhas type\n  ℝ\nbut is expected to have type\n  ℕ\nin the application\n  Real.logb_pow 2 50 y | line 30: linarith failed to find a contradiction\ncase left\nhpl : 3.14 < Real.pi\nhpu : Real.pi < 3.1416\nhel : 2.7182818283 < Real.exp 1\nheu : Real.exp 1 < 2.7182818286\nhe : 0 < Real.exp 1\ny : ℝ\nhy2 : 2.3 < y\nhy3 : y < 2.32\nhy0 : 0 < y\nh5 : 64 < y ^ 5\nh50 : y ^ 50 < 2 ^ 61\nl5 : 6 < Real.logb 2 (y ^ 5)\nl50 : Real.logb 2 (y ^ 50) < 61\na5 : Real.logb 2 (5 ^ sorry) = ↑sorry * Real.logb 2 5\na50 : Real.logb 2 (50  | non-standard axioms: {'probe_alpha_coarse': ['sorryAx']}",
+    "axioms": {
+     "probe_alpha_coarse": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_alpha_coarse :\n    (0.6 : ℝ) < (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) ∧\n    (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) < 0.61 := by\n  have hpl := Real.pi_gt_d2\n  have hpu := Real.pi_lt_d4\n  have hel := Real.exp_one_gt_d9\n  have heu := Real.exp_one_lt_d9\n  have he : 0 < Real.exp 1 := Real.exp_pos 1\n  have hy2 : (2.3 : ℝ) < 2 * Real.pi / Real.exp 1 := by\n    rw [lt_div_iff₀ he]; linarith\n  have hy3 : 2 * Real.pi / Real.exp 1 < (2.32 : ℝ) := by\n    rw [div_lt_iff₀ he]; linarith\n  generalize 2 * Real.pi / Real.exp 1 = y at *\n  have hy0 : 0 < y := by linarith\n  have h5 : (64 : ℝ) < y ^ 5 := by\n    calc (64 : ℝ) < (2.3 : ℝ) ^ 5 := by norm_num\n      _ < y ^ 5 := pow_lt_pow_left₀ hy2 (by norm_num) (by norm_num)\n  have h50 : y ^ 50 < (2 : ℝ) ^ 61 := by\n    calc y ^ 50 < (2.32 : ℝ) ^ 50 := pow_lt_pow_left₀ hy3 hy0.le (by norm_num)\n      _ < (2 : ℝ) ^ 61 := by norm_num\n  have l5 : ((6 : ℕ) : ℝ) < Real.logb 2 (y ^ 5) := by\n    rw [Real.lt_logb_iff_rpow_lt (by norm_num) (by positivity), Real.rpow_natCast]\n    have e6 : (2 : ℝ) ^ 6 = 64 := by norm_num\n    rw [e6]; exact h5\n  have l50 : Real.logb 2 (y ^ 50) < ((61 : ℕ) : ℝ) := by\n    rw [Real.logb_lt_iff_lt_rpow (by norm_num) (by positivity), Real.rpow_natCast]\n    exact h50\n  have a5 := Real.logb_pow 2 5 y\n  have a50 := Real.logb_pow 2 50 y\n  push_cast at a5 a50 l5 l50\n  constructor <;> linarith",
+   "attempts": [
+    {
+     "lean": "theorem probe_alpha_coarse :\n    (0.6044 : ℝ) < (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) ∧\n    (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) < 0.6045 := by\n  have hpl := Real.pi_gt_d20\n  have hpu := Real.pi_lt_d20\n  have hel := Real.exp_one_gt_d9\n  have heu := Real.exp_one_lt_d9\n  have he : 0 < Real.exp 1 := Real.exp_pos 1\n  have hpi : 0 < Real.pi := Real.pi_pos\n  have hy : 0 < 2 * Real.pi / Real.exp 1 := by positivity\n  have hyl : (2 * 3.14159265358979323846 / 2.7182818286 : ℝ) < 2 * Real.pi / Real.exp 1 := by\n    rw [div_lt_div_iff₀ (by norm_num) he]\n    nlinarith [mul_pos (sub_pos.2 hpl) (by norm_num : (0:ℝ) < 2.7182818286),\n      mul_pos (by norm_num : (0:ℝ) < 3.14159265358979323846) (sub_pos.2 heu)]\n  have hyu : 2 * Real.pi / Real.exp 1 < (2 * 3.14159265358979323847 / 2.7182818283 : ℝ) := by\n    rw [div_lt_div_iff₀ he (by norm_num)]\n    nlinarith [mul_pos (sub_pos.2 hpu) he,\n      mul_pos hpi (sub_pos.2 hel)]\n  have h1 : (1.2088 : ℝ) < Real.logb 2 (2 * Real.pi / Real.exp 1) := by\n    rw [Real.lt_logb_iff_rpow_lt (by norm_num) hy]\n    apply lt_of_pow_lt_pow_left₀ 1250 hy.le\n    have h : ((2:ℝ) ^ (1.2088:ℝ)) ^ (1250:ℕ) = 2 ^ (1511:ℕ) := by\n      rw [← Real.rpow_natCast, ← Real.rpow_mul (by norm_num)]\n      norm_num\n    rw [h]\n    calc (2:ℝ) ^ (1511:ℕ) < (2 * 3.14159265358979323846 / 2.7182818286 : ℝ) ^ (1250:ℕ) := by norm_num\n      _ < (2 * Real.pi / Real.exp 1) ^ (1250:ℕ) :=\n        pow_lt_pow_left₀ hyl (by norm_num) (by norm_num)\n  have h2 : Real.logb 2 (2 * Real.pi / Real.exp 1) < (1.209 : ℝ) := by\n    rw [Real.logb_lt_iff_lt_rpow (by norm_num) hy]\n    apply lt_of_pow_lt_pow_left₀ 1000 (Real.rpow_nonneg (by norm_num) _)\n    have h : ((2:ℝ) ^ (1.209:ℝ)) ^ (1000:ℕ) = 2 ^ (1209:ℕ) := by\n      rw [← Real.rpow_natCast, ← Real.rpow_mul (by norm_num)]\n      norm_num\n    rw [h]\n    calc (2 * Real.pi / Real.exp 1) ^ (1000:ℕ)\n        < (2 * 3.14159265358979323847 / 2.7182818283 : ℝ) ^ (1000:ℕ) :=\n          pow_lt_pow_left₀ hyu hy.le (by norm_num)\n      _ < (2:ℝ) ^ (1209:ℕ) := by norm_num\n  constructor <;> linarith",
+     "status": "YELLOW",
+     "detail": "line 25: unsolved goals\nhpl : 3.14159265358979323846 < Real.pi\nhpu : Real.pi < 3.14159265358979323847\nhel : 2.7182818283 < Real.exp 1\nheu : Real.exp 1 < 2.7182818286\nhe : 0 < Real.exp 1\nhpi : 0 < Real.pi\nhy : 0 < 2 * Real.pi / Real.exp 1\nhyl : 2 * 3.14159265358979323846 / 2.7182818286 < 2 * Real.pi / Real.exp 1\nhyu : 2 * Real.pi / Real.exp 1 < 2 * 3.14159265358979323847 / 2.7182818283\nh : (2 ^ 1.2088) ^ 12 | line 38: unsolved goals\nhpl : 3.14159265358979323846 < Real.pi\nhpu : Real.pi < 3.14159265358979323847\nhel : 2.7182818283 < Real.exp 1\nheu : Real.exp 1 < 2.7182818286\nhe : 0 < Real.exp 1\nhpi : 0 < Real.pi\nhy : 0 < 2 * Real.pi / Real.exp 1\nhyl : 2 * 3.14159265358979323846 / 2.7182818286 < 2 * Real.pi / Real.exp 1\nhyu : 2 * Real.pi / Real.exp 1 < 2 * 3.14159265358979323847 / 2.7182818283\nh1 : 1.2088 < Real.lo | non-standard axioms: {'probe_alpha_coarse': ['sorryAx']}",
+     "seconds": 46.1
+    },
+    {
+     "lean": "theorem probe_alpha_coarse :\n    (0.6044 : ℝ) < (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) ∧\n    (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) < 0.6045 := by\n  have hpl : (3.1415926535 : ℝ) < Real.pi := by\n    have := Real.pi_gt_d20; linarith\n  have hpu : Real.pi < (3.1415926536 : ℝ) := by\n    have := Real.pi_lt_d20; linarith\n  have hel := Real.exp_one_gt_d9\n  have heu := Real.exp_one_lt_d9\n  have he : 0 < Real.exp 1 := Real.exp_pos 1\n  have hpi : 0 < Real.pi := Real.pi_pos\n  have hy : 0 < 2 * Real.pi / Real.exp 1 := by positivity\n  have hyl : (2 * 3.1415926535 / 2.7182818286 : ℝ) < 2 * Real.pi / Real.exp 1 := by\n    rw [div_lt_div_iff₀ (by norm_num) he]\n    nlinarith [mul_pos (sub_pos.2 hpl) (by norm_num : (0:ℝ) < 2.7182818286),\n      mul_pos (by norm_num : (0:ℝ) < 3.1415926535) (sub_pos.2 heu)]\n  have hyu : 2 * Real.pi / Real.exp 1 < (2 * 3.1415926536 / 2.7182818283 : ℝ) := by\n    rw [div_lt_div_iff₀ he (by norm_num)]\n    nlinarith [mul_pos (sub_pos.2 hpu) (by norm_num : (0:ℝ) < 2.7182818283),\n      mul_pos (by norm_num : (0:ℝ) < 3.1415926536) (sub_pos.2 hel)]\n  have h1 : ((1511:ℝ)/1250) < Real.logb 2 (2 * Real.pi / Real.exp 1) := by\n    rw [Real.lt_logb_iff_rpow_lt (by norm_num) hy]\n    apply lt_of_pow_lt_pow_left₀ 1250 hy.le\n    have h : ((2:ℝ) ^ ((1511:ℝ)/1250)) ^ (1250:ℕ) = 2 ^ (1511:ℕ) := by\n      rw [← Real.rpow_natCast, ← Real.rpow_mul (by norm_num)]\n      have : (1511:ℝ)/1250 * ((1250:ℕ):ℝ) = ((1511:ℕ):ℝ) := by norm_num\n      rw [this, Real.rpow_natCast]\n    rw [h]\n    calc (2:ℝ) ^ (1511:ℕ) < (2 * 3.1415926535 / 2.7182818286 : ℝ) ^ (1250:ℕ) := by norm_num\n      _ < (2 * Real.pi / Real.exp 1) ^ (1250:ℕ) :=\n        pow_lt_pow_left₀ hyl (by norm_num) (by norm_num)\n  have h2 : Real.logb 2 (2 * Real.pi / Real.exp 1) < ((1209:ℝ)/1000) := by\n    rw [Real.logb_lt_iff_lt_rpow (by norm_num) hy]\n    apply lt_of_pow_lt_pow_left₀ 1000 (Real.rpow_nonneg (by norm_num) _)\n    have h : ((2:ℝ) ^ ((1209:ℝ)/1000)) ^ (1000:ℕ) = 2 ^ (1209:ℕ) := by\n      rw [← Real.rpow_natCast, ← Real.rpow_mul (by norm_num)]\n      have : (1209:ℝ)/1000 * ((1000:ℕ):ℝ) = ((1209:ℕ):ℝ) := by norm_num\n      rw [this, Real.rpow_natCast]\n    rw [h]\n    calc (2 * Real.pi / Real.exp 1) ^ (1000:ℕ)\n        < (2 * 3.1415926536 / 2.7182818283 : ℝ) ^ (1000:ℕ) :=\n          pow_lt_pow_left₀ hyu hy.le (by norm_num)\n      _ < (2:ℝ) ^ (1209:ℕ) := by norm_num\n  constructor <;> linarith",
+     "status": "YELLOW",
+     "detail": "line 28: unsolved goals\nhpl : 3.1415926535 < Real.pi\nhpu : Real.pi < 3.1415926536\nhel : 2.7182818283 < Real.exp 1\nheu : Real.exp 1 < 2.7182818286\nhe : 0 < Real.exp 1\nhpi : 0 < Real.pi\nhy : 0 < 2 * Real.pi / Real.exp 1\nhyl : 2 * 3.1415926535 / 2.7182818286 < 2 * Real.pi / Real.exp 1\nhyu : 2 * Real.pi / Real.exp 1 < 2 * 3.1415926536 / 2.7182818283\nh : (2 ^ (1511 / 1250)) ^ 1250 = 2 ^ 1511\n⊢ 2 ^ 1511 < (10134 | line 42: unsolved goals\nhpl : 3.1415926535 < Real.pi\nhpu : Real.pi < 3.1415926536\nhel : 2.7182818283 < Real.exp 1\nheu : Real.exp 1 < 2.7182818286\nhe : 0 < Real.exp 1\nhpi : 0 < Real.pi\nhy : 0 < 2 * Real.pi / Real.exp 1\nhyl : 2 * 3.1415926535 / 2.7182818286 < 2 * Real.pi / Real.exp 1\nhyu : 2 * Real.pi / Real.exp 1 < 2 * 3.1415926536 / 2.7182818283\nh1 : 1511 / 1250 < Real.logb 2 (2 * Real.pi / Real.exp 1)\nh : | non-standard axioms: {'probe_alpha_coarse': ['sorryAx']}",
+     "seconds": 49.1
+    },
+    {
+     "lean": "theorem probe_alpha_coarse :\n    (0.6 : ℝ) < (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) ∧\n    (1/2 : ℝ) * Real.logb 2 (2 * Real.pi / Real.exp 1) < 0.61 := by\n  have hpl := Real.pi_gt_d2\n  have hpu := Real.pi_lt_d4\n  have hel := Real.exp_one_gt_d9\n  have heu := Real.exp_one_lt_d9\n  have he : 0 < Real.exp 1 := Real.exp_pos 1\n  have hy2 : (2.3 : ℝ) < 2 * Real.pi / Real.exp 1 := by\n    rw [lt_div_iff₀ he]; linarith\n  have hy3 : 2 * Real.pi / Real.exp 1 < (2.32 : ℝ) := by\n    rw [div_lt_iff₀ he]; linarith\n  generalize 2 * Real.pi / Real.exp 1 = y at *\n  have hy0 : 0 < y := by linarith\n  have h5 : (64 : ℝ) < y ^ 5 := by\n    calc (64 : ℝ) < (2.3 : ℝ) ^ 5 := by norm_num\n      _ < y ^ 5 := pow_lt_pow_left₀ hy2 (by norm_num) (by norm_num)\n  have h50 : y ^ 50 < (2 : ℝ) ^ 61 := by\n    calc y ^ 50 < (2.32 : ℝ) ^ 50 := pow_lt_pow_left₀ hy3 hy0.le (by norm_num)\n      _ < (2 : ℝ) ^ 61 := by norm_num\n  have l5 : ((6 : ℕ) : ℝ) < Real.logb 2 (y ^ 5) := by\n    rw [Real.lt_logb_iff_rpow_lt (by norm_num) (by positivity), Real.rpow_natCast]\n    have e6 : (2 : ℝ) ^ 6 = 64 := by norm_num\n    rw [e6]; exact h5\n  have l50 : Real.logb 2 (y ^ 50) < ((61 : ℕ) : ℝ) := by\n    rw [Real.logb_lt_iff_lt_rpow (by norm_num) (by positivity), Real.rpow_natCast]\n    exact h50\n  have a5 := Real.logb_pow 2 5 y\n  have a50 := Real.logb_pow 2 50 y\n  push_cast at a5 a50 l5 l50\n  constructor <;> linarith",
+     "status": "YELLOW",
+     "detail": "line 27: Application type mismatch: The argument\n  y\nhas type\n  ℝ\nbut is expected to have type\n  ℕ\nin the application\n  Real.logb_pow 2 5 y | line 28: Application type mismatch: The argument\n  y\nhas type\n  ℝ\nbut is expected to have type\n  ℕ\nin the application\n  Real.logb_pow 2 50 y | line 30: linarith failed to find a contradiction\ncase left\nhpl : 3.14 < Real.pi\nhpu : Real.pi < 3.1416\nhel : 2.7182818283 < Real.exp 1\nheu : Real.exp 1 < 2.7182818286\nhe : 0 < Real.exp 1\ny : ℝ\nhy2 : 2.3 < y\nhy3 : y < 2.32\nhy0 : 0 < y\nh5 : 64 < y ^ 5\nh50 : y ^ 50 < 2 ^ 61\nl5 : 6 < Real.logb 2 (y ^ 5)\nl50 : Real.logb 2 (y ^ 50) < 61\na5 : Real.logb 2 (5 ^ sorry) = ↑sorry * Real.logb 2 5\na50 : Real.logb 2 (50  | non-standard axioms: {'probe_alpha_coarse': ['sorryAx']}",
+     "seconds": 43.9
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "F3",
+    "decl": "PackingBounds.fullLinearProgram",
+    "line": 54,
+    "explanation": "sInf over ℝ would be 0 if the quotient set were empty or unbounded below. Neither happens: the set is bounded below by 0 because f(0) > 0, and it is nonempty because A_d contains a Cohn–Elkies function. A degenerate LP_d = 0 would in any case contradict the stated limit.",
+    "probe_idea": "∀ d ≥ 1, (fullQuotientSet d).Nonempty ∧ BddBelow (fullQuotientSet d) ∧ 0 < fullLinearProgram d"
+   },
+   "result": {
+    "id": "F3-a2",
+    "status": "YELLOW",
+    "claim": "For every d, the set fullQuotientSet d is bounded below by 0. This uses Fourier inversion at 0: f(0) = ∫ 𝓕f ≥ 0, together with 𝓕f(0) > 0. So the sInf in fullLinearProgram is not distorted by unboundedness.",
+    "kind": "other",
+    "seconds": 41.2,
+    "detail": "line 0: unsolved goals\nd : ℕ\nf : PackingBounds.FullAdmissible d\n⊢ 0 ≤ (f.function 0).re\n'probe_bdd_below' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'probe_bdd_below': ['sorryAx']}",
+    "axioms": {
+     "probe_bdd_below": [
+      "propext",
+      "sorryAx",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_bdd_below (d : ℕ) : BddBelow (PackingBounds.fullQuotientSet d) := by\n  refine ⟨0, ?_⟩\n  rintro _ ⟨f, rfl⟩\n  unfold PackingBounds.fullQuotient\n  refine div_nonneg ?_ f.fourier_zero_pos.le\n  have hco : ∀ v, (𝓕 f.function) v = 𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) v := by\n    intro v\n    first\n      | rfl\n      | simp [SchwartzMap.fourier_coe]\n      | (rw [SchwartzMap.fourier_coe])\n  have hf : MeasureTheory.Integrable (⇑f.function : CohnElkies.Euclidean d → ℂ) :=\n    f.function.integrable\n  have hF : MeasureTheory.Integrable (𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ)) := by\n    have h := (𝓕 f.function).integrable\n    have he : (fun v => (𝓕 f.function) v) = 𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) := by\n      funext v; exact hco v\n    rw [← he]; exact h\n  have key := MeasureTheory.Integrable.fourier_inversion hf hF\n    (f.function.continuous.continuousAt (x := (0 : CohnElkies.Euclidean d)))\n  rw [Real.fourierInv_eq'] at key\n  simp at key\n  have h4 : (∫ v, 𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) v).re\n      = ∫ v, (𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) v).re := by\n    exact (integral_re hF).symm\n  rw [← key, h4]\n  exact integral_nonneg (fun v => by rw [← hco v]; exact f.fourier_nonneg v)",
+   "attempts": [
+    {
+     "lean": "theorem probe_bdd_below (d : ℕ) : BddBelow (PackingBounds.fullQuotientSet d) := by\n  refine ⟨0, ?_⟩\n  rintro _ ⟨f, rfl⟩\n  unfold PackingBounds.fullQuotient\n  refine div_nonneg ?_ f.fourier_zero_pos.le\n  have h1 : (𝓕⁻ (𝓕 f.function) : CohnElkies.TestFunction d) = f.function :=\n    FourierTransform.fourierInv_fourier_eq _\n  have h2 : f.function 0 = ∫ v, (𝓕 f.function) v := by\n    have h3 := congrFun (SchwartzMap.fourierInv_coe (𝓕 f.function)) 0\n    rw [h1] at h3\n    rw [h3, Real.fourierInv_eq']\n    simp\n  rw [h2]\n  have h4 : (∫ v, (𝓕 f.function) v).re = ∫ v, ((𝓕 f.function) v).re := by\n    have := integral_re (𝕜 := ℂ) (SchwartzMap.integrable (𝓕 f.function))\n    simpa using this.symm\n  rw [h4]\n  exact integral_nonneg (fun v => f.fourier_nonneg v)",
+     "status": "YELLOW",
+     "detail": "non-standard axioms: {'probe_bdd_below': ['sorryAx']}",
+     "seconds": 32.2
+    },
+    {
+     "lean": "theorem probe_bdd_below (d : ℕ) : BddBelow (PackingBounds.fullQuotientSet d) := by\n  refine ⟨0, ?_⟩\n  rintro _ ⟨f, rfl⟩\n  unfold PackingBounds.fullQuotient\n  refine div_nonneg ?_ f.fourier_zero_pos.le\n  have h1 : (𝓕⁻ (𝓕 f.function) : CohnElkies.TestFunction d) = f.function := by\n    first\n      | exact FourierTransform.fourierInv_fourier_eq _\n      | exact SchwartzMap.fourierInv_fourier_eq _\n      | simp\n  have h3 : ((𝓕⁻ (𝓕 f.function) : CohnElkies.TestFunction d) : CohnElkies.Euclidean d → ℂ) 0\n      = ∫ v, (𝓕 f.function) v := by\n    first\n      | (rw [SchwartzMap.fourierInv_coe, Real.fourierInv_eq']; simp)\n      | (simp [SchwartzMap.fourierInv_coe, Real.fourierInv_eq'])\n  have hinv : f.function 0 = ∫ v, (𝓕 f.function) v := by\n    calc f.function 0 = ((𝓕⁻ (𝓕 f.function) : CohnElkies.TestFunction d) : CohnElkies.Euclidean d → ℂ) 0 := by rw [h1]\n      _ = _ := h3\n  have h4 : (∫ v, (𝓕 f.function) v).re = ∫ v, ((𝓕 f.function) v).re := by\n    first\n      | exact (integral_re (SchwartzMap.integrable (𝓕 f.function))).symm\n      | simpa using (integral_re (SchwartzMap.integrable (𝓕 f.function))).symm\n  rw [hinv, h4]\n  exact integral_nonneg (fun v => f.fourier_nonneg v)",
+     "status": "YELLOW",
+     "detail": "line 5: unsolved goals\nd : ℕ\nf : PackingBounds.FullAdmissible d\n⊢ sorry () = f.function | line 0: unsolved goals\nd : ℕ\nf : PackingBounds.FullAdmissible d\nh1 : sorry = f.function\n⊢ 0 ≤ (f.function 0).re\n'probe_bdd_below' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'probe_bdd_below': ['sorryAx']}",
+     "seconds": 38.1
+    },
+    {
+     "lean": "theorem probe_bdd_below (d : ℕ) : BddBelow (PackingBounds.fullQuotientSet d) := by\n  refine ⟨0, ?_⟩\n  rintro _ ⟨f, rfl⟩\n  unfold PackingBounds.fullQuotient\n  refine div_nonneg ?_ f.fourier_zero_pos.le\n  have hco : ∀ v, (𝓕 f.function) v = 𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) v := by\n    intro v\n    first\n      | rfl\n      | simp [SchwartzMap.fourier_coe]\n      | (rw [SchwartzMap.fourier_coe])\n  have hf : MeasureTheory.Integrable (⇑f.function : CohnElkies.Euclidean d → ℂ) :=\n    f.function.integrable\n  have hF : MeasureTheory.Integrable (𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ)) := by\n    have h := (𝓕 f.function).integrable\n    have he : (fun v => (𝓕 f.function) v) = 𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) := by\n      funext v; exact hco v\n    rw [← he]; exact h\n  have key := MeasureTheory.Integrable.fourier_inversion hf hF\n    (f.function.continuous.continuousAt (x := (0 : CohnElkies.Euclidean d)))\n  rw [Real.fourierInv_eq'] at key\n  simp at key\n  have h4 : (∫ v, 𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) v).re\n      = ∫ v, (𝓕 (⇑f.function : CohnElkies.Euclidean d → ℂ) v).re := by\n    exact (integral_re hF).symm\n  rw [← key, h4]\n  exact integral_nonneg (fun v => by rw [← hco v]; exact f.fourier_nonneg v)",
+     "status": "YELLOW",
+     "detail": "line 0: unsolved goals\nd : ℕ\nf : PackingBounds.FullAdmissible d\n⊢ 0 ≤ (f.function 0).re\n'probe_bdd_below' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'probe_bdd_below': ['sorryAx']}",
+     "seconds": 41.2
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "PackingBounds.FullMain.exact_limit",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "Tendsto\n      (fun d : ℕ =>\n        PackingBounds.fullLinearProgram d ^ ((d : ℝ)⁻¹))\n      atTop\n      (nhds (Real.sqrt (Real.exp 1 / (2 * Real.pi))))",
+   "restated": "∀ ε : ℝ, 0 < ε → ∃ N : ℕ, ∀ d : ℕ, N ≤ d → |PackingBounds.fullLinearProgram d ^ ((d : ℝ)⁻¹) - Real.sqrt (Real.exp 1 / (2 * Real.pi))| < ε",
+   "english": "For every ε > 0 there is N such that for all d ≥ N, the d-th root of the linear-programming bound fullLinearProgram d is within ε of √(e/(2π)).",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "fullLinearProgram"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace PackingBounds.FullMain\nopen Filter MeasureTheory Metric\nopen scoped ENNReal FourierTransform SchwartzMap Topology\ntheorem probe_restate_0  :\n    (Tendsto\n      (fun d : ℕ =>\n        PackingBounds.fullLinearProgram d ^ ((d : ℝ)⁻¹))\n      atTop\n      (nhds (Real.sqrt (Real.exp 1 / (2 * Real.pi))))) ↔\n    (∀ ε : ℝ, 0 < ε → ∃ N : ℕ, ∀ d : ℕ, N ≤ d → |PackingBounds.fullLinearProgram d ^ ((d : ℝ)⁻¹) - Real.sqrt (Real.exp 1 / (2 * Real.pi))| < ε) := by\n  rw [Metric.tendsto_atTop]; simp only [Real.dist_eq]\nend PackingBounds.FullMain\n",
+   "seconds": 45.5
+  },
+  {
+   "target": "PackingBounds.FullMain.exact_binary_exponent",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "Tendsto\n      (fun d : ℕ =>\n        Real.logb 2 (PackingBounds.fullLinearProgram d) / (d : ℝ))\n      atTop\n      (nhds (-(1 / 2 : ℝ) *\n        Real.logb 2 (2 * Real.pi / Real.exp 1)))",
+   "restated": "Tendsto (fun d : ℕ => Real.logb 2 (PackingBounds.fullLinearProgram d) / (d : ℝ)) atTop (nhds ((1 / 2 : ℝ) * Real.logb 2 (Real.exp 1 / (2 * Real.pi))))",
+   "english": "The binary logarithm of the linear-programming bound, divided by d, converges to (1/2)·log₂(e/(2π)), a negative number. So the bound decays like 2^(-c·d) with c = (1/2)·log₂(2π/e) ≈ 0.6044.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "fullLinearProgram"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace PackingBounds.FullMain\nopen Filter MeasureTheory Metric\nopen scoped ENNReal FourierTransform SchwartzMap Topology\ntheorem probe_restate_10  :\n    (Tendsto\n      (fun d : ℕ =>\n        Real.logb 2 (PackingBounds.fullLinearProgram d) / (d : ℝ))\n      atTop\n      (nhds (-(1 / 2 : ℝ) *\n        Real.logb 2 (2 * Real.pi / Real.exp 1)))) ↔\n    (Tendsto (fun d : ℕ => Real.logb 2 (PackingBounds.fullLinearProgram d) / (d : ℝ)) atTop (nhds ((1 / 2 : ℝ) * Real.logb 2 (Real.exp 1 / (2 * Real.pi))))) := by\n  have h : (-(1 / 2 : ℝ)) * Real.logb 2 (2 * Real.pi / Real.exp 1) = (1 / 2 : ℝ) * Real.logb 2 (Real.exp 1 / (2 * Real.pi)) := by\n    have h2 : Real.exp 1 / (2 * Real.pi) = (2 * Real.pi / Real.exp 1)⁻¹ := (inv_div _ _).symm\n    rw [h2, Real.logb_inv]\n    ring\n  rw [h]\nend PackingBounds.FullMain\n",
+   "seconds": 40.7
+  },
+  {
+   "target": "PackingBounds.PackingBridge.sphere_packing_sharp_asymptotic_upper",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ e : ℕ → ℝ,\n      Asymptotics.IsLittleO atTop e (fun _ : ℕ => (1 : ℝ)) ∧\n      ∀ d : ℕ, 0 < d →\n        SpherePackingConstant d ≤\n          ENNReal.ofReal\n            ((Real.sqrt (Real.exp 1 / (2 * Real.pi)) + e d) ^ d)",
+   "restated": "∃ e : ℕ → ℝ, Filter.Tendsto e Filter.atTop (nhds 0) ∧ ∀ d : ℕ, 0 < d → SpherePackingConstant d ≤ ENNReal.ofReal ((Real.sqrt (Real.exp 1 / (2 * Real.pi)) + e d) ^ d)",
+   "english": "There is a sequence e(d) tending to 0 such that for every d ≥ 1 the sphere packing constant in dimension d is at most (√(e/(2π)) + e(d))^d.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "SpherePackingConstant"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace PackingBounds.PackingBridge\nopen Filter MeasureTheory Metric\nopen scoped ENNReal FourierTransform SchwartzMap Topology\ntheorem probe_restate_20  :\n    (∃ e : ℕ → ℝ,\n      Asymptotics.IsLittleO atTop e (fun _ : ℕ => (1 : ℝ)) ∧\n      ∀ d : ℕ, 0 < d →\n        SpherePackingConstant d ≤\n          ENNReal.ofReal\n            ((Real.sqrt (Real.exp 1 / (2 * Real.pi)) + e d) ^ d)) ↔\n    (∃ e : ℕ → ℝ, Filter.Tendsto e Filter.atTop (nhds 0) ∧ ∀ d : ℕ, 0 < d → SpherePackingConstant d ≤ ENNReal.ofReal ((Real.sqrt (Real.exp 1 / (2 * Real.pi)) + e d) ^ d)) := by\n  simp only [Asymptotics.isLittleO_one_iff]\nend PackingBounds.PackingBridge\n",
+   "seconds": 46.4
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 149,
+  "lines_needing_human_review": 100,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

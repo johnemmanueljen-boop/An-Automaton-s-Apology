@@ -1,0 +1,179 @@
+{
+ "challenge": "../oai-math/lean/ComparatorChallenges/TamingCompatibility.lean",
+ "paper": "../oai-math/preprints/Taming-implies-compatibility-on-four-manifolds-September-23-2026/build/sections/01-introduction.tex",
+ "lines": "15:72",
+ "lint": [
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "TamingCompatibility.lean",
+   "decl": "OAI.TamingCompatibility.AlmostComplexStructure",
+   "decl_kind": "structure",
+   "line": 22,
+   "snippet": "square : ∀ x v, endomorphism x (endomorphism x v) = -v",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  }
+ ],
+ "audit": {
+  "summary": "The Lean theorem says the following. Let X be a compact, connected, Hausdorff, second-countable smooth (C^∞) 4-manifold without boundary, and let J be a smooth almost complex structure on X. If some smooth, closed, nondegenerate 2-form tames J, then there is a smooth, closed, nondegenerate 2-form that is J-invariant and tames J. This matches Theorem 1.1. The main caveat is that smoothness and closedness of 2-forms are not taken from Mathlib's bundle machinery: they are defined by testing pullbacks along all smooth maps from open subsets of ℝ⁴. This appears equivalent to the standard notions, since chart inverses are admissible test maps, but it is a bespoke encoding.",
+  "glossary": [
+   {
+    "decl": "TwoForm",
+    "line": 16,
+    "plain": "An arbitrary (not necessarily smooth) pointwise choice of an alternating bilinear form on each tangent space T_xX ≅ ℝ⁴, written in Mathlib's chart-at-x coordinates.",
+    "standard_concept": "section of Λ²T*X",
+    "matches_standard": "yes",
+    "note": "Regularity is imposed separately by IsSmooth."
+   },
+   {
+    "decl": "AlmostComplexStructure",
+    "line": 19,
+    "plain": "A fibrewise linear J_x on T_xX with J² = -1, such that the induced map TX → TX is C^∞.",
+    "standard_concept": "smooth almost complex structure",
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "eval",
+    "line": 27,
+    "plain": "α_x(u,v).",
+    "standard_concept": null,
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "pullback",
+    "line": 30,
+    "plain": "f*α as a map y ↦ α_{f(y)}(df_y ·, df_y ·) from ℝ⁴ to alternating 2-forms on ℝ⁴.",
+    "standard_concept": "pullback of a 2-form",
+    "matches_standard": "yes",
+    "note": "mfderiv and α(f y) both use chart-at-f(y) coordinates, so the composite is coordinate-independent."
+   },
+   {
+    "decl": "IsSmooth",
+    "line": 34,
+    "plain": "For every open U ⊆ ℝ⁴ and every smooth f : U → X, the pullback f*α is C^∞ on U.",
+    "standard_concept": "smooth 2-form",
+    "matches_standard": "yes",
+    "note": "Taking f to be inverse charts on their open targets recovers smoothness in charts; the converse follows from the chain rule."
+   },
+   {
+    "decl": "IsClosed",
+    "line": 38,
+    "plain": "For every smooth f : U → X with U open in ℝ⁴, d(f*α) = 0 on U.",
+    "standard_concept": "closed form, dα = 0",
+    "matches_standard": "yes",
+    "note": "Equivalent to dα = 0 in charts for smooth α."
+   },
+   {
+    "decl": "IsNondegenerate",
+    "line": 43,
+    "plain": "α_x(v,·) = 0 implies v = 0.",
+    "standard_concept": "nondegenerate 2-form",
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "IsSymplectic",
+    "line": 46,
+    "plain": "α is smooth, closed and nondegenerate.",
+    "standard_concept": "symplectic form",
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "Tames",
+    "line": 49,
+    "plain": "α_x(v,Jv) > 0 for all v ≠ 0.",
+    "standard_concept": "J-taming",
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "IsInvariant",
+    "line": 52,
+    "plain": "α(Ju,Jv) = α(u,v).",
+    "standard_concept": "J-invariance",
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "Compatible",
+    "line": 55,
+    "plain": "α tames J and is J-invariant.",
+    "standard_concept": "J-compatible form",
+    "matches_standard": "yes",
+    "note": ""
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "taming_implies_compatibility",
+    "line": 58,
+    "plain": "Let X be a T2, second-countable, compact, connected C^∞ manifold modelled on ℝ⁴ without boundary, and let J be a smooth almost complex structure on X. If some symplectic form α tames J, then some symplectic form η is J-compatible (tames J and is J-invariant)."
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "If a smooth almost complex structure J on a closed connected smooth 4-manifold is tamed by a symplectic form, then there is a smooth symplectic form compatible with J."
+   },
+   {
+    "ref": "Corollary (Taming and compatible cones)",
+    "plain": "K^t_J = K^c_J + H^-_J; if b₂⁺ = 1, then K^t_J = K^c_J, and every taming form has a cohomologous compatible representative."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "taming_implies_compatibility",
+    "relation": "equivalent",
+    "why": "Hypotheses (closed connected smooth 4-manifold) and conclusion match; the bespoke definitions agree with the standard notions."
+   },
+   {
+    "paper_ref": "Corollary (Taming and compatible cones)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "No cohomological statement is formalized."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "IsSmooth",
+    "line": 34,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "Smoothness of 2-forms is encoded by testing pullbacks along smooth maps from open subsets of ℝ⁴, not via Mathlib's bundle-section smoothness. This appears equivalent, because chart inverses are admissible test maps (the model has range univ, so chart targets are open). It is still bespoke and unverified against Mathlib's notion.",
+    "polarity": "unclear",
+    "probe_idea": "Prove IsSmooth α ↔ ∀ x, ContDiffOn ℝ ∞ (pullback α (extChartAt Model x).symm) (extChartAt Model x).target."
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "IsClosed",
+    "line": 38,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "Closedness is tested by extDerivWithin of pullbacks along all smooth maps. For smooth α this should be equivalent to dα = 0, since d commutes with pullback. Note that for a non-smooth α the condition could hold for junk-value reasons, but here IsSmooth is always conjoined.",
+    "polarity": "unclear",
+    "probe_idea": "Show IsSmooth α → (IsClosed α ↔ closedness in every chart (extChartAt x).symm on its target)."
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "taming_implies_compatibility",
+    "line": 58,
+    "paper_ref": "Corollary (Taming and compatible cones)",
+    "explanation": "The cohomological corollary is not formalized; only the main theorem is.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ],
+  "lint_verdicts": []
+ }
+}

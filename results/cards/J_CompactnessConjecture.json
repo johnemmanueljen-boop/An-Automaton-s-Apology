@@ -1,0 +1,424 @@
+{
+ "result": "J_CompactnessConjecture",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/J_CompactnessConjecture.lean",
+ "theorems": [
+  "CompactnessConjecture.quantitativeCompactnessCounterexample",
+  "CompactnessConjecture.compactnessCounterexample_bigO",
+  "CompactnessConjecture.not_erdos_180"
+ ],
+ "lint": [
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.familyExtremal",
+   "decl_kind": "def",
+   "line": 22,
+   "snippet": "(fun host : SimpleGraph (Fin n) => host.edgeFinset.card)",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.extremalScale",
+   "decl_kind": "def",
+   "line": 38,
+   "snippet": "(n : ℝ) ^ ((4 : ℝ) / 3)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.quantitativeCompactnessCounterexample",
+   "decl_kind": "theorem",
+   "line": 63,
+   "snippet": "(host.edgeFinset.card : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.quantitativeCompactnessCounterexample",
+   "decl_kind": "theorem",
+   "line": 66,
+   "snippet": "(0 : ℝ) < 1 / 48 ∧",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.quantitativeCompactnessCounterexample",
+   "decl_kind": "theorem",
+   "line": 67,
+   "snippet": "(21 : ℝ) / 16 = (4 : ℝ) / 3 - 1 / 48 ∧",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.compactnessCounterexample_bigO",
+   "decl_kind": "theorem",
+   "line": 83,
+   "snippet": "(n : ℝ) ^ ((4 : ℝ) / 3 - (1 : ℝ) / 48)) ∧",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.IsCompactFamily",
+   "decl_kind": "def",
+   "line": 29,
+   "snippet": "∀ᶠ n : ℕ in atTop,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.extremalScale",
+   "decl_kind": "def",
+   "line": 38,
+   "snippet": "(n : ℝ) ^ ((4 : ℝ) / 3)",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.UniformMemberLower",
+   "decl_kind": "def",
+   "line": 42,
+   "snippet": "∀ᶠ n : ℕ in atTop,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.compactnessCounterexample_bigO",
+   "decl_kind": "theorem",
+   "line": 80,
+   "snippet": "Asymptotics.IsBigO Filter.atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_CompactnessConjecture.lean",
+   "decl": "CompactnessConjecture.compactnessCounterexample_bigO",
+   "decl_kind": "theorem",
+   "line": 83,
+   "snippet": "(n : ℝ) ^ ((4 : ℝ) / 3 - (1 : ℝ) / 48)) ∧",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  }
+ ],
+ "audit": {
+  "summary": "The file formalizes Theorem 1.1. It asserts a nonempty finite family F of connected, bipartite, non-acyclic graphs such that each member F has ex(n,F) ≥ c·n^{4/3} eventually (with c uniform over F), while ex(n,F) = O(n^{4/3−1/48}). It also asserts that F is not compact and that the corrected Erdős–Simonovits compactness conjecture fails. The definitions (F-freeness via Mathlib `Free`, `familyExtremal` as a finite sup, `IsCompactFamily` matching (1)) faithfully encode the paper's notions. There is no substantive caveat; the statements are at least as strong as the paper's.",
+  "glossary": [
+   {
+    "decl": "FiniteGraph",
+    "line": 10,
+    "plain": "A finite simple graph on vertex set {0,…,order−1}.",
+    "standard_concept": "finite simple graph",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "FamilyFree",
+    "line": 14,
+    "plain": "Host G on n vertices contains no member of 𝓕 as a (not necessarily induced) subgraph.",
+    "standard_concept": "𝓕-free",
+    "matches_standard": "yes",
+    "note": "Mathlib `A.Free B` means ¬(A ⊑ B), i.e. B has no copy of A; the direction is correct.",
+    "citation_ok": true
+   },
+   {
+    "decl": "familyExtremal",
+    "line": 18,
+    "plain": "ex(n,𝓕): maximum number of edges of an 𝓕-free graph on n vertices.",
+    "standard_concept": "extremal number of a family",
+    "matches_standard": "yes",
+    "note": "The sup over a finite set is fine. The empty graph is always 𝓕-free for families of cyclic graphs, so the sup is never over an empty set.",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsCyclicFamily",
+    "line": 24,
+    "plain": "Every member contains a cycle.",
+    "standard_concept": "each member contains a cycle",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsCompactFamily",
+    "line": 27,
+    "plain": "There exist F∈𝓕 and C>0 with ex(n,F) ≤ C·ex(n,𝓕) for all sufficiently large n.",
+    "standard_concept": "condition (1)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "CompactnessConjectureStatement",
+    "line": 33,
+    "plain": "Every finite nonempty family of graphs each containing a cycle is compact.",
+    "standard_concept": "corrected Erdős–Simonovits compactness conjecture",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "extremalScale",
+    "line": 38,
+    "plain": "n^{4/3} (real power).",
+    "standard_concept": "n^{4/3}",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "UniformMemberLower",
+    "line": 40,
+    "plain": "For every F∈𝓕, eventually c·n^{4/3} ≤ ex(n,F).",
+    "standard_concept": "ex(n,F)=Ω(n^{4/3}) for each F",
+    "matches_standard": "yes",
+    "note": "The constant c is uniform over the family, which is harmless for a finite family.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "not_erdos_180",
+    "line": 46,
+    "plain": "The corrected compactness conjecture is false: some finite nonempty family of graphs each containing a cycle is not compact.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "quantitativeCompactnessCounterexample",
+    "line": 52,
+    "plain": "There exist a nonempty finite family 𝓕 of connected bipartite graphs each containing a cycle, and c, C > 0, such that: (i) for every F∈𝓕, eventually c·n^{4/3} ≤ ex(n,F); (ii) for all n, every 𝓕-free graph on n vertices has e^16 ≤ C·n^21; (iii) ex(n,𝓕)^16 ≤ C·n^21 for all n; (iv) the trivial identities 1/48 > 0 and 21/16 = 4/3 − 1/48 hold; (v) 𝓕 is not compact; and (vi) the compactness conjecture fails.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "compactnessCounterexample_bigO",
+    "line": 72,
+    "plain": "There exist a nonempty finite family 𝓕 of connected bipartite graphs each containing a cycle, and c>0, such that every member has ex(n,F) ≥ c·n^{4/3} eventually, ex(n,𝓕) = O(n^{4/3−1/48}) as n→∞, 𝓕 is not compact, and the compactness conjecture fails.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "There exists a finite nonempty family 𝓕 of connected bipartite graphs, each containing a cycle, with ex(n,𝓕)=O(n^{4/3−1/48}) and ex(n,F)=Ω(n^{4/3}) for every F∈𝓕; in particular no member satisfies (1)."
+   },
+   {
+    "ref": "Theorem 1.2",
+    "plain": "There exist a connected bipartite 2-degenerate graph H and c, ε > 0 with ex(n,H) ≥ c·n^{3/2+ε} for large n."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "compactnessCounterexample_bigO",
+    "relation": "equivalent",
+    "why": "The big-O upper bound, eventual per-member lower bound, member properties and non-compactness all match."
+   },
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "quantitativeCompactnessCounterexample",
+    "relation": "lean_stronger",
+    "why": "The upper bound holds for all n with an explicit constant (exponent 21/16 = 4/3 − 1/48), not just asymptotically."
+   },
+   {
+    "paper_ref": "Theorem 1.1 (in particular)",
+    "lean_theorem": "not_erdos_180",
+    "relation": "equivalent",
+    "why": "Negation of the corrected conjecture (1)."
+   },
+   {
+    "paper_ref": "Theorem 1.2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Covered elsewhere (sibling file J_TwoDegenerateGraphs)."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "quantitativeCompactnessCounterexample",
+    "line": 61,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The upper bound e^16 ≤ C n^21 is stated for all n rather than eventually. This is stronger than the paper's O(·) and fine, since finitely many small n can be absorbed into C. Lines 66–67 are trivial arithmetic padding, and line 65 is redundant given line 63.",
+    "polarity": "lean stronger",
+    "probe_idea": null,
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 22,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "edgeFinset of a graph on Fin n is a genuine finite set, so its card is the true edge count."
+   },
+   {
+    "line": 38,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "(4:ℝ)/3 is real division with a nonzero denominator."
+   },
+   {
+    "line": 63,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "Finite edge set; the card is the true edge count."
+   },
+   {
+    "line": 66,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real division by 48 ≠ 0; trivially true padding conjunct."
+   },
+   {
+    "line": 67,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Real literals with nonzero denominators; the identity 21/16 = 4/3 − 1/48 is genuinely true."
+   },
+   {
+    "line": 83,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The exponent is the real number 4/3 − 1/48 = 21/16; 0^positive = 0 at n = 0 is irrelevant under atTop."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance of the main definition"
+   },
+   "result": {
+    "id": "NV-a0",
+    "status": "GREEN",
+    "claim": "The triangle (complete graph on Fin 3) forms a singleton family that is nonempty and satisfies IsCyclicFamily, so the hypotheses of CompactnessConjectureStatement can be met by a concrete family.",
+    "kind": "non-vacuity",
+    "seconds": 25.8,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_cyclic_family_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_cyclic_family_nonempty :\n    (({⟨3, (⊤ : SimpleGraph (Fin 3))⟩} : Finset CompactnessConjecture.FiniteGraph)).Nonempty ∧\n    CompactnessConjecture.IsCyclicFamily\n      ({⟨3, (⊤ : SimpleGraph (Fin 3))⟩} : Finset CompactnessConjecture.FiniteGraph) := by\n  refine ⟨Finset.singleton_nonempty _, ?_⟩\n  intro f hf h\n  rw [Finset.mem_singleton] at hf\n  subst hf\n  have h' : (⊤ : SimpleGraph (Fin 3)).IsAcyclic := h\n  have h01 : (⊤ : SimpleGraph (Fin 3)).Adj 0 1 := by decide\n  have h12 : (⊤ : SimpleGraph (Fin 3)).Adj 1 2 := by decide\n  have h20 : (⊤ : SimpleGraph (Fin 3)).Adj 2 0 := by decide\n  let c : (⊤ : SimpleGraph (Fin 3)).Walk 0 0 :=\n    SimpleGraph.Walk.cons h01 (SimpleGraph.Walk.cons h12 (SimpleGraph.Walk.cons h20 SimpleGraph.Walk.nil))\n  apply h' c\n  rw [SimpleGraph.Walk.isCycle_def]\n  refine ⟨?_, ?_, ?_⟩\n  · simp [c, SimpleGraph.Walk.isTrail_def]\n  · simp [c]\n  · simp [c]",
+   "attempts": [
+    {
+     "lean": "theorem probe_cyclic_family_nonempty :\n    (({⟨3, (⊤ : SimpleGraph (Fin 3))⟩} : Finset CompactnessConjecture.FiniteGraph)).Nonempty ∧\n    CompactnessConjecture.IsCyclicFamily\n      ({⟨3, (⊤ : SimpleGraph (Fin 3))⟩} : Finset CompactnessConjecture.FiniteGraph) := by\n  refine ⟨Finset.singleton_nonempty _, ?_⟩\n  intro f hf h\n  rw [Finset.mem_singleton] at hf\n  subst hf\n  have h' : (⊤ : SimpleGraph (Fin 3)).IsAcyclic := h\n  have h01 : (⊤ : SimpleGraph (Fin 3)).Adj 0 1 := by decide\n  have h12 : (⊤ : SimpleGraph (Fin 3)).Adj 1 2 := by decide\n  have h20 : (⊤ : SimpleGraph (Fin 3)).Adj 2 0 := by decide\n  let c : (⊤ : SimpleGraph (Fin 3)).Walk 0 0 :=\n    SimpleGraph.Walk.cons h01 (SimpleGraph.Walk.cons h12 (SimpleGraph.Walk.cons h20 SimpleGraph.Walk.nil))\n  apply h' c\n  rw [SimpleGraph.Walk.isCycle_def]\n  refine ⟨?_, ?_, ?_⟩\n  · simp [c, SimpleGraph.Walk.isTrail_def]\n  · simp [c]\n  · simp [c]",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 25.8
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "CompactnessConjecture.quantitativeCompactnessCounterexample",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ (family : Finset FiniteGraph) (c C : ℝ),\n      family.Nonempty ∧\n      (∀ forbidden ∈ family,\n        forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧\n          ¬ forbidden.graph.IsAcyclic) ∧\n      0 < c ∧\n      0 < C ∧\n      UniformMemberLower family c ∧\n      (∀ (n : ℕ) (host : SimpleGraph (Fin n)),\n        FamilyFree family host →\n          (host.edgeFinset.card : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧\n      (∀ n : ℕ,\n        (familyExtremal family n : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧\n      (0 : ℝ) < 1 / 48 ∧\n      (21 : ℝ) / 16 = (4 : ℝ) / 3 - 1 / 48 ∧\n      ¬ IsCompactFamily family ∧\n      ¬ CompactnessConjectureStatement",
+   "restated": "∃ (family : Finset FiniteGraph) (c C : ℝ), family.Nonempty ∧ (∀ forbidden ∈ family, forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧ ¬ forbidden.graph.IsAcyclic) ∧ 0 < c ∧ 0 < C ∧ UniformMemberLower family c ∧ (∀ (n : ℕ) (host : SimpleGraph (Fin n)), FamilyFree family host → (host.edgeFinset.card : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧ (∀ n : ℕ, (familyExtremal family n : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧ ¬ IsCompactFamily family ∧ ¬ CompactnessConjectureStatement",
+   "english": "There is a nonempty finite family of connected, bipartite, non-acyclic (so cyclic) forbidden graphs and constants c, C > 0 such that: every member H has ex(n,H) ≥ c·n^(4/3) eventually; every family-free graph on n vertices has e^16 ≤ C·n^21, and likewise the family's extremal number satisfies ex(n,F)^16 ≤ C·n^21 for all n; the family is not compact (no member's extremal number is eventually bounded by a constant multiple of the family's); and the compactness conjecture fails.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "CompactnessConjectureStatement",
+    "FamilyFree",
+    "FiniteGraph",
+    "IsCompactFamily",
+    "UniformMemberLower",
+    "familyExtremal"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace CompactnessConjecture\nopen Filter Finset SimpleGraph\nopen scoped Topology\nopen scoped Classical\ntheorem probe_restate_0  :\n    (∃ (family : Finset FiniteGraph) (c C : ℝ),\n      family.Nonempty ∧\n      (∀ forbidden ∈ family,\n        forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧\n          ¬ forbidden.graph.IsAcyclic) ∧\n      0 < c ∧\n      0 < C ∧\n      UniformMemberLower family c ∧\n      (∀ (n : ℕ) (host : SimpleGraph (Fin n)),\n        FamilyFree family host →\n          (host.edgeFinset.card : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧\n      (∀ n : ℕ,\n        (familyExtremal family n : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧\n      (0 : ℝ) < 1 / 48 ∧\n      (21 : ℝ) / 16 = (4 : ℝ) / 3 - 1 / 48 ∧\n      ¬ IsCompactFamily family ∧\n      ¬ CompactnessConjectureStatement) ↔\n    (∃ (family : Finset FiniteGraph) (c C : ℝ), family.Nonempty ∧ (∀ forbidden ∈ family, forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧ ¬ forbidden.graph.IsAcyclic) ∧ 0 < c ∧ 0 < C ∧ UniformMemberLower family c ∧ (∀ (n : ℕ) (host : SimpleGraph (Fin n)), FamilyFree family host → (host.edgeFinset.card : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧ (∀ n : ℕ, (familyExtremal family n : ℝ) ^ 16 ≤ C * (n : ℝ) ^ 21) ∧ ¬ IsCompactFamily family ∧ ¬ CompactnessConjectureStatement) := by\n  constructor\n  · rintro ⟨f, c, C, h1, h2, h3, h4, h5, h6, h7, -, -, h8, h9⟩\n    exact ⟨f, c, C, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩\n  · rintro ⟨f, c, C, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩\n    exact ⟨f, c, C, h1, h2, h3, h4, h5, h6, h7, by norm_num, by norm_num, h8, h9⟩\nend CompactnessConjecture\n",
+   "seconds": 24.7
+  },
+  {
+   "target": "CompactnessConjecture.compactnessCounterexample_bigO",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ (family : Finset FiniteGraph) (c : ℝ),\n      family.Nonempty ∧\n      (∀ forbidden ∈ family,\n        forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧\n          ¬ forbidden.graph.IsAcyclic) ∧\n      0 < c ∧\n      UniformMemberLower family c ∧\n      Asymptotics.IsBigO Filter.atTop\n        (fun n : ℕ => (familyExtremal family n : ℝ))\n        (fun n : ℕ =>\n          (n : ℝ) ^ ((4 : ℝ) / 3 - (1 : ℝ) / 48)) ∧\n      ¬ IsCompactFamily family ∧\n      ¬ CompactnessConjectureStatement",
+   "restated": "∃ (family : Finset FiniteGraph) (c : ℝ), family.Nonempty ∧ (∀ forbidden ∈ family, forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧ ¬ forbidden.graph.IsAcyclic) ∧ 0 < c ∧ UniformMemberLower family c ∧ (∃ K : ℝ, ∀ᶠ n : ℕ in Filter.atTop, ‖(familyExtremal family n : ℝ)‖ ≤ K * ‖(n : ℝ) ^ ((4 : ℝ) / 3 - (1 : ℝ) / 48)‖) ∧ ¬ IsCompactFamily family ∧ ¬ CompactnessConjectureStatement",
+   "english": "There is a nonempty finite family of finite graphs, each connected, bipartite and containing a cycle, and a constant c > 0, such that every member H has ex(n,H) ≥ c·n^(4/3) eventually. The family's extremal number is eventually bounded by K·n^(4/3−1/48) for some constant K. The family is not compact, and the Compactness Conjecture fails.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "CompactnessConjectureStatement",
+    "FiniteGraph",
+    "IsCompactFamily",
+    "UniformMemberLower",
+    "familyExtremal"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace CompactnessConjecture\nopen Filter Finset SimpleGraph\nopen scoped Topology\nopen scoped Classical\ntheorem probe_restate_10  :\n    (∃ (family : Finset FiniteGraph) (c : ℝ),\n      family.Nonempty ∧\n      (∀ forbidden ∈ family,\n        forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧\n          ¬ forbidden.graph.IsAcyclic) ∧\n      0 < c ∧\n      UniformMemberLower family c ∧\n      Asymptotics.IsBigO Filter.atTop\n        (fun n : ℕ => (familyExtremal family n : ℝ))\n        (fun n : ℕ =>\n          (n : ℝ) ^ ((4 : ℝ) / 3 - (1 : ℝ) / 48)) ∧\n      ¬ IsCompactFamily family ∧\n      ¬ CompactnessConjectureStatement) ↔\n    (∃ (family : Finset FiniteGraph) (c : ℝ), family.Nonempty ∧ (∀ forbidden ∈ family, forbidden.graph.Connected ∧ forbidden.graph.IsBipartite ∧ ¬ forbidden.graph.IsAcyclic) ∧ 0 < c ∧ UniformMemberLower family c ∧ (∃ K : ℝ, ∀ᶠ n : ℕ in Filter.atTop, ‖(familyExtremal family n : ℝ)‖ ≤ K * ‖(n : ℝ) ^ ((4 : ℝ) / 3 - (1 : ℝ) / 48)‖) ∧ ¬ IsCompactFamily family ∧ ¬ CompactnessConjectureStatement) := by\n  simp only [Asymptotics.isBigO_iff]\nend CompactnessConjecture\n",
+   "seconds": 24.8
+  },
+  {
+   "target": "CompactnessConjecture.not_erdos_180",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "¬ CompactnessConjectureStatement",
+   "restated": "∃ family : Finset FiniteGraph, family.Nonempty ∧ (∀ F ∈ family, ¬ F.graph.IsAcyclic) ∧ ∀ F ∈ family, ∀ C : ℝ, 0 < C → ∃ᶠ n : ℕ in atTop, C * (familyExtremal family n : ℝ) < (SimpleGraph.extremalNumber n F.graph : ℝ)",
+   "english": "There is a nonempty finite family of finite graphs, each containing a cycle, such that for every member F and every constant C > 0, there are infinitely many n with ex(n, F) > C · ex(n, family). In other words, no member of the family has extremal number bounded by a constant multiple of the family's extremal number.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "FiniteGraph",
+    "familyExtremal"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace CompactnessConjecture\nopen Filter Finset SimpleGraph\nopen scoped Topology\nopen scoped Classical\ntheorem probe_restate_20  :\n    (¬ CompactnessConjectureStatement) ↔\n    (∃ family : Finset FiniteGraph, family.Nonempty ∧ (∀ F ∈ family, ¬ F.graph.IsAcyclic) ∧ ∀ F ∈ family, ∀ C : ℝ, 0 < C → ∃ᶠ n : ℕ in atTop, C * (familyExtremal family n : ℝ) < (SimpleGraph.extremalNumber n F.graph : ℝ)) := by\n  unfold CompactnessConjectureStatement IsCompactFamily IsCyclicFamily\n  push_neg <;> exact Iff.rfl\nend CompactnessConjecture\n",
+   "seconds": 24.3
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 73,
+  "lines_needing_human_review": 37,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

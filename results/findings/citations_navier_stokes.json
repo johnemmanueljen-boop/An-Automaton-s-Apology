@@ -1,0 +1,261 @@
+{
+ "summary": {
+  "labels_cited": 25,
+  "in_paper": 9,
+  "different_kind": 10,
+  "absent": 6,
+  "not_in_paper": 16,
+  "paper_statement_headers": 57
+ },
+ "labels": [
+  {
+   "label": "Theorem 1.1",
+   "status": "in_paper",
+   "paper_has": "Theorem 1.1",
+   "cited_at": [
+    "NavierStokes/LocalAngularGrowth.lean:236",
+    "NavierStokes/ProblemStatement.lean:7",
+    "NavierStokes/ProblemStatement.lean:116",
+    "NavierStokes/R3/ProblemStatement.lean:7",
+    "NavierStokes/R3/ProblemStatement.lean:87"
+   ],
+   "n_citations": 10
+  },
+  {
+   "label": "Proposition 3.2",
+   "status": "different_kind",
+   "paper_has": "Definition 3.2",
+   "cited_at": [
+    "NavierStokes/LeadingStress.lean:33",
+    "NavierStokes/LeadingStress.lean:37",
+    "NavierStokes/LeadingStress.lean:137",
+    "NavierStokes/LeadingStress.lean:564"
+   ],
+   "n_citations": 4
+  },
+  {
+   "label": "Lemma 3.3",
+   "status": "different_kind",
+   "paper_has": "Definition 3.3",
+   "cited_at": [
+    "NavierStokes/StressAlgebra.lean:153",
+    "NavierStokes/StressAlgebra.lean:211"
+   ],
+   "n_citations": 2
+  },
+  {
+   "label": "Lemma 3.5",
+   "status": "absent",
+   "paper_has": null,
+   "cited_at": [
+    "NavierStokes/ConeAlgebra.lean:9",
+    "NavierStokes/ConeAlgebra.lean:68"
+   ],
+   "n_citations": 2
+  },
+  {
+   "label": "Lemma 3.6",
+   "status": "absent",
+   "paper_has": null,
+   "cited_at": [
+    "NavierStokes/PowerMomentMatrix.lean:18"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Lemma 3.7",
+   "status": "absent",
+   "paper_has": null,
+   "cited_at": [
+    "NavierStokes/MomentRepair.lean:153"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Lemma 4.4",
+   "status": "in_paper",
+   "paper_has": "Lemma 4.4",
+   "cited_at": [
+    "NavierStokes/RadialHeatProfile.lean:10",
+    "NavierStokes/RadialHeatProfile.lean:688"
+   ],
+   "n_citations": 2
+  },
+  {
+   "label": "Proposition 5.1",
+   "status": "different_kind",
+   "paper_has": "Lemma 5.1",
+   "cited_at": [
+    "NavierStokes/AxisProfile.lean:14",
+    "NavierStokes/AxisProfile.lean:46",
+    "NavierStokes/AxisSeries.lean:10",
+    "NavierStokes/AxisSeries.lean:300"
+   ],
+   "n_citations": 4
+  },
+  {
+   "label": "Lemma 5.2",
+   "status": "in_paper",
+   "paper_has": "Lemma 5.2",
+   "cited_at": [
+    "NavierStokes/ReferenceBounds.lean:1176"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Lemma 6.1",
+   "status": "in_paper",
+   "paper_has": "Lemma 6.1",
+   "cited_at": [
+    "NavierStokes/LoopMoments.lean:11",
+    "NavierStokes/LoopVariance.lean:11"
+   ],
+   "n_citations": 2
+  },
+  {
+   "label": "Proposition 6.2",
+   "status": "different_kind",
+   "paper_has": "Lemma 6.2",
+   "cited_at": [
+    "NavierStokes/RadialModulation.lean:18"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Definition 8.1",
+   "status": "different_kind",
+   "paper_has": "Proposition 8.1",
+   "cited_at": [
+    "NavierStokes/GraphCalculus.lean:10",
+    "NavierStokes/PhysicalGraphBounds.lean:18"
+   ],
+   "n_citations": 2
+  },
+  {
+   "label": "Lemma 8.3",
+   "status": "different_kind",
+   "paper_has": "Proposition 8.3",
+   "cited_at": [
+    "NavierStokes/SlotGeometry.lean:15"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Lemma 8.4",
+   "status": "different_kind",
+   "paper_has": "Proposition 8.4",
+   "cited_at": [
+    "NavierStokes/TangentProjection.lean:12"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Lemma 8.5",
+   "status": "different_kind",
+   "paper_has": "Corollary 8.5",
+   "cited_at": [
+    "NavierStokes/PulseGrowth.lean:9"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Remark 8.6",
+   "status": "different_kind",
+   "paper_has": "Lemma 8.6",
+   "cited_at": [
+    "NavierStokes/Scaling.lean:14"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Lemma 8.7",
+   "status": "in_paper",
+   "paper_has": "Lemma 8.7",
+   "cited_at": [
+    "NavierStokes/Covariance.lean:12",
+    "NavierStokes/TorusAverages.lean:623",
+    "NavierStokes/TorusAverages.lean:653"
+   ],
+   "n_citations": 3
+  },
+  {
+   "label": "Lemma 8.8",
+   "status": "in_paper",
+   "paper_has": "Lemma 8.8",
+   "cited_at": [
+    "NavierStokes/CurlGeometry.lean:9",
+    "NavierStokes/CurlGeometry.lean:74"
+   ],
+   "n_citations": 2
+  },
+  {
+   "label": "Lemma 9.2",
+   "status": "in_paper",
+   "paper_has": "Lemma 9.2",
+   "cited_at": [
+    "NavierStokes/CurlClassBounds.lean:757"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Proposition 9.3",
+   "status": "in_paper",
+   "paper_has": "Proposition 9.3",
+   "cited_at": [
+    "NavierStokes/LinearWaveBounds.lean:896"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Proposition 10.3",
+   "status": "different_kind",
+   "paper_has": "Lemma 10.3",
+   "cited_at": [
+    "NavierStokes/ExponentLedger.lean:9"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Lemma 10.4",
+   "status": "in_paper",
+   "paper_has": "Lemma 10.4",
+   "cited_at": [
+    "NavierStokes/R3/IntegratedDissipation.lean:72",
+    "NavierStokes/R3/IntegratedDissipation.lean:201",
+    "NavierStokes/R3/IntegratedDissipation.lean:276",
+    "NavierStokes/R3/Theorem.lean:64"
+   ],
+   "n_citations": 4
+  },
+  {
+   "label": "Lemma 11.3",
+   "status": "absent",
+   "paper_has": null,
+   "cited_at": [
+    "NavierStokes/DiagonalScale.lean:11",
+    "NavierStokes/DiagonalScale.lean:152",
+    "NavierStokes/DiagonalScale.lean:207"
+   ],
+   "n_citations": 3
+  },
+  {
+   "label": "Proposition 11.4",
+   "status": "absent",
+   "paper_has": null,
+   "cited_at": [
+    "NavierStokes/TimeLocalization.lean:15"
+   ],
+   "n_citations": 1
+  },
+  {
+   "label": "Proposition 11.7",
+   "status": "absent",
+   "paper_has": null,
+   "cited_at": [
+    "NavierStokes/BlowupImplication.lean:9",
+    "NavierStokes/BlowupImplication.lean:124"
+   ],
+   "n_citations": 2
+  }
+ ]
+}

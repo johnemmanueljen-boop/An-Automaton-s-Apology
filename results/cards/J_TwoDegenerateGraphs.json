@@ -1,0 +1,276 @@
+{
+ "result": "J_TwoDegenerateGraphs",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/J_TwoDegenerateGraphs.lean",
+ "theorems": [
+  "TwoDegenerateGraphs.twoDegenerateExtremalCounterexample",
+  "TwoDegenerateGraphs.not_erdos_146"
+ ],
+ "lint": [
+  {
+   "rule": "card-zero",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_TwoDegenerateGraphs.lean",
+   "decl": "TwoDegenerateGraphs.IsDegenerate",
+   "decl_kind": "def",
+   "line": 15,
+   "snippet": "∃ v ∈ s, (neighborsWithin G s v).card ≤ r",
+   "explanation": "Nat.card of an infinite type is 0; dividing by a cardinality that can be 0 gives 0.",
+   "suggested_probe": "Check finiteness / nonemptiness."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_TwoDegenerateGraphs.lean",
+   "decl": "TwoDegenerateGraphs.DegeneracyConjectureStatement",
+   "decl_kind": "def",
+   "line": 25,
+   "snippet": "(fun n : ℕ => (n : ℝ) ^ (((2 : ℕ) : ℝ) - 1 / (r : ℝ)))",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "J_TwoDegenerateGraphs.lean",
+   "decl": "TwoDegenerateGraphs.twoDegenerateExtremalCounterexample",
+   "decl_kind": "theorem",
+   "line": 39,
+   "snippet": "c * (n : ℝ) ^ ((3 : ℝ) / 2 + ε) ≤",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_TwoDegenerateGraphs.lean",
+   "decl": "TwoDegenerateGraphs.DegeneracyConjectureStatement",
+   "decl_kind": "def",
+   "line": 23,
+   "snippet": "Asymptotics.IsBigO Filter.atTop",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_TwoDegenerateGraphs.lean",
+   "decl": "TwoDegenerateGraphs.twoDegenerateExtremalCounterexample",
+   "decl_kind": "theorem",
+   "line": 38,
+   "snippet": "∀ᶠ n : ℕ in atTop,",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-rpow",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "J_TwoDegenerateGraphs.lean",
+   "decl": "TwoDegenerateGraphs.twoDegenerateExtremalCounterexample",
+   "decl_kind": "theorem",
+   "line": 39,
+   "snippet": "c * (n : ℝ) ^ ((3 : ℝ) / 2 + ε) ≤",
+   "explanation": "Real powers x ^ (r : ℝ) give junk values for x < 0 (and 0 ^ 0 = 1).",
+   "suggested_probe": "Check the base is nonnegative."
+  }
+ ],
+ "audit": {
+  "summary": "The first target proves that there is a finite, connected, bipartite, 2-degenerate graph H on Fin q with ex(n,H) ≥ c·n^{3/2+ε} for all sufficiently large n, for some constants c, ε > 0. It also proves an extra property not in the paper: under every proper 2-colouring, each colour class contains a vertex of degree > 2. The second target proves the negation of a formalized Erdős degeneracy conjecture: for every r > 0 and every finite bipartite r-degenerate H, ex(n,H) = O(n^{2−1/r}). Both statements match the paper; the only deviation is the harmless extra colouring/degree conjunct, which makes Lean stronger.",
+  "glossary": [
+   {
+    "decl": "neighborsWithin",
+    "line": 8,
+    "plain": "For a finite set s and vertex v: the set of vertices in s adjacent to v in G.",
+    "standard_concept": "neighbourhood of v restricted to s",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsDegenerate",
+    "line": 13,
+    "plain": "Every nonempty finite vertex set s contains a vertex with at most r neighbours inside s.",
+    "standard_concept": "r-degenerate graph",
+    "matches_standard": "yes",
+    "note": "Stated for induced subgraphs. This is equivalent to the paper's 'every nonempty subgraph has a vertex of degree ≤ r', since deleting edges only lowers degrees.",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsTwoDegenerate",
+    "line": 17,
+    "plain": "IsDegenerate 2 G",
+    "standard_concept": "2-degenerate graph",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "DegeneracyConjectureStatement",
+    "line": 20,
+    "plain": "For all r > 0 and all bipartite r-degenerate graphs H on Fin q, ex(n,H) = O(n^{2−1/r}) as n → ∞.",
+    "standard_concept": "Erdős degeneracy conjecture (3)",
+    "matches_standard": "yes",
+    "note": "Uses Mathlib's extremalNumber, which matches the paper's ex(n,H). The hypothesis r > 0 avoids the 1/0 junk value.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "twoDegenerateExtremalCounterexample",
+    "line": 28,
+    "plain": "There exist q and a graph H on Fin q with all of the following: H is connected, bipartite and 2-degenerate; for every proper 2-colouring and each colour class, the maximum degree over that class exceeds 2; and there are reals c > 0, ε > 0 with c·n^{3/2+ε} ≤ ex(n,H) for all sufficiently large n.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "not_erdos_146",
+    "line": 43,
+    "plain": "There exist r > 0 and a bipartite r-degenerate graph H on Fin q such that ex(n,H) is not O(n^{2−1/r}).",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.2",
+    "plain": "There exist a fixed connected bipartite 2-degenerate graph H and constants c, ε > 0 with ex(n,H) ≥ c·n^{3/2+ε} for all sufficiently large n."
+   },
+   {
+    "ref": "Abstract / §1.2",
+    "plain": "Erdős's conjecture that every bipartite r-degenerate graph has ex(n,H) = O(n^{2−1/r}) is false (already for r = 2)."
+   },
+   {
+    "ref": "Theorem 1.1",
+    "plain": "Failure of compactness (covered elsewhere, sibling file)."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.2",
+    "lean_theorem": "twoDegenerateExtremalCounterexample",
+    "relation": "lean_stronger",
+    "why": "Same conclusion, plus an extra conjunct on degrees within each colour class."
+   },
+   {
+    "paper_ref": "Abstract / §1.2 (disproof of degeneracy conjecture)",
+    "lean_theorem": "not_erdos_146",
+    "relation": "equivalent",
+    "why": "The negation of the faithfully formalized conjecture (3)."
+   },
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Covered elsewhere (sibling file J_CompactnessConjecture)."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "other",
+    "severity": "low",
+    "decl": "twoDegenerateExtremalCounterexample",
+    "line": 33,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The extra conjunct requires that, under every proper 2-colouring, each colour class contains a vertex of degree > 2. This also forces both classes to be nonempty, since sup over an empty class is 0. The paper's Theorem 1.2 does not state this, though it is presumably meant to rule out the Füredi/AKS case. It only strengthens the Lean statement.",
+    "polarity": "lean stronger",
+    "probe_idea": null,
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 15,
+    "rule": "card-zero",
+    "verdict": "harmless",
+    "why": "This is a Finset.card of a finite filter, not Nat.card of a possibly infinite type, so no junk value arises."
+   },
+   {
+    "line": 25,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The hypothesis 0 < r excludes 1/0, and (2:ℕ):ℝ = 2 exactly."
+   },
+   {
+    "line": 39,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "(3:ℝ)/2 is real division and equals 1.5 exactly."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance of the main definition"
+   },
+   "result": {
+    "id": "NV-a0",
+    "status": "GREEN",
+    "claim": "The bespoke predicate IsDegenerate is satisfiable: the empty graph on Fin 3 is 2-degenerate (and so IsTwoDegenerate holds for it). This shows the definition is not vacuously false.",
+    "kind": "non-vacuity",
+    "seconds": 24.2,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_nv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_nv : TwoDegenerateGraphs.IsDegenerate 2 (⊥ : SimpleGraph (Fin 3)) := by\n  intro s hs\n  obtain ⟨v, hv⟩ := hs\n  refine ⟨v, hv, ?_⟩\n  simp [TwoDegenerateGraphs.neighborsWithin]",
+   "attempts": [
+    {
+     "lean": "theorem probe_nv : TwoDegenerateGraphs.IsDegenerate 2 (⊥ : SimpleGraph (Fin 3)) := by\n  intro s hs\n  obtain ⟨v, hv⟩ := hs\n  refine ⟨v, hv, ?_⟩\n  simp [TwoDegenerateGraphs.neighborsWithin]",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 24.2
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "TwoDegenerateGraphs.twoDegenerateExtremalCounterexample",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ (q : ℕ) (H : SimpleGraph (Fin q)),\n      H.Connected ∧\n      H.IsBipartite ∧\n      IsTwoDegenerate H ∧\n      (∀ coloring : H.Coloring (Fin 2), ∀ side : Fin 2,\n        2 < (Finset.univ.filter\n          (fun vertex : Fin q => coloring vertex = side)).sup\n          (fun vertex => H.degree vertex)) ∧\n      ∃ c ε : ℝ, 0 < c ∧ 0 < ε ∧\n        ∀ᶠ n : ℕ in atTop,\n          c * (n : ℝ) ^ ((3 : ℝ) / 2 + ε) ≤\n            (SimpleGraph.extremalNumber n H : ℝ)",
+   "restated": "∃ (q : ℕ) (H : SimpleGraph (Fin q)), H.Connected ∧ H.IsBipartite ∧ IsTwoDegenerate H ∧ (∀ coloring : H.Coloring (Fin 2), ∀ side : Fin 2, 2 < (Finset.univ.filter (fun vertex : Fin q => coloring vertex = side)).sup (fun vertex => H.degree vertex)) ∧ ∃ c ε : ℝ, 0 < c ∧ 0 < ε ∧ ∃ N : ℕ, ∀ n : ℕ, N ≤ n → c * (n : ℝ) ^ ((3 : ℝ) / 2 + ε) ≤ (SimpleGraph.extremalNumber n H : ℝ)",
+   "english": "There is a finite connected bipartite 2-degenerate graph H such that, in every proper 2-colouring, each colour class contains a vertex of degree greater than 2. Moreover there are constants c > 0 and ε > 0 and a threshold N such that for all n ≥ N, ex(n, H) ≥ c·n^(3/2+ε).",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "IsTwoDegenerate"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace TwoDegenerateGraphs\nopen Filter Finset SimpleGraph\nopen scoped Topology\nopen Classical in\ntheorem probe_restate_0  :\n    (∃ (q : ℕ) (H : SimpleGraph (Fin q)),\n      H.Connected ∧\n      H.IsBipartite ∧\n      IsTwoDegenerate H ∧\n      (∀ coloring : H.Coloring (Fin 2), ∀ side : Fin 2,\n        2 < (Finset.univ.filter\n          (fun vertex : Fin q => coloring vertex = side)).sup\n          (fun vertex => H.degree vertex)) ∧\n      ∃ c ε : ℝ, 0 < c ∧ 0 < ε ∧\n        ∀ᶠ n : ℕ in atTop,\n          c * (n : ℝ) ^ ((3 : ℝ) / 2 + ε) ≤\n            (SimpleGraph.extremalNumber n H : ℝ)) ↔\n    (∃ (q : ℕ) (H : SimpleGraph (Fin q)), H.Connected ∧ H.IsBipartite ∧ IsTwoDegenerate H ∧ (∀ coloring : H.Coloring (Fin 2), ∀ side : Fin 2, 2 < (Finset.univ.filter (fun vertex : Fin q => coloring vertex = side)).sup (fun vertex => H.degree vertex)) ∧ ∃ c ε : ℝ, 0 < c ∧ 0 < ε ∧ ∃ N : ℕ, ∀ n : ℕ, N ≤ n → c * (n : ℝ) ^ ((3 : ℝ) / 2 + ε) ≤ (SimpleGraph.extremalNumber n H : ℝ)) := by\n  simp only [Filter.eventually_atTop]\nend TwoDegenerateGraphs\n",
+   "seconds": 25.4
+  },
+  {
+   "target": "TwoDegenerateGraphs.not_erdos_146",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "¬ DegeneracyConjectureStatement",
+   "restated": "∃ (r q : ℕ) (H : SimpleGraph (Fin q)), 0 < r ∧ H.IsBipartite ∧ IsDegenerate r H ∧ ¬ Asymptotics.IsBigO Filter.atTop (fun n : ℕ => (SimpleGraph.extremalNumber n H : ℝ)) (fun n : ℕ => (n : ℝ) ^ (((2 : ℕ) : ℝ) - 1 / (r : ℝ)))",
+   "english": "There exist r > 0 and a bipartite r-degenerate graph H on q vertices whose extremal number ex(n, H) is not O(n^(2 - 1/r)) as n → ∞.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "IsDegenerate"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace TwoDegenerateGraphs\nopen Filter Finset SimpleGraph\nopen scoped Topology\nopen Classical in\ntheorem probe_restate_11  :\n    (¬ DegeneracyConjectureStatement) ↔\n    (∃ (r q : ℕ) (H : SimpleGraph (Fin q)), 0 < r ∧ H.IsBipartite ∧ IsDegenerate r H ∧ ¬ Asymptotics.IsBigO Filter.atTop (fun n : ℕ => (SimpleGraph.extremalNumber n H : ℝ)) (fun n : ℕ => (n : ℝ) ^ (((2 : ℕ) : ℝ) - 1 / (r : ℝ)))) := by\n  unfold DegeneracyConjectureStatement\n  constructor\n  · intro h\n    by_contra hc\n    apply h\n    intro r q H hr hb hd\n    by_contra hn\n    exact hc ⟨r, q, H, hr, hb, hd, hn⟩\n  · rintro ⟨r, q, H, hr, hb, hd, hn⟩ h\n    exact hn (h r q H hr hb hd)\nend TwoDegenerateGraphs\n",
+   "seconds": 27.3
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 38,
+  "lines_needing_human_review": 17,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

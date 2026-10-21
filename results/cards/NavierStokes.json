@@ -1,0 +1,622 @@
+{
+ "result": "NavierStokes",
+ "repo": "NavierStokesAndEuler",
+ "challenge_file": "ComparatorChallenges/NavierStokes.lean",
+ "theorems": [
+  "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+  "NavierStokes.Comparator.navier_stokes_breakdown_periodic"
+ ],
+ "lint": [
+  {
+   "rule": "junk-deriv",
+   "severity": "high",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.divergence",
+   "decl_kind": "def",
+   "line": 81,
+   "snippet": "def divergence (v : ℝ^n → ℝ^n) (x : ℝ^n) : ℝ := (fderiv ℝ v x).trace ℝ (ℝ^n)",
+   "explanation": "deriv/fderiv of a non-differentiable function is 0.",
+   "suggested_probe": "Check differentiability is asserted (e.g. ContDiff / Differentiable) wherever the derivative is used."
+  },
+  {
+   "rule": "junk-deriv",
+   "severity": "high",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.InitialVelocityConditionDecay",
+   "decl_kind": "structure",
+   "line": 155,
+   "snippet": "decay : ∀ m : ℕ, ∀ K : ℝ, ∃ C : ℝ, ∀ x, ‖iteratedFDeriv ℝ m u₀ x‖ ≤ C / (1 + ‖x‖) ^ K",
+   "explanation": "deriv/fderiv of a non-differentiable function is 0.",
+   "suggested_probe": "Check differentiability is asserted (e.g. ContDiff / Differentiable) wherever the derivative is used."
+  },
+  {
+   "rule": "junk-deriv",
+   "severity": "high",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothness",
+   "decl_kind": "structure",
+   "line": 223,
+   "snippet": "derivWithin (v x ·) (Set.Ici 0) t + fderiv ℝ (v · t) x (v x t) =",
+   "explanation": "deriv/fderiv of a non-differentiable function is 0.",
+   "suggested_probe": "Check differentiability is asserted (e.g. ContDiff / Differentiable) wherever the derivative is used."
+  },
+  {
+   "rule": "junk-integral",
+   "severity": "high",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessRn",
+   "decl_kind": "structure",
+   "line": 253,
+   "snippet": "globally_bounded_energy : ∃ E, ∀ t ≥ 0, (∫ x : ℝ^n, ‖v x t‖ ^ 2) < E",
+   "explanation": "The Bochner integral of a non-integrable function is 0.",
+   "suggested_probe": "Prove Integrable, or check the statement includes it as a hypothesis/conclusion."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.InitialVelocityConditionDecay",
+   "decl_kind": "structure",
+   "line": 155,
+   "snippet": "decay : ∀ m : ℕ, ∀ K : ℝ, ∃ C : ℝ, ∀ x, ‖iteratedFDeriv ℝ m u₀ x‖ ≤ C / (1 + ‖x‖) ^ K",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.ForceConditionDecay",
+   "decl_kind": "structure",
+   "line": 191,
+   "snippet": "‖iteratedFDerivWithin ℝ m (↿f) (Set.univ ×ˢ Set.Ici 0) (x, t)‖ ≤ C / (1 + ‖x‖ + t) ^ K",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.ForceConditionPeriodic",
+   "decl_kind": "structure",
+   "line": 205,
+   "snippet": "‖iteratedFDerivWithin ℝ m (↿f) (Set.univ ×ˢ Set.Ici 0) (x, t)‖ ≤ C / (1 + t) ^ K",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothness",
+   "decl_kind": "structure",
+   "line": 224,
+   "snippet": "nu • Δ (v · t) x - gradient (p · t) x + f x t",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.InitialVelocityCondition",
+   "decl_kind": "structure",
+   "line": 135,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.InitialVelocityConditionDecay",
+   "decl_kind": "structure",
+   "line": 152,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.ForceConditionDecay",
+   "decl_kind": "structure",
+   "line": 186,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.ForceConditionPeriodic",
+   "decl_kind": "structure",
+   "line": 201,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.ForceConditionPeriodic",
+   "decl_kind": "structure",
+   "line": 203,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothness",
+   "decl_kind": "structure",
+   "line": 220,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothness",
+   "decl_kind": "structure",
+   "line": 225,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothness",
+   "decl_kind": "structure",
+   "line": 228,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessRn",
+   "decl_kind": "structure",
+   "line": 249,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessRn",
+   "decl_kind": "structure",
+   "line": 251,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessPeriodic",
+   "decl_kind": "structure",
+   "line": 266,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "NavierStokesAndEuler",
+   "file": "NavierStokes.lean",
+   "decl": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessPeriodic",
+   "decl_kind": "structure",
+   "line": 268,
+   "snippet": "",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  }
+ ],
+ "audit": {
+  "summary": "For every ν > 0, the two theorems assert Fefferman's breakdown alternatives. (C): there are smooth, divergence-free, rapidly decaying u₀ and f on ℝ³ such that no smooth (v,p) on ℝ³×[0,∞) solves Navier–Stokes with v(·,t) ∈ L² and uniformly bounded energy. (D): the same on the torus, with no smooth spatially 1-periodic solution. This matches the 'Consequently…' part of Theorem 1.1 and the final sentence of Corollary 10.6. The main caveat is in (D): the pressure must also be 1-periodic. That is an extra requirement inside the ¬∃ and makes the statement weaker, though it follows the Clay errata and the paper's periodic pressure P_per. The blow-up construction itself (compact support, L∞ blow-up as t↑1) is not formalized.",
+  "glossary": [
+   {
+    "decl": "divergence",
+    "line": 81,
+    "plain": "∇·v(x) = trace of the Jacobian Dv(x); equals 0 where v is not differentiable",
+    "standard_concept": "divergence of a vector field",
+    "matches_standard": "yes",
+    "note": "Junk value only at non-differentiable points; every use is on smooth fields.",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsOnePeriodic",
+    "line": 121,
+    "plain": "f(x+e_i) = f(x) for all x and every coordinate i",
+    "standard_concept": "ℤⁿ-periodicity (function on 𝕋ⁿ)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "InitialVelocityCondition",
+    "line": 134,
+    "plain": "u₀ is C^∞ and ∇·u₀ = 0 everywhere",
+    "standard_concept": "Fefferman's smooth divergence-free initial datum",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "InitialVelocityConditionDecay",
+    "line": 150,
+    "plain": "In addition, for all m and all real K there is C with ‖D^m u₀(x)‖ ≤ C(1+|x|)^{-K}",
+    "standard_concept": "Fefferman condition (4)",
+    "matches_standard": "yes",
+    "note": "Allowing K < 0 is a vacuous strengthening; the base is ≥ 1, so there is no junk division.",
+    "citation_ok": true
+   },
+   {
+    "decl": "InitialVelocityConditionPeriodic",
+    "line": 164,
+    "plain": "Smooth, divergence-free and 1-periodic u₀",
+    "standard_concept": "Fefferman condition (8)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "ForceCondition",
+    "line": 175,
+    "plain": "f is C^∞ on ℝⁿ×[0,∞)",
+    "standard_concept": "smooth force",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "ForceConditionDecay",
+    "line": 185,
+    "plain": "Every space-time derivative of f is bounded by C(1+|x|+t)^{-K} for t ≥ 0",
+    "standard_concept": "Fefferman condition (5)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "ForceConditionPeriodic",
+    "line": 200,
+    "plain": "f(·,t) is 1-periodic for t ≥ 0, and every derivative is bounded by C(1+t)^{-K}",
+    "standard_concept": "Fefferman conditions (8),(9)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "NavierStokesExistenceAndSmoothness",
+    "line": 217,
+    "plain": "(v,p) satisfy, for t ≥ 0: ∂_t v + (v·∇)v = νΔv − ∇p + f (one-sided time derivative); ∇·v = 0; v(·,0) = u₀; v and p are C^∞ on ℝⁿ×[0,∞)",
+    "standard_concept": "Fefferman (1),(2),(3),(6)/(11)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "NavierStokesExistenceAndSmoothnessRn",
+    "line": 245,
+    "plain": "In addition, v(·,t) ∈ L² for each t ≥ 0 and sup_t ∫|v|² < E for some E",
+    "standard_concept": "Fefferman condition (7)",
+    "matches_standard": "yes",
+    "note": "The MemLp hypothesis makes the Bochner integral genuine, not a junk 0.",
+    "citation_ok": true
+   },
+   {
+    "decl": "NavierStokesExistenceAndSmoothnessPeriodic",
+    "line": 262,
+    "plain": "In addition, v(·,t) and p(·,t) are 1-periodic for t ≥ 0",
+    "standard_concept": "Fefferman condition (10) plus the errata on pressure periodicity",
+    "matches_standard": "partly",
+    "note": "Pressure periodicity is not in Fefferman's original (10). It is the errata and standard fix, and matches the paper's P_per.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "navier_stokes_breakdown_R3",
+    "line": 273,
+    "plain": "For all ν > 0 there exist u₀, f: ℝ³ → ℝ³ (f time-dependent) such that u₀ is smooth, divergence-free and Schwartz-decaying, f is smooth on ℝ³×[0,∞) with all derivatives O((1+|x|+t)^{-K}), and there are no v, p that are smooth on ℝ³×[0,∞) and satisfy NS, ∇·v = 0, v(·,0) = u₀, v(·,t) ∈ L² for every t ≥ 0, and sup_{t≥0} ‖v(t)‖²_{L²} < ∞.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "navier_stokes_breakdown_periodic",
+    "line": 280,
+    "plain": "For all ν > 0 there exist smooth, divergence-free, 1-periodic u₀ and smooth, spatially 1-periodic f with all derivatives O((1+t)^{-K}), such that there are no smooth v, p on ℝ³×[0,∞) satisfying NS, ∇·v = 0, v(·,0) = u₀, with both v(·,t) and p(·,t) 1-periodic for every t ≥ 0.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "For every ν > 0 there exist f ∈ C_c^∞(ℝ³×(0,∞)), a compact set K, and smooth u, p on ℝ³×[0,1) solving NS with u(·,0) = 0, supported in K, with bounded L² norm and limsup_{t↑1} ‖u‖_∞ = ∞. Consequently there is no smooth solution on ℝ³×[0,∞) with the same data and uniformly bounded kinetic energy, i.e. alternative (C)."
+   },
+   {
+    "ref": "Corollary 10.6",
+    "plain": "For every ν > 0 there is a smooth force on 𝕋³×[0,∞), compactly supported in time, such that the periodic solution (U, P_per) with zero data blows up in L∞ as t↑1. There is no global smooth periodic solution for the same data, i.e. alternative (D)."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1 (consequence / alternative C)",
+    "lean_theorem": "navier_stokes_breakdown_R3",
+    "relation": "equivalent",
+    "why": "Lean asserts Fefferman's (C); the paper's data (u₀ = 0, compactly supported f) are admissible witnesses."
+   },
+   {
+    "paper_ref": "Theorem 1.1 (blow-up construction, compact support, L∞ blow-up)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Only the non-existence consequence is stated."
+   },
+   {
+    "paper_ref": "Corollary 10.6 (alternative D)",
+    "lean_theorem": "navier_stokes_breakdown_periodic",
+    "relation": "equivalent",
+    "why": "Matches (D) with periodic pressure, consistent with the paper's P_per and the Clay errata. It is weaker than a literal reading of Fefferman's original (10)."
+   },
+   {
+    "paper_ref": "Corollary 10.6 (blow-up of U on [0,1))",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "Only non-existence is stated."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "assumption",
+    "severity": "low",
+    "decl": "NavierStokesExistenceAndSmoothnessPeriodic",
+    "line": 269,
+    "paper_ref": "Corollary 10.6",
+    "explanation": "The solution must also have 1-periodic pressure. This is an extra requirement inside ¬∃, so the breakdown claim is weaker than Fefferman's original (D), which constrains only u. It follows the Clay errata and the paper's periodic pressure P_per. Without it, solutions with non-periodic pressure (e.g. a spatially constant velocity g(t) with p = −g'(t)·x) could exist.",
+    "polarity": "lean weaker",
+    "probe_idea": "State a variant without isOnePeriodic_pressure and compare. The constant-velocity/linear-pressure example shows the field is necessary for a meaningful (D).",
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "navier_stokes_breakdown_R3",
+    "line": 273,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The paper's main content (an explicit smooth solution on [0,1) with compact support, bounded energy, and L∞ blow-up) is not formalized. Only the non-existence consequence is.",
+    "polarity": "lean weaker",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F3",
+    "category": "other",
+    "severity": "low",
+    "decl": "NavierStokesExistenceAndSmoothness",
+    "line": 223,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The time derivative is derivWithin on Ici 0 (one-sided at t = 0), and smoothness is ContDiffOn on univ ×ˢ Ici 0. This is a faithful encoding of C^∞(ℝ³×[0,∞)). Because v and p are required smooth, the fderiv, Δ and gradient terms are never junk.",
+    "polarity": "n/a",
+    "probe_idea": null,
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 81,
+    "rule": "junk-deriv",
+    "verdict": "harmless",
+    "why": "Divergence is only applied to fields required to be C^∞, so fderiv is genuine."
+   },
+   {
+    "line": 155,
+    "rule": "junk-deriv",
+    "verdict": "harmless",
+    "why": "u₀ is required ContDiff ∞, so iteratedFDeriv is the true derivative."
+   },
+   {
+    "line": 223,
+    "rule": "junk-deriv",
+    "verdict": "harmless",
+    "why": "velocity_smooth on univ ×ˢ Ici 0 makes the spatial and one-sided time derivatives genuine for t ≥ 0."
+   },
+   {
+    "line": 253,
+    "rule": "junk-integral",
+    "verdict": "harmless",
+    "why": "The integrable field (MemLp ‖v·t‖ 2) guarantees ‖v‖² is integrable, so the integral is the true energy."
+   },
+   {
+    "line": 155,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The base 1+‖x‖ ≥ 1, so the rpow is positive and there is no division by zero."
+   },
+   {
+    "line": 191,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "1+‖x‖+t ≥ 1 for t ≥ 0."
+   },
+   {
+    "line": 205,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "1+t ≥ 1 for t ≥ 0."
+   },
+   {
+    "line": 224,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "This is subtraction of vectors in EuclideanSpace ℝ (Fin 3), not ℕ."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "NavierStokesExistenceAndSmoothnessPeriodic",
+    "line": 269,
+    "explanation": "The solution must also have 1-periodic pressure. This is an extra requirement inside ¬∃, so the breakdown claim is weaker than Fefferman's original (D), which constrains only u. It follows the Clay errata and the paper's periodic pressure P_per. Without it, solutions with non-periodic pressure (e.g. a spatially constant velocity g(t) with p = −g'(t)·x) could exist.",
+    "probe_idea": "State a variant without isOnePeriodic_pressure and compare. The constant-velocity/linear-pressure example shows the field is necessary for a meaningful (D)."
+   },
+   "result": {
+    "id": "F1-a1",
+    "status": "GREEN",
+    "claim": "There is a concrete instance with smooth, divergence-free, 1-periodic initial data u₀ = 0, zero force, and a smooth Navier–Stokes solution (v, p) with v(x,t) = t•e₀ (spatially constant, so 1-periodic) and p(x,t) = -x₀. This solution satisfies every field of NavierStokesExistenceAndSmoothness and has 1-periodic velocity, but its pressure is not 1-periodic. So the isOnePeriodic_pressure field is a genuine extra restriction inside the ¬∃ of (D), which makes that breakdown claim weaker than a version constraining only the velocity.",
+    "kind": "discrepancy",
+    "seconds": 31.0,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_nonperiodic_pressure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "open NavierStokes.Comparator\nopen scoped Laplacian\n\ntheorem probe_nonperiodic_pressure (nu : ℝ) :\n    ∃ (u₀ : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3))\n      (f : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3))\n      (v : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3))\n      (p : EuclideanSpace ℝ (Fin 3) → ℝ → ℝ),\n      InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧\n      NavierStokesExistenceAndSmoothness nu u₀ f v p ∧\n      (∀ t ≥ (0:ℝ), IsOnePeriodic (v · t)) ∧\n      ¬ (∀ t ≥ (0:ℝ), IsOnePeriodic (p · t)) := by\n  obtain ⟨e, he⟩ : ∃ e : EuclideanSpace ℝ (Fin 3), e = EuclideanSpace.single (0 : Fin 3) (1 : ℝ) := ⟨_, rfl⟩\n  refine ⟨fun _ => 0, fun _ _ => 0, fun _ t => t • e, fun x _ => -inner ℝ e x, ?_, ?_, ?_, ?_, ?_⟩\n  · refine ⟨⟨?_, contDiff_const⟩, fun x i => rfl⟩\n    intro x\n    simp [divergence]\n  · refine ⟨⟨contDiffOn_const⟩, fun t ht x i => rfl, ?_⟩\n    intro m K\n    refine ⟨0, fun x t ht => ?_⟩\n    have h : ‖iteratedFDerivWithin ℝ m (↿(fun (_ : EuclideanSpace ℝ (Fin 3)) (_ : ℝ) => (0 : EuclideanSpace ℝ (Fin 3)))) (Set.univ ×ˢ Set.Ici (0:ℝ)) (x, t)‖ = 0 := by\n      have h0 : (↿(fun (_ : EuclideanSpace ℝ (Fin 3)) (_ : ℝ) => (0 : EuclideanSpace ℝ (Fin 3)))) = fun _ => 0 := rfl\n      rw [h0, iteratedFDerivWithin_zero_fun]\n      simp\n    rw [h]\n    simp\n  · refine ⟨?_, ?_, ?_, ?_, ?_⟩\n    · intro x t ht\n      have h1 : derivWithin (fun s : ℝ => s • e) (Set.Ici 0) t = e := by\n        have := ((hasDerivAt_id t).smul_const e).hasDerivWithinAt (s := Set.Ici (0:ℝ))\n        simpa using this.derivWithin (uniqueDiffOn_Ici 0 t ht)\n      have hL : Δ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x = 0 := by\n        first\n          | simp\n          | (rw [laplacian_eq_iteratedFDeriv_stdOrthonormalBasis]\n             simp [iteratedFDeriv_const_of_ne])\n      have h : HasFDerivAt (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) (-(innerSL ℝ e)) x :=\n        ((innerSL ℝ e).hasFDerivAt (x := x)).neg\n      have hg : HasGradientAt (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) (-e) x := by\n        have h2 : (InnerProductSpace.toDual ℝ (EuclideanSpace ℝ (Fin 3))) (-e) = -(innerSL ℝ e) := by\n          ext y\n          simp\n        rw [hasGradientAt_iff_hasFDerivAt, h2]\n        exact h\n      show derivWithin (fun s : ℝ => s • e) (Set.Ici 0) t + fderiv ℝ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x (t • e) = nu • Δ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x - gradient (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) x + 0\n      rw [h1, hL, hg.gradient]\n      simp\n    · intro x t ht\n      exact divergence_const _ _\n    · intro x\n      simp\n    · show ContDiffOn ℝ ∞ (fun q : EuclideanSpace ℝ (Fin 3) × ℝ => q.2 • e) _\n      exact (contDiff_snd.smul contDiff_const).contDiffOn\n    · show ContDiffOn ℝ ∞ (fun q : EuclideanSpace ℝ (Fin 3) × ℝ => -inner ℝ e q.1) _\n      first\n        | exact (contDiff_const.inner ℝ contDiff_fst).neg.contDiffOn\n        | (apply ContDiff.contDiffOn; fun_prop)\n  · intro t ht x i\n    rfl\n  · intro h\n    have := h 0 le_rfl 0 0\n    subst he\n    simp at this",
+   "attempts": [
+    {
+     "lean": "open NavierStokes.Comparator\nopen scoped Laplacian\n\ntheorem probe_nonperiodic_pressure (nu : ℝ) :\n    ∃ (u₀ : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3))\n      (f : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3))\n      (v : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3))\n      (p : EuclideanSpace ℝ (Fin 3) → ℝ → ℝ),\n      InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧\n      NavierStokesExistenceAndSmoothness nu u₀ f v p ∧\n      (∀ t ≥ (0:ℝ), IsOnePeriodic (v · t)) ∧\n      ¬ (∀ t ≥ (0:ℝ), IsOnePeriodic (p · t)) := by\n  obtain ⟨e, he⟩ : ∃ e : EuclideanSpace ℝ (Fin 3), e = EuclideanSpace.single (0 : Fin 3) (1 : ℝ) := ⟨_, rfl⟩\n  refine ⟨fun _ => 0, fun _ _ => 0, fun _ t => t • e, fun x _ => -inner ℝ e x, ?_, ?_, ?_, ?_, ?_⟩\n  · refine ⟨⟨?_, contDiff_const⟩, fun x i => rfl⟩\n    intro x\n    simp [divergence]\n  · refine ⟨⟨contDiffOn_const⟩, fun t ht x i => rfl, ?_⟩\n    intro m K\n    refine ⟨0, fun x t ht => ?_⟩\n    have h : ‖iteratedFDerivWithin ℝ m (↿(fun (_ : EuclideanSpace ℝ (Fin 3)) (_ : ℝ) => (0 : EuclideanSpace ℝ (Fin 3)))) (Set.univ ×ˢ Set.Ici (0:ℝ)) (x, t)‖ = 0 := by\n      have h0 : (↿(fun (_ : EuclideanSpace ℝ (Fin 3)) (_ : ℝ) => (0 : EuclideanSpace ℝ (Fin 3)))) = fun _ => 0 := rfl\n      rw [h0, iteratedFDerivWithin_zero_fun (uniqueDiffOn_univ.prod (uniqueDiffOn_Ici 0))]\n      simp\n    rw [h]\n    simp\n  · refine ⟨?_, ?_, ?_, ?_, ?_⟩\n    · intro x t ht\n      have h1 : derivWithin (fun s : ℝ => s • e) (Set.Ici 0) t = e := by\n        have := ((hasDerivAt_id t).smul_const e).hasDerivWithinAt (s := Set.Ici (0:ℝ))\n        simpa using this.derivWithin (uniqueDiffOn_Ici 0 t ht)\n      have hL : Δ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x = 0 := by\n        first\n          | simp\n          | (rw [laplacian_eq_iteratedFDeriv_stdOrthonormalBasis]\n             simp [iteratedFDeriv_const_of_ne])\n      have hg : HasGradientAt (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) (-e) x := by\n        rw [hasGradientAt_iff_hasFDerivAt]\n        have h := ((innerSL ℝ e).hasFDerivAt (x := x)).neg\n        convert h using 1\n        ext y\n        simp\n      show derivWithin (fun s : ℝ => s • e) (Set.Ici 0) t + fderiv ℝ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x (t • e) = nu • Δ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x - gradient (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) x + 0\n      rw [h1, hL, hg.gradient]\n      simp\n    · intro x t ht\n      exact divergence_const _ _\n    · intro x\n      simp\n    · show ContDiffOn ℝ ∞ (fun q : EuclideanSpace ℝ (Fin 3) × ℝ => q.2 • e) _\n      exact (contDiff_snd.smul contDiff_const).contDiffOn\n    · show ContDiffOn ℝ ∞ (fun q : EuclideanSpace ℝ (Fin 3) × ℝ => -inner ℝ e q.1) _\n      first\n        | exact (contDiff_const.inner ℝ contDiff_fst).neg.contDiffOn\n        | (apply ContDiff.contDiffOn; fun_prop)\n  · intro t ht x i\n    rfl\n  · intro h\n    have := h 0 le_rfl 0 0\n    subst he\n    simp at this",
+     "status": "YELLOW",
+     "detail": "line 22: Function expected at\n  iteratedFDerivWithin_zero_fun\nbut this term has type\n  iteratedFDerivWithin ?m.222 ?m.231 (fun x => 0) ?m.230 = 0\n\nNote: Expected a function because this term is being applied to the argument\n  (uniqueDiffOn_univ.prod (uniqueDiffOn_Ici 0)) | line 36: unsolved goals\ncase e'_9\nnu : ℝ\ne : EuclideanSpace ℝ (Fin 3)\nhe : e = EuclideanSpace.single 0 1\nx : EuclideanSpace ℝ (Fin 3)\nt : ℝ\nht : t ≥ 0\nh1 : derivWithin (fun s => s • e) (Ici 0) t = e\nhL : Δ (fun x => t • e) x = 0\nh : HasFDerivAt (-⇑((innerSL ℝ) e)) (-(innerSL ℝ) e) x\ne_8✝ : Real.instRCLike.toDivisionRing.toAddCommGroup = Real.normedAddCommGroup.toAddCommGroup\n⊢ Semiring.toModule = RCLike.to | non-standard axioms: {'probe_nonperiodic_pressure': ['sorryAx']}",
+     "seconds": 88.4
+    },
+    {
+     "lean": "open NavierStokes.Comparator\nopen scoped Laplacian\n\ntheorem probe_nonperiodic_pressure (nu : ℝ) :\n    ∃ (u₀ : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3))\n      (f : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3))\n      (v : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3))\n      (p : EuclideanSpace ℝ (Fin 3) → ℝ → ℝ),\n      InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧\n      NavierStokesExistenceAndSmoothness nu u₀ f v p ∧\n      (∀ t ≥ (0:ℝ), IsOnePeriodic (v · t)) ∧\n      ¬ (∀ t ≥ (0:ℝ), IsOnePeriodic (p · t)) := by\n  obtain ⟨e, he⟩ : ∃ e : EuclideanSpace ℝ (Fin 3), e = EuclideanSpace.single (0 : Fin 3) (1 : ℝ) := ⟨_, rfl⟩\n  refine ⟨fun _ => 0, fun _ _ => 0, fun _ t => t • e, fun x _ => -inner ℝ e x, ?_, ?_, ?_, ?_, ?_⟩\n  · refine ⟨⟨?_, contDiff_const⟩, fun x i => rfl⟩\n    intro x\n    simp [divergence]\n  · refine ⟨⟨contDiffOn_const⟩, fun t ht x i => rfl, ?_⟩\n    intro m K\n    refine ⟨0, fun x t ht => ?_⟩\n    have h : ‖iteratedFDerivWithin ℝ m (↿(fun (_ : EuclideanSpace ℝ (Fin 3)) (_ : ℝ) => (0 : EuclideanSpace ℝ (Fin 3)))) (Set.univ ×ˢ Set.Ici (0:ℝ)) (x, t)‖ = 0 := by\n      have h0 : (↿(fun (_ : EuclideanSpace ℝ (Fin 3)) (_ : ℝ) => (0 : EuclideanSpace ℝ (Fin 3)))) = fun _ => 0 := rfl\n      rw [h0, iteratedFDerivWithin_zero_fun]\n      simp\n    rw [h]\n    simp\n  · refine ⟨?_, ?_, ?_, ?_, ?_⟩\n    · intro x t ht\n      have h1 : derivWithin (fun s : ℝ => s • e) (Set.Ici 0) t = e := by\n        have := ((hasDerivAt_id t).smul_const e).hasDerivWithinAt (s := Set.Ici (0:ℝ))\n        simpa using this.derivWithin (uniqueDiffOn_Ici 0 t ht)\n      have hL : Δ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x = 0 := by\n        first\n          | simp\n          | (rw [laplacian_eq_iteratedFDeriv_stdOrthonormalBasis]\n             simp [iteratedFDeriv_const_of_ne])\n      have h : HasFDerivAt (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) (-(innerSL ℝ e)) x :=\n        ((innerSL ℝ e).hasFDerivAt (x := x)).neg\n      have hg : HasGradientAt (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) (-e) x := by\n        have h2 : (InnerProductSpace.toDual ℝ (EuclideanSpace ℝ (Fin 3))) (-e) = -(innerSL ℝ e) := by\n          ext y\n          simp\n        rw [hasGradientAt_iff_hasFDerivAt, h2]\n        exact h\n      show derivWithin (fun s : ℝ => s • e) (Set.Ici 0) t + fderiv ℝ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x (t • e) = nu • Δ (fun _ : EuclideanSpace ℝ (Fin 3) => t • e) x - gradient (fun y : EuclideanSpace ℝ (Fin 3) => -inner ℝ e y) x + 0\n      rw [h1, hL, hg.gradient]\n      simp\n    · intro x t ht\n      exact divergence_const _ _\n    · intro x\n      simp\n    · show ContDiffOn ℝ ∞ (fun q : EuclideanSpace ℝ (Fin 3) × ℝ => q.2 • e) _\n      exact (contDiff_snd.smul contDiff_const).contDiffOn\n    · show ContDiffOn ℝ ∞ (fun q : EuclideanSpace ℝ (Fin 3) × ℝ => -inner ℝ e q.1) _\n      first\n        | exact (contDiff_const.inner ℝ contDiff_fst).neg.contDiffOn\n        | (apply ContDiff.contDiffOn; fun_prop)\n  · intro t ht x i\n    rfl\n  · intro h\n    have := h 0 le_rfl 0 0\n    subst he\n    simp at this",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 31.0
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance of the main definition"
+   },
+   "result": {
+    "id": "NV-a0",
+    "status": "GREEN",
+    "claim": "The zero velocity, zero pressure, zero initial data and zero force give a concrete instance of NavierStokesExistenceAndSmoothnessRn on ℝ³ for any viscosity. So the central solution structure, including the energy and L² conditions, is satisfiable.",
+    "kind": "non-vacuity",
+    "seconds": 27.9,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_nv_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_nv_instance (nu : ℝ) :\n    NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessRn (n := 3) nu\n      (fun _ => 0) (fun _ _ => 0) (fun _ _ => 0) (fun _ _ => 0) where\n  navier_stokes := by\n    intro x t ht\n    first\n      | simp\n      | simp [show (fun _ : EuclideanSpace ℝ (Fin 3) => (0 : EuclideanSpace ℝ (Fin 3))) = 0 from rfl]\n  div_free := by\n    intro x t ht\n    exact NavierStokes.Comparator.divergence_zero x\n  initial_condition := by intro x; rfl\n  velocity_smooth := contDiffOn_const\n  pressure_smooth := contDiffOn_const\n  integrable := by\n    intro t ht\n    simpa using (MeasureTheory.MemLp.zero : MeasureTheory.MemLp (0 : EuclideanSpace ℝ (Fin 3) → ℝ) 2 MeasureTheory.volume)\n  globally_bounded_energy := ⟨1, by intro t ht; simp⟩",
+   "attempts": [
+    {
+     "lean": "theorem probe_nv_instance (nu : ℝ) :\n    NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessRn (n := 3) nu\n      (fun _ => 0) (fun _ _ => 0) (fun _ _ => 0) (fun _ _ => 0) where\n  navier_stokes := by\n    intro x t ht\n    first\n      | simp\n      | simp [show (fun _ : EuclideanSpace ℝ (Fin 3) => (0 : EuclideanSpace ℝ (Fin 3))) = 0 from rfl]\n  div_free := by\n    intro x t ht\n    exact NavierStokes.Comparator.divergence_zero x\n  initial_condition := by intro x; rfl\n  velocity_smooth := contDiffOn_const\n  pressure_smooth := contDiffOn_const\n  integrable := by\n    intro t ht\n    simpa using (MeasureTheory.MemLp.zero : MeasureTheory.MemLp (0 : EuclideanSpace ℝ (Fin 3) → ℝ) 2 MeasureTheory.volume)\n  globally_bounded_energy := ⟨1, by intro t ht; simp⟩",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 27.9
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "∀ (nu : ℝ) (hnu : nu > 0), ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p)",
+   "restated": "∃ (u₀ : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3)) (f : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)), InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧ ∀ (v : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)) (p : EuclideanSpace ℝ (Fin 3) → ℝ → ℝ), ¬ NavierStokesExistenceAndSmoothnessRn nu u₀ f v p",
+   "english": "For every viscosity nu > 0 there exist a smooth, divergence-free, rapidly decaying initial velocity u₀ and a smooth, rapidly decaying force f on ℝ³ such that no pair (v, p) is a smooth, finite-energy solution of the Navier–Stokes equations with data (u₀, f). Equivalently, every candidate pair (v, p) fails to be such a solution.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "ForceConditionDecay",
+    "InitialVelocityConditionDecay",
+    "NavierStokesExistenceAndSmoothnessRn"
+   ],
+   "detail": "line 4: unexpected token '³'; expected ')'\n'NavierStokes.Comparator.probe_restate_2' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'NavierStokes.Comparator.probe_restate_2': ['sorryAx']}",
+   "lean": "namespace NavierStokes.Comparator\nopen ContDiff Set InnerProductSpace MeasureTheory\nopen scoped Laplacian\ntheorem probe_restate_2  :\n    (∀ (nu : ℝ) (hnu : nu > 0), ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p)) ↔\n    (∃ (u₀ : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3)) (f : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)), InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧ ∀ (v : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)) (p : EuclideanSpace ℝ (Fin 3) → ℝ → ℝ), ¬ NavierStokesExistenceAndSmoothnessRn nu u₀ f v p) := by\n  simp only [not_exists]\nend NavierStokes.Comparator\n",
+   "seconds": 26.2
+  },
+  {
+   "target": "NavierStokes.Comparator.navier_stokes_breakdown_periodic",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "∀ (nu : ℝ) (hnu : nu > 0), ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p)",
+   "restated": "∃ (u₀ : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3)) (f : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)), InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧ ∀ (v : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)) (p : EuclideanSpace ℝ (Fin 3) → ℝ → ℝ), ¬ NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p",
+   "english": "For every viscosity nu > 0 there exist smooth, divergence-free, 1-periodic initial data u₀ and a smooth, 1-periodic, time-decaying force f on the 3-torus, such that for every candidate velocity v and pressure p, the pair (v, p) is not a smooth periodic solution of Navier–Stokes with data (u₀, f).",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "ForceConditionPeriodic",
+    "InitialVelocityConditionPeriodic",
+    "NavierStokesExistenceAndSmoothnessPeriodic"
+   ],
+   "detail": "line 4: unexpected token '³'; expected ')'\n'NavierStokes.Comparator.probe_restate_12' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound] | non-standard axioms: {'NavierStokes.Comparator.probe_restate_12': ['sorryAx']}",
+   "lean": "namespace NavierStokes.Comparator\nopen ContDiff Set InnerProductSpace MeasureTheory\nopen scoped Laplacian\ntheorem probe_restate_12  :\n    (∀ (nu : ℝ) (hnu : nu > 0), ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p)) ↔\n    (∃ (u₀ : EuclideanSpace ℝ (Fin 3) → EuclideanSpace ℝ (Fin 3)) (f : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)), InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧ ∀ (v : EuclideanSpace ℝ (Fin 3) → ℝ → EuclideanSpace ℝ (Fin 3)) (p : EuclideanSpace ℝ (Fin 3) → ℝ → ℝ), ¬ NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by\n  simp only [not_exists]\nend NavierStokes.Comparator\n",
+   "seconds": 26.6
+  },
+  {
+   "target": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessPeriodic",
+   "mode": "iff",
+   "status": "FAILED",
+   "original_expr": "@NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p",
+   "restated": "(∀ x, ∀ t ≥ 0, derivWithin (fun s => v x s) (Set.Ici 0) t + fderiv ℝ (fun y => v y t) x (v x t) = nu • Laplacian.laplacian (fun y => v y t) x - gradient (fun y => p y t) x + f x t) ∧ (∀ x, ∀ t ≥ 0, divergence (fun y => v y t) x = 0) ∧ (∀ x, v x 0 = u₀ x) ∧ ContDiffOn ℝ ∞ (↿v) (Set.univ ×ˢ Set.Ici 0) ∧ ContDiffOn ℝ ∞ (↿p) (Set.univ ×ˢ Set.Ici 0) ∧ (∀ t ≥ 0, IsOnePeriodic (fun y => v y t)) ∧ (∀ t ≥ 0, IsOnePeriodic (fun y => p y t))",
+   "english": "For all x and t ≥ 0 the Navier–Stokes equation ∂ₜv + (v·∇)v = ν Δv − ∇p + f holds, with the time derivative taken one-sidedly on [0,∞). The divergence of v(·,t) vanishes for t ≥ 0, and v(·,0) = u₀. Both v and p are C^∞ on ℝⁿ × [0,∞). For every t ≥ 0, v(·,t) and p(·,t) are 1-periodic in each coordinate.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "IsOnePeriodic",
+    "divergence"
+   ],
+   "detail": "line 5: Application type mismatch: The argument\n  nu\nhas type\n  ℝ\nbut is expected to have type\n  ℕ\nin the application\n  @NavierStokesExistenceAndSmoothnessPeriodic nu | line 6: Function expected at\n  Δ fun y => v y t\nbut this term has type\n  ?m.75\n\nNote: Expected a function because this term is being applied to the argument\n  x | line 6: Application type mismatch: The argument\n  y\nhas type\n  EuclideanSpace ℝ (Fin (?m.240 t))\nbut is expected to have type\n  ℝ ^ n\nin the application\n  p y",
+   "lean": "namespace NavierStokes.Comparator\nopen ContDiff Set InnerProductSpace MeasureTheory\nopen scoped Laplacian\ntheorem probe_restate_22 (nu : ℝ) (u₀ : ℝ^n → ℝ^n) (f : ℝ^n → ℝ → ℝ^n)\n    (v : ℝ^n → ℝ → ℝ^n) (p : ℝ^n → ℝ → ℝ) :\n    (@NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) ↔\n    ((∀ x, ∀ t ≥ 0, derivWithin (fun s => v x s) (Set.Ici 0) t + fderiv ℝ (fun y => v y t) x (v x t) = nu • Laplacian.laplacian (fun y => v y t) x - gradient (fun y => p y t) x + f x t) ∧ (∀ x, ∀ t ≥ 0, divergence (fun y => v y t) x = 0) ∧ (∀ x, v x 0 = u₀ x) ∧ ContDiffOn ℝ ∞ (↿v) (Set.univ ×ˢ Set.Ici 0) ∧ ContDiffOn ℝ ∞ (↿p) (Set.univ ×ˢ Set.Ici 0) ∧ (∀ t ≥ 0, IsOnePeriodic (fun y => v y t)) ∧ (∀ t ≥ 0, IsOnePeriodic (fun y => p y t))) := by\n  constructor\n  · rintro ⟨⟨a, b, c, d, e⟩, g, h⟩\n    exact ⟨a, b, c, d, e, g, h⟩\n  · rintro ⟨a, b, c, d, e, g, h⟩\n    exact ⟨⟨a, b, c, d, e⟩, g, h⟩\nend NavierStokes.Comparator\n",
+   "seconds": 28.4
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 233,
+  "lines_needing_human_review": 45,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

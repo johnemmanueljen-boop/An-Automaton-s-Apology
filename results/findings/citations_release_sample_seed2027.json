@@ -1,0 +1,578 @@
+[
+ {
+  "note": "008.md",
+  "title": "The Deligne–Drinfeld conjecture",
+  "pdfs": [
+   "preprints/The-Deligne-Drinfeld-conjecture-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "DeligneDrinfeld"
+  ],
+  "modules": [
+   "OAI.Algebra.Drinfeld.Completion"
+  ],
+  "dirs": [
+   "lean/OAI/Algebra/Drinfeld/"
+  ],
+  "paper_headers": 25,
+  "lean_files_scanned": 21,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "049.md",
+  "title": "A stable-coordinate counterexample in four variables",
+  "pdfs": [
+   "preprints/A-stable-coordinate-that-is-not-a-coordinate-in-four-variables-October-5-2026/stable-coordinate-four-variables.pdf",
+   "preprints/An-explicit-noncoordinate-polynomial-with-affine-three-space-zero-fibre-September-24-2026/paper.pdf"
+  ],
+  "configs": [
+   "AbhyankarSathaye",
+   "CommutingDerivations",
+   "StableCoordinateFour"
+  ],
+  "modules": [
+   "OAI.AlgebraicGeometry.AbhyankarSathaye.Counterexample",
+   "OAI.AlgebraicGeometry.CommutingDerivations.OrdinaryExtraMain",
+   "OAI.AlgebraicGeometry.StableCoordinate.Principal"
+  ],
+  "dirs": [
+   "lean/OAI/AlgebraicGeometry/AbhyankarSathaye/",
+   "lean/OAI/AlgebraicGeometry/CommutingDerivations/",
+   "lean/OAI/AlgebraicGeometry/StableCoordinate/"
+  ],
+  "paper_headers": 17,
+  "lean_files_scanned": 154,
+  "labels_cited": 2,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "075.md",
+  "title": "The $`L\\log L`$ Fourier-convergence conjecture",
+  "pdfs": [
+   "preprints/Almost-everywhere-Fourier-convergence-in-L-log-L-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "FourierLLogL"
+  ],
+  "modules": [
+   "OAI.Analysis.FourierLLogL.PaperMain"
+  ],
+  "dirs": [
+   "lean/OAI/Analysis/FourierLLogL/"
+  ],
+  "paper_headers": 32,
+  "lean_files_scanned": 155,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "100.md",
+  "title": "Cylinder coverings below the half-area bound",
+  "pdfs": [
+   "preprints/Finite-angular-cylinder-covers-below-the-half-area-bound-September-27-2026/main.pdf",
+   "preprints/Finite-cylinder-approximation-of-ruled-sets-September-27-2026/main.pdf",
+   "preprints/Finite-triangular-approximation-of-radial-sweeps-September-27-2026/main.pdf",
+   "preprints/Slope-field-perturbations-of-the-two-cylinder-covering-September-27-2026/main.pdf"
+  ],
+  "configs": [
+   "CylinderCovering",
+   "RuledCovering",
+   "TriangularCovering"
+  ],
+  "modules": [
+   "OAI.Geometry.CylinderCovering.Main",
+   "OAI.Geometry.RuledCovering.Main",
+   "OAI.Geometry.TriangularCovering.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Geometry/CylinderCovering/",
+   "lean/OAI/Geometry/RuledCovering/",
+   "lean/OAI/Geometry/TriangularCovering/"
+  ],
+  "paper_headers": 27,
+  "lean_files_scanned": 641,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "102.md",
+  "title": "The Unique Games Conjecture and optimal approximation thresholds",
+  "pdfs": [
+   "preprints/A-Direct-Proof-of-Optimal-Max-Cut-Hardness-September-23-2026/paper.pdf",
+   "preprints/Constant-factor-hardness-of-Min-UnCut-September-23-2026/paper.pdf",
+   "preprints/Constant-factor-hardness-of-directed-feedback-vertex-set-September-23-2026/paper.pdf",
+   "preprints/The-Factor-Two-Hardness-Threshold-for-Vertex-Cover-September-23-2026/paper.pdf",
+   "preprints/The-Unique-Games-Theorem-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "DirectedFeedback",
+   "MinUncut",
+   "OptimalMaxCut",
+   "UniqueGamesTheorem",
+   "VertexCover"
+  ],
+  "modules": [
+   "OAI.Computability.DirectedFeedback.Main",
+   "OAI.Computability.MinUncut.Main",
+   "OAI.Computability.MaxCut.Main",
+   "OAI.Computability.UniqueGames.Main",
+   "OAI.Computability.VertexCover.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Computability/DirectedFeedback/",
+   "lean/OAI/Computability/MaxCut/",
+   "lean/OAI/Computability/MinUncut/",
+   "lean/OAI/Computability/UniqueGames/",
+   "lean/OAI/Computability/VertexCover/"
+  ],
+  "paper_headers": 73,
+  "lean_files_scanned": 1803,
+  "labels_cited": 24,
+  "undefined": 13,
+  "undefined_without_external_hint": 13,
+  "undefined_detail": {
+   "Corollary 4.3": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/Pinsker.lean:498",
+     "line": "/-- Finite Corollary 4.3 in natural-log normalization, for actual likelihood",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Foundations/PinskerLemmas.lean:433",
+     "line": "/-- Finite Corollary 4.3 in natural-log normalization, for actual likelihood",
+     "external_hint": false
+    }
+   ],
+   "Definition 4.6": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/NoiseEnumeration.lean:58",
+     "line": "/-! Actual finite translation game of Definition 4.6.  All questions, linear",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Reduction/ActualGame.lean:14",
+     "line": "/-! Actual finite translation game of Definition 4.6.  All questions, linear",
+     "external_hint": false
+    }
+   ],
+   "Lemma 2.14": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/KMSMomentTheorem.lean:122",
+     "line": "/-- A stronger lower fourth-moment estimate than KMS Lemma 2.14, avoiding",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Inverse/KMSFourthMomentMixedScalarLemmas.lean:665",
+     "line": "/-- A stronger lower fourth-moment estimate than KMS Lemma 2.14, avoiding",
+     "external_hint": false
+    }
+   ],
+   "Lemma 2.7": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/MatrixChartDegreeNeighbors.lean:135",
+     "line": "The local neighbor law for the ordered-basis lift used in KMS Lemma 2.7.",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/MatrixChartKMSNeighbors.lean:140",
+     "line": "This is the sampling comparison in KMS Lemma 2.7. The original experiment",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/MatrixChartKMSNeighbors.lean:186",
+     "line": "bound than the stated KMS Lemma 2.7. -/",
+     "external_hint": false
+    }
+   ],
+   "Lemma 2.8": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/KMSBasisComparisonPseudorandomTupleMap.lean:70",
+     "line": "/-- KMS Lemma 2.8 in the actual linear-map coordinates, with the stronger ε",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Inverse/KMSBasisComparisonPseudorandomTupleMapLemmas.lean:86",
+     "line": "/-- KMS Lemma 2.8 in the actual linear-map coordinates, with the stronger ε",
+     "external_hint": false
+    }
+   ],
+   "Lemma 3.19": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/KMSAnalyticFrequencyShift.lean:435",
+     "line": "/-- The recurrence cost in Lemma 3.19 is absorbed by `2^(4 i²)`. The proof only",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/KMSFourthMomentPointShuffle.lean:111",
+     "line": "induction in KMS Lemma 3.19. The statements below establish its exact base",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/KMSFourthMomentPointShuffle.lean:533",
+     "line": "slice is the fixed-frequency energy used by Lemma 3.19. -/",
+     "external_hint": false
+    }
+   ],
+   "Lemma 3.20": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/KMSFourthMomentPointShuffle.lean:545",
+     "line": "The actual mixed-energy induction step of KMS Lemma 3.20. Previously fixed",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Inverse/KMSFourthMomentMixedBaseLemmas.lean:92",
+     "line": "The actual mixed-energy induction step of KMS Lemma 3.20. Previously fixed",
+     "external_hint": false
+    }
+   ],
+   "Lemma 6.3": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/ActualAdviceStochasticBridge.lean:236",
+     "line": "The exact combined-map density formula of Lemma 6.3 for genuine finite-dimensional",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/ActualAdviceStochasticBridge.lean:409",
+     "line": "/-- Lemma 6.3's exact second-moment identity for an arbitrary finite uniform",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/ActualAdviceStochasticBridge.lean:493",
+     "line": "The real-valued finite-expectation argument in Lemma 6.3 and equation (6.11).",
+     "external_hint": false
+    }
+   ],
+   "Lemma 6.7": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/Information.lean:599",
+     "line": "/-- Lemma 6.7's conditional product law in the actual independent raw sampling",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Soundness/ZeroInformationLemmas.lean:602",
+     "line": "/-- Lemma 6.7's conditional product law in the actual independent raw sampling",
+     "external_hint": false
+    }
+   ],
+   "Lemma 6.8": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/AdviceImageLaw.lean:300",
+     "line": "/-- The precise averaging identity from Lemma 6.8, including zero-dimensional",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/AnswerBridge.lean:586",
+     "line": "The actual local simulation in Lemma 6.8 after fixing H. These reconstruction",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/PCP/RepetitionUpper.lean:126",
+     "line": "/-- Lemma 6.8's numerical conclusion, conditional on the repeated-game and",
+     "external_hint": false
+    }
+   ],
+   "Proposition 4.3": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/Incidence.lean:441",
+     "line": "/-! Actual finite incidence-game probabilities for Proposition 4.3.",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Reduction/IncidenceProbabilityLemmas.lean:18",
+     "line": "/-! Actual finite incidence-game probabilities for Proposition 4.3.",
+     "external_hint": false
+    }
+   ],
+   "Proposition 6.9": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/PCP/RepetitionUpper.lean:214",
+     "line": "/-- Proposition 6.9's contradiction, with its dependency boundary visible.",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/PCP/RepetitionUpper.lean:232",
+     "line": "/-- Proposition 6.9 specialized to (6.25) and (4.4). Every occurrence of",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Soundness/PartnerLinearLemmas.lean:459",
+     "line": "/-- Proposition 6.9's contradiction, with its dependency boundary visible.",
+     "external_hint": false
+    }
+   ],
+   "Theorem 3.4": [
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/FinalParameters.lean:218",
+     "line": "/-- The stability and dispersion claim of Theorem 3.4 for fixed errors and rank. -/",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/MaxCut/Games/PartnerProjection.lean:448",
+     "line": "The last paragraph of Theorem 3.4 uses the fact that a uniform vector in a",
+     "external_hint": false
+    },
+    {
+     "at": "lean/OAI/Computability/UniqueGames/Gadgets/ActualGadgetLemmas.lean:99",
+     "line": "/-- The stability and dispersion claim of Theorem 3.4 for fixed errors and rank. -/",
+     "external_hint": false
+    }
+   ]
+  },
+  "external_hint_only": []
+ },
+ {
+  "note": "148.md",
+  "title": "The entropy-rate dimension formula for self-similar measures",
+  "pdfs": [
+   "preprints/The-entropy-rate-dimension-formula-for-self-similar-measures-on-the-line-September-24-2026/main.pdf"
+  ],
+  "configs": [
+   "SelfSimilar",
+   "SelfSimilarCorollaries"
+  ],
+  "modules": [
+   "OAI.MeasureTheory.SelfSimilar.Main",
+   "OAI.MeasureTheory.SelfSimilar.DimensionCorollaries"
+  ],
+  "dirs": [
+   "lean/OAI/MeasureTheory/SelfSimilar/"
+  ],
+  "paper_headers": 16,
+  "lean_files_scanned": 64,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "157.md",
+  "title": "Graph coloring, clique minors, and Colin de Verdière invariants",
+  "pdfs": [
+   "preprints/A-counterexample-to-Hadwigers-conjecture-September-23-2026/paper.pdf",
+   "preprints/A-linear-list-coloring-bound-in-terms-of-the-Hadwiger-number-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "HadwigerCounterexample",
+   "ListHadwiger"
+  ],
+  "modules": [
+   "OAI.Combinatorics.HadwigerCounterexample.Main",
+   "OAI.Combinatorics.ListHadwiger.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Combinatorics/HadwigerCounterexample/",
+   "lean/OAI/Combinatorics/ListHadwiger/"
+  ],
+  "paper_headers": 96,
+  "lean_files_scanned": 329,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "174.md",
+  "title": "Deterministic construction of strong thin spanning trees",
+  "pdfs": [
+   "preprints/A-polynomial-time-construction-of-strong-thin-trees-September-23-2026/paper.pdf",
+   "preprints/The-strong-thin-tree-conjecture-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "AlgorithmicThinTrees",
+   "StrongThinTree"
+  ],
+  "modules": [
+   "OAI.Combinatorics.ThinTrees.AlgorithmicMain",
+   "OAI.Combinatorics.ThinTrees.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Combinatorics/ThinTrees/"
+  ],
+  "paper_headers": 23,
+  "lean_files_scanned": 183,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "176.md",
+  "title": "The second Kahn–Kalai conjecture with an edge-count bound",
+  "pdfs": [
+   "preprints/The-second-Kahn-Kalai-conjecture-September-24-2026/paper.pdf"
+  ],
+  "configs": [
+   "SecondKahnKalai"
+  ],
+  "modules": [
+   "OAI.Combinatorics.GraphThreshold.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Combinatorics/GraphThreshold/"
+  ],
+  "paper_headers": 5,
+  "lean_files_scanned": 37,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "192.md",
+  "title": "Boolean functions violate the square-root degree bound by arbitrary factors",
+  "pdfs": [
+   "preprints/Unbounded-Violations-of-the-Square-Root-Degree-Bound-September-26-2026/Unbounded-Violations-of-the-Square-Root-Degree-Bound-September-26-2026.pdf"
+  ],
+  "configs": [
+   "SquareRootDegree"
+  ],
+  "modules": [
+   "OAI.Combinatorics.BooleanFunctions.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Combinatorics/BooleanFunctions/"
+  ],
+  "paper_headers": 12,
+  "lean_files_scanned": 21,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "249.md",
+  "title": "A finitely generated Eilenberg–Ganea counterexample",
+  "pdfs": [
+   "preprints/A-finitely-generated-counterexample-to-the-Eilenberg-Ganea-conjecture-September-23-2026/paper.pdf"
+  ],
+  "configs": [
+   "EilenbergGanea"
+  ],
+  "modules": [
+   "OAI.Topology.EilenbergGanea.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Topology/EilenbergGanea/"
+  ],
+  "paper_headers": 16,
+  "lean_files_scanned": 21,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "260.md",
+  "title": "Spacetime Penrose inequalities: enclosing area, charge, rotation, and anti-de Sitter extensions",
+  "pdfs": [
+   "preprints/Area-controlled-end-replacement-and-the-Bondi-Penrose-inequality-in-the-CKS-class-September-27-2026/paper.pdf"
+  ],
+  "configs": [
+   "CKSBondiPenrose"
+  ],
+  "modules": [
+   "OAI.Geometry.Relativity.CKS.ComparatorMain"
+  ],
+  "dirs": [
+   "lean/OAI/Geometry/Relativity/CKS/"
+  ],
+  "paper_headers": 11,
+  "lean_files_scanned": 336,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "271.md",
+  "title": "Bloch's law, its lattice correction, and the spherical magnetization law",
+  "pdfs": [
+   "preprints/Spontaneous-magnetization-in-the-quantum-Heisenberg-ferromagnet-September-24-2026/paper.pdf"
+  ],
+  "configs": [
+   "Heisenberg"
+  ],
+  "modules": [
+   "OAI.MathematicalPhysics.Heisenberg.Main"
+  ],
+  "dirs": [
+   "lean/OAI/MathematicalPhysics/Heisenberg/"
+  ],
+  "paper_headers": 35,
+  "lean_files_scanned": 128,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "330.md",
+  "title": "A uniformly discrete counterexample to bounded approximation in Lipschitz-free spaces",
+  "pdfs": [
+   "preprints/Failure-of-Bounded-Approximation-in-a-Lipschitz-Free-Space-over-a-Uniformly-Discrete-Metric-Space-September-26-2026/main.pdf"
+  ],
+  "configs": [
+   "DiscreteLipschitzFree",
+   "RealL1Renorming"
+  ],
+  "modules": [
+   "OAI.Analysis.LipschitzFree.Main",
+   "OAI.Analysis.LipschitzFree.Renorming"
+  ],
+  "dirs": [
+   "lean/OAI/Analysis/LipschitzFree/"
+  ],
+  "paper_headers": 13,
+  "lean_files_scanned": 34,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ },
+ {
+  "note": "337.md",
+  "title": "Sharp Cartan–Hadamard isoperimetry and rigidity",
+  "pdfs": [],
+  "configs": [
+   "FillingCoefficient",
+   "SharpCAT0Filling"
+  ],
+  "modules": [
+   "OAI.Geometry.IntegralFillings.Main",
+   "OAI.Geometry.CAT0Fillings.Main"
+  ],
+  "dirs": [
+   "lean/OAI/Geometry/CAT0Fillings/",
+   "lean/OAI/Geometry/IntegralFillings/"
+  ],
+  "paper_headers": 0,
+  "lean_files_scanned": 442,
+  "labels_cited": 0,
+  "undefined": 0,
+  "undefined_without_external_hint": 0,
+  "undefined_detail": {},
+  "external_hint_only": []
+ }
+]

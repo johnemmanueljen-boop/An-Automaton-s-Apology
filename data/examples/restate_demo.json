@@ -1,0 +1,65 @@
+[
+ {
+  "challenge": "I_MulticolorTriangleRamsey",
+  "target": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta",
+  "mode": "iff",
+  "restated": "(∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |Real.log (triangleRamseyNumber k : ℝ)| ≤ c * |(k : ℝ) * Real.log (k : ℝ)|) ∧ (∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |(k : ℝ) * Real.log (k : ℝ)| ≤ c * |Real.log (triangleRamseyNumber k : ℝ)|)",
+  "proof": "simp only [Asymptotics.IsTheta, Asymptotics.isBigO_iff, Real.norm_eq_abs]",
+  "english": "There are constants c, c' such that for all sufficiently large k: |log R_k(3)| ≤ c·|k log k| and |k log k| ≤ c'·|log R_k(3)|. That is, log R_k(3) = Θ(k log k), i.e. R_k(3) = k^Θ(k).",
+  "why_clearer": "Replaces Mathlib's =Θ[atTop] notation with explicit constants and 'for all large k'."
+ },
+ {
+  "challenge": "H_GapCVP",
+  "target": "GapCVP.IsNP",
+  "mode": "iff",
+  "restated": "∃ (bound : Polynomial ℕ) (verifier : List Bool × List Bool → Bool), Nonempty (VerifierTM verifier) ∧ ∀ input : List Bool, (language input = true ↔ ∃ certificate : List Bool, certificate.length ≤ bound.eval input.length ∧ verifier (input, certificate) = true)",
+  "proof": "unfold IsNP\nrw [decide_eq_true_eq]",
+  "english": "A language is in NP exactly when there is a polynomial bound p and a polynomial-time Turing-machine verifier V such that x is in the language iff some certificate of length at most p(|x|) makes V accept (x, certificate).",
+  "why_clearer": "OpenAI encodes 'is in NP' as a Bool built with classical `decide`; this unwraps it into the textbook certificate definition of NP."
+ },
+ {
+  "challenge": "D_NonSoficGroup",
+  "target": "SoficGroups.GoodOn",
+  "mode": "iff",
+  "restated": "(∀ g ∈ F, ∀ h ∈ F, normalizedHamming (M.action (g * h)) (M.action g * M.action h) < ε) ∧ (∀ g ∈ F, g ≠ 1 → 1 - ε < normalizedHamming (M.action g) 1)",
+  "proof": "constructor\n· rintro ⟨h1, h2⟩\n  exact ⟨h1, h2⟩\n· rintro ⟨h1, h2⟩\n  exact ⟨h1, h2⟩",
+  "english": "A permutation model M is ε-good on a finite set F exactly when (1) it is ε-almost multiplicative on F: M(gh) and M(g)M(h) disagree on fewer than an ε-fraction of points, and (2) it is (1−ε)-separating: every non-identity g ∈ F moves more than a (1−ε)-fraction of points.",
+  "why_clearer": "Shows the two hidden conditions packed inside the structure as one explicit statement."
+ },
+ {
+  "challenge": "D_NonSoficGroup",
+  "target": "SoficGroups.normalizedHamming",
+  "mode": "iff",
+  "restated": "((Finset.univ.filter (fun y => p y ≠ q y)).card : ℝ) / Fintype.card Y",
+  "proof": "rfl",
+  "english": "The normalized Hamming distance of two permutations is the fraction of points of Y on which they disagree.",
+  "why_clearer": "Unfolds Mathlib's hammingDist on functions into the familiar 'fraction of disagreements'."
+ },
+ {
+  "challenge": "I_MulticolorTriangleRamsey",
+  "target": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+  "mode": "implies",
+  "restated": "Filter.Tendsto (fun k : ℕ => (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ))) atTop atTop",
+  "proof": "intro h\nexact h.2",
+  "english": "Corollary: R_k(3)^(1/k) → ∞ as k → ∞ (Erdős problem 183, qualitative form).",
+  "why_clearer": "Separates the headline qualitative statement from the explicit constant 1/(6e^38)."
+ },
+ {
+  "challenge": "I_MulticolorTriangleRamsey",
+  "target": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta",
+  "mode": "iff",
+  "restated": "∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |Real.log (triangleRamseyNumber k : ℝ)| ≤ c * |(k : ℝ) * Real.log (k : ℝ)|",
+  "proof": "simp only [Asymptotics.IsTheta, Asymptotics.isBigO_iff, Real.norm_eq_abs]",
+  "english": "DELIBERATELY WRONG (drops the lower bound): should FAIL — Lean must refuse to certify a non-equivalent restatement.",
+  "why_clearer": "negative control"
+ },
+ {
+  "challenge": "D_NonSoficGroup",
+  "target": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+  "mode": "iff",
+  "restated": "True",
+  "proof": "sorry",
+  "english": "DELIBERATE CHEAT: uses sorry — should be REJECTED by the guard before Lean runs.",
+  "why_clearer": "negative control"
+ }
+]

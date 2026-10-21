@@ -1,0 +1,474 @@
+{
+ "result": "E_ConnesRigidity",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/E_ConnesRigidity.lean",
+ "theorems": [
+  "ConnesRigidity.exists_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+  "ConnesRigidity.exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors"
+ ],
+ "lint": [
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.UnitaryRepresentation.HasAlmostInvariantUnitVectors",
+   "decl_kind": "def",
+   "line": 45,
+   "snippet": "∃ ξ : H, ‖ξ‖ = 1 ∧ ∀ g ∈ K, ‖(π g : H →L[ℂ] H) ξ - ξ‖ < ε",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.l2Reindex",
+   "decl_kind": "def",
+   "line": 69,
+   "snippet": "rw [memℓp_gen_iff (by norm_num : 0 < (2 : ℝ≥0∞).toReal)]",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.l2Reindex",
+   "decl_kind": "def",
+   "line": 71,
+   "snippet": "((lp.memℓp f).summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal))⟩",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.l2Reindex",
+   "decl_kind": "def",
+   "line": 74,
+   "snippet": "rw [memℓp_gen_iff (by norm_num : 0 < (2 : ℝ≥0∞).toReal)]",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.l2Reindex",
+   "decl_kind": "def",
+   "line": 76,
+   "snippet": "((lp.memℓp f).summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal))⟩",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.l2Reindex",
+   "decl_kind": "def",
+   "line": 97,
+   "snippet": "rw [lp.norm_eq_tsum_rpow (by norm_num : 0 < (2 : ℝ≥0∞).toReal)]",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.l2Reindex",
+   "decl_kind": "def",
+   "line": 98,
+   "snippet": "rw [lp.norm_eq_tsum_rpow (by norm_num : 0 < (2 : ℝ≥0∞).toReal)]",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "extended-arith",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.l2Reindex",
+   "decl_kind": "def",
+   "line": 100,
+   "snippet": "exact e.symm.tsum_eq (fun i ↦ ‖f i‖ ^ (2 : ℝ≥0∞).toReal)",
+   "explanation": "Extended number types have ⊤ (infinity); ⊤ - ⊤ = 0 and ⊤ * 0 = 0, and an inequality can hold because a side is ⊤.",
+   "suggested_probe": "Check finiteness where it matters."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "ten-proofs",
+   "file": "E_ConnesRigidity.lean",
+   "decl": "ConnesRigidity.TracialGroupFactorEquiv",
+   "decl_kind": "structure",
+   "line": 184,
+   "snippet": "trace_preserving :",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  }
+ ],
+ "audit": {
+  "summary": "Lean asserts two existence results about finitely generated, countable groups in Type 0 that are ICC and have Kazhdan property (T). (1) There are two non-isomorphic such groups Γ, Λ whose group von Neumann algebras admit a normal, trace-preserving *-isomorphism. (2) There are Λ and a sequence Γ_n of such groups, with Λ and all Γ_n pairwise non-isomorphic and all their group factors tracially isomorphic. The definitions of ICC, property (T), the left regular representation, L(G) (as a double commutant) and the canonical trace are faithful. The factor-isomorphism notion adds normality and trace-preservation, which only strengthens the existence claim. The main caveat is coverage: the 'Moreover' part of Theorem 1.2 (finite-index embeddings Γ_0 ↪ Γ_n of index 2^{4n}, commensurability) is not formalized.",
+  "glossary": [
+   {
+    "decl": "CountableDiscreteGroup",
+    "line": 7,
+    "plain": "A countable group (discrete).",
+    "standard_concept": "countable discrete group",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsICC",
+    "line": 24,
+    "plain": "G is infinite and every nonidentity conjugacy class {xgx⁻¹} is infinite.",
+    "standard_concept": "ICC group",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "GroupsIsomorphic",
+    "line": 27,
+    "plain": "There exists a group isomorphism G ≅ H.",
+    "standard_concept": "group isomorphism",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "UnitaryRepresentation",
+    "line": 30,
+    "plain": "A group homomorphism G → U(H) for a complex Hilbert space H.",
+    "standard_concept": "unitary representation of a discrete group",
+    "matches_standard": "yes",
+    "note": "No continuity is needed for discrete groups.",
+    "citation_ok": true
+   },
+   {
+    "decl": "UnitaryRepresentation.HasAlmostInvariantUnitVectors",
+    "line": 43,
+    "plain": "For every finite K ⊆ G and every ε > 0 there is a unit vector ξ with ‖π(g)ξ − ξ‖ < ε for all g ∈ K.",
+    "standard_concept": "almost invariant vectors",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "HasKazhdanPropertyT",
+    "line": 49,
+    "plain": "Every unitary representation of G on a Hilbert space in the same universe that has almost invariant unit vectors has a nonzero invariant vector.",
+    "standard_concept": "Kazhdan property (T)",
+    "matches_standard": "yes",
+    "note": "Only Hilbert spaces in Type 0 are quantified. For a countable group this is equivalent to the standard notion, since separable representations suffice.",
+    "citation_ok": true
+   },
+   {
+    "decl": "leftRegularRepresentation",
+    "line": 106,
+    "plain": "λ(g)f(h) = f(g⁻¹h) on ℓ²(G).",
+    "standard_concept": "left regular representation",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "vonNeumannClosure",
+    "line": 124,
+    "plain": "The double commutant (S ∪ S*)''.",
+    "standard_concept": "generated von Neumann algebra",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "groupVonNeumannAlgebra",
+    "line": 143,
+    "plain": "L(G) = λ(G)'' ⊆ B(ℓ²G).",
+    "standard_concept": "group von Neumann algebra L(G)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "canonicalTrace",
+    "line": 156,
+    "plain": "τ(x) = ⟨δ_1, x δ_1⟩.",
+    "standard_concept": "canonical trace on L(G)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "IsNormalStarAlgEquiv",
+    "line": 169,
+    "plain": "The *-isomorphism and its inverse preserve suprema of arbitrary families of projections.",
+    "standard_concept": "normal *-isomorphism",
+    "matches_standard": "yes",
+    "note": "Automatic for *-isomorphisms of von Neumann algebras, so it is an extra but satisfiable requirement.",
+    "citation_ok": true
+   },
+   {
+    "decl": "TracialGroupFactorEquiv",
+    "line": 179,
+    "plain": "A normal, trace-preserving *-isomorphism L(G) ≅ L(H).",
+    "standard_concept": "isomorphism of group von Neumann algebras",
+    "matches_standard": "yes",
+    "note": "Stronger than a bare isomorphism. For II1 factors trace preservation is automatic by uniqueness of the trace.",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "exists_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+    "line": 199,
+    "plain": "There exist countable groups Γ, Λ with the following properties: both finitely generated, both ICC, both with property (T); a normal trace-preserving *-isomorphism L(Γ) ≅ L(Λ) exists; and Γ ≇ Λ.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+    "line": 208,
+    "plain": "There exist countable groups Λ and Γ_0, Γ_1, … with the following properties: all finitely generated, ICC, with property (T); L(Γ_n) ≅ L(Λ) and L(Γ_m) ≅ L(Γ_n) tracially for all m, n; Γ_m ≇ Γ_n for m ≠ n; and Λ ≇ Γ_n for all n.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.2",
+    "plain": "There exist finitely generated ICC property-(T) groups Λ, Γ_0, Γ_1, … that are pairwise nonisomorphic with L(Γ_n) ≅ L(Λ). Moreover, Γ_n contains a subgroup isomorphic to Γ_0 of index 2^{4n}, so the Γ_n are commensurable."
+   },
+   {
+    "ref": "Corollary 5.10 / disproof of Conjecture 1.1",
+    "plain": "The pair Λ, Γ_0 consists of non-isomorphic ICC property-(T) groups with isomorphic group factors."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Corollary 5.10",
+    "lean_theorem": "exists_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+    "relation": "equivalent",
+    "why": "Lean additionally demands normality and trace preservation, which are automatic for II1 factors."
+   },
+   {
+    "paper_ref": "Theorem 1.2 (main part)",
+    "lean_theorem": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+    "relation": "equivalent",
+    "why": "Pairwise non-isomorphism and isomorphic factors are captured; the extra Γ_m–Γ_n factor isomorphisms follow by composition."
+   },
+   {
+    "paper_ref": "Theorem 1.2 (Moreover: index-2^{4n} subgroups, commensurability)",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "No subgroup or index statement appears in Lean."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+    "line": 208,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The commensurability clause (Γ_0 embeds in Γ_n with index 2^{4n}) is omitted, so Lean covers only the main part of Theorem 1.2.",
+    "polarity": "lean weaker",
+    "probe_idea": "Add the conjunct ∀ n, ∃ H : Subgroup (Γ n), Nonempty (H ≃* Γ 0) ∧ H.index = 2^(4*n).",
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "definition-mismatch",
+    "severity": "low",
+    "decl": "TracialGroupFactorEquiv",
+    "line": 179,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The isomorphism is required to be normal (preserve projection suprema) and trace-preserving. The paper only says L(Γ_n) ≅ L(Λ). This is an extra requirement inside an existential, so Lean is stronger.",
+    "polarity": "lean stronger",
+    "probe_idea": null,
+    "citation_ok": true
+   },
+   {
+    "id": "F3",
+    "category": "other",
+    "severity": "low",
+    "decl": "HasKazhdanPropertyT",
+    "line": 49,
+    "paper_ref": null,
+    "explanation": "Property (T) quantifies only over Hilbert spaces in Type 0. This is equivalent to the standard definition for countable groups, since separable representations suffice.",
+    "polarity": "n/a",
+    "probe_idea": "Prove that HasKazhdanPropertyT G implies the analogous property for Hilbert spaces in Type 1.",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 45,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "This is vector subtraction in a Hilbert space, not truncated ℕ subtraction."
+   },
+   {
+    "line": 69,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "This is a proof-internal fact that (2 : ℝ≥0∞).toReal > 0."
+   },
+   {
+    "line": 71,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "Proof term only; it does not affect the statement."
+   },
+   {
+    "line": 74,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "Proof term only; it does not affect the statement."
+   },
+   {
+    "line": 76,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "Proof term only; it does not affect the statement."
+   },
+   {
+    "line": 97,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "This is inside the proof of norm preservation for the reindexing map."
+   },
+   {
+    "line": 98,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "Proof term only; it does not affect the statement."
+   },
+   {
+    "line": 100,
+    "rule": "extended-arith",
+    "verdict": "harmless",
+    "why": "Proof term only; the exponent 2 is correctly the ℓ² exponent."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+    "line": 208,
+    "explanation": "The commensurability clause (Γ_0 embeds in Γ_n with index 2^{4n}) is omitted, so Lean covers only the main part of Theorem 1.2.",
+    "probe_idea": "Add the conjunct ∀ n, ∃ H : Subgroup (Γ n), Nonempty (H ≃* Γ 0) ∧ H.index = 2^(4*n)."
+   },
+   "result": {
+    "id": "F1-a0",
+    "status": "GREEN",
+    "claim": "The commensurability clause suggested in the probe idea, `∃ H : Subgroup (Γ n), Nonempty (H ≃* Γ 0) ∧ H.index = 2^(4*n)`, is well-typed over `CountableDiscreteGroup`. At n = 0 it holds for every group, taking H = ⊤. So the omitted clause only has content for n ≥ 1, and the Lean theorem leaves it out. This probe does not show that the Lean theorem fails to imply the clause.",
+    "kind": "other",
+    "seconds": 53.8,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_clause_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_clause_zero (Γ : ConnesRigidity.CountableDiscreteGroup.{0}) :\n    ∃ H : Subgroup Γ, Nonempty (H ≃* Γ) ∧ H.index = 2 ^ (4 * 0) :=\n  ⟨⊤, ⟨Subgroup.topEquiv⟩, by simp⟩",
+   "attempts": [
+    {
+     "lean": "theorem probe_clause_zero (Γ : ConnesRigidity.CountableDiscreteGroup.{0}) :\n    ∃ H : Subgroup Γ, Nonempty (H ≃* Γ) ∧ H.index = 2 ^ (4 * 0) :=\n  ⟨⊤, ⟨Subgroup.topEquiv⟩, by simp⟩",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 53.8
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "F3",
+    "decl": "HasKazhdanPropertyT",
+    "line": 49,
+    "explanation": "Property (T) quantifies only over Hilbert spaces in Type 0. This is equivalent to the standard definition for countable groups, since separable representations suffice.",
+    "probe_idea": "Prove that HasKazhdanPropertyT G implies the analogous property for Hilbert spaces in Type 1."
+   },
+   "result": {
+    "id": "F3-a0",
+    "status": "GREEN",
+    "claim": "This does not prove the Type 0 vs Type 1 equivalence from the probe idea, which would need a separable-subrepresentation reduction. It only checks non-vacuity: the trivial group, as a CountableDiscreteGroup.{0}, satisfies HasKazhdanPropertyT. The definition is therefore satisfiable and not trivially false.",
+    "kind": "other",
+    "seconds": 52.4,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_trivial_group_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_trivial_group_T :\n    ConnesRigidity.HasKazhdanPropertyT.{0}\n      (⟨PUnit.{1}, inferInstance, inferInstance⟩ : ConnesRigidity.CountableDiscreteGroup.{0}) := by\n  intro H _ _ _ π h\n  obtain ⟨ξ, hξ, _⟩ := h ∅ 1 one_pos\n  refine ⟨ξ, ?_, ?_⟩\n  · intro h0\n    simp [h0] at hξ\n  · intro g\n    have hg : g = 1 := by\n      first | rfl | exact Subsingleton.elim _ _\n    subst hg\n    simp",
+   "attempts": [
+    {
+     "lean": "theorem probe_trivial_group_T :\n    ConnesRigidity.HasKazhdanPropertyT.{0}\n      (⟨PUnit.{1}, inferInstance, inferInstance⟩ : ConnesRigidity.CountableDiscreteGroup.{0}) := by\n  intro H _ _ _ π h\n  obtain ⟨ξ, hξ, _⟩ := h ∅ 1 one_pos\n  refine ⟨ξ, ?_, ?_⟩\n  · intro h0\n    simp [h0] at hξ\n  · intro g\n    have hg : g = 1 := by\n      first | rfl | exact Subsingleton.elim _ _\n    subst hg\n    simp",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 52.4
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "ConnesRigidity.exists_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ Γ Λ : CountableDiscreteGroup.{0},\n      Group.FG Γ ∧ Group.FG Λ ∧\n      IsICC Γ ∧ HasKazhdanPropertyT Γ ∧\n      IsICC Λ ∧ HasKazhdanPropertyT Λ ∧\n      TracialGroupFactorsIsomorphic Γ Λ ∧\n      ¬ GroupsIsomorphic Γ Λ",
+   "restated": "∃ Γ Λ : CountableDiscreteGroup.{0}, Group.FG Γ ∧ Group.FG Λ ∧ (Infinite Γ ∧ ∀ g : Γ, g ≠ 1 → Set.Infinite {h : Γ | ∃ x : Γ, h = x * g * x⁻¹}) ∧ HasKazhdanPropertyT Γ ∧ (Infinite Λ ∧ ∀ g : Λ, g ≠ 1 → Set.Infinite {h : Λ | ∃ x : Λ, h = x * g * x⁻¹}) ∧ HasKazhdanPropertyT Λ ∧ Nonempty (TracialGroupFactorEquiv Γ Λ) ∧ ¬ Nonempty (Γ ≃* Λ)",
+   "english": "There exist two finitely generated countable discrete groups Γ and Λ, both infinite with every non-identity element having an infinite conjugacy class (ICC), both with Kazhdan's property (T), such that there is a normal, trace-preserving *-isomorphism between their group von Neumann algebras, yet there is no group isomorphism Γ ≃* Λ.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "CountableDiscreteGroup",
+    "HasKazhdanPropertyT",
+    "TracialGroupFactorEquiv"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace ConnesRigidity\nopen scoped NNReal ENNReal\nopen ConnesRigidity\ntheorem probe_restate_0  :\n    (∃ Γ Λ : CountableDiscreteGroup.{0},\n      Group.FG Γ ∧ Group.FG Λ ∧\n      IsICC Γ ∧ HasKazhdanPropertyT Γ ∧\n      IsICC Λ ∧ HasKazhdanPropertyT Λ ∧\n      TracialGroupFactorsIsomorphic Γ Λ ∧\n      ¬ GroupsIsomorphic Γ Λ) ↔\n    (∃ Γ Λ : CountableDiscreteGroup.{0}, Group.FG Γ ∧ Group.FG Λ ∧ (Infinite Γ ∧ ∀ g : Γ, g ≠ 1 → Set.Infinite {h : Γ | ∃ x : Γ, h = x * g * x⁻¹}) ∧ HasKazhdanPropertyT Γ ∧ (Infinite Λ ∧ ∀ g : Λ, g ≠ 1 → Set.Infinite {h : Λ | ∃ x : Λ, h = x * g * x⁻¹}) ∧ HasKazhdanPropertyT Λ ∧ Nonempty (TracialGroupFactorEquiv Γ Λ) ∧ ¬ Nonempty (Γ ≃* Λ)) := by\n  exact Iff.rfl\nend ConnesRigidity\n",
+   "seconds": 50.3
+  },
+  {
+   "target": "ConnesRigidity.exists_infinite_pairwise_nonisomorphic_propertyT_icc_groups_with_isomorphic_factors",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∃ (Λ : CountableDiscreteGroup.{0}) (Γ : ℕ → CountableDiscreteGroup.{0}),\n      Group.FG Λ ∧\n      (∀ n, Group.FG (Γ n)) ∧\n      IsICC Λ ∧\n      (∀ n, IsICC (Γ n)) ∧\n      HasKazhdanPropertyT Λ ∧\n      (∀ n, HasKazhdanPropertyT (Γ n)) ∧\n      (∀ n, TracialGroupFactorsIsomorphic (Γ n) Λ) ∧\n      (∀ m n, TracialGroupFactorsIsomorphic (Γ m) (Γ n)) ∧\n      (∀ ⦃m n : ℕ⦄, m ≠ n → ¬ GroupsIsomorphic (Γ m) (Γ n)) ∧\n      (∀ n, ¬ GroupsIsomorphic Λ (Γ n))",
+   "restated": "∃ (Λ : CountableDiscreteGroup.{0}) (Γ : ℕ → CountableDiscreteGroup.{0}), Group.FG Λ ∧ (∀ n, Group.FG (Γ n)) ∧ IsICC Λ ∧ (∀ n, IsICC (Γ n)) ∧ HasKazhdanPropertyT Λ ∧ (∀ n, HasKazhdanPropertyT (Γ n)) ∧ (∀ n, TracialGroupFactorsIsomorphic (Γ n) Λ) ∧ (∀ m n, TracialGroupFactorsIsomorphic (Γ m) (Γ n)) ∧ (∀ ⦃m n : ℕ⦄, m ≠ n → ¬ Nonempty (Γ m ≃* Γ n)) ∧ (∀ n, ¬ Nonempty (Λ ≃* Γ n))",
+   "english": "There is a finitely generated ICC Kazhdan property (T) group Λ and a sequence Γ n of finitely generated ICC property (T) groups, whose group von Neumann algebras (with trace) are all isomorphic to each other and to that of Λ, yet no two of the groups Γ m, Γ n (m ≠ n) are isomorphic as groups, and none is isomorphic to Λ. Here 'not isomorphic' means that there is no multiplicative equivalence between them.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "CountableDiscreteGroup",
+    "HasKazhdanPropertyT",
+    "IsICC",
+    "TracialGroupFactorsIsomorphic"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace ConnesRigidity\nopen scoped NNReal ENNReal\nopen ConnesRigidity\ntheorem probe_restate_10  :\n    (∃ (Λ : CountableDiscreteGroup.{0}) (Γ : ℕ → CountableDiscreteGroup.{0}),\n      Group.FG Λ ∧\n      (∀ n, Group.FG (Γ n)) ∧\n      IsICC Λ ∧\n      (∀ n, IsICC (Γ n)) ∧\n      HasKazhdanPropertyT Λ ∧\n      (∀ n, HasKazhdanPropertyT (Γ n)) ∧\n      (∀ n, TracialGroupFactorsIsomorphic (Γ n) Λ) ∧\n      (∀ m n, TracialGroupFactorsIsomorphic (Γ m) (Γ n)) ∧\n      (∀ ⦃m n : ℕ⦄, m ≠ n → ¬ GroupsIsomorphic (Γ m) (Γ n)) ∧\n      (∀ n, ¬ GroupsIsomorphic Λ (Γ n))) ↔\n    (∃ (Λ : CountableDiscreteGroup.{0}) (Γ : ℕ → CountableDiscreteGroup.{0}), Group.FG Λ ∧ (∀ n, Group.FG (Γ n)) ∧ IsICC Λ ∧ (∀ n, IsICC (Γ n)) ∧ HasKazhdanPropertyT Λ ∧ (∀ n, HasKazhdanPropertyT (Γ n)) ∧ (∀ n, TracialGroupFactorsIsomorphic (Γ n) Λ) ∧ (∀ m n, TracialGroupFactorsIsomorphic (Γ m) (Γ n)) ∧ (∀ ⦃m n : ℕ⦄, m ≠ n → ¬ Nonempty (Γ m ≃* Γ n)) ∧ (∀ n, ¬ Nonempty (Λ ≃* Γ n))) := by\n  exact Iff.rfl\nend ConnesRigidity\n",
+   "seconds": 50.2
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 183,
+  "lines_needing_human_review": 88,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

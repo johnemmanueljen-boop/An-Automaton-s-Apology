@@ -1,0 +1,66 @@
+[
+ {
+  "case": "ns-lemma-8.6",
+  "found_by": "Bastounis, Circelli & Hansen, 'Navier-Stokes lost in translation', arXiv:2610.08144 (about two weeks of expert work)",
+  "hits": [
+   {
+    "gt": "GT1",
+    "label": "Lean needs m+5 derivatives of F where the paper's (8.19) uses m+4 (C^{m+4} norm)",
+    "matched_flag": "F1"
+   },
+   {
+    "gt": "GT2",
+    "label": "Lean bounds one derivative word w at a time; (8.19) is a C^m norm, i.e. a sup over all multi-indices of order <= m",
+    "matched_flag": null
+   }
+  ],
+  "n_flags": 4,
+  "flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "medium",
+    "decl": "norm_derivativeWord_inverse_le",
+    "line": 23,
+    "paper_ref": "Lemma 8.6 (8.19)",
+    "explanation": "The paper's derivative loss is 4: ‖N⁻¹F‖_{C^m} ≤ C_m‖F‖_{C^{m+4}}. Lean assumes bounds on derivatives of order m+5, a loss of 5. A C^{m+4} bound does not imply bounds on (m+5)-th derivatives, so Lean is weaker in loss count, which matters for tame/Nash–Moser bookkeeping. Using only pure derivatives and sup|f| is a different, in some ways weaker, input norm. Neither statement directly implies the other.",
+    "polarity": "unclear",
+    "probe_idea": "Attempt the variant with `w.length + 4` in hfirst/hsecond; or check whether downstream uses only need loss 5."
+   },
+   {
+    "id": "F2",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "mixedLossConstant",
+    "line": 16,
+    "paper_ref": "Lemma 8.6",
+    "explanation": "The tsum Σ weight(k)^{-4} is 0 if the family is not summable, which would make the bound vacuous-strong (the inverse would be forced to be 0). The constant also does not depend on the direction d, so the divisor bound must be built into `Direction`.",
+    "polarity": "n/a",
+    "probe_idea": "example : Summable (fun k : Frequency => (weight k ^ 4)⁻¹) and 0 < ∑' k, (weight k ^ 4)⁻¹"
+   },
+   {
+    "id": "F3",
+    "category": "assumption",
+    "severity": "low",
+    "decl": "norm_derivativeWord_inverse_le",
+    "line": 20,
+    "paper_ref": "Lemma 8.6",
+    "explanation": "The zero-mean hypothesis on F is absent. This is acceptable if `inverse` discards the k=0 mode, in which case Lean is stronger or equal. It should be confirmed that `inverse d f` is the Fourier multiplier 1/(2πi v·k) over k≠0, i.e. the paper's N⁻¹. The Direction structure's fields (Diophantine/divisor condition (6.7)) are hidden assumptions.",
+    "polarity": "lean stronger",
+    "probe_idea": "Check the definition of `inverse` and `Direction`; prove N(inverse d f) = f − mean f for smooth periodic f."
+   },
+   {
+    "id": "F4",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "norm_derivativeWord_inverse_le",
+    "line": 19,
+    "paper_ref": "Lemma 8.6",
+    "explanation": "Existence, uniqueness and the solution equation Nφ = F are not part of this statement.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ],
+  "summary": "For a smooth, periodic family f and a fixed parameter p, the Lean theorem bounds every iterated coordinate derivative (any word w of length m) of slice (inverse d f) p, at any point Y, by mixedLossConstant m · C. Here C bounds |f|, the pure x-derivative of order m+5, and the pure y-derivative of order m+5 on [0,1]². This is a C^m tame estimate for the torus inverse, matching the shape of (8.19). The main caveat is the derivative count: Lean loses 5 derivatives and uses only pure derivatives, while the paper states a loss of 4 measured in the full C^{m+4} norm. The existence, uniqueness and Fourier-series parts of Lemma 8.6 are not stated here."
+ }
+]

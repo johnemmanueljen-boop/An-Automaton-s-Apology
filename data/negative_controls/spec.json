@@ -1,0 +1,74 @@
+[
+ {
+  "id": "nc01",
+  "context": "open scoped Classical\nvariable {α : Type*} [Group α]",
+  "stmt": "theorem stmt (s : Subgroup α) : Nat.card s ∣ Nat.card α",
+  "paper": "Theorem (Lagrange). Let G be a finite group and H a subgroup of G. Then the order of H divides the order of G."
+ },
+ {
+  "id": "nc02",
+  "context": "variable {K : Type*} [GroupWithZero K] [Fintype K]",
+  "stmt": "theorem stmt (a : K) (ha : a ≠ 0) : a ^ (Fintype.card K - 1) = 1",
+  "paper": "Theorem (Fermat's little theorem, finite-field form). Let K be a finite field with q elements. Then every nonzero a in K satisfies a^(q-1) = 1."
+ },
+ {
+  "id": "nc03",
+  "context": "open Set\nvariable {α : Type*} [ConditionallyCompleteLinearOrder α] [TopologicalSpace α] [OrderTopology α] [DenselyOrdered α]\nvariable {δ : Type*} [LinearOrder δ] [TopologicalSpace δ] [OrderClosedTopology δ]",
+  "stmt": "theorem stmt {a b : α} (hab : a ≤ b) {f : α → δ} (hf : ContinuousOn f (Icc a b)) :\n    Icc (f a) (f b) ⊆ f '' Icc a b",
+  "paper": "Theorem (Intermediate value theorem). Let f : [a,b] -> R be continuous, with a <= b. Then for every y with f(a) <= y <= f(b) there is c in [a,b] with f(c) = y."
+ },
+ {
+  "id": "nc04",
+  "context": "",
+  "stmt": "theorem stmt (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p",
+  "paper": "Theorem (Euclid). There are infinitely many prime numbers; that is, for every natural number n there is a prime p with p >= n."
+ },
+ {
+  "id": "nc05",
+  "context": "open Nat",
+  "stmt": "theorem stmt (p : ℕ) [Fact p.Prime] : ((p - 1)! : ZMod p) = -1",
+  "paper": "Theorem (Wilson). If p is a prime, then (p-1)! ≡ -1 (mod p)."
+ },
+ {
+  "id": "nc06",
+  "context": "open Set",
+  "stmt": "theorem stmt (f : ℝ → ℝ) {a b : ℝ} (hab : a < b) (hfc : ContinuousOn f (Icc a b))\n    (hfd : DifferentiableOn ℝ f (Ioo a b)) : ∃ c ∈ Ioo a b, deriv f c = (f b - f a) / (b - a)",
+  "paper": "Theorem (Mean value theorem). Let a < b and let f be continuous on [a,b] and differentiable on (a,b). Then there is c in (a,b) with f'(c) = (f(b) - f(a)) / (b - a)."
+ },
+ {
+  "id": "nc07",
+  "context": "open Filter Topology Bornology\nvariable {X : Type*} [PseudoMetricSpace X] [ProperSpace X] {s : Set X}",
+  "stmt": "theorem stmt (hs : IsBounded s) {x : ℕ → X} (hx : ∀ n, x n ∈ s) :\n    ∃ a ∈ closure s, ∃ φ : ℕ → ℕ, StrictMono φ ∧ Tendsto (x ∘ φ) atTop (𝓝 a)",
+  "paper": "Theorem (Bolzano-Weierstrass). Every bounded sequence in R^n has a convergent subsequence, whose limit lies in the closure of the set containing the sequence."
+ },
+ {
+  "id": "nc08",
+  "context": "",
+  "stmt": "theorem stmt {G : Type*} [Group G] [Fintype G] (p : ℕ) [hp : Fact p.Prime] (hdvd : p ∣ Fintype.card G) :\n    ∃ x : G, orderOf x = p",
+  "paper": "Theorem (Cauchy). Let G be a finite group and p a prime dividing the order of G. Then G contains an element of order p."
+ },
+ {
+  "id": "nc09",
+  "context": "open EuclideanGeometry\nvariable {V : Type*} {P : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V] [MetricSpace P] [NormedAddTorsor V P]",
+  "stmt": "theorem stmt (p₁ p₂ p₃ : P) :\n    dist p₁ p₃ * dist p₁ p₃ = dist p₁ p₂ * dist p₁ p₂ + dist p₃ p₂ * dist p₃ p₂ ↔\n      ∠ p₁ p₂ p₃ = Real.pi / 2",
+  "paper": "Theorem (Pythagoras and its converse). For points A, B, C in a Euclidean space, AC^2 = AB^2 + BC^2 if and only if the angle ABC is a right angle."
+ },
+ {
+  "id": "nc10",
+  "context": "variable {p q : ℕ} [Fact p.Prime] [Fact q.Prime]",
+  "stmt": "theorem stmt (hp : p ≠ 2) (hq : q ≠ 2) (hpq : p ≠ q) :\n    legendreSym q p * legendreSym p q = (-1) ^ (p / 2 * (q / 2))",
+  "paper": "Theorem (Quadratic reciprocity). Let p and q be distinct odd primes, and let (a/p) denote the Legendre symbol. Then (p/q)(q/p) = (-1)^(((p-1)/2)((q-1)/2))."
+ },
+ {
+  "id": "nc11",
+  "context": "open Polynomial",
+  "stmt": "theorem stmt {f : ℂ[X]} (hf : 0 < degree f) : ∃ z : ℂ, IsRoot f z",
+  "paper": "Theorem (Fundamental theorem of algebra). Every non-constant polynomial with complex coefficients has a complex root."
+ },
+ {
+  "id": "nc12",
+  "context": "variable {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℝ F]",
+  "stmt": "theorem stmt (x y : F) : |inner ℝ x y| ≤ ‖x‖ * ‖y‖",
+  "paper": "Theorem (Cauchy-Schwarz). For vectors x, y in a real inner product space, |<x, y>| <= ||x|| ||y||."
+ }
+]

@@ -1,0 +1,386 @@
+{
+ "result": "C_PermanentFormulaLowerBound",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/C_PermanentFormulaLowerBound.lean",
+ "theorems": [
+  "PermanentFormulaLowerBound.permanent_divisionFree_formula_logarithmic_lower_bound",
+  "PermanentFormulaLowerBound.permanent_rational_formula_logarithmic_lower_bound"
+ ],
+ "lint": [
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "C_PermanentFormulaLowerBound.lean",
+   "decl": "PermanentFormulaLowerBound.Formula.eval",
+   "decl_kind": "def",
+   "line": 22,
+   "snippet": "| .sub f g => eval f - eval g",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "C_PermanentFormulaLowerBound.lean",
+   "decl": "PermanentFormulaLowerBound.RationalFormula.eval",
+   "decl_kind": "def",
+   "line": 55,
+   "snippet": "| .sub f g => eval f - eval g",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "C_PermanentFormulaLowerBound.lean",
+   "decl": "PermanentFormulaLowerBound.RationalFormula.eval",
+   "decl_kind": "def",
+   "line": 57,
+   "snippet": "| .div f g => eval f / eval g",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "C_PermanentFormulaLowerBound.lean",
+   "decl": "PermanentFormulaLowerBound.permanent_divisionFree_formula_logarithmic_lower_bound",
+   "decl_kind": "theorem",
+   "line": 86,
+   "snippet": "(n : ℝ) ^ 4 / (128 * Real.logb 2 (n : ℝ)) ≤",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "C_PermanentFormulaLowerBound.lean",
+   "decl": "PermanentFormulaLowerBound.permanent_rational_formula_logarithmic_lower_bound",
+   "decl_kind": "theorem",
+   "line": 98,
+   "snippet": "(n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  }
+ ],
+ "audit": {
+  "summary": "The two Lean theorems state that for n ≥ 32, any division-free formula over ℂ computing per_n has at least n^4/(128·log₂ n) variable leaves. Any valid formula with division computing per_n, as an element of the fraction field, has at least n^4/(192·log₂ n) variable leaves. These match the variable-leaf parts of Theorems 1.2 and 1.3. The main caveat is coverage: the gate-count bounds G(Φ) and Theorem 1.1 (the circuit bound) are not formalized.",
+  "glossary": [
+   {
+    "decl": "Formula",
+    "line": 7,
+    "plain": "Binary-tree arithmetic formula with leaves that are variables x_i or constants c ∈ R, and internal gates +, −, ×.",
+    "standard_concept": "division-free arithmetic formula",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Formula.eval",
+    "line": 18,
+    "plain": "The polynomial in R[x_i] computed by the formula.",
+    "standard_concept": "polynomial computed by a formula",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Formula.variableLeaves",
+    "line": 25,
+    "plain": "Number of variable-labelled leaves, counted with multiplicity: L_var(Φ).",
+    "standard_concept": "L_var(Φ)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "RationalFormula",
+    "line": 34,
+    "plain": "Formula tree that also allows ÷ gates.",
+    "standard_concept": "arithmetic formula with division",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "RationalFormula.eval",
+    "line": 46,
+    "plain": "The value in the fraction field ℂ(x_ij). Division by zero gives the junk value 0, but Valid excludes it.",
+    "standard_concept": "interpretation in the rational function field",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": false
+   },
+   {
+    "decl": "RationalFormula.Valid",
+    "line": 59,
+    "plain": "Every denominator subformula evaluates to a nonzero rational function.",
+    "standard_concept": "valid formula with division",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "RationalFormula.variableLeaves",
+    "line": 68,
+    "plain": "Number of variable leaves, L_var(Φ).",
+    "standard_concept": "L_var(Φ)",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": false
+   },
+   {
+    "decl": "permanentPolynomial",
+    "line": 78,
+    "plain": "per_n = Σ_σ Π_i x_{i,σ(i)} in ℂ[x_ij].",
+    "standard_concept": "permanent polynomial",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "permanent_divisionFree_formula_logarithmic_lower_bound",
+    "line": 82,
+    "plain": "For all n ≥ 32 and every division-free formula f over ℂ in the variables x_ij with eval f = per_n: n^4/(128·log₂ n) ≤ L_var(f).",
+    "citation_ok": true
+   },
+   {
+    "theorem": "permanent_rational_formula_logarithmic_lower_bound",
+    "line": 90,
+    "plain": "For all n ≥ 32 and every valid formula f with division over ℂ whose value in ℂ(x_ij) equals per_n: n^4/(192·log₂ n) ≤ L_var(f).",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "For n ≥ 2^16, C(per_n) ≥ (n²/144)(log₂log₂ n − 3)."
+   },
+   {
+    "ref": "Theorem 1.2",
+    "plain": "For n ≥ 32, a division-free formula Φ computing per_n has L_var ≥ n^4/(128 log₂ n) and G ≥ n^4/(256 log₂ n). The leaf bound also holds for total leaves and vertices."
+   },
+   {
+    "ref": "Theorem 1.3",
+    "plain": "For n ≥ 32, a valid formula with division computing per_n has L_var ≥ n^4/(192 log₂ n) and G ≥ n^4/(384 log₂ n). The leaf bound also holds for total leaves and vertices."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "The circuit bound is not among the targets."
+   },
+   {
+    "paper_ref": "Theorem 1.2",
+    "lean_theorem": "permanent_divisionFree_formula_logarithmic_lower_bound",
+    "relation": "lean_weaker",
+    "why": "The L_var bound is formalized exactly; the G(Φ) bound is omitted."
+   },
+   {
+    "paper_ref": "Theorem 1.3",
+    "lean_theorem": "permanent_rational_formula_logarithmic_lower_bound",
+    "relation": "lean_weaker",
+    "why": "The L_var bound is formalized exactly; the G(Φ) bound is omitted."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+    "line": 82,
+    "paper_ref": "Theorem 1.2",
+    "explanation": "The gate-count bound G(Φ) ≥ n^4/(256 log₂ n) is not stated. This is separate from the leaf bound: it does not follow from the L_var bound alone, since that only gives G ≥ L_var − 1 when L_var ≥ 1.",
+    "polarity": "lean weaker",
+    "probe_idea": "Define an internal-gate count for Formula and state n^4/(256·logb 2 n) ≤ gates f under the same hypotheses.",
+    "citation_ok": true
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "permanent_rational_formula_logarithmic_lower_bound",
+    "line": 90,
+    "paper_ref": "Theorem 1.3",
+    "explanation": "The gate-count bound G(Φ) ≥ n^4/(384 log₂ n) is not stated.",
+    "polarity": "lean weaker",
+    "probe_idea": "Define gates for RationalFormula and state the 384 bound.",
+    "citation_ok": true
+   },
+   {
+    "id": "F3",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "permanentPolynomial",
+    "line": 78,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "The circuit lower bound (Theorem 1.1) is not formalized in this file.",
+    "polarity": "n/a",
+    "probe_idea": null,
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 22,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "This is subtraction in the ring MvPolynomial, not ℕ."
+   },
+   {
+    "line": 55,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "This is subtraction in the fraction field."
+   },
+   {
+    "line": 57,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Division by zero is excluded by Valid.div, which requires eval g ≠ 0, and the theorem assumes Valid."
+   },
+   {
+    "line": 86,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "For n ≥ 32, logb 2 n ≥ 5 > 0, so the denominator is positive."
+   },
+   {
+    "line": 98,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "For n ≥ 32, logb 2 n ≥ 5 > 0, so the denominator is positive."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "permanent_divisionFree_formula_logarithmic_lower_bound",
+    "line": 82,
+    "explanation": "The gate-count bound G(Φ) ≥ n^4/(256 log₂ n) is not stated. This is separate from the leaf bound: it does not follow from the L_var bound alone, since that only gives G ≥ L_var − 1 when L_var ≥ 1.",
+    "probe_idea": "Define an internal-gate count for Formula and state n^4/(256·logb 2 n) ≤ gates f under the same hypotheses."
+   },
+   "result": {
+    "id": "F1-a0",
+    "status": "GREEN",
+    "claim": "The challenge file defines no internal-gate count for Formula. A gate count can be defined (add/sub/mul nodes), and it satisfies variableLeaves f ≤ gates f + 1. This shows the leaf-count statement in the file is a different quantity from the gate-count bound, which is only loosely related to it and is not stated.",
+    "kind": "other",
+    "seconds": 326.6,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_gates_vs_leaves": [
+      "propext",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "def probeGates {ι : Type*} {R : Type*} : PermanentFormulaLowerBound.Formula ι R → ℕ\n  | .var _ => 0\n  | .const _ => 0\n  | .add f g => probeGates f + probeGates g + 1\n  | .sub f g => probeGates f + probeGates g + 1\n  | .mul f g => probeGates f + probeGates g + 1\n\ntheorem probe_gates_vs_leaves {ι : Type*} {R : Type*} (f : PermanentFormulaLowerBound.Formula ι R) :\n    PermanentFormulaLowerBound.Formula.variableLeaves f ≤ probeGates f + 1 := by\n  induction f with\n  | var i => simp [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n  | const c => simp [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n  | add f g hf hg =>\n    simp only [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n    omega\n  | sub f g hf hg =>\n    simp only [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n    omega\n  | mul f g hf hg =>\n    simp only [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n    omega",
+   "attempts": [
+    {
+     "lean": "def probeGates {ι : Type*} {R : Type*} : PermanentFormulaLowerBound.Formula ι R → ℕ\n  | .var _ => 0\n  | .const _ => 0\n  | .add f g => probeGates f + probeGates g + 1\n  | .sub f g => probeGates f + probeGates g + 1\n  | .mul f g => probeGates f + probeGates g + 1\n\ntheorem probe_gates_vs_leaves {ι : Type*} {R : Type*} (f : PermanentFormulaLowerBound.Formula ι R) :\n    PermanentFormulaLowerBound.Formula.variableLeaves f ≤ probeGates f + 1 := by\n  induction f with\n  | var i => simp [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n  | const c => simp [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n  | add f g hf hg =>\n    simp only [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n    omega\n  | sub f g hf hg =>\n    simp only [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n    omega\n  | mul f g hf hg =>\n    simp only [probeGates, PermanentFormulaLowerBound.Formula.variableLeaves]\n    omega",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 326.6
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "F2",
+    "decl": "permanent_rational_formula_logarithmic_lower_bound",
+    "line": 90,
+    "explanation": "The gate-count bound G(Φ) ≥ n^4/(384 log₂ n) is not stated.",
+    "probe_idea": "Define gates for RationalFormula and state the 384 bound."
+   },
+   "result": {
+    "id": "F2-a1",
+    "status": "GREEN",
+    "claim": "A gate-style measure (counting binary operation nodes) on RationalFormula satisfies leaves ≤ gates + 1. Hence the stated leaf bound n^4/(192 log₂ n) implies the gate bound n^4/(384 log₂ n) for n ≥ 32. So the 384 gate-count bound follows from the leaf-count theorem but is not stated as such in the file.",
+    "kind": "other",
+    "seconds": 156.3,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_leaves_le_gates": [
+      "propext",
+      "Quot.sound"
+     ],
+     "probe_gate_bound_from_leaf_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "def probeGates {ι : Type _} {R : Type _} : PermanentFormulaLowerBound.RationalFormula ι R → ℕ\n  | .var _ => 0\n  | .const _ => 0\n  | .add f g => probeGates f + probeGates g + 1\n  | .sub f g => probeGates f + probeGates g + 1\n  | .mul f g => probeGates f + probeGates g + 1\n  | .div f g => probeGates f + probeGates g + 1\n\ntheorem probe_leaves_le_gates {ι : Type _} {R : Type _} (f : PermanentFormulaLowerBound.RationalFormula ι R) :\n    PermanentFormulaLowerBound.RationalFormula.variableLeaves f ≤ probeGates f + 1 := by\n  induction f with\n  | var _ => simp [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]\n  | const _ => simp [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]\n  | add f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n  | sub f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n  | mul f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n  | div f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n\ntheorem probe_gate_bound_from_leaf_bound {n : ℕ} (hn : 32 ≤ n)\n    (f : PermanentFormulaLowerBound.RationalFormula (Fin n × Fin n) ℂ)\n    (H : (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤\n      (PermanentFormulaLowerBound.RationalFormula.variableLeaves f : ℝ)) :\n    (n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ)) ≤ (probeGates f : ℝ) := by\n  have hn' : (32 : ℝ) ≤ n := by exact_mod_cast hn\n  have hnpos : (0 : ℝ) < n := by linarith\n  have hL : 0 < Real.logb 2 (n : ℝ) := Real.logb_pos (by norm_num) (by linarith)\n  have hlt : Real.logb 2 (n : ℝ) < n := by\n    rw [Real.logb_lt_iff_lt_rpow (by norm_num) hnpos, Real.rpow_natCast]\n    exact_mod_cast Nat.lt_two_pow_self\n  have hle : (PermanentFormulaLowerBound.RationalFormula.variableLeaves f : ℝ) ≤ (probeGates f : ℝ) + 1 := by\n    exact_mod_cast probe_leaves_le_gates f\n  have h3 : (32:ℝ)^3 ≤ (n:ℝ)^3 := pow_le_pow_left₀ (by norm_num) hn' 3\n  have h6 : (384:ℝ) ≤ (n:ℝ)^3 := by norm_num at h3 ⊢; linarith\n  have h4 : (384 : ℝ) * Real.logb 2 (n : ℝ) ≤ (n : ℝ) ^ 4 := by\n    have e : (n:ℝ)^4 = n * n^3 := by ring\n    rw [e]\n    have h7 := mul_le_mul_of_nonneg_left h6 hnpos.le\n    nlinarith\n  have h5 : (1:ℝ) ≤ (n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ)) := by\n    rw [one_le_div (by positivity)]\n    exact h4\n  have h1 : (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) =\n      2 * ((n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ))) := by\n    field_simp <;> ring\n  rw [h1] at H\n  linarith",
+   "attempts": [
+    {
+     "lean": "namespace PermanentFormulaLowerBound\n\ndef probeGates {ι : Type u} {R : Type v} : RationalFormula ι R → ℕ\n  | .var _ => 0\n  | .const _ => 0\n  | .add f g => probeGates f + probeGates g + 1\n  | .sub f g => probeGates f + probeGates g + 1\n  | .mul f g => probeGates f + probeGates g + 1\n  | .div f g => probeGates f + probeGates g + 1\n\ntheorem probe_leaves_le_gates {ι : Type u} {R : Type v} (f : RationalFormula ι R) :\n    RationalFormula.variableLeaves f ≤ probeGates f + 1 := by\n  induction f with\n  | var _ => simp [RationalFormula.variableLeaves, probeGates]\n  | const _ => simp [RationalFormula.variableLeaves, probeGates]\n  | add f g hf hg => simp only [RationalFormula.variableLeaves, probeGates]; omega\n  | sub f g hf hg => simp only [RationalFormula.variableLeaves, probeGates]; omega\n  | mul f g hf hg => simp only [RationalFormula.variableLeaves, probeGates]; omega\n  | div f g hf hg => simp only [RationalFormula.variableLeaves, probeGates]; omega\n\ntheorem probe_gate_bound_from_leaf_bound {n : ℕ} (hn : 32 ≤ n)\n    (f : RationalFormula (Fin n × Fin n) ℂ)\n    (H : (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤\n      (RationalFormula.variableLeaves f : ℝ)) :\n    (n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ)) ≤ (probeGates f : ℝ) := by\n  have hn' : (32 : ℝ) ≤ n := by exact_mod_cast hn\n  have hnpos : (0 : ℝ) < n := by linarith\n  have hL : 0 < Real.logb 2 (n : ℝ) := Real.logb_pos (by norm_num) (by linarith)\n  have hlt : Real.logb 2 (n : ℝ) < n := by\n    rw [Real.logb_lt_iff_lt_rpow (by norm_num) hnpos, Real.rpow_natCast]\n    exact_mod_cast Nat.lt_two_pow_self\n  have hle : (RationalFormula.variableLeaves f : ℝ) ≤ (probeGates f : ℝ) + 1 := by\n    exact_mod_cast probe_leaves_le_gates f\n  have h3 : (32:ℝ)^3 ≤ (n:ℝ)^3 := pow_le_pow_left₀ (by norm_num) hn' 3\n  have h4 : (384 : ℝ) * Real.logb 2 (n : ℝ) ≤ (n : ℝ) ^ 4 := by\n    have : (n:ℝ)^4 = n * n^3 := by ring\n    rw [this]\n    nlinarith\n  have h5 : (1:ℝ) ≤ (n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ)) := by\n    rw [one_le_div (by positivity)]\n    exact h4\n  have h1 : (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) =\n      2 * ((n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ))) := by\n    field_simp <;> ring\n  rw [h1] at H\n  linarith\n\nend PermanentFormulaLowerBound",
+     "status": "YELLOW",
+     "detail": "declarations not found: ['probe_gate_bound_from_leaf_bound', 'probe_leaves_le_gates']",
+     "seconds": 289.7
+    },
+    {
+     "lean": "def probeGates {ι : Type _} {R : Type _} : PermanentFormulaLowerBound.RationalFormula ι R → ℕ\n  | .var _ => 0\n  | .const _ => 0\n  | .add f g => probeGates f + probeGates g + 1\n  | .sub f g => probeGates f + probeGates g + 1\n  | .mul f g => probeGates f + probeGates g + 1\n  | .div f g => probeGates f + probeGates g + 1\n\ntheorem probe_leaves_le_gates {ι : Type _} {R : Type _} (f : PermanentFormulaLowerBound.RationalFormula ι R) :\n    PermanentFormulaLowerBound.RationalFormula.variableLeaves f ≤ probeGates f + 1 := by\n  induction f with\n  | var _ => simp [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]\n  | const _ => simp [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]\n  | add f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n  | sub f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n  | mul f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n  | div f g hf hg => simp only [PermanentFormulaLowerBound.RationalFormula.variableLeaves, probeGates]; omega\n\ntheorem probe_gate_bound_from_leaf_bound {n : ℕ} (hn : 32 ≤ n)\n    (f : PermanentFormulaLowerBound.RationalFormula (Fin n × Fin n) ℂ)\n    (H : (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤\n      (PermanentFormulaLowerBound.RationalFormula.variableLeaves f : ℝ)) :\n    (n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ)) ≤ (probeGates f : ℝ) := by\n  have hn' : (32 : ℝ) ≤ n := by exact_mod_cast hn\n  have hnpos : (0 : ℝ) < n := by linarith\n  have hL : 0 < Real.logb 2 (n : ℝ) := Real.logb_pos (by norm_num) (by linarith)\n  have hlt : Real.logb 2 (n : ℝ) < n := by\n    rw [Real.logb_lt_iff_lt_rpow (by norm_num) hnpos, Real.rpow_natCast]\n    exact_mod_cast Nat.lt_two_pow_self\n  have hle : (PermanentFormulaLowerBound.RationalFormula.variableLeaves f : ℝ) ≤ (probeGates f : ℝ) + 1 := by\n    exact_mod_cast probe_leaves_le_gates f\n  have h3 : (32:ℝ)^3 ≤ (n:ℝ)^3 := pow_le_pow_left₀ (by norm_num) hn' 3\n  have h6 : (384:ℝ) ≤ (n:ℝ)^3 := by norm_num at h3 ⊢; linarith\n  have h4 : (384 : ℝ) * Real.logb 2 (n : ℝ) ≤ (n : ℝ) ^ 4 := by\n    have e : (n:ℝ)^4 = n * n^3 := by ring\n    rw [e]\n    have h7 := mul_le_mul_of_nonneg_left h6 hnpos.le\n    nlinarith\n  have h5 : (1:ℝ) ≤ (n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ)) := by\n    rw [one_le_div (by positivity)]\n    exact h4\n  have h1 : (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) =\n      2 * ((n : ℝ) ^ 4 / (384 * Real.logb 2 (n : ℝ))) := by\n    field_simp <;> ring\n  rw [h1] at H\n  linarith",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 156.3
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "PermanentFormulaLowerBound.permanent_divisionFree_formula_logarithmic_lower_bound",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {n : ℕ} (hn : 32 ≤ n)\n    (f : Formula (Fin n × Fin n) ℂ)\n    (hf : Formula.eval f = permanentPolynomial n), (n : ℝ) ^ 4 / (128 * Real.logb 2 (n : ℝ)) ≤\n      (Formula.variableLeaves f : ℝ)",
+   "restated": "∀ {n : ℕ}, 32 ≤ n → ∀ (f : Formula (Fin n × Fin n) ℂ), Formula.eval f = permanentPolynomial n → (n : ℝ) ^ 4 ≤ (Formula.variableLeaves f : ℝ) * (128 * Real.logb 2 (n : ℝ))",
+   "english": "For n ≥ 32, any division-free arithmetic formula over ℂ computing the n×n permanent polynomial has a number of variable leaves L satisfying n^4 ≤ L · 128 · log₂ n.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "Formula",
+    "eval",
+    "permanentPolynomial",
+    "variableLeaves"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace PermanentFormulaLowerBound\ntheorem probe_restate_1  :\n    (∀ {n : ℕ} (hn : 32 ≤ n)\n    (f : Formula (Fin n × Fin n) ℂ)\n    (hf : Formula.eval f = permanentPolynomial n), (n : ℝ) ^ 4 / (128 * Real.logb 2 (n : ℝ)) ≤\n      (Formula.variableLeaves f : ℝ)) ↔\n    (∀ {n : ℕ}, 32 ≤ n → ∀ (f : Formula (Fin n × Fin n) ℂ), Formula.eval f = permanentPolynomial n → (n : ℝ) ^ 4 ≤ (Formula.variableLeaves f : ℝ) * (128 * Real.logb 2 (n : ℝ))) := by\n  have key : ∀ n : ℕ, 32 ≤ n → (0:ℝ) < 128 * Real.logb 2 (n:ℝ) := by\n    intro n hn\n    have h1 : (1:ℝ) < (n:ℝ) := by exact_mod_cast (by omega : 1 < n)\n    have h2 := Real.logb_pos (by norm_num : (1:ℝ) < 2) h1\n    linarith\n  constructor\n  · intro h n hn f hf\n    have h3 := h hn f hf\n    rw [div_le_iff₀ (key n hn)] at h3\n    exact h3\n  · intro h n hn f hf\n    rw [div_le_iff₀ (key n hn)]\n    exact h hn f hf\nend PermanentFormulaLowerBound\n",
+   "seconds": 28.3
+  },
+  {
+   "target": "PermanentFormulaLowerBound.permanent_rational_formula_logarithmic_lower_bound",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {n : ℕ} (hn : 32 ≤ n)\n    (f : RationalFormula (Fin n × Fin n) ℂ)\n    (hvalid : RationalFormula.Valid f)\n    (hf : RationalFormula.eval f =\n      algebraMap (MvPolynomial (Fin n × Fin n) ℂ)\n        (FractionRing (MvPolynomial (Fin n × Fin n) ℂ))\n        (permanentPolynomial n)), (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤\n      (RationalFormula.variableLeaves f : ℝ)",
+   "restated": "∀ (n : ℕ), 32 ≤ n → ∀ f : RationalFormula (Fin n × Fin n) ℂ, RationalFormula.Valid f → RationalFormula.eval f = algebraMap (MvPolynomial (Fin n × Fin n) ℂ) (FractionRing (MvPolynomial (Fin n × Fin n) ℂ)) (Matrix.mvPolynomialX (Fin n) (Fin n) ℂ).permanent → (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤ (RationalFormula.variableLeaves f : ℝ)",
+   "english": "For n ≥ 32, any valid rational formula (every division has a nonzero denominator) over ℂ that computes the permanent of the generic n×n matrix of indeterminates, viewed in the fraction field, has at least n^4/(192·log₂ n) variable leaves.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "RationalFormula",
+    "Valid",
+    "eval",
+    "variableLeaves"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace PermanentFormulaLowerBound\ntheorem probe_restate_10  :\n    (∀ {n : ℕ} (hn : 32 ≤ n)\n    (f : RationalFormula (Fin n × Fin n) ℂ)\n    (hvalid : RationalFormula.Valid f)\n    (hf : RationalFormula.eval f =\n      algebraMap (MvPolynomial (Fin n × Fin n) ℂ)\n        (FractionRing (MvPolynomial (Fin n × Fin n) ℂ))\n        (permanentPolynomial n)), (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤\n      (RationalFormula.variableLeaves f : ℝ)) ↔\n    (∀ (n : ℕ), 32 ≤ n → ∀ f : RationalFormula (Fin n × Fin n) ℂ, RationalFormula.Valid f → RationalFormula.eval f = algebraMap (MvPolynomial (Fin n × Fin n) ℂ) (FractionRing (MvPolynomial (Fin n × Fin n) ℂ)) (Matrix.mvPolynomialX (Fin n) (Fin n) ℂ).permanent → (n : ℝ) ^ 4 / (192 * Real.logb 2 (n : ℝ)) ≤ (RationalFormula.variableLeaves f : ℝ)) := by\n  exact Iff.rfl\nend PermanentFormulaLowerBound\n",
+   "seconds": 27.8
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 83,
+  "lines_needing_human_review": 57,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

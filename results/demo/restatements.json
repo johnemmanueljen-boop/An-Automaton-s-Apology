@@ -1,0 +1,103 @@
+[
+ {
+  "target": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta",
+  "mode": "iff",
+  "status": "CERTIFIED",
+  "original_expr": "(fun k : ℕ => Real.log (triangleRamseyNumber k : ℝ))\n      =Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℝ))",
+  "restated": "(∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |Real.log (triangleRamseyNumber k : ℝ)| ≤ c * |(k : ℝ) * Real.log (k : ℝ)|) ∧ (∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |(k : ℝ) * Real.log (k : ℝ)| ≤ c * |Real.log (triangleRamseyNumber k : ℝ)|)",
+  "english": "There are constants c, c' such that for all sufficiently large k: |log R_k(3)| ≤ c·|k log k| and |k log k| ≤ c'·|log R_k(3)|. That is, log R_k(3) = Θ(k log k), i.e. R_k(3) = k^Θ(k).",
+  "mathlib_only": false,
+  "bespoke_used": [
+   "triangleRamseyNumber"
+  ],
+  "detail": "compiled; axioms clean",
+  "lean": "namespace ErdosProblems.MulticolourTriangleRamsey\nopen Filter Finset SimpleGraph\nopen scoped Topology\ntheorem probe_restate_0  :\n    ((fun k : ℕ => Real.log (triangleRamseyNumber k : ℝ))\n      =Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℝ))) ↔\n    ((∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |Real.log (triangleRamseyNumber k : ℝ)| ≤ c * |(k : ℝ) * Real.log (k : ℝ)|) ∧ (∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |(k : ℝ) * Real.log (k : ℝ)| ≤ c * |Real.log (triangleRamseyNumber k : ℝ)|)) := by\n  simp only [Asymptotics.IsTheta, Asymptotics.isBigO_iff, Real.norm_eq_abs]\nend ErdosProblems.MulticolourTriangleRamsey\n",
+  "seconds": 34.4
+ },
+ {
+  "target": "GapCVP.IsNP",
+  "mode": "iff",
+  "status": "CERTIFIED",
+  "original_expr": "@IsNP language = true",
+  "restated": "∃ (bound : Polynomial ℕ) (verifier : List Bool × List Bool → Bool), Nonempty (VerifierTM verifier) ∧ ∀ input : List Bool, (language input = true ↔ ∃ certificate : List Bool, certificate.length ≤ bound.eval input.length ∧ verifier (input, certificate) = true)",
+  "english": "A language is in NP exactly when there is a polynomial bound p and a polynomial-time Turing-machine verifier V such that x is in the language iff some certificate of length at most p(|x|) makes V accept (x, certificate).",
+  "mathlib_only": false,
+  "bespoke_used": [
+   "VerifierTM"
+  ],
+  "detail": "compiled; axioms clean",
+  "lean": "namespace GapCVP\nopen scoped BigOperators\ntheorem probe_restate_1 (language : BitLanguage) :\n    (@IsNP language = true) ↔\n    (∃ (bound : Polynomial ℕ) (verifier : List Bool × List Bool → Bool), Nonempty (VerifierTM verifier) ∧ ∀ input : List Bool, (language input = true ↔ ∃ certificate : List Bool, certificate.length ≤ bound.eval input.length ∧ verifier (input, certificate) = true)) := by\n  unfold IsNP\n  rw [decide_eq_true_eq]\nend GapCVP\n",
+  "seconds": 42.5
+ },
+ {
+  "target": "SoficGroups.GoodOn",
+  "mode": "iff",
+  "status": "CERTIFIED",
+  "original_expr": "@GoodOn G _ M F ε",
+  "restated": "(∀ g ∈ F, ∀ h ∈ F, normalizedHamming (M.action (g * h)) (M.action g * M.action h) < ε) ∧ (∀ g ∈ F, g ≠ 1 → 1 - ε < normalizedHamming (M.action g) 1)",
+  "english": "A permutation model M is ε-good on a finite set F exactly when (1) it is ε-almost multiplicative on F: M(gh) and M(g)M(h) disagree on fewer than an ε-fraction of points, and (2) it is (1−ε)-separating: every non-identity g ∈ F moves more than a (1−ε)-fraction of points.",
+  "mathlib_only": false,
+  "bespoke_used": [
+   "normalizedHamming"
+  ],
+  "detail": "compiled; axioms clean",
+  "lean": "namespace SoficGroups\ntheorem probe_restate_2 {G : Type*} [Group G]\n    (M : PermutationModel G) (F : Finset G) (ε : ℝ) :\n    (@GoodOn G _ M F ε) ↔\n    ((∀ g ∈ F, ∀ h ∈ F, normalizedHamming (M.action (g * h)) (M.action g * M.action h) < ε) ∧ (∀ g ∈ F, g ≠ 1 → 1 - ε < normalizedHamming (M.action g) 1)) := by\n  constructor\n  · rintro ⟨h1, h2⟩\n    exact ⟨h1, h2⟩\n  · rintro ⟨h1, h2⟩\n    exact ⟨h1, h2⟩\nend SoficGroups\n",
+  "seconds": 42.1
+ },
+ {
+  "target": "SoficGroups.normalizedHamming",
+  "mode": "iff",
+  "status": "CERTIFIED",
+  "original_expr": "@normalizedHamming Y _ _ p q",
+  "restated": "((Finset.univ.filter (fun y => p y ≠ q y)).card : ℝ) / Fintype.card Y",
+  "english": "The normalized Hamming distance of two permutations is the fraction of points of Y on which they disagree.",
+  "mathlib_only": true,
+  "bespoke_used": [],
+  "detail": "compiled; axioms clean",
+  "lean": "namespace SoficGroups\ntheorem probe_restate_3 {Y : Type*} [Fintype Y] [DecidableEq Y]\n    (p q : Equiv.Perm Y) :\n    (@normalizedHamming Y _ _ p q) =\n    (((Finset.univ.filter (fun y => p y ≠ q y)).card : ℝ) / Fintype.card Y) := by\n  rfl\nend SoficGroups\n",
+  "seconds": 42.2
+ },
+ {
+  "target": "ErdosProblems.MulticolourTriangleRamsey.erdos_problem_183_explicit",
+  "mode": "implies",
+  "status": "CERTIFIED",
+  "original_expr": "(∀ k : ℕ, 2 ≤ k →\n      (((1 : ℝ) / (6 * Real.exp 38)) *\n        (k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤\n          (triangleRamseyNumber k : ℝ)) ∧\n      Filter.Tendsto\n        (fun k : ℕ =>\n          (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))\n        atTop atTop",
+  "restated": "Filter.Tendsto (fun k : ℕ => (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ))) atTop atTop",
+  "english": "Corollary: R_k(3)^(1/k) → ∞ as k → ∞ (Erdős problem 183, qualitative form).",
+  "mathlib_only": false,
+  "bespoke_used": [
+   "triangleRamseyNumber"
+  ],
+  "detail": "compiled; axioms clean",
+  "lean": "namespace ErdosProblems.MulticolourTriangleRamsey\nopen Filter Finset SimpleGraph\nopen scoped Topology\ntheorem probe_restate_4  :\n    ((∀ k : ℕ, 2 ≤ k →\n      (((1 : ℝ) / (6 * Real.exp 38)) *\n        (k : ℝ) ^ ((1 : ℝ) / 3) / Real.log (k : ℝ)) ^ k ≤\n          (triangleRamseyNumber k : ℝ)) ∧\n      Filter.Tendsto\n        (fun k : ℕ =>\n          (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ)))\n        atTop atTop) →\n    (Filter.Tendsto (fun k : ℕ => (triangleRamseyNumber k : ℝ) ^ ((1 : ℝ) / (k : ℝ))) atTop atTop) := by\n  intro h\n  exact h.2\nend ErdosProblems.MulticolourTriangleRamsey\n",
+  "seconds": 41.0
+ },
+ {
+  "target": "ErdosProblems.MulticolourTriangleRamsey.triangleRamseyNumber_log_isTheta",
+  "mode": "iff",
+  "status": "FAILED",
+  "original_expr": "(fun k : ℕ => Real.log (triangleRamseyNumber k : ℝ))\n      =Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℝ))",
+  "restated": "∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |Real.log (triangleRamseyNumber k : ℝ)| ≤ c * |(k : ℝ) * Real.log (k : ℝ)|",
+  "english": "DELIBERATELY WRONG (drops the lower bound): should FAIL — Lean must refuse to certify a non-equivalent restatement.",
+  "mathlib_only": false,
+  "bespoke_used": [
+   "triangleRamseyNumber"
+  ],
+  "detail": "line 6: unsolved goals\n⊢ ((∃ c, ∀ᶠ (x : ℕ) in atTop, |Real.log ↑(triangleRamseyNumber x)| ≤ c * |↑x * Real.log ↑x|) ∧\n      ∃ c, ∀ᶠ (x : ℕ) in atTop, |↑x * Real.log ↑x| ≤ c * |Real.log ↑(triangleRamseyNumber x)|) ↔\n    ∃ c, ∀ᶠ (x : ℕ) in atTop, |Real.log ↑(triangleRamseyNumber x)| ≤ c * |↑x * Real.log ↑x|\n'ErdosProblems.MulticolourTriangleRamsey.probe_restate_5' depends on axioms: [propext,\n sorryAx,\n Cla | non-standard axioms: {'ErdosProblems.MulticolourTriangleRamsey.probe_restate_5': ['sorryAx']}",
+  "lean": "namespace ErdosProblems.MulticolourTriangleRamsey\nopen Filter Finset SimpleGraph\nopen scoped Topology\ntheorem probe_restate_5  :\n    ((fun k : ℕ => Real.log (triangleRamseyNumber k : ℝ))\n      =Θ[atTop] (fun k : ℕ => (k : ℝ) * Real.log (k : ℝ))) ↔\n    (∃ c : ℝ, ∀ᶠ k : ℕ in atTop, |Real.log (triangleRamseyNumber k : ℝ)| ≤ c * |(k : ℝ) * Real.log (k : ℝ)|) := by\n  simp only [Asymptotics.IsTheta, Asymptotics.isBigO_iff, Real.norm_eq_abs]\nend ErdosProblems.MulticolourTriangleRamsey\n",
+  "seconds": 40.3
+ },
+ {
+  "target": "SoficGroups.SourceTopLevelCompressionFinal.exists_finitelyPresented_nonsofic_group",
+  "mode": "iff",
+  "status": "REJECTED",
+  "original_expr": "",
+  "restated": "True",
+  "english": "DELIBERATE CHEAT: uses sorry — should be REJECTED by the guard before Lean runs.",
+  "mathlib_only": false,
+  "bespoke_used": [],
+  "detail": "guard: forbidden token 'sorry' in proof",
+  "lean": "",
+  "seconds": 0.0
+ }
+]

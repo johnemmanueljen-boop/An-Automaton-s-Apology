@@ -1,0 +1,26 @@
+{
+  "_comment": "Where each result's headline claims sit in the paper text: 1-based inclusive line ranges in the pdftotext -layout output under ../papers/. A plain list uses the default paper (ten.txt); {file, ranges} names another paper.",
+  "default_paper": "ten.txt",
+  "ranges": {
+    "A_SpherePacking": [[190, 340]],
+    "B_BinaryCodes": [[1940, 2110]],
+    "B_SphericalCodes": [[2040, 2110], [4225, 4250], [4420, 4440], [4515, 4545]],
+    "C_PermanentFormulaLowerBound": [[7215, 7262]],
+    "D_NonSoficGroup": [[5185, 5215]],
+    "E_ConnesRigidity": [[6170, 6240]],
+    "F_EhrhartVolumeInequality": [[13365, 13470]],
+    "G_QuantumParallelRepetition": [[9620, 9690]],
+    "H_GapCVP": [[11390, 11420], [13110, 13135]],
+    "I_MulticolorTriangleRamsey": [[13932, 14010]],
+    "J_CompactnessConjecture": [[14320, 14420]],
+    "J_TwoDegenerateGraphs": [[14320, 14420]],
+    "NavierStokes": {
+      "file": "ns-openai.txt",
+      "ranges": [[30, 52], [6511, 6520]]
+    },
+    "Euler": {
+      "file": "euler-openai.txt",
+      "ranges": [[24, 40]]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+ "n": 12,
+ "with_medium_high": 0,
+ "weaker_or_different": 0,
+ "rows": [
+  {
+   "id": "nc01",
+   "paper": "Theorem (Lagrange). Let G be a finite group and H a subgroup of G. Then the order of H divides the order of G.",
+   "relations": [
+    "lean_stronger"
+   ],
+   "n_flags": 1,
+   "medium_high": [],
+   "summary": "The Lean theorem states that for any group α and any subgroup s, Nat.card s divides Nat.card α. There is no finiteness assumption, so it is formally stronger than the paper's statement. For finite α it is exactly Lagrange's theorem. For infinite α, Nat.card α = 0 and every natural number divides 0, so the extra cases hold only via the junk value. This is harmless."
+  },
+  {
+   "id": "nc02",
+   "paper": "Theorem (Fermat's little theorem, finite-field form). Let K be a finite field with q elements. Then every nonzero a in K satisfies a^(q-1) = 1.",
+   "relations": [
+    "lean_stronger"
+   ],
+   "n_flags": 1,
+   "medium_high": [],
+   "summary": "The theorem proves that in any finite group with zero K, every nonzero a satisfies a^(|K|-1) = 1. Every finite field is a finite group with zero, so this generalizes the paper's finite-field statement. The only caveat is that the Lean statement is stronger than the paper, which is acceptable. The natural-number subtraction is safe because a GroupWithZero is nontrivial, so |K| ≥ 2."
+  },
+  {
+   "id": "nc03",
+   "paper": "Theorem (Intermediate value theorem). Let f : [a,b] -> R be continuous, with a <= b. Then for every y with f(a) <= y <= f(b) there is c in [a,b] with f(c) = y.",
+   "relations": [
+    "lean_stronger"
+   ],
+   "n_flags": 1,
+   "medium_high": [],
+   "summary": "The Lean theorem proves the intermediate value theorem on a closed interval. Let α be a densely ordered, conditionally complete linear order with the order topology, and δ a linear order with an order-closed topology. If f : α → δ is continuous on [a,b] with a ≤ b, then every y with f(a) ≤ y ≤ f(b) is attained at some point of [a,b]. Specializing α = δ = ℝ recovers the paper's statement exactly, so the Lean statement is a faithful generalization. There is no substantive caveat."
+  },
+  {
+   "id": "nc04",
+   "paper": "Theorem (Euclid). There are infinitely many prime numbers; that is, for every natural number n there is a prime p with p >= n.",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 0,
+   "medium_high": [],
+   "summary": "The Lean theorem states that for every natural number n there is a natural number p with n ≤ p and p prime. This is exactly the paper's formulation of Euclid's theorem. No caveats of substance: there are no bespoke definitions, Nat.Prime is Mathlib's standard primality predicate, and no junk values are involved."
+  },
+  {
+   "id": "nc05",
+   "paper": "Theorem (Wilson). If p is a prime, then (p-1)! ≡ -1 (mod p).",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 0,
+   "medium_high": [],
+   "summary": "The Lean theorem states Wilson's theorem: for every prime p, the factorial (p-1)! cast into ZMod p equals -1, i.e. (p-1)! ≡ -1 (mod p). This matches the paper exactly. The ℕ subtraction p - 1 cannot truncate, because p ≥ 2 for a prime."
+  },
+  {
+   "id": "nc06",
+   "paper": "Theorem (Mean value theorem). Let a < b and let f be continuous on [a,b] and differentiable on (a,b). Then there is c in (a,b) with f'(c) = (f(b) - f(a)) / (b - a).",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 0,
+   "medium_high": [],
+   "summary": "The Lean theorem states the classical mean value theorem: for real f continuous on [a,b] and differentiable on (a,b), with a < b, there is c ∈ (a,b) with f'(c) = (f(b) − f(a))/(b − a). This matches the paper statement exactly, and it is essentially Mathlib's `exists_deriv_eq_slope`. No meaningful caveat: the junk-value conventions for `deriv` and `/` cannot be triggered under these hypotheses."
+  },
+  {
+   "id": "nc07",
+   "paper": "Theorem (Bolzano-Weierstrass). Every bounded sequence in R^n has a convergent subsequence, whose limit lies in the closure of the set containing the sequence.",
+   "relations": [
+    "lean_stronger"
+   ],
+   "n_flags": 1,
+   "medium_high": [],
+   "summary": "The theorem proves Bolzano–Weierstrass in any proper pseudometric space. If a sequence x lies in a bounded set s, then some strictly increasing reindexing φ makes x∘φ converge to a point a in closure s. Every ℝⁿ is a proper metric space, so this generalizes the paper's statement. There is no substantive caveat: the Lean statement is at least as strong as the paper's."
+  },
+  {
+   "id": "nc08",
+   "paper": "Theorem (Cauchy). Let G be a finite group and p a prime dividing the order of G. Then G contains an element of order p.",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 0,
+   "medium_high": [],
+   "summary": "The Lean statement is Cauchy's theorem. For a finite group G (with a Fintype instance) and a prime p dividing |G|, there exists x in G with orderOf x = p. It matches the paper exactly. No substantive caveat: Fintype.card is the true cardinality, and a group is nonempty, so the card-zero junk value does not arise."
+  },
+  {
+   "id": "nc09",
+   "paper": "Theorem (Pythagoras and its converse). For points A, B, C in a Euclidean space, AC^2 = AB^2 + BC^2 if and only if the angle ABC is a right angle.",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 2,
+   "medium_high": [],
+   "summary": "Formally: for any three points p₁, p₂, p₃ in a real inner-product affine space, the equation dist(p₁,p₃)² = dist(p₁,p₂)² + dist(p₃,p₂)² holds if and only if the unoriented angle ∠p₁p₂p₃ equals π/2. With A = p₁, B = p₂, C = p₃ this is exactly the paper's Pythagorean theorem and its converse. The only caveat concerns degenerate configurations. When p₁ = p₂ or p₃ = p₂, Mathlib's convention sets the angle to π/2. Both sides of the iff are then true, so the statement stays consistent, but there it rests on a convention the paper does not discuss."
+  },
+  {
+   "id": "nc10",
+   "paper": "Theorem (Quadratic reciprocity). Let p and q be distinct odd primes, and let (a/p) denote the Legendre symbol. Then (p/q)(q/p) = (-1)^(((p-1)/2)((q-1)/2)).",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 0,
+   "medium_high": [],
+   "summary": "The Lean theorem states quadratic reciprocity for distinct odd primes p and q: (p/q)·(q/p) = (-1)^(⌊p/2⌋·⌊q/2⌋). Here legendreSym q p is (p/q) and legendreSym p q is (q/p). For odd p, natural-number division gives ⌊p/2⌋ = (p-1)/2, so the exponent matches the paper. No material caveat; the only subtlety is that the exponent uses truncating ℕ division, which is exact here."
+  },
+  {
+   "id": "nc11",
+   "paper": "Theorem (Fundamental theorem of algebra). Every non-constant polynomial with complex coefficients has a complex root.",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 0,
+   "medium_high": [],
+   "summary": "The Lean theorem states that every complex polynomial f with 0 < degree f has a complex root, i.e. some z with f.eval z = 0. This is exactly the fundamental theorem of algebra. Here degree is WithBot ℕ, and the zero polynomial has degree ⊥, so it is excluded, as are nonzero constants. No meaningful caveat."
+  },
+  {
+   "id": "nc12",
+   "paper": "Theorem (Cauchy-Schwarz). For vectors x, y in a real inner product space, |<x, y>| <= ||x|| ||y||.",
+   "relations": [
+    "equivalent"
+   ],
+   "n_flags": 0,
+   "medium_high": [],
+   "summary": "The Lean theorem states the Cauchy–Schwarz inequality |⟪x, y⟫| ≤ ‖x‖‖y‖ for any two vectors x, y in a real inner product space F. Here F is a NormedAddCommGroup with InnerProductSpace ℝ F, and the norm is the one induced by the inner product. This matches the paper exactly. No caveats of substance: there are no bespoke definitions and no junk-value issues."
+  }
+ ]
+}

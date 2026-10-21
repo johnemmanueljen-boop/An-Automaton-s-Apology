@@ -1,0 +1,543 @@
+{
+ "challenge": "../oai-math/lean/ComparatorChallenges/HeckeSevenEighths.lean",
+ "paper": "../oai-math/preprints/The-Quasi-Riemann-Hypothesis-September-30-2026/build/paper.tex",
+ "lines": "64:118",
+ "lint": [
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 23,
+   "snippet": "have hid : (fun x => f x * g x - a * b) =",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "nat-sub",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 24,
+   "snippet": "fun x => (f x - a) * g x + a * (g x - b) := by",
+   "explanation": "Subtraction in ℕ truncates at 0 (2 - 5 = 0).",
+   "suggested_probe": "Confirm the operands are not ℕ, or that the left side is ≥ the right."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 12,
+   "snippet": "(hf : ∀ r : ℝ, (fun x => f x - a) =O[atTop] (fun x : ℝ => x ^ r))",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 13,
+   "snippet": "(hg : ∀ r : ℝ, (fun x => g x - b) =O[atTop] (fun x : ℝ => x ^ r))",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 15,
+   "snippet": "(fun x => f x * g x - a * b) =O[atTop] (fun x : ℝ => x ^ r) := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 16,
+   "snippet": "have hg0 : g =O[atTop] (fun _ : ℝ => (1 : ℝ)) := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 17,
+   "snippet": "have hc : (fun _ : ℝ => b) =O[atTop] (fun x : ℝ => x ^ (0 : ℝ)) := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 18,
+   "snippet": "simpa using (isBigO_const_one ℝ b (atTop : Filter ℝ))",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_product_sub",
+   "decl_kind": "theorem",
+   "line": 28,
+   "snippet": "have h₁' : (fun x => (f x - a) * g x) =O[atTop] (fun x : ℝ => x ^ r) := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_rescale",
+   "decl_kind": "theorem",
+   "line": 54,
+   "snippet": "(hf : ∀ r : ℝ, (fun x => f x - a) =O[atTop] (fun x : ℝ => x ^ r))",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_rescale",
+   "decl_kind": "theorem",
+   "line": 56,
+   "snippet": "(fun x => f (u * x) - a) =O[atTop] (fun x : ℝ => x ^ r) := by",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_rescale",
+   "decl_kind": "theorem",
+   "line": 57,
+   "snippet": "have ht : Tendsto (fun x : ℝ => u * x) atTop atTop :=",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_rescale",
+   "decl_kind": "theorem",
+   "line": 58,
+   "snippet": "(tendsto_const_mul_atTop_of_pos hu).2 tendsto_id",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_rescale",
+   "decl_kind": "theorem",
+   "line": 60,
+   "snippet": "have heq : (fun x : ℝ => (u * x) ^ r) =ᶠ[atTop]",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_rescale",
+   "decl_kind": "theorem",
+   "line": 62,
+   "snippet": "filter_upwards [eventually_ge_atTop (0 : ℝ)] with x hx",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "eventually",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rapid_rescale",
+   "decl_kind": "theorem",
+   "line": 64,
+   "snippet": "exact h.trans (heq.isBigO.trans ((isBigO_refl (fun x : ℝ => x ^ r) atTop).const_mul_left _))",
+   "explanation": "Asymptotic statements: check the filter and direction match the paper (e.g. 'for all large k' vs 'for all k ≥ 2').",
+   "suggested_probe": "Compare with the paper's quantifier carefully."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.ThetaProduct.rescale",
+   "decl_kind": "def",
+   "line": 82,
+   "snippet": "have heq : u * (1 / x) = 1 / (u⁻¹ * x) := by field_simp",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.EisensteinTheta.xShift",
+   "decl_kind": "def",
+   "line": 143,
+   "snippet": "def xShift (a b L : ℝ) (e : Fin 2) : ℝ := (2 * a - b - L * e) / (2 * L)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.EisensteinTheta.yShift",
+   "decl_kind": "def",
+   "line": 144,
+   "snippet": "def yShift (b L : ℝ) (e : Fin 2) : ℝ := (b + L * e) / (2 * L)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeTheta.latticeL",
+   "decl_kind": "def",
+   "line": 202,
+   "snippet": "(Real.pi : ℂ) ^ s * (Complex.Gamma s)⁻¹ * completed w s",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.Character",
+   "decl_kind": "structure",
+   "line": 219,
+   "snippet": "modulus_ne_bot : modulus ≠ ⊥",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.Character",
+   "decl_kind": "structure",
+   "line": 221,
+   "snippet": "unit_trivial : ∀ u : Oˣ, residue (Ideal.Quotient.mk modulus (u : O)) = 1",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "hypothesis-in-structure",
+   "severity": "low",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.Character",
+   "decl_kind": "structure",
+   "line": 223,
+   "snippet": "period_pos : 0 < period",
+   "explanation": "A Prop field inside a structure is an assumption baked into the definition; easy to miss when reading the theorem.",
+   "suggested_probe": "List these as hidden hypotheses on the audit card."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.LFunction",
+   "decl_kind": "def",
+   "line": 235,
+   "snippet": "def LFunction (χ : Character) (s : ℂ) : ℂ := continuedLattice χ s / 6",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.LFunction",
+   "decl_kind": "def",
+   "line": 235,
+   "snippet": "def LFunction (χ : Character) (s : ℂ) : ℂ := continuedLattice χ s / 6",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+   "decl_kind": "theorem",
+   "line": 238,
+   "snippet": "(χ : Character) {s : ℂ} (hs : (7 / 8 : ℝ) < s.re)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+   "decl_kind": "theorem",
+   "line": 237,
+   "snippet": "theorem LFunction_ne_zero_of_seven_eighths_lt_re",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  },
+  {
+   "rule": "junk-pole",
+   "severity": "medium",
+   "repo": "oai-math",
+   "file": "HeckeSevenEighths.lean",
+   "decl": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+   "decl_kind": "theorem",
+   "line": 239,
+   "snippet": "(hpole : ¬ (χ.residue = 1 ∧ s = 1)) : LFunction χ s ≠ 0 := by sorry",
+   "explanation": "Functions with poles are totalized in Mathlib (riemannZeta 1 is a finite convention value; Gamma is 0 at non-positive integers). A statement over a region containing a pole makes a claim about a convention value.",
+   "suggested_probe": "Check whether the hypotheses exclude the pole (e.g. s ≠ 1), and whether the paper excludes or allows it."
+  }
+ ],
+ "audit": {
+  "summary": "The theorem says that for every finite-order ray class character χ of ℤ[ω] (trivial on units) and every s with Re s > 7/8, other than s = 1 when χ is principal, the function LFunction χ s is nonzero. LFunction is not defined by an Euler product or Dirichlet series over ideals. It is built from products of Hurwitz even kernels (theta series) through Mathlib's WeakFEPair.Λ. The main caveat is that nothing in the file shows this construction equals the Hecke L-function. The Dirichlet and ζ part of the paper's theorem is also not stated.",
+  "glossary": [
+   {
+    "decl": "OAI.SevenEighths.HeckeFamily.K / O",
+    "line": 208,
+    "plain": "K = ℚ(ζ₃) = ℚ(√-3) and O = its ring of integers ℤ[ω].",
+    "standard_concept": "F = ℚ(√-3) and 𝒪_F",
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "OAI.SevenEighths.HeckeFamily.Character",
+    "line": 217,
+    "plain": "A nonzero ideal m of O, a multiplicative character of (O/m) into ℂ that is trivial on the images of the units, and a positive integer N with N ∈ m.",
+    "standard_concept": "Finite-order Hecke (ray class) character of Q(√-3) with modulus m",
+    "matches_standard": "partly",
+    "note": "Since the class number is 1 and the infinite place is complex, finite-order ray class characters correspond to characters of (O/m)^× trivial on units, so this looks right. The 'period' is extra data (some N ∈ m, which exists for any nonzero m). The modulus m = ⊤ (trivial ring) is allowed, giving the Dedekind zeta function of F."
+   },
+   {
+    "decl": "OAI.SevenEighths.HeckeFamily.coefficients",
+    "line": 230,
+    "plain": "For (x,y) ∈ (Fin N)², the coefficient is χ(x + yω), which is 0 when x + yω is a nonunit mod m.",
+    "standard_concept": "Coefficient of the character extended by zero on non-coprime residues",
+    "matches_standard": "yes",
+    "note": ""
+   },
+   {
+    "decl": "OAI.SevenEighths.HeckeTheta.pair / completed / latticeL",
+    "line": 194,
+    "plain": "A weighted sum of rectangular products of Hurwitz even-kernel pairs, with shifts xShift, yShift and scalings L² and 3L², over residues mod N and parity e ∈ {0,1}. 'completed' is its Mellin-type Λ from Mathlib's WeakFEPair. latticeL s = π^s Γ(s)⁻¹ Λ(s).",
+    "standard_concept": "Theta-series representation of the completed Hecke L-function Σ χ(a) N(a)^{-s} over the Eisenstein lattice",
+    "matches_standard": "unclear",
+    "note": "Nothing in the file shows that this equals the Dirichlet series Σ_{n≠0} χ(n)/(x²-xy+y²)^s (or the sum over ideals) for Re s > 1. The correctness of the shifts, the scalings L² and 3L², and the parity split cannot be checked from the statement."
+   },
+   {
+    "decl": "OAI.SevenEighths.HeckeFamily.LFunction",
+    "line": 235,
+    "plain": "LFunction χ s = π^s · Γ(s)⁻¹ · Λ_pair(s) / 6.",
+    "standard_concept": "Hecke L-function L(s,χ) = Σ_{ideals a} χ(a) N(a)^{-s} and its meromorphic continuation",
+    "matches_standard": "unclear",
+    "note": "The division by 6 matches |O^×| = 6 and is a nonzero scalar. The identification with the Hecke L-function is not established in the file. Mathlib's Λ is totalized at s = 0 and s = 1."
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+    "line": 237,
+    "plain": "For every Character χ (ideal m, unit-trivial multiplicative character mod m, period N) and every complex s with Re s > 7/8, if not (χ.residue = 1 and s = 1), then LFunction χ s ≠ 0. Here LFunction χ s = π^s Γ(s)⁻¹ Λ(s)/6 for the theta-series pair attached to the coefficients χ(x+yω)."
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1 (thm:main), part 1",
+    "plain": "Every finite-order Hecke L-function over Q(√-3) has no zero in Re s > 7/8."
+   },
+   {
+    "ref": "Theorem 1.1, part 2",
+    "plain": "The same holds for every Dirichlet L-function, including ζ(s)."
+   },
+   {
+    "ref": "Theorem 1.1, part 3",
+    "plain": "A pole at s = 1 for a principal character is allowed (it is not a zero)."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1, part 1",
+    "lean_theorem": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+    "relation": "equivalent",
+    "why": "Matches provided the theta-defined LFunction equals the Hecke L-function. The statement is nonvanishing for Re s > 7/8 with s = 1 excluded for principal characters."
+   },
+   {
+    "paper_ref": "Theorem 1.1, part 2",
+    "lean_theorem": null,
+    "relation": "not_formalized",
+    "why": "No Dirichlet L-function or ζ statement appears in this file. It could only follow via a separate identification, which is not in the file."
+   },
+   {
+    "paper_ref": "Theorem 1.1, part 3",
+    "lean_theorem": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+    "relation": "equivalent",
+    "why": "The hypothesis hpole excludes exactly the principal-character pole point s = 1, avoiding the junk value there."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "definition-mismatch",
+    "severity": "high",
+    "decl": "OAI.SevenEighths.HeckeFamily.LFunction",
+    "line": 235,
+    "paper_ref": "Theorem 1.1",
+    "explanation": "LFunction is defined through custom theta-product WeakFEPairs (shifts, scalings L², 3L², parity split), not by the Hecke Dirichlet series or Euler product. Nothing in the statement file proves it agrees with the paper's Hecke L-function for Re s > 1 or on its continuation. If the construction were slightly off, the theorem would be about a different function. The statement cannot be validated against the paper without such a bridge.",
+    "polarity": "unclear",
+    "probe_idea": "Prove for Re s > 1: LFunction χ s = ∑' (n : O) with n ≠ 0 up to units, elementCoeff χ n / (Algebra.norm ℤ n : ℂ)^s, or the ideal-sum version. Or check numerically that LFunction of the trivial character equals the Dedekind zeta ζ(s)·L(s,χ_{-3})."
+   },
+   {
+    "id": "F2",
+    "category": "coverage",
+    "severity": "medium",
+    "decl": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+    "line": 237,
+    "paper_ref": "Theorem 1.1, part 2",
+    "explanation": "The paper also claims the result for every Dirichlet L-function including ζ. The Lean theorem covers only Hecke characters of ℚ(√-3), and no Dirichlet statement is present. Even if the Dirichlet case follows from factorization, no such statement is given.",
+    "polarity": "lean weaker",
+    "probe_idea": "State ∀ q, ∀ χ : DirichletCharacter ℂ q, ∀ s, 7/8 < s.re → (χ ≠ 1 ∨ s ≠ 1) → DirichletCharacter.LFunction χ s ≠ 0, and ζ(s) ≠ 0 for Re s > 7/8, s ≠ 1."
+   },
+   {
+    "id": "F3",
+    "category": "junk-value",
+    "severity": "low",
+    "decl": "OAI.SevenEighths.HeckeFamily.LFunction",
+    "line": 235,
+    "paper_ref": "Theorem 1.1, part 3",
+    "explanation": "Mathlib's WeakFEPair.Λ is totalized at s = 0 and s = 1 (division by zero gives 0). The theorem excludes s = 1 only for principal characters. For nonprincipal χ it asserts nonvanishing at s = 1, which relies on Λ(1) being the true continuation. This is correct only if the constructed g₀ vanishes exactly for nonprincipal χ. The paper's statement is consistent with this, but it depends on the construction in F1.",
+    "polarity": "unclear",
+    "probe_idea": "Show that for nonprincipal χ the constant g₀ of (pair (coefficients χ)) is 0, so the junk term at s = 1 is genuinely 0. Also check that for principal χ the term at s = 1 is excluded."
+   },
+   {
+    "id": "F4",
+    "category": "other",
+    "severity": "low",
+    "decl": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+    "line": 239,
+    "paper_ref": null,
+    "explanation": "The proof in this file is `sorry`. This is presumably a stub for the Comparator, so only the statement is audited. The statement itself is not weakened by this.",
+    "polarity": "n/a",
+    "probe_idea": null
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 23,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℂ, not ℕ."
+   },
+   {
+    "line": 24,
+    "rule": "nat-sub",
+    "verdict": "harmless",
+    "why": "The subtraction is in ℂ, not ℕ."
+   },
+   {
+    "line": 82,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "This is inside a proof with x > 0 and u > 0, so there is no division by zero."
+   },
+   {
+    "line": 143,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The denominator 2L is positive in every use (L = N ≥ 1 cast)."
+   },
+   {
+    "line": 144,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "The denominator 2L is positive in every use."
+   },
+   {
+    "line": 202,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "Γ⁻¹ is 0 only at nonpositive integers, which are outside Re s > 7/8. latticeL is therefore genuine in the region of the theorem."
+   },
+   {
+    "line": 235,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "Division by the nonzero constant 6 is fine."
+   },
+   {
+    "line": 235,
+    "rule": "junk-pole",
+    "verdict": "needs-probe",
+    "why": "The underlying Λ is totalized at s = 1; see F3."
+   },
+   {
+    "line": 238,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "(7/8 : ℝ) is a real literal, not a truncated division."
+   },
+   {
+    "line": 237,
+    "rule": "junk-pole",
+    "verdict": "needs-probe",
+    "why": "The region Re s > 7/8 contains s = 1, where the totalized Λ takes a convention value. This is handled only for principal χ via hpole."
+   },
+   {
+    "line": 239,
+    "rule": "junk-pole",
+    "verdict": "harmless",
+    "why": "hpole removes exactly the principal-character pole at s = 1, which is the paper's allowed pole."
+   }
+  ]
+ }
+}

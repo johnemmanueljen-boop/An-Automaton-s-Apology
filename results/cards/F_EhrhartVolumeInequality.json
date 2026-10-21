@@ -1,0 +1,354 @@
+{
+ "result": "F_EhrhartVolumeInequality",
+ "repo": "ten-proofs",
+ "challenge_file": "ComparatorChallenges/F_EhrhartVolumeInequality.lean",
+ "theorems": [
+  "Ehrhart.Volume.ehrhart_volume_inequality_for_sets",
+  "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+  "Ehrhart.SimplexVolume.barycenter_centeredSimplex",
+  "Ehrhart.SimplexVolume.normalizedVolume_centeredSimplex"
+ ],
+ "lint": [
+  {
+   "rule": "junk-integral",
+   "severity": "high",
+   "repo": "ten-proofs",
+   "file": "F_EhrhartVolumeInequality.lean",
+   "decl": "Ehrhart.barycenter",
+   "decl_kind": "def",
+   "line": 28,
+   "snippet": "(normalizedVolume K)⁻¹ • ∫ x in K, x ∂(volume : Measure (Space n))",
+   "explanation": "The Bochner integral of a non-integrable function is 0.",
+   "suggested_probe": "Prove Integrable, or check the statement includes it as a hypothesis/conclusion."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "F_EhrhartVolumeInequality.lean",
+   "decl": "Ehrhart.sharpConstant",
+   "decl_kind": "def",
+   "line": 42,
+   "snippet": "((n : ℝ) + 1) ^ n / (n.factorial : ℝ)",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  },
+  {
+   "rule": "junk-div",
+   "severity": "medium",
+   "repo": "ten-proofs",
+   "file": "F_EhrhartVolumeInequality.lean",
+   "decl": "Ehrhart.Volume.ehrhart_volume_inequality_for_sets",
+   "decl_kind": "theorem",
+   "line": 73,
+   "snippet": "((n : ℝ) + 1) ^ n / (n.factorial : ℝ) := by",
+   "explanation": "Division by zero is defined as 0; in ℕ and ℤ division also truncates.",
+   "suggested_probe": "Check every denominator is provably nonzero (and in the intended type)."
+  }
+ ],
+ "audit": {
+  "summary": "The file formalizes Theorem 1.1 of the paper (Ehrhart's sharp volume inequality). For a convex, compact, full-dimensional set S ⊂ ℝⁿ with barycenter 0 and int(S) ∩ ℤⁿ = {0}, it states vol(S) ≤ (n+1)ⁿ/n!. It also formalizes sharpness: the centered simplex (n+1)Δₙ − (1,…,1) has barycenter 0 and volume (n+1)ⁿ/n!, and some centered body attains the bound. The definitions match the standard notions. The only caveat is minor: no standalone theorem says that the centered simplex itself has 0 as its unique interior lattice point. That fact is only implied indirectly, through the existential sharpness theorem.",
+  "glossary": [
+   {
+    "decl": "Ehrhart.Space",
+    "line": 10,
+    "plain": "ℝⁿ as Fin n → ℝ, with the Lebesgue (product) volume",
+    "standard_concept": "Euclidean space ℝⁿ",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.integerPoint",
+    "line": 12,
+    "plain": "inclusion ℤⁿ → ℝⁿ",
+    "standard_concept": "lattice ℤⁿ ⊂ ℝⁿ",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.standardSimplex",
+    "line": 15,
+    "plain": "Δₙ = {x ≥ 0, Σxᵢ ≤ 1} = conv{0,e₁,…,eₙ}",
+    "standard_concept": "standard simplex Δₙ",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.simplexDilation",
+    "line": 18,
+    "plain": "x ↦ (n+1)x − (1,…,1)",
+    "standard_concept": null,
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.centeredSimplex",
+    "line": 21,
+    "plain": "(n+1)Δₙ − (1,…,1)",
+    "standard_concept": "centered extremal simplex",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.normalizedVolume",
+    "line": 24,
+    "plain": "Lebesgue volume of K as a real number (toReal; this is junk 0 only if the volume is infinite)",
+    "standard_concept": "vol(K)",
+    "matches_standard": "yes",
+    "note": "Despite the name, this is not normalized. It equals vol for compact K.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.barycenter",
+    "line": 27,
+    "plain": "vol(K)⁻¹ ∫_K x dx",
+    "standard_concept": "barycenter (centroid)",
+    "matches_standard": "yes",
+    "note": "Junk values arise only if vol(K) = 0 or x is not integrable on K. Neither happens for compact, full-dimensional K.",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.interiorLatticePoints",
+    "line": 30,
+    "plain": "ℤⁿ ∩ int(K)",
+    "standard_concept": "interior lattice points",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.CenteredBody",
+    "line": 33,
+    "plain": "convex, compact, nonempty-interior K with barycenter 0 and int(K) ∩ ℤⁿ = {0}",
+    "standard_concept": "hypotheses of Theorem 1.1",
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   },
+   {
+    "decl": "Ehrhart.sharpConstant",
+    "line": 41,
+    "plain": "(n+1)ⁿ/n!",
+    "standard_concept": null,
+    "matches_standard": "yes",
+    "note": "",
+    "citation_ok": true
+   }
+  ],
+  "lean_claims": [
+   {
+    "theorem": "Ehrhart.Volume.ehrhart_volume_inequality_for_sets",
+    "line": 65,
+    "plain": "For n > 0 and S ⊂ ℝⁿ convex, compact, with nonempty interior, barycenter 0, and int(S) ∩ ℤⁿ = {0}: vol(S) ≤ (n+1)ⁿ/n!.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "Ehrhart.SimplexVolume.barycenter_centeredSimplex",
+    "line": 48,
+    "plain": "For all n, the barycenter of (n+1)Δₙ − 1 is 0.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "Ehrhart.SimplexVolume.normalizedVolume_centeredSimplex",
+    "line": 52,
+    "plain": "For n > 0, vol((n+1)Δₙ − 1) = (n+1)ⁿ/n!.",
+    "citation_ok": true
+   },
+   {
+    "theorem": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+    "line": 56,
+    "plain": "For n > 0 there is a convex, compact, full-dimensional body with barycenter 0 and int ∩ ℤⁿ = {0} whose volume equals (n+1)ⁿ/n!.",
+    "citation_ok": true
+   }
+  ],
+  "paper_claims": [
+   {
+    "ref": "Theorem 1.1",
+    "plain": "A full-dimensional compact convex K ⊂ ℝⁿ with barycenter 0 and int(K) ∩ ℤⁿ = {0} has vol(K) ≤ (n+1)ⁿ/n!."
+   },
+   {
+    "ref": "Sharpness remark after Theorem 1.1",
+    "plain": "The simplex (n+1)Δₙ − (1,…,1) has barycenter 0, has no interior lattice point other than 0, and has volume (n+1)ⁿ/n!."
+   }
+  ],
+  "coverage": [
+   {
+    "paper_ref": "Theorem 1.1",
+    "lean_theorem": "Ehrhart.Volume.ehrhart_volume_inequality_for_sets",
+    "relation": "equivalent",
+    "why": "The hypotheses and conclusion match. The n = 0 case is excluded, but it is trivial."
+   },
+   {
+    "paper_ref": "Sharpness remark",
+    "lean_theorem": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+    "relation": "lean_weaker",
+    "why": "The existential theorem does not say the extremizer is the centered simplex. The barycenter and volume of the simplex are proved separately, but its lattice-point condition is not."
+   }
+  ],
+  "flags": [
+   {
+    "id": "F1",
+    "category": "coverage",
+    "severity": "low",
+    "decl": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+    "line": 56,
+    "paper_ref": "Sharpness remark",
+    "explanation": "There is no standalone statement that interiorLatticePoints (centeredSimplex n) = {0}. Sharpness is captured only existentially, so the witness need not be the simplex. This still suffices for sharpness of the bound.",
+    "polarity": "lean weaker",
+    "probe_idea": "theorem : interiorLatticePoints (centeredSimplex n) = {0}",
+    "citation_ok": true
+   }
+  ],
+  "lint_verdicts": [
+   {
+    "line": 28,
+    "rule": "junk-integral",
+    "verdict": "harmless",
+    "why": "In every target use, the set is compact and full-dimensional (or n = 0, where the point has measure 1). So the volume is positive and finite and x is integrable on it."
+   },
+   {
+    "line": 42,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "n! is never 0, so the real division is genuine."
+   },
+   {
+    "line": 73,
+    "rule": "junk-div",
+    "verdict": "harmless",
+    "why": "This is the same constant, and n! ≠ 0."
+   }
+  ]
+ },
+ "probes": [
+  {
+   "target": {
+    "id": "F1",
+    "decl": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+    "line": 56,
+    "explanation": "There is no standalone statement that interiorLatticePoints (centeredSimplex n) = {0}. Sharpness is captured only existentially, so the witness need not be the simplex. This still suffices for sharpness of the bound.",
+    "probe_idea": "theorem : interiorLatticePoints (centeredSimplex n) = {0}"
+   },
+   "result": {
+    "id": "F1-a1",
+    "status": "GREEN",
+    "claim": "For n = 1 the centered simplex [-1,1] has interior lattice points exactly {0}, so the unproved standalone statement about the simplex holds in this case.",
+    "kind": "unit-test",
+    "seconds": 28.9,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_n1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_n1 : Ehrhart.interiorLatticePoints (Ehrhart.centeredSimplex 1) = {0} := by\n  have h : Ehrhart.centeredSimplex 1 = Set.pi Set.univ (fun _ => Set.Icc (-1:ℝ) 1) := by\n    ext x\n    constructor\n    · rintro ⟨y, ⟨h0, hs⟩, rfl⟩ i _\n      have h1 := h0 0\n      simp at hs\n      have : i = 0 := Subsingleton.elim _ _\n      subst this\n      simp only [Ehrhart.simplexDilation, Set.mem_Icc]\n      push_cast\n      constructor <;> linarith\n    · intro hx\n      refine ⟨fun i => (x i + 1)/2, ⟨?_, ?_⟩, ?_⟩\n      · intro i\n        have := (hx i trivial).1\n        simp only\n        linarith\n      · have := (hx 0 trivial).2\n        simp\n        linarith\n      · funext i\n        simp [Ehrhart.simplexDilation]\n        ring\n  ext z\n  simp only [Ehrhart.interiorLatticePoints, Set.mem_setOf_eq, Set.mem_singleton_iff]\n  rw [h, interior_pi_set Set.finite_univ]\n  simp only [Set.mem_pi, Set.mem_univ, true_implies, interior_Icc, Set.mem_Ioo]\n  constructor\n  · intro hz\n    obtain ⟨h1, h2⟩ := hz 0\n    have a' : (-1:ℝ) < (z 0 : ℝ) := h1\n    have b' : (z 0 : ℝ) < 1 := h2\n    have a : -1 < z 0 := by exact_mod_cast a'\n    have b : z 0 < 1 := by exact_mod_cast b'\n    funext i\n    have : i = 0 := Subsingleton.elim _ _\n    subst this\n    simp\n    omega\n  · rintro rfl i\n    simp [Ehrhart.integerPoint]",
+   "attempts": [
+    {
+     "lean": "theorem probe_n1 : Ehrhart.interiorLatticePoints (Ehrhart.centeredSimplex 1) = {0} := by\n  have h : Ehrhart.centeredSimplex 1 = Set.pi Set.univ (fun _ => Set.Icc (-1:ℝ) 1) := by\n    ext x\n    constructor\n    · rintro ⟨y, ⟨h0, hs⟩, rfl⟩ i _\n      have h1 := h0 0\n      simp at hs\n      have : i = 0 := Subsingleton.elim _ _\n      subst this\n      simp only [Ehrhart.simplexDilation, Set.mem_Icc]\n      push_cast\n      constructor <;> linarith\n    · intro hx\n      refine ⟨fun i => (x i + 1)/2, ⟨?_, ?_⟩, ?_⟩\n      · intro i\n        have := (hx i trivial).1\n        simp only\n        linarith\n      · have := (hx 0 trivial).2\n        simp\n        linarith\n      · funext i\n        simp [Ehrhart.simplexDilation]\n        ring\n  rw [h, interior_pi_set Set.finite_univ]\n  ext z\n  simp only [Ehrhart.interiorLatticePoints, Set.mem_setOf_eq, Set.mem_singleton_iff, Set.mem_pi, interior_Icc, Set.mem_univ, true_implies]\n  constructor\n  · intro hz\n    have hh := hz 0\n    simp only [Ehrhart.integerPoint, Set.mem_Ioo] at hh\n    have a : -1 < z 0 := by exact_mod_cast hh.1\n    have b : z 0 < 1 := by exact_mod_cast hh.2\n    funext i\n    have : i = 0 := Subsingleton.elim _ _\n    subst this\n    simp\n    omega\n  · rintro rfl i\n    simp [Ehrhart.integerPoint]",
+     "status": "YELLOW",
+     "detail": "line 24: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  interior (Set.univ.pi ?m.206)\nin the target expression\n  Ehrhart.interiorLatticePoints (Set.univ.pi fun x => Set.Icc (-1) 1) = {0}\n\nh : Ehrhart.centeredSimplex 1 = Set.univ.pi fun x => Set.Icc (-1) 1\n⊢ Ehrhart.interiorLatticePoints (Set.univ.pi fun x => Set.Icc (-1) 1) = {0}\n'probe_n1' depends on axioms: [propext, sorryAx, Classi | non-standard axioms: {'probe_n1': ['sorryAx']}",
+     "seconds": 74.0
+    },
+    {
+     "lean": "theorem probe_n1 : Ehrhart.interiorLatticePoints (Ehrhart.centeredSimplex 1) = {0} := by\n  have h : Ehrhart.centeredSimplex 1 = Set.pi Set.univ (fun _ => Set.Icc (-1:ℝ) 1) := by\n    ext x\n    constructor\n    · rintro ⟨y, ⟨h0, hs⟩, rfl⟩ i _\n      have h1 := h0 0\n      simp at hs\n      have : i = 0 := Subsingleton.elim _ _\n      subst this\n      simp only [Ehrhart.simplexDilation, Set.mem_Icc]\n      push_cast\n      constructor <;> linarith\n    · intro hx\n      refine ⟨fun i => (x i + 1)/2, ⟨?_, ?_⟩, ?_⟩\n      · intro i\n        have := (hx i trivial).1\n        simp only\n        linarith\n      · have := (hx 0 trivial).2\n        simp\n        linarith\n      · funext i\n        simp [Ehrhart.simplexDilation]\n        ring\n  ext z\n  simp only [Ehrhart.interiorLatticePoints, Set.mem_setOf_eq, Set.mem_singleton_iff]\n  rw [h, interior_pi_set Set.finite_univ]\n  simp only [Set.mem_pi, Set.mem_univ, true_implies, interior_Icc, Set.mem_Ioo]\n  constructor\n  · intro hz\n    obtain ⟨h1, h2⟩ := hz 0\n    have a' : (-1:ℝ) < (z 0 : ℝ) := h1\n    have b' : (z 0 : ℝ) < 1 := h2\n    have a : -1 < z 0 := by exact_mod_cast a'\n    have b : z 0 < 1 := by exact_mod_cast b'\n    funext i\n    have : i = 0 := Subsingleton.elim _ _\n    subst this\n    simp\n    omega\n  · rintro rfl i\n    simp [Ehrhart.integerPoint]",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 28.9
+    }
+   ]
+  },
+  {
+   "target": {
+    "id": "NV",
+    "explanation": "Non-vacuity: exhibit a concrete object satisfying the central bespoke definition(s) the target theorems quantify over.",
+    "probe_idea": "construct an instance of the main definition"
+   },
+   "result": {
+    "id": "NV-a0",
+    "status": "GREEN",
+    "claim": "There is a concrete instance of Ehrhart.CenteredBody 0, with carrier the whole one-point space, so the structure's hypotheses (convex, compact, nonempty interior, barycenter 0, unique interior lattice point 0) can all be satisfied together. This is a degenerate dimension (n = 0) instance.",
+    "kind": "non-vacuity",
+    "seconds": 26.3,
+    "detail": "compiled; axioms clean",
+    "axioms": {
+     "probe_centeredBody_nonvacuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+     ]
+    }
+   },
+   "lean": "theorem probe_centeredBody_nonvacuous : ∃ K : Ehrhart.CenteredBody 0, True := by\n  refine ⟨{ carrier := Set.univ\n            convex := convex_univ\n            compact := isCompact_univ\n            fullDimensional := by simp\n            centered := Subsingleton.elim _ _\n            uniqueInteriorLatticePoint := ?_ }, trivial⟩\n  ext z\n  have h : z = 0 := Subsingleton.elim _ _\n  subst h\n  simp [Ehrhart.interiorLatticePoints]",
+   "attempts": [
+    {
+     "lean": "theorem probe_centeredBody_nonvacuous : ∃ K : Ehrhart.CenteredBody 0, True := by\n  refine ⟨{ carrier := Set.univ\n            convex := convex_univ\n            compact := isCompact_univ\n            fullDimensional := by simp\n            centered := Subsingleton.elim _ _\n            uniqueInteriorLatticePoint := ?_ }, trivial⟩\n  ext z\n  have h : z = 0 := Subsingleton.elim _ _\n  subst h\n  simp [Ehrhart.interiorLatticePoints]",
+     "status": "GREEN",
+     "detail": "compiled; axioms clean",
+     "seconds": 26.3
+    }
+   ]
+  }
+ ],
+ "restatements": [
+  {
+   "target": "Ehrhart.Volume.ehrhart_volume_inequality_for_sets",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ {n : ℕ} (hn : 0 < n) (S : Set (Space n))\n    (hconvex : Convex ℝ S)\n    (hcompact : IsCompact S)\n    (hinterior : (interior S).Nonempty)\n    (hcentered : barycenter S = 0)\n    (hlattice : interiorLatticePoints S = {0}), normalizedVolume S ≤\n      ((n : ℝ) + 1) ^ n / (n.factorial : ℝ)",
+   "restated": "∀ {n : ℕ}, 0 < n → ∀ S : Set (Fin n → ℝ), Convex ℝ S → IsCompact S → (interior S).Nonempty → barycenter S = 0 → {z : Fin n → ℤ | (fun i => (z i : ℝ)) ∈ interior S} = {0} → ((MeasureTheory.volume : MeasureTheory.Measure (Fin n → ℝ)) S).toReal ≤ ((n : ℝ) + 1) ^ n / (n.factorial : ℝ)",
+   "english": "For n ≥ 1, every convex compact set S in ℝⁿ with nonempty interior and barycenter 0, whose only interior integer lattice point is the origin, has Lebesgue volume at most (n+1)^n / n!.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "barycenter"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace Ehrhart.Volume\nopen Set MeasureTheory\nopen scoped BigOperators ENNReal\ntheorem probe_restate_2  :\n    (∀ {n : ℕ} (hn : 0 < n) (S : Set (Space n))\n    (hconvex : Convex ℝ S)\n    (hcompact : IsCompact S)\n    (hinterior : (interior S).Nonempty)\n    (hcentered : barycenter S = 0)\n    (hlattice : interiorLatticePoints S = {0}), normalizedVolume S ≤\n      ((n : ℝ) + 1) ^ n / (n.factorial : ℝ)) ↔\n    (∀ {n : ℕ}, 0 < n → ∀ S : Set (Fin n → ℝ), Convex ℝ S → IsCompact S → (interior S).Nonempty → barycenter S = 0 → {z : Fin n → ℤ | (fun i => (z i : ℝ)) ∈ interior S} = {0} → ((MeasureTheory.volume : MeasureTheory.Measure (Fin n → ℝ)) S).toReal ≤ ((n : ℝ) + 1) ^ n / (n.factorial : ℝ)) := by\n  exact Iff.rfl\nend Ehrhart.Volume\n",
+   "seconds": 25.5
+  },
+  {
+   "target": "Ehrhart.SimplexVolume.exists_centeredBody_sharp",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ (n : ℕ) (hn : 0 < n), ∃ K : CenteredBody n,\n      normalizedVolume K.carrier = sharpConstant n",
+   "restated": "∀ n : ℕ, 0 < n → ∃ S : Set (Fin n → ℝ), Convex ℝ S ∧ IsCompact S ∧ (interior S).Nonempty ∧ barycenter S = 0 ∧ {z : Fin n → ℤ | (fun i => (z i : ℝ)) ∈ interior S} = {0} ∧ ((volume : Measure (Fin n → ℝ)) S).toReal = ((n : ℝ) + 1) ^ n / (n.factorial : ℝ)",
+   "english": "For every n > 0 there is a convex compact set S in ℝⁿ with nonempty interior, barycenter 0, whose only interior integer lattice point is the origin, and whose Lebesgue volume equals (n+1)^n / n!.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "barycenter"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace Ehrhart.SimplexVolume\nopen Set MeasureTheory\nopen scoped BigOperators ENNReal\ntheorem probe_restate_11  :\n    (∀ (n : ℕ) (hn : 0 < n), ∃ K : CenteredBody n,\n      normalizedVolume K.carrier = sharpConstant n) ↔\n    (∀ n : ℕ, 0 < n → ∃ S : Set (Fin n → ℝ), Convex ℝ S ∧ IsCompact S ∧ (interior S).Nonempty ∧ barycenter S = 0 ∧ {z : Fin n → ℤ | (fun i => (z i : ℝ)) ∈ interior S} = {0} ∧ ((volume : Measure (Fin n → ℝ)) S).toReal = ((n : ℝ) + 1) ^ n / (n.factorial : ℝ)) := by\n  constructor\n  · intro h n hn\n    obtain ⟨K, hK⟩ := h n hn\n    exact ⟨K.carrier, K.convex, K.compact, K.fullDimensional, K.centered, K.uniqueInteriorLatticePoint, hK⟩\n  · intro h n hn\n    obtain ⟨S, h1, h2, h3, h4, h5, h6⟩ := h n hn\n    exact ⟨⟨S, h1, h2, h3, h4, h5⟩, h6⟩\nend Ehrhart.SimplexVolume\n",
+   "seconds": 26.8
+  },
+  {
+   "target": "Ehrhart.SimplexVolume.barycenter_centeredSimplex",
+   "mode": "iff",
+   "status": "CERTIFIED",
+   "original_expr": "∀ (n : ℕ), barycenter (centeredSimplex n) = 0",
+   "restated": "∀ m : ℕ, Ehrhart.normalizedVolume (Ehrhart.centeredSimplex m) = 0 ∨ ∫ x in Ehrhart.centeredSimplex m, x ∂(volume : Measure (Ehrhart.Space m)) = 0",
+   "english": "For every dimension m, either the centered simplex has volume zero, or the integral of the position vector x over it is the zero vector. This is what barycenter = 0 means once the scalar factor 1/volume is unfolded.",
+   "mathlib_only": false,
+   "bespoke_used": [
+    "Space",
+    "centeredSimplex",
+    "normalizedVolume"
+   ],
+   "detail": "compiled; axioms clean",
+   "lean": "namespace Ehrhart.SimplexVolume\nopen Set MeasureTheory\nopen scoped BigOperators ENNReal\ntheorem probe_restate_21  :\n    (∀ (n : ℕ), barycenter (centeredSimplex n) = 0) ↔\n    (∀ m : ℕ, Ehrhart.normalizedVolume (Ehrhart.centeredSimplex m) = 0 ∨ ∫ x in Ehrhart.centeredSimplex m, x ∂(volume : Measure (Ehrhart.Space m)) = 0) := by\n  simp only [Ehrhart.barycenter, smul_eq_zero, inv_eq_zero]\nend Ehrhart.SimplexVolume\n",
+   "seconds": 28.2
+  }
+ ],
+ "trust_burden": {
+  "statement_lines": 55,
+  "lines_needing_human_review": 20,
+  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+ }
+}

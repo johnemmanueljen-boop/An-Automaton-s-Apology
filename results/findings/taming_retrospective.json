@@ -1,0 +1,21 @@
+{
+ "title": "Retrospective test: OpenAI's corrected cone claim (Taming implies compatibility on four-manifolds)",
+ "source": "openai/math @ fd4aeeb; history.md (Oct 7, 2026 fixes); preprint versions September-23-2026 (original) and October-6-2026 (corrected)",
+ "what_openai_corrected": "Original Corollary (Taming and compatible cones) claimed K^t = K^c + H_J^- for every closed 4-manifold, and K^t = K^c when b2+ = 1, citing Li-Zhang 2009 Corollary 1.1. Corrected version: cone-sum equality only when h_J^- = b2+ - 1; strict inclusion can occur (explicit four-torus example).",
+ "lean_scope": "Only the main theorem (taming implies compatibility) is formalized: ComparatorChallenges/TamingCompatibility.lean. The cone corollary has no Lean statement.",
+ "test1_pipeline_audit_blind": {
+  "model": "claude-opus-5-5",
+  "result": "Main theorem judged equivalent to the Lean statement; the cone corollary marked not_formalized (low-severity coverage flag). The later-corrected claim lies entirely in the part the pipeline marks as awaiting formal verification.",
+  "file": "results/findings/taming_retrospective_audit.json",
+  "command": "python -m experiments.audit_external --challenge ../oai-math/lean/ComparatorChallenges/TamingCompatibility.lean --paper ../oai-math/preprints/Taming-implies-compatibility-on-four-manifolds-September-23-2026/build/sections/01-introduction.tex --lines 15:72 --out results/findings/taming_retrospective_audit.json"
+ },
+ "test2_ai_referee_blind": {
+  "model": "claude-opus-5-5",
+  "result": "Judged the original proof sound; recalled the cited Li-Zhang result as unconditional. It missed the error OpenAI later corrected.",
+  "file": "results/findings/taming_retrospective_referee.json",
+  "note": "One ad-hoc Opus call asking it to check each step of the original corollary's proof; the prompt was not saved, only the answer."
+ },
+ "contamination": "Correction published Oct 7, 2026, after the model's training cutoff (about June 2026); the prompts contain only the original text.",
+ "other_corrections": "3 withdrawn manuscripts had no Lean formalization. Incompressible Box Transport (repaired estimates) is formalized; whether the repaired estimates were inside its Lean scope was not checked. Other corrected manuscripts have no matching scope note.",
+ "takeaway": "The one statement-level error OpenAI corrected in a formalized result sat outside the Lean-verified statement, exactly where the pipeline places a 'not formally verified' sticky note. An AI referee reading the flawed proof called it sound: AI judgment is not a substitute for knowing what Lean actually verified."
+}

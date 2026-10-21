@@ -1,0 +1,33 @@
+[
+ {
+  "id": "sofic-nonvacuity-trivial-group",
+  "status": "GREEN",
+  "claim": "OpenAI's bespoke `Sofic` definition is satisfiable: the trivial group is sofic. (If it weren't, 'there is a non-sofic group' would be trivially true.)",
+  "kind": "non-vacuity",
+  "seconds": 29.0,
+  "detail": "compiled; axioms clean",
+  "axioms": {
+   "probe_trivial_sofic": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ]
+  }
+ },
+ {
+  "id": "sofic-nonvacuity-finite-groups",
+  "status": "YELLOW",
+  "claim": "Every finite group is sofic under OpenAI's definition (the regular representation works), matching the standard fact.",
+  "kind": "non-vacuity",
+  "seconds": 39.3,
+  "detail": "probe uses sorry | non-standard axioms: {'probe_finite_sofic': ['sorryAx']}",
+  "axioms": {
+   "probe_finite_sofic": [
+    "propext",
+    "sorryAx",
+    "Classical.choice",
+    "Quot.sound"
+   ]
+  }
+ }
+]
