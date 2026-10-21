@@ -21,7 +21,7 @@ Submission to the 2026 Open Scientific Intelligence Hackathon (mathematics). The
 
 | | |
 |---|---|
-| **An error sat exactly where Lean wasn't checking** | OpenAI later corrected a claim about cones in *Taming implies compatibility*. Run blind on the original paper, the pipeline marked that claim "not formally verified": it was never in the Lean code. Asked to referee the same proof, the same AI model called it sound. |
+| **An error sat exactly where Lean wasn't checking** | OpenAI later corrected a claim about cones in *Taming implies compatibility*. Run blind on the original paper, the pipeline marked that claim "not formally verified": it was never in the Lean code. Asked to referee the same proof, the raw AI model called it sound. |
 | **Re-found an expert gap in minutes, for cents** | Navier–Stokes Lemma 8.6: the Lean code needs 5 extra derivatives where the paper claims 4. Bastounis, Circelli and Hansen first found this over about two weeks. |
 | **The code cites an earlier draft** | 16 of 25 paper labels cited in OpenAI's Navier–Stokes Lean files are not in the published paper (6 numbers don't exist at all, including a whole Section 11). A second formalization, Unique Games / Max-Cut, has the same problem. Found with no AI. |
 | **Measured, not claimed** | 71% of 41 planted errors that Lean accepts were caught (78% with lint), with 2% false alarms. No false flags on 12 textbook theorems. 29 readable restatements proven equivalent by Lean. |
