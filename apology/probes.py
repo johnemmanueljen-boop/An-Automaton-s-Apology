@@ -58,8 +58,8 @@ class ProbeResult:
     axioms: dict[str, list[str]]
 
 
-def lean_check(repo: Path, source: str, timeout: int = 900) -> tuple[str, float]:
-    """Compile `source` inside `repo` with Lean; return (Lean's output, seconds). Raises on timeout."""
+def lean_check(repo: Path, source: str, timeout: int = 900) -> tuple[str, float, int]:
+    """Compile `source` inside `repo` with Lean; return (output, seconds, exit code). Raises on timeout."""
     env = dict(os.environ, PATH=f"{ELAN_BIN}:{os.environ.get('PATH', '')}")
     with tempfile.NamedTemporaryFile("w", suffix=".lean", dir=repo, prefix="_probe_", delete=False) as f:
         f.write(source)
@@ -71,7 +71,7 @@ def lean_check(repo: Path, source: str, timeout: int = 900) -> tuple[str, float]
         )
     finally:
         tmp.unlink(missing_ok=True)
-    return proc.stdout + proc.stderr, time.time() - started
+    return proc.stdout + proc.stderr, time.time() - started, proc.returncode
 
 
 def _errors(output: str, probe_start: int) -> tuple[list[str], bool]:
@@ -112,19 +112,22 @@ def run_probe(p: Probe, timeout: int = 900) -> ProbeResult:
     print_axioms = "\n".join(f"#print axioms {d}" for d in p.check_decls)
     source = f"{statement.rstrip()}\n\n-- ===== probe: {p.id} =====\n{p.lean.strip()}\n\n{print_axioms}\n"
     try:
-        output, seconds = lean_check(repo, source, timeout)
+        output, seconds, exit_code = lean_check(repo, source, timeout)
     except subprocess.TimeoutExpired:
         return result("YELLOW", "timed out", timeout)
 
     errors, used_sorry = _errors(output, probe_start=statement.count("\n") + 3)
     axioms = _axioms(output, p.check_decls)
     bad_axioms = {d: extra for d, ax in axioms.items() if (extra := [a for a in ax if a not in STANDARD_AXIOMS])}
-    compiled = not errors and not used_sorry and not bad_axioms and len(axioms) == len(p.check_decls)
+    # A pass needs Lean to exit cleanly and at least one named theorem with its axioms printed.
+    checked = bool(p.check_decls) and len(axioms) == len(p.check_decls)
+    compiled = exit_code == 0 and not errors and not used_sorry and not bad_axioms and checked
 
     if p.expect_fail:
         if compiled:
             return result("RED", "negative test compiled: the claimed counterexample exists", seconds, axioms)
-        return result("GREEN", "negative test did not compile, as expected (weak evidence)", seconds, axioms)
+        # Lean failing to prove something is not a proof of its negation.
+        return result("YELLOW", "negative test did not compile: inconclusive", seconds, axioms)
     if compiled:
         return result("GREEN", "compiled; axioms clean", seconds, axioms)
 
@@ -135,6 +138,10 @@ def run_probe(p: Probe, timeout: int = 900) -> ProbeResult:
         reasons.append(f"non-standard axioms: {bad_axioms}")
     if (missing := set(p.check_decls) - set(axioms)) and not errors:
         reasons.append(f"declarations not found: {sorted(missing)}")
+    if not p.check_decls:
+        reasons.append("no theorem named to check")
+    if exit_code != 0 and not errors:
+        reasons.append(f"Lean exited with code {exit_code}")
     return result("YELLOW", " | ".join(reasons) or "did not compile", seconds, axioms)
 
 

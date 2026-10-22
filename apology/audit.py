@@ -119,16 +119,16 @@ def llm_audit(
 def verify_citations(ch: dict, audit: dict) -> None:
     """Mark each flag, glossary entry and claim citation_ok only if the cited declaration exists
     and the cited line falls inside it."""
-    by_name = {}
-    for d in ch["decls"]:
-        by_name[d["name"]] = d
-        by_name.setdefault(d["short_name"], d)
     for key, field in (("flags", "decl"), ("glossary", "decl"), ("lean_claims", "theorem")):
         for item in audit.get(key, []):
             name = item.get(field) or ""
-            d = by_name.get(name) or by_name.get(name.split(".")[-1])
+            exact = [d for d in ch["decls"] if d["name"] == name]
+            matches = exact or [d for d in ch["decls"] if _names(d, name)]
             line = item.get("line")
-            item["citation_ok"] = bool(d) and (not isinstance(line, int) or d["start_line"] <= line <= d["end_line"])
+            # Exactly one declaration, and a whole-number line inside it (bool is not a line number).
+            item["citation_ok"] = (
+                len(matches) == 1 and type(line) is int and matches[0]["start_line"] <= line <= matches[0]["end_line"]
+            )
 
 
 def _names(decl: dict, cited: str) -> bool:

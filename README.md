@@ -24,7 +24,7 @@ Submission to the 2026 Open Scientific Intelligence Hackathon (mathematics). The
 | **An error sat exactly where Lean wasn't checking** | OpenAI later corrected a claim about cones in *Taming implies compatibility*. Run blind on the original paper, the pipeline marked that claim "not formally verified": it was never in the Lean code. Asked to referee the same proof, the raw AI model called it sound. |
 | **Re-found an expert gap in minutes, for cents** | Navier–Stokes Lemma 8.6: the Lean code needs 5 extra derivatives where the paper claims 4. Bastounis, Circelli and Hansen first found this over about two weeks. |
 | **The code cites an earlier draft** | 16 of 25 paper labels cited in OpenAI's Navier–Stokes Lean files are not in the published paper (6 numbers don't exist at all, including a whole Section 11). A second formalization, Unique Games / Max-Cut, has the same problem. Found with no AI. |
-| **Measured, not claimed** | 71% of 41 planted errors that Lean accepts were caught (78% with lint), with 2% false alarms. No false flags on 12 textbook theorems. 29 readable restatements proven equivalent by Lean. |
+| **Measured, not claimed** | 71% of 41 planted errors that Lean accepts were caught (78% with lint), with 2% false alarms (a flag at the same spot in the unmodified file). No false flags on 12 textbook theorems. 29 readable restatements proven equivalent by Lean. |
 | **Whole-release checks, no AI** | All 242 scope notes, 426 links, 416 statement files and 537 target theorems of OpenAI's October release are consistent. 64 definitions in 9 files are never compared by OpenAI's checker. 17 statement files run metaprograms. |
 
 None of this shows that any OpenAI theorem is false. Details: [docs/findings.md](docs/findings.md).
@@ -53,7 +53,7 @@ All from blind or held-out tests; misses are reported. Method and caveats: [docs
 |---|---|
 | Expert case: Navier–Stokes Lemma 8.6 | Main gap found in one call (~US$0.05–0.09); the second, more cosmetic point missed (1 of 2) |
 | Expert case: quasi-Riemann hypothesis (ζ pole at s = 1) | Opus flagged it blind, at low severity; Sonnet missed it |
-| 41 planted errors that Lean accepts (held out) | 71% caught by the AI, 78% with lint; 2% false alarms (10% with lint) |
+| 41 planted errors that Lean accepts (held out) | 71% caught by the AI, 78% with lint; 2% false alarms (10% with lint), counted as a flag at the same spot in the unmodified file |
 | By error type | assumptions 9/9 · quantifiers 10/12 · number types 3/4 · constants/goals 5/10 · definitions 2/6 |
 | 12 textbook theorems, stated as in Mathlib | 0 false flags |
 | Readable restatements | 29 of 37 proven equivalent by Lean; 22 of 25 Lean probes passed |
@@ -61,7 +61,8 @@ All from blind or held-out tests; misses are reported. Method and caveats: [docs
 The main weakness: subtle boundary changes (`0 < x` vs `0 ≤ x`) are caught only about half the time.
 
 Each audit card also reports how much of the statement a person still has to read to trust the result:
-the target theorems always count (they are the claim), plus anything flagged or not judged standard.
+the target theorems always count (they are the claim), plus anything flagged or not judged standard by the AI.
+That judgement only orders the reading list; it is not a human check.
 Across the 14 results that is 48% of statement lines, from 11% (Navier–Stokes) to 76% (GapCVP); the
 target theorems alone are 17%. Recompute it with `python -m apology.audit --all --recount`.
 
@@ -117,6 +118,9 @@ app.py          Marimo app
 design (blind and held-out tests, negative controls) and the framing. The code and much of the analysis were
 written with an AI coding assistant. The pipeline's AI steps use Claude Opus 5.5 (audits) and Claude
 Sonnet 5.5 (writing Lean checks) through their API; the whole project cost about US$14 (`.llm_cache/ledger.jsonl`).
+
+**Thanks** to Tan Xeng Ian for a code review that found three bugs in the evidence checks (fixed; none changed a
+reported number) and for a roadmap toward whole-result audits (branch `codex/research-audit-workflow`).
 
 **Independence.** The models that audit OpenAI's work here come from another lab, so the design does not ask
 you to trust them: every AI flag's accuracy is measured and its misses are reported, every certified
