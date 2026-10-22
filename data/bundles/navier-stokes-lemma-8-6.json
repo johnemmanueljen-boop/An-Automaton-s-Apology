@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "id": "navier-stokes-lemma-8-6-reproduction",
+  "documents": [
+    {
+      "id": "paper",
+      "content": "Lemma 8.6. Let N = vt · ∂y on T2 , with vt as in (6.2), and let F be a smooth function of zero Haar\nmean. Then N φ = F has a unique smooth zero-mean solution φ = N −1 F. This solution is given by\nthe following Fourier series and satisfies the displayed norm bound for every integer m ≥ 0:\n                                        Fˆ︁(k ) 2πik·y\n                 N −1 F =      ∑       2πivt · k\n                                                 e     ,     ∥ N −1 F ∥Cym ≤ Cm ∥ F ∥Cym+4 .        (8.19)\n                            k ∈Z2 \\{0}\n\nFor a pair Eθ , Ez ∈ Mα of normalized angularly invariant residual coefficients, use this inverse in the\n                                                                            −1     ◦         ◦\noriginal auxiliary coordinate Y to define the physical tangential update − Nabs ( Eθ,phys , Ez,phys ). Here\n\f96                                                     OPENAI\n\nresiduals and velocities have the normalizations in (8.11). This physical definition ensures agreement\non chart overlaps. Its chart representatives are\n                    ∆v = −ci−0 1 Ni−0 1 Eθ◦ ,     γd = −ci−0 1 Ni−0 1 Ez◦ ,    ci−0 1 ≤ CS∗ .           (8.20)\n   Both desired increments ∆v, γd lie in Mα and have zero auxiliary mean at each slow and radial\npoint. The realization of γd by (8.14) gives the actual velocity increment\n                           (∆β, ∆v, ∆γ) = −ε∂ Z T1 γd , ∆v, γd − A1 γd ,\n                                            (︁                             )︁\n                                                                                          (8.21)\n                           (∆β, ∆v, ∆γ) ∈ Mα+1 × Mα × Mα .\nThis field is divergence-free and its addition preserves both integral constraints in (8.2). If a = −A1 γd\ndenotes the cutoff remainder in the axial increment, then its fast-time cancellation equations are\n                          ci0 Ni0 ∆v = − Eθ◦ ,         ci0 Ni0 ∆γ = − Ez◦ + ci0 Ni0 a.                  (8.22)\nThe angular cancellation is exact, and ci0 Ni0 a is flat at every fixed coefficient derivative order.\nProof. The divisor bound (6.7) gives |vt · k |−1 ≤ C (1 + |k |). Four more derivatives of F than\nthe requested output leave a summable (1 + |k|)−3 bound on the Fourier series in two\ndimensions. This proves (8.19), smoothness, and uniqueness after fixing the zero Fourier\ncoefficient. The multiplier commutes with every slow coefficient derivative and preserves",
+      "sha256": "e02a2763b7c3a4aafaf41b342c616d3cbf19abb8d2d01dae3bd5647fb7bac992",
+      "version": "repository supplied excerpt",
+      "url": "https://arxiv.org/html/2610.08144v1",
+      "extraction_method": "existing expert-case input; see source credit"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "lean-excerpt",
+      "content": "-- SmoothFourierData.lean\n\n/-- The genuine first coordinate derivative. -/\nnoncomputable def partialX (f : Plane → ℂ) (z : Plane) : ℂ := fderiv ℝ f z (1, 0)\n\nnoncomputable def xJet (p : ℕ) (f : Plane → ℂ) : Plane → ℂ := partialX^[p] f\n\n-- TorusInverse.lean\ndef derivativeWord : List Bool → (Plane → ℂ) → Plane → ℂ\n  | [], f => f\n  | j :: js, f => coordinatePartial j (derivativeWord js f)\n\n-- ParametricTorusInverse.lean\nnoncomputable def mixedLossConstant (r : ℕ) : ℝ :=\n  ((6 * ‖omega⁻¹‖) * ‖omega‖ ^ r) * 3 ^ (r + 5) *\n    ∑' k : Frequency, (weight k ^ 4)⁻¹\n\n-- SmoothFamilyTorusInverse.lean (statement only; proof omitted, already kernel-checked)\ntheorem norm_derivativeWord_inverse_le (d : Direction) {f : Source P}\n    (hf : ContDiff ℝ ∞ f) (hp : Periodic f) (w : List Bool) (p : P) (Y : Plane) {C : ℝ}\n    (hzero : ∀ x ∈ Icc (0 : ℝ) 1, ∀ y ∈ Icc (0 : ℝ) 1, ‖f (p, (x, y))‖ ≤ C)\n    (hfirst : ∀ x ∈ Icc (0 : ℝ) 1, ∀ y ∈ Icc (0 : ℝ) 1,\n      ‖SmoothFourierData.xJet (w.length + 5) (slice f p) (x, y)‖ ≤ C)\n    (hsecond : ∀ x ∈ Icc (0 : ℝ) 1, ∀ y ∈ Icc (0 : ℝ) 1,\n      ‖SmoothFourierData.xJet (w.length + 5)\n        (SmoothFourierData.swapFunction (slice f p)) (x, y)‖ ≤ C) :\n    ‖derivativeWord w (slice (inverse d f) p) Y‖ ≤\n      ParametricTorusInverse.mixedLossConstant w.length * C := by\n  -- (proof omitted)",
+      "sha256": "23b7fbeb72719de4804f59a1be55a9a26400f6805b430ed3bd9fbcc2c43ea63c",
+      "repository": "https://github.com/openai/NavierStokesAndEuler",
+      "commit": "f9e8bc5",
+      "excerpt_only": true
+    }
+  ],
+  "claims": [
+    {
+      "id": "lemma-8-6",
+      "label": "Lemma 8.6, eq. (8.19)",
+      "paper_source": "paper",
+      "formal_targets": [
+        {
+          "source_id": "lean-excerpt",
+          "name": "norm_derivativeWord_inverse_le"
+        }
+      ]
+    }
+  ],
+  "example_kind": "historical_expert_reproduction",
+  "credit": "Bastounis, Circelli and Hansen, arXiv:2610.08144, Example 3.1",
+  "limitations": [
+    "Supplied lemma pairing and assembled context; not fresh end-to-end discovery.",
+    "Stored model audit available separately; no new inference or Lean proof check."
+  ]
+}

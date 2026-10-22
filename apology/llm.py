@@ -18,6 +18,7 @@ import os
 import re
 import sys
 import time
+import copy
 
 from .paths import CACHE, ROOT
 
@@ -33,6 +34,20 @@ JSON_RETRY = (
     "\n\nIMPORTANT: answer with ONE JSON object only, exactly in the schema requested. "
     "No tool calls, no XML, no prose. [JSON-RETRY]"
 )
+REQUEST_TRACE: list[dict] = []
+
+
+class OfflineCacheMiss(RuntimeError):
+    pass
+
+
+def is_offline() -> bool:
+    return os.environ.get("APOLOGY_OFFLINE", "1").lower() not in {"0", "false", "no"}
+
+
+def _trace(key, model, system, user, max_tokens, hit, cost=0.0):
+    REQUEST_TRACE.append({"request_id": key, "model": model, "system": system, "user": user,
+                          "max_tokens": max_tokens, "cache_hit": hit, "actual_api_usd": cost})
 
 
 def _load_env() -> None:
@@ -62,12 +77,12 @@ def cache_key(model: str, system: str, user: str, max_tokens: int) -> str:
 
 def cached(key: str):
     path = CACHE / f"{key}.json"
-    return json.loads(path.read_text())["parsed"] if path.exists() else None
+    return json.loads(path.read_text(encoding="utf-8"))["parsed"] if path.exists() else None
 
 
 def _store(key: str, model: str, text: str, parsed) -> None:
     record = {"provider": PROVIDER, "model": model, "raw": text, "parsed": parsed}
-    (CACHE / f"{key}.json").write_text(json.dumps(record, ensure_ascii=False))
+    (CACHE / f"{key}.json").write_text(json.dumps(record, ensure_ascii=False), encoding="utf-8")
 
 
 def spent_usd() -> float:
@@ -110,6 +125,8 @@ def _check_budget(cost: float) -> None:
 
 
 def _client():
+    if is_offline():
+        raise OfflineCacheMiss("offline mode prohibits provider access")
     import anthropic
 
     # Always the public API with this project's key, whatever ANTHROPIC_BASE_URL the shell has.
@@ -144,7 +161,10 @@ def complete_json(system: str, user: str, max_tokens: int = 8000, role: str = "p
     model = model_name(role)
     key = cache_key(model, system, user, max_tokens)
     if (hit := cached(key)) is not None:
-        return hit
+        _trace(key, model, system, user, max_tokens, True)
+        return copy.deepcopy(hit)
+    if is_offline():
+        raise OfflineCacheMiss(f"offline cache miss: {key}; no provider call made")
     _check_budget(_worst_case(model, system, user, max_tokens))
 
     client, budget = _client(), max_tokens
@@ -152,6 +172,7 @@ def complete_json(system: str, user: str, max_tokens: int = 8000, role: str = "p
         with client.messages.stream(**_request(model, system, user, budget)) as stream:
             response = stream.get_final_message()
         cost = _cost(response.usage, model)
+        _trace(key, model, system, user, budget, False, cost)
         truncated = response.stop_reason == "max_tokens"
         _log(
             {
@@ -197,6 +218,11 @@ def complete_json_many(
     keys = [cache_key(model, s, u, m) for s, u, m in items]
     out = [cached(k) for k in keys]
     todo = [i for i, x in enumerate(out) if x is None]
+    for i, value in enumerate(out):
+        if value is not None:
+            _trace(keys[i], model, *items[i], True)
+    if todo and is_offline():
+        raise OfflineCacheMiss(f"offline batch cache misses: {len(todo)}; no batch submitted")
 
     def worst(i):
         return 0.5 * _worst_case(model, *items[i])
@@ -220,6 +246,8 @@ def complete_json_many(
 
 
 def _run_batch(chunk, items, keys, out, model, role, poll_s, timeout_s) -> None:
+    if is_offline():
+        raise OfflineCacheMiss("offline mode prohibits batch submission")
     client = _client()
     requests = [{"custom_id": f"r{i}", "params": _request(model, *items[i])} for i in chunk]
     batch = client.messages.batches.create(requests=requests)
@@ -237,6 +265,7 @@ def _run_batch(chunk, items, keys, out, model, role, poll_s, timeout_s) -> None:
             retry.append(i)
             continue
         msg = entry.result.message
+        _trace(keys[i], model, *items[i], False, _cost(msg.usage, model, discount=0.5))
         truncated = msg.stop_reason == "max_tokens"
         _log(
             {

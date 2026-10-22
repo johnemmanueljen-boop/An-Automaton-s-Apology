@@ -62,8 +62,22 @@ The main weakness: subtle boundary changes (`0 < x` vs `0 ≤ x`) are caught onl
 
 ## Try it
 
+The implementation now includes versioned bundle audits and local review workflows. See
+[implementation and validation](docs/implementation.md) for the changes, published examples, and integration limits.
+
+Use a virtual environment for every Python command:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -B -X utf8 -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe -B -X utf8 -m experiments.published_examples --build --run
+.\.venv\Scripts\python.exe -m marimo run app.py
+```
+
+For Unix, use `.venv/bin/python`. The original commands below should likewise use the virtual environment's interpreter.
+
 ```sh
-pip install -r requirements.txt
 marimo run app.py                    # browse audit cards, validation and findings
 python -m experiments.summarize      # recompute every number above from the stored results
 ```

@@ -1,5 +1,11 @@
 # How the auditor was tested
 
+The numbers below describe the frozen historical evaluation. They remain unchanged after implementation.
+New deterministic examples, component ablations, regression coverage, and integration gaps are documented
+in [implementation and validation](implementation.md). The historical false-alarm metric reuses original
+files at each mutation site; it is not an independent clean-file error rate. No new semantic accuracy
+improvement is claimed without fresh model outputs and human adjudication.
+
 The auditor is an AI, so its output is only useful if we know how often it is right. Each test below says
 what it measures, how contamination was avoided, and what it found, misses included.
 `python -m experiments.summarize` recomputes every number here from the stored results.

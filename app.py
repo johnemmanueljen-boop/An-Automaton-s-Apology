@@ -12,13 +12,19 @@ def _():
     import marimo as mo
 
     from apology.paths import DATA, REPOS, RESULTS
+    from apology.schema import adapt_card
+    from apology.audit import trust_burden
 
     def load(path):
-        return json.loads(path.read_text()) if path.exists() else None
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
     corpus = load(DATA / "corpus.json")
     lint = load(DATA / "lint.json")
-    cards = {p.stem: load(p) for p in sorted((RESULTS / "cards").glob("*.json"))}
+    cards = {p.stem: adapt_card(load(p)) for p in sorted((RESULTS / "cards").glob("*.json"))}
+    for _ch in corpus:
+        _card = cards.get(_ch["challenge_file"].split("/")[-1].removesuffix(".lean"))
+        if _card and _card["repo"] == _ch["repo"]:
+            _card["trust_burden"] = trust_burden(_ch, _card.get("audit", {}))
     validation = {p.stem: load(p) for p in (RESULTS / "validation").glob("*.json")}
     findings = {p.stem: load(p) for p in (RESULTS / "findings").glob("*.json")}
     demo_restatements = load(RESULTS / "demo" / "restatements.json") or []
@@ -65,7 +71,7 @@ def _(corpus, mo):
     options = {
         f"{c['repo']} · {c['challenge_file'].split('/')[-1].removesuffix('.lean')}": i for i, c in enumerate(corpus)
     }
-    picker = mo.ui.dropdown(options=options, value=list(options)[4], label="Result")
+    picker = mo.ui.dropdown(options=options, value=list(options)[min(4, len(options) - 1)], label="Result")
     mo.vstack([mo.md("## Audit cards"), picker])
     return (picker,)
 
@@ -85,7 +91,7 @@ def _(cards, corpus, lint, picker):
 def _(mo):
     def render_restatements(items):
         icon = {
-            "CERTIFIED": "🟢 Lean-certified",
+            "CERTIFIED": "Historical Lean result · not rechecked",
             "FAILED": "🟡 Lean did not accept",
             "REJECTED": "⛔ rejected by the guard",
         }
@@ -108,7 +114,7 @@ def _(mo):
                                     "Original, built from OpenAI's file": mo.md(
                                         f"```lean\n{r.get('original_expr', '')}\n```"
                                     ),
-                                    "Restated, proved equivalent by Lean": mo.md(
+                "Restated formal expression": mo.md(
                                         f"```lean\n{r.get('restated', '')}\n```"
                                     ),
                                     "Lean's verdict": mo.md(f"`{(r.get('detail') or '')[:400]}`"),
@@ -116,7 +122,7 @@ def _(mo):
                             ),
                         ]
                     ),
-                    kind={"CERTIFIED": "success", "REJECTED": "danger"}.get(r["status"], "warn"),
+                    kind={"CERTIFIED": "info", "REJECTED": "danger"}.get(r["status"], "warn"),
                 )
             )
         return mo.vstack(blocks)
@@ -128,11 +134,11 @@ def _(mo):
 def _(SEVERITY, card, mo, render_restatements, stem):
     def _relation(rel):
         return {
-            "equivalent": "🟢 equivalent",
-            "lean_stronger": "🟢 Lean stronger",
-            "lean_weaker": "🟠 Lean weaker",
-            "different": "🔴 different",
-            "not_formalized": "⚪ not formalized",
+            "equivalent": "Model proposal: equivalent",
+            "lean_stronger": "Model proposal: Lean stronger",
+            "lean_weaker": "Model proposal: Lean weaker",
+            "different": "Model concern: different",
+            "not_formalized": "Model concern: not found in supplied scope",
         }.get(rel, rel)
 
     if card is None:
@@ -156,13 +162,13 @@ def _(SEVERITY, card, mo, render_restatements, stem):
                 "Line": f.get("line"),
                 "Declaration": (f.get("decl") or "").split(".")[-1],
                 "What differs": f["explanation"],
-                "Citation": "✓ checked" if f.get("citation_ok", True) else "⚠ not found",
+                "Citation": "Source location checked" if f.get("location_valid", False) else "Unvalidated location",
             }
             for f in _audit.get("flags", [])
         ]
         _probes = [
             {
-                "": {"GREEN": "🟢", "YELLOW": "🟡", "RED": "🔴"}[p["result"]["status"]],
+                "Evidence": "Historical result · not rechecked",
                 "Kind": p["result"]["kind"],
                 "Claim": p["result"]["claim"],
                 "Attempts": len(p["attempts"]),
@@ -174,7 +180,7 @@ def _(SEVERITY, card, mo, render_restatements, stem):
             {
                 "Definition": g["decl"].split(".")[-1],
                 "Plain meaning": g["plain"],
-                "Standard?": {"yes": "🟢", "partly": "🟠", "no": "🔴", "unclear": "⚪"}.get(g["matches_standard"], ""),
+                "Model assessment": g["matches_standard"] + " · unreviewed",
                 "Note": g.get("note", ""),
             }
             for g in _audit.get("glossary", [])
@@ -191,7 +197,7 @@ def _(SEVERITY, card, mo, render_restatements, stem):
                         mo.stat(value=str(len(_flags)), label="sticky notes"),
                         mo.stat(
                             value=f"{sum(p['result']['status'] == 'GREEN' for p in card['probes'])}/{len(card['probes'])}",
-                            label="Lean probes passed",
+                            label="historical Lean passes (not rechecked)",
                         ),
                     ],
                     justify="start",
@@ -200,7 +206,7 @@ def _(SEVERITY, card, mo, render_restatements, stem):
                     {
                         "Paper vs Lean": mo.ui.table(_coverage, selection=None) if _coverage else mo.md("—"),
                         "Sticky notes": mo.ui.table(_flags, selection=None) if _flags else mo.md("None."),
-                        "Readable versions (Lean-certified)": render_restatements(card["restatements"])
+                        "Readable versions (historical checks)": render_restatements(card["restatements"])
                         if card["restatements"]
                         else mo.md("None."),
                         "Lean probes": mo.ui.table(_probes, selection=None) if _probes else mo.md("None."),
@@ -256,7 +262,7 @@ def _(demo_restatements, mo, render_restatements):
     mo.vstack(
         [
             mo.md(
-                "## Readable versions, certified by Lean\n"
+                "## Readable versions with historical Lean results\n"
                 "The AI proposes a clearer statement; Lean must prove it means exactly the same as OpenAI's. "
                 "The last two are deliberate cheats, to show they are caught."
             ),
@@ -306,7 +312,7 @@ def _(mo, validation):
                     mo.stat(
                         value=f"{_with_lint / _n:.0%}", label="with deterministic lint", caption=f"{_with_lint} of {_n}"
                     ),
-                    mo.stat(value=f"{_alarms / _n:.0%}", label="false alarms on clean files"),
+                    mo.stat(value=f"{_alarms / _n:.0%}", label="false alarms at reused mutation sites"),
                     mo.stat(
                         value=f"{_control['with_medium_high']}/{_control['n']}",
                         label="false flags on textbook theorems",
@@ -367,6 +373,34 @@ def _(findings, mo):
             ),
         ]
     )
+    return
+
+
+@app.cell
+def _(mo):
+    from pathlib import Path
+    from apology.paths import ROOT
+    from apology.ui import available_inspections, render_bundle
+    _bundle_options = available_inspections(ROOT)
+    bundle_picker = mo.ui.dropdown(options=_bundle_options, value=next(iter(_bundle_options), None), label="Bundle run")
+    mo.vstack([mo.md("## Bundle audit and review"), bundle_picker])
+    return Path, ROOT, bundle_picker, render_bundle
+
+
+@app.cell
+def _(Path, ROOT, bundle_picker, mo, render_bundle):
+    bundle_review_form = None
+    if bundle_picker.value:
+        _bundle_view, bundle_review_form = render_bundle(mo, Path(bundle_picker.value), ROOT)
+    else:
+        _bundle_view = mo.md("Generate examples with `python -m experiments.published_examples --build --run`.")
+    _bundle_view
+    return (bundle_review_form,)
+
+
+@app.cell
+def _(bundle_review_form, mo):
+    mo.md("Review recorded locally. Reopen the bundle to refresh its review queue.") if bundle_review_form and bundle_review_form.value else None
     return
 
 

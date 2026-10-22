@@ -3,7 +3,7 @@ name = "an-automatons-apology"
 version = "1.0.0"
 description = "Lean checks the proof. We check the claim: a statement-faithfulness auditor for AI-written, Lean-verified mathematics."
 requires-python = ">=3.11"
-dependencies = ["anthropic>=0.40", "marimo>=0.9"]
+dependencies = ["anthropic>=0.40", "marimo>=0.25.2"]
 license = { text = "MIT" }
 
 [tool.ruff]

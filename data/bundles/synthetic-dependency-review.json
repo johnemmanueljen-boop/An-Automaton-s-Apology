@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "id": "synthetic-dependency-review",
+  "documents": [
+    {
+      "id": "paper",
+      "content": "Synthetic comparison: x > 0 and x >= 0 disagree at x = 0.",
+      "sha256": "c17ceb2ba165faea8a876b5e98acdd3f78c84ff3def01c89306c9fb787dd3757",
+      "version": "synthetic-v1"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "endpoint-source",
+      "content": "namespace Demo\ndef lower : Int := 0\ndef positive (x : Int) : Prop := x > lower\ndef nonnegative (x : Int) : Prop := x >= lower\ntheorem helper : (0 : Int) >= 0 := by decide\ntheorem endpoint : nonnegative 0 ∧ ¬ positive 0 := by\n  constructor\n  · exact helper\n  · decide\nend Demo\n",
+      "sha256": "951acbc70add84c4d3380e849293a051a29fc9e865343ecaa26ea0f7b647f1cc",
+      "repository": "synthetic",
+      "commit": "951acbc70add84c4d3380e849293a051a29fc9e865343ecaa26ea0f7b647f1cc"
+    }
+  ],
+  "claims": [
+    {
+      "id": "endpoint",
+      "paper_source": "paper",
+      "formal_targets": [
+        {
+          "source_id": "endpoint-source",
+          "name": "Demo.endpoint"
+        }
+      ]
+    }
+  ],
+  "dependency_graph": {
+    "path": "endpoint.expected-graph.json",
+    "sha256": "a89f3fecd66cb204faae140ca8e25acef0b21ecc073207595e4d33272f0b1115",
+    "targets": [
+      "Demo.endpoint"
+    ]
+  },
+  "semantic_comparisons": [
+    {
+      "id": "synthetic-endpoint",
+      "category": "boundary",
+      "variables": {
+        "x": [
+          -1,
+          0,
+          1
+        ]
+      },
+      "paper": {
+        "domain": "Int",
+        "predicate": {
+          "op": "gt",
+          "args": [
+            {
+              "var": "x"
+            },
+            {
+              "value": 0
+            }
+          ]
+        }
+      },
+      "formal": {
+        "domain": "Int",
+        "predicate": {
+          "op": "ge",
+          "args": [
+            {
+              "var": "x"
+            },
+            {
+              "value": 0
+            }
+          ]
+        }
+      },
+      "synthetic": true
+    }
+  ],
+  "example_kind": "synthetic_expected_graph"
+}

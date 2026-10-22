@@ -195,6 +195,10 @@ def run_mutants(manifest: Path, batch: bool, with_lint: bool, out_name: str) -> 
         false_alarms(False),
     )
     summary = {
+        "scoring_unit": "legacy mutation site on reused originals; not independent clean-file false-positive rate",
+        "unique_clean_files": len(clean_flags),
+        "clean_files_with_any_medium_high_flag": sum(any(f.get("severity") in ("medium", "high") for f in flags)
+                                                    for flags in clean_flags.values()),
         "model": model_name("audit"),
         "with_lint": with_lint,
         "mutants_evaluated": len(rows),
@@ -214,8 +218,12 @@ def run_mutants(manifest: Path, batch: bool, with_lint: bool, out_name: str) -> 
         "note": "strict = a medium/high flag within ±2 lines of the planted bug; loose = strict or a flag naming the "
         "mutated declaration. False alarms apply the same rule to the unmutated file.",
     }
-    (OUT / out_name).write_text(
-        json.dumps({"summary": summary, "rows": rows, "clean_flags": clean_flags}, indent=1, ensure_ascii=False)
+    from apology.schema import new_run
+    run_dir, run_manifest = new_run(ROOT, "legacy_location_benchmark", {"manifest": str(manifest)})
+    from apology.schema import write_json
+    write_json(run_dir / "manifest.json", run_manifest)
+    (run_dir / Path(out_name).name).write_text(
+        json.dumps({"summary": summary, "rows": rows, "clean_flags": clean_flags}, indent=1, ensure_ascii=False), encoding="utf-8"
     )
     return summary
 

@@ -1,0 +1,95 @@
+{
+  "schema_version": 2,
+  "id": "atlas-section-1-division",
+  "documents": [
+    {
+      "id": "paper",
+      "content": "Adapted threshold test: 3/2 > 1 in Rat but not Nat; source contrasts 1.5 with 1.",
+      "sha256": "fb1a9f84a922fcdecfc2041b58ad46aba93ccc82dfaaf2dd303222778f9f54d7",
+      "version": "v1",
+      "url": "https://arxiv.org/html/2604.16347v1",
+      "extraction_method": "authored paraphrase verified against published HTML; not a PDF transcript"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "formal",
+      "content": "import Mathlib\n-- Authored test encoding; not code extracted from the paper.\n",
+      "sha256": "9f5eff2d699272ba02b69e2629c778d0371c09361a65e8e5336af94aa73a02ff",
+      "repository": "local-synthetic-encoding",
+      "commit": "fe0cd8652727073124811d3108487b69a7b34f5cde4b96f15d3e72c7b3d2603f"
+    }
+  ],
+  "claims": [
+    {
+      "id": "comparison",
+      "paper_source": "paper",
+      "paper_span": [
+        1,
+        1
+      ],
+      "formal_targets": []
+    }
+  ],
+  "semantic_comparisons": [
+    {
+      "id": "atlas-section-1-division",
+      "category": "type-default",
+      "variables": {
+        "x": [
+          2,
+          3,
+          4
+        ]
+      },
+      "paper": {
+        "domain": "Rat",
+        "predicate": {
+          "op": "gt",
+          "args": [
+            {
+              "op": "div",
+              "args": [
+                {
+                  "var": "x"
+                },
+                {
+                  "value": 2
+                }
+              ]
+            },
+            {
+              "value": 1
+            }
+          ]
+        }
+      },
+      "formal": {
+        "domain": "Nat",
+        "predicate": {
+          "op": "gt",
+          "args": [
+            {
+              "op": "div",
+              "args": [
+                {
+                  "var": "x"
+                },
+                {
+                  "value": 2
+                }
+              ]
+            },
+            {
+              "value": 1
+            }
+          ]
+        }
+      },
+      "source_url": "https://arxiv.org/html/2604.16347v1",
+      "source_location": "Section 1, 3/2 example",
+      "interpretation_note": "Adapted threshold test: 3/2 > 1 in Rat but not Nat; source contrasts 1.5 with 1."
+    }
+  ],
+  "example_kind": "paper_adaptation"
+}

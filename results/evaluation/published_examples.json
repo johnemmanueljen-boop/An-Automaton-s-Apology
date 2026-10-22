@@ -1,0 +1,131 @@
+{
+  "atlas_division_values": {
+    "Rat": "3/2",
+    "Nat": 1
+  },
+  "examples": [
+    {
+      "schema_version": 2,
+      "comparison_id": "bastounis-example-2-1-sign",
+      "spec_sha256": "3e331b9e94234ce2e5a8053f2e7820df80a6d860e63ef37677d928e083f18386",
+      "status": "bounded_separating_witness",
+      "witnesses": {
+        "paper_not_formal": {
+          "x": 0
+        },
+        "formal_not_paper": null
+      },
+      "bounds": {
+        "x": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "assignments_examined": 4,
+      "directions": {
+        "paper_implies_formal": "refuted_in_bounds",
+        "formal_implies_paper": "unknown"
+      },
+      "interpretation_status": "proposed",
+      "paper_faithfulness": "unreviewed",
+      "evidence_kind": "exact_bounded_computation",
+      "lean_verification": "not_executed"
+    },
+    {
+      "schema_version": 2,
+      "comparison_id": "atlas-section-1-division",
+      "spec_sha256": "fe0cd8652727073124811d3108487b69a7b34f5cde4b96f15d3e72c7b3d2603f",
+      "status": "bounded_separating_witness",
+      "witnesses": {
+        "paper_not_formal": {
+          "x": 3
+        },
+        "formal_not_paper": null
+      },
+      "bounds": {
+        "x": [
+          2,
+          3,
+          4
+        ]
+      },
+      "assignments_examined": 3,
+      "directions": {
+        "paper_implies_formal": "refuted_in_bounds",
+        "formal_implies_paper": "unknown"
+      },
+      "interpretation_status": "proposed",
+      "paper_faithfulness": "unreviewed",
+      "evidence_kind": "exact_bounded_computation",
+      "lean_verification": "not_executed"
+    },
+    {
+      "schema_version": 2,
+      "comparison_id": "synthetic-endpoint",
+      "spec_sha256": "3c936549502a69eff659abb44429c3e0b9b6e6afcb16d85dfc328b42c575b9bb",
+      "status": "bounded_separating_witness",
+      "witnesses": {
+        "paper_not_formal": null,
+        "formal_not_paper": {
+          "x": 0
+        }
+      },
+      "bounds": {
+        "x": [
+          -1,
+          0,
+          1
+        ]
+      },
+      "assignments_examined": 3,
+      "directions": {
+        "paper_implies_formal": "unknown",
+        "formal_implies_paper": "refuted_in_bounds"
+      },
+      "interpretation_status": "proposed",
+      "paper_faithfulness": "unreviewed",
+      "evidence_kind": "exact_bounded_computation",
+      "lean_verification": "not_executed"
+    },
+    {
+      "schema_version": 2,
+      "comparison_id": "synthetic-quantifier-order",
+      "spec_sha256": "2d8f0e3c2e828ba1ef0e0a6accaf846ff316ef6a339e0f08ca56ffdc9d61b0a3",
+      "status": "bounded_separating_witness",
+      "witnesses": {
+        "paper_not_formal": {},
+        "formal_not_paper": null
+      },
+      "bounds": {},
+      "assignments_examined": 1,
+      "directions": {
+        "paper_implies_formal": "refuted_in_bounds",
+        "formal_implies_paper": "unknown"
+      },
+      "interpretation_status": "proposed",
+      "paper_faithfulness": "unreviewed",
+      "evidence_kind": "exact_bounded_computation",
+      "lean_verification": "not_executed"
+    }
+  ],
+  "actual_api_usd": 0,
+  "lean_verification": "not_executed",
+  "synthetic_dependency_scope": {
+    "retained_nodes": 4,
+    "full_nodes": 5,
+    "retention_fraction": 0.8,
+    "complete": false,
+    "blockers": [
+      "Synthetic expected graph; native extraction was not executed.",
+      "incomplete extraction: Demo.endpoint",
+      "incomplete extraction: Demo.lower",
+      "incomplete extraction: Demo.nonnegative",
+      "incomplete extraction: Demo.positive"
+    ],
+    "human_review_time": "not_measured",
+    "proof_verification": "not_established_by_graph"
+  },
+  "interpretation": "authored finite encodings; not an unbiased accuracy benchmark"
+}

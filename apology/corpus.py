@@ -83,7 +83,7 @@ def comment_lines(lines: list[str]) -> set[int]:
 
 
 def parse_file(path: Path) -> list[Decl]:
-    lines = path.read_text().splitlines()
+    lines = path.read_text(encoding="utf-8").splitlines()
     in_comment = comment_lines(lines)
     scopes: list[tuple[str, str]] = []  # (kind, name)
     decls: list[Decl] = []

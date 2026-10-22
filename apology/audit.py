@@ -24,18 +24,24 @@ from dataclasses import asdict
 from pathlib import Path
 
 from .llm import complete_json
-from .paths import CARDS, DATA, PAPERS, REPOS
-from .probes import Probe, run_probe
-from .prompts import AUDIT_SYSTEM, PROBE_SYSTEM
+from .paths import DATA, PAPERS, REPOS
+from .probes import run_probe, build_probe
+from .prompts import AUDIT_SYSTEM
 from .restate import llm_restate
+from .schema import validate_location, validate_audit, new_run, write_json, digest
 
 # ---------------------------------------------------------------- inputs
 
 
 def load_challenge(stem: str) -> tuple[dict, Path]:
-    for ch in json.loads((DATA / "corpus.json").read_text()):
-        if Path(ch["challenge_file"]).stem == stem:
-            return ch, REPOS[ch["repo"]]
+    repository, _, name = stem.partition(":")
+    matches = [ch for ch in json.loads((DATA / "corpus.json").read_text(encoding="utf-8"))
+               if Path(ch["challenge_file"]).stem == (name or stem)
+               and (not name or ch["repo"] == repository)]
+    if len(matches) > 1:
+        raise ValueError(f"ambiguous result {stem}; use repository:stem")
+    if matches:
+        return matches[0], REPOS[matches[0]["repo"]]
     raise SystemExit(f"unknown result {stem}")
 
 
@@ -112,39 +118,29 @@ def llm_audit(
     ch: dict, repo: Path, lint_findings: list[dict], excerpt: str | None = None, override_text: str | None = None
 ) -> dict:
     user = audit_prompt(ch, repo, lint_findings, excerpt, override_text)
-    return complete_json(AUDIT_SYSTEM, user, max_tokens=24000, role="audit")
+    return validate_audit(complete_json(AUDIT_SYSTEM, user, max_tokens=24000, role="audit"))
 
 
 def verify_citations(ch: dict, audit: dict) -> None:
     """Mark each flag, glossary entry and claim citation_ok only if the cited declaration exists
     and the cited line falls inside it."""
-    by_name = {}
-    for d in ch["decls"]:
-        by_name[d["name"]] = d
-        by_name.setdefault(d["short_name"], d)
     for key, field in (("flags", "decl"), ("glossary", "decl"), ("lean_claims", "theorem")):
         for item in audit.get(key, []):
-            name = item.get(field) or ""
-            d = by_name.get(name) or by_name.get(name.split(".")[-1])
-            line = item.get("line")
-            item["citation_ok"] = bool(d) and (not isinstance(line, int) or d["start_line"] <= line <= d["end_line"])
+            item.update(validate_location(ch["decls"], item.get(field), item.get("line"), item.get("end_line")))
 
 
 def trust_burden(ch: dict, audit: dict) -> dict:
-    """Statement lines a human still has to read: target theorems, flagged declarations, and any
-    definition the audit did not judge standard."""
-    cleared = {g["decl"] for g in audit.get("glossary", []) if g.get("matches_standard") == "yes"}
-    flagged = {f["decl"] for f in audit.get("flags", []) if f.get("severity") in ("high", "medium")}
-    needs = 0
+    """Unique declaration lines await human review; an LLM cannot clear this burden."""
+    spans = set()
     for d in ch["decls"]:
-        names = {d["name"], d["short_name"]}
-        is_target = d["kind"] in ("theorem", "lemma") and d["is_target_theorem"]
-        if names & flagged or not names & cleared or is_target:
-            needs += sum(1 for line in d["text"].splitlines() if line.strip())
+        for offset, line in enumerate(d["text"].splitlines()):
+            if line.strip():
+                spans.add(d["start_line"] + offset)
     return {
         "statement_lines": ch["nonblank_lines"],
-        "lines_needing_human_review": needs,
-        "note": "target theorems always need review; definitions are cleared when judged standard and not flagged",
+        "lines_needing_human_review": len(spans),
+        "human_reviewed": 0,
+        "note": "all unique declaration lines await human review; model confidence only sets priority",
     }
 
 
@@ -155,18 +151,20 @@ def probe_for(ch: dict, repo: Path, target: dict, max_repairs: int = 2) -> dict:
     """Ask Sonnet for a Lean probe that bears on `target`; feed Lean's errors back up to `max_repairs` times."""
     src = (repo / ch["challenge_file"]).read_text()
     base = f"=== CHALLENGE FILE {ch['challenge_file']} ===\n{src}\n\n=== WHAT TO CHECK ===\n{json.dumps(target, ensure_ascii=False)}\n"
-    history, attempts = "", []
+    system = ("Return JSON with kind, claim, proposition (one Lean Prop), proof (tactic body). "
+              "Never emit declarations, commands, sorry, or new axioms. Use exact qualified names from the source. "
+              "Preserve the proposition across repair attempts; only repair the proof. "
+              "A non-vacuity check must construct a witness. A failed proof is inconclusive.")
+    history, attempts, locked = "", [], None
     for attempt in range(max_repairs + 1):
-        spec = complete_json(PROBE_SYSTEM, base + history, max_tokens=10000)
-        probe = Probe(
-            id=f"{target.get('id', 'probe')}-a{attempt}",
-            repo_dir=str(repo),
-            challenge_file=ch["challenge_file"],
-            kind=spec.get("kind", "other"),
-            claim=spec.get("claim", ""),
-            lean=spec["lean"],
-            check_decls=spec.get("check_decls", []),
-        )
+        spec = complete_json(system, base + history, max_tokens=10000)
+        proposed = spec["proposition"]
+        if locked is None:
+            locked = proposed
+        if proposed != locked:
+            attempts.append({"status": "YELLOW", "detail": "goal change refused; original proposition retained"})
+        probe = build_probe(target.get("id", "probe"), repo, ch["challenge_file"],
+                            spec.get("kind", "other"), spec.get("claim", ""), locked, spec["proof"])
         result = run_probe(probe)
         attempts.append(
             {"lean": probe.lean, "status": result.status, "detail": result.detail, "seconds": result.seconds}
@@ -175,7 +173,7 @@ def probe_for(ch: dict, repo: Path, target: dict, max_repairs: int = 2) -> dict:
             break
         history += (
             f"\n=== ATTEMPT {attempt + 1} FAILED ===\n{probe.lean}\nLean said: {result.detail}\n"
-            "Fix it, or switch to a smaller probe that still bears on the claim.\n"
+            f"Keep this exact proposition: {locked}. Repair only the proof.\n"
         )
     return {"target": target, "result": asdict(result), "lean": probe.lean, "attempts": attempts}
 
@@ -204,7 +202,7 @@ def probe_targets(audit: dict) -> list[dict]:
         for v in audit.get("lint_verdicts", [])
         if v.get("verdict") in ("needs-probe", "concern")
     ]
-    targets.append(
+    targets.insert(0,
         {
             "id": "NV",
             "explanation": "Non-vacuity: exhibit a concrete object satisfying the central "
@@ -219,18 +217,36 @@ def probe_targets(audit: dict) -> list[dict]:
 
 
 def run(stem: str, do_probes: bool = True, max_probes: int = 4, max_restate: int = 3) -> dict:
+    from .llm import REQUEST_TRACE
+    trace_start = len(REQUEST_TRACE)
     ch, repo = load_challenge(stem)
-    findings = [f for f in json.loads((DATA / "lint.json").read_text()) if f["file"] == Path(ch["challenge_file"]).name]
+    findings = [f for f in json.loads((DATA / "lint.json").read_text(encoding="utf-8"))
+                if f["file"] == Path(ch["challenge_file"]).name and f["repo"] == ch["repo"]]
     print(f"[{stem}] audit", file=sys.stderr)
     audit = llm_audit(ch, repo, findings)
+    source_text = (repo / ch["challenge_file"]).read_text(encoding="utf-8")
+    source_lines = source_text.splitlines()
+    snapshot_matches = all("\n".join(source_lines[d["start_line"] - 1:d["end_line"]]) == d["text"] for d in ch["decls"])
     verify_citations(ch, audit)
+    for key in ("flags", "glossary", "lean_claims"):
+        for item in audit.get(key, []):
+            item["source_sha256"] = digest(source_text)
+            item["location_valid"] = item["citation_ok"] = item["citation_ok"] and snapshot_matches
+            if not snapshot_matches:
+                item["citation_status"] = "stale_corpus_snapshot"
 
     probes, restatements = [], []
     if do_probes:
         seen = set()
         for target in probe_targets(audit)[:max_probes]:
             print(f"[{stem}] probe {target['id']}", file=sys.stderr)
-            res = probe_for(ch, repo, target)
+            try:
+                res = probe_for(ch, repo, target)
+            except (ValueError, KeyError, RuntimeError) as exc:
+                probes.append({"target": target, "result": {"status": "YELLOW", "kind": "other", "claim": "",
+                                                           "detail": str(exc), "execution_status": "inconclusive"},
+                               "attempts": [], "lean": ""})
+                continue
             if (key := " ".join(res["lean"].split())) not in seen:  # skip an identical probe
                 seen.add(key)
                 probes.append(res)
@@ -249,6 +265,7 @@ def run(stem: str, do_probes: bool = True, max_probes: int = 4, max_restate: int
                 restatements.append({"target": name, "status": "FAILED", "detail": f"error: {e}"})
 
     card = {
+        "schema_version": 2,
         "result": stem,
         "repo": ch["repo"],
         "challenge_file": ch["challenge_file"],
@@ -259,8 +276,17 @@ def run(stem: str, do_probes: bool = True, max_probes: int = 4, max_restate: int
         "restatements": restatements,
         "trust_burden": trust_burden(ch, audit),
     }
-    CARDS.mkdir(parents=True, exist_ok=True)
-    (CARDS / f"{stem}.json").write_text(json.dumps(card, indent=1, ensure_ascii=False))
+    from .paths import ROOT
+    from .llm import is_offline
+    folder, manifest = new_run(ROOT, "single_file_audit", {"repo": ch["repo"], "file": ch["challenge_file"],
+                                                         "source_sha256": digest((repo / ch["challenge_file"]).read_bytes())},
+                               offline=is_offline())
+    card["run_id"] = manifest["run_id"]
+    card["probe_skipped_reason"] = "disabled or zero budget" if not do_probes or max_probes <= 0 else None
+    manifest["requests"] = list(REQUEST_TRACE[trace_start:])
+    manifest["actual_api_usd"] = sum(x.get("actual_api_usd", 0) for x in manifest["requests"])
+    write_json(folder / "card.json", card)
+    write_json(folder / "manifest.json", manifest)
     return card
 
 
@@ -271,7 +297,11 @@ def main() -> None:
     ap.add_argument("--no-probes", action="store_true")
     ap.add_argument("--max-probes", type=int, default=4)
     ap.add_argument("--max-restate", type=int, default=3)
+    ap.add_argument("--offline", action="store_true", help="refuse provider calls on cache miss (default)")
+    ap.add_argument("--online", action="store_true", help="allow budget-limited provider calls")
     a = ap.parse_args()
+    import os
+    os.environ["APOLOGY_OFFLINE"] = "0" if a.online and not a.offline else "1"
     stems = list(_paper_map()["ranges"]) if a.all else [a.stem]
     for stem in stems:
         try:

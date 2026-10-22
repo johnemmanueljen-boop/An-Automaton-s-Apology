@@ -56,7 +56,7 @@ def benchmark() -> list[str]:
     return [
         f"Planted errors Lean accepts: {len(rows)} ({len(excluded)} judged meaning-preserving, {n} kept)",
         f"  caught by the AI:          {caught_ai}/{n} = {caught_ai / n:.0%}   (with lint {caught_any}/{n} = {caught_any / n:.0%})",
-        f"  false alarms on clean files: {alarm_ai}/{n} = {alarm_ai / n:.0%}   (with lint {alarm_any}/{n} = {alarm_any / n:.0%})",
+        f"  false alarms at reused mutation sites: {alarm_ai}/{n} = {alarm_ai / n:.0%}   (with lint {alarm_any}/{n} = {alarm_any / n:.0%})",
         f"  by error type (AI):        {kinds}",
     ]
 

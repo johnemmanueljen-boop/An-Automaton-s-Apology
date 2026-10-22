@@ -1,0 +1,16 @@
+{
+  "tests_run": 38,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "successful": true,
+  "python_files_parsed": 38,
+  "virtual_environment": true,
+  "python_executable": "C:\\Users\\tanxe\\Programming\\OSI_hackathon\\An-Automaton-s-Apology\\.venv\\Scripts\\python.exe",
+  "lean_executable_on_path": null,
+  "marimo_installed_in_venv": false,
+  "live_lean_checks": "not_executed_by_this_command",
+  "marimo_runtime": "not_executed_by_this_command",
+  "mocked_execution_tests": "control flow only; not Lean proof validation",
+  "actual_api_usd": 0
+}

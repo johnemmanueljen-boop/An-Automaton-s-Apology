@@ -3,3 +3,6 @@ __pycache__/
 __marimo__/
 .ruff_cache/
 *.raw.txt
+.venv/
+results/runs/
+results/reviews/

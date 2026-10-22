@@ -1,28 +1,34 @@
 # Why you can trust a label
 
-Each label on an audit card rests on a different foundation, and the card says which. Only one kind is a
-mathematical guarantee; the others are measured or need a human.
+Each label on an audit card rests on a different foundation. Version 2 separates execution status,
+evidence type, source location, and human semantic review. Historical cards are displayed as historical
+results and are not silently upgraded to the current validation contract.
 
 | Label | What it guarantees | Rests on | Can it be wrong? |
 |---|---|---|---|
-| Lean-certified restatement or probe | A theorem holds, e.g. OpenAI's exact statement ⟺ our readable version | Lean's kernel, Mathlib, three standard axioms, ~170 lines of our guard code | Only if Lean's kernel or Mathlib has a bug |
-| Deterministic finding (citation label, definition hole, lint) | A fact about the files, which anyone can reproduce | Simple code reading the files | Only through a bug in that code; anyone can re-run it |
+| Checked formal probe or restatement | The recorded formal expression was accepted under the execution policy, with checked target identity and allowed axioms | Lean, imports, execution environment, wrapper construction and evidence validator | Validation, execution, statement construction or trusted-code errors remain possible |
+| Source location checked | The exact declaration and source span exist in the recorded snapshot | Hash and range validation | Does not establish that the text supports the concern |
+| Deterministic lint or text difference | A reproducible feature of the input files | Parser and rule implementation | A semantic mismatch still requires interpretation |
 | AI flag (sticky note) | Nothing; it says where to look | The model's reading, with its accuracy measured | Yes: it missed about 1 in 4 planted errors and raised 2% false alarms |
 | Coverage verdict (equivalent, weaker, different) | Nothing until a human confirms it | The model's reading | Yes; confirm before publishing |
 
-## Why a Lean-certified label is sound
+## What a checked formal label establishes
 
 A certified restatement is a theorem *original ⟺ restated*, checked by Lean's kernel
 (`apology/restate.py`):
 
-1. **The AI does not write the original side.** Our code copies OpenAI's statement verbatim, or applies
-   OpenAI's definition to all of its parameters, so the AI cannot narrow it to a special case.
-2. **No shortcuts.** Before Lean runs, the guard rejects `sorry`, new axioms, `native_decide`, new
-   definitions or instances, options and metaprograms, any of which could fake or change a proof.
-3. **Axioms are checked afterwards.** The result may use only the three standard axioms Mathlib uses.
-4. **Trivial restatements are refused.** The restated side may not mention the original, so "A ⟺ A" fails.
-5. **Failures are tested.** A deliberately wrong restatement (dropping a lower bound) was refused by Lean;
-   a `sorry` cheat was refused by the guard (`results/demo/restatements.json`).
+1. Python generates probe identities and theorem wrappers. Model proof repair retains the requested proposition.
+2. Known unsafe constructs are rejected. These guards are not a sandbox; live execution is disabled by default.
+3. Successful execution requires a zero process exit, a nonempty unique set of newly declared proof targets,
+   and complete axiom evidence limited to `propext`, `Classical.choice`, and `Quot.sound`.
+4. Failed proofs, timeouts, missing Lean, unsupported restatement syntax, and expected compiler failures
+   remain inconclusive. Compiler rejection never establishes a mathematical negation.
+5. A witness, satisfiability proof, implication and equivalence have different evidence types. A failed
+   reverse implication does not establish strict weakening.
+
+The restatement path refuses inferred definition types and section/universe variables when it cannot
+reconstruct them safely. Broader support requires an elaborated target-type bridge. Historical proof
+records are preserved separately; current regression tests do not independently recheck them.
 
 ## What a certified label does not guarantee
 
@@ -35,9 +41,17 @@ A certified restatement is a theorem *original ⟺ restated*, checked by Lean's 
 
 ## The trusted base
 
-To believe a certified label you trust Lean's kernel, Mathlib's definitions, the three standard axioms,
-and about 170 lines of guard code you can read (`FORBIDDEN` and `assemble` in `restate.py`, `FORBIDDEN`
-and the axiom check in `probes.py`). That is the base OpenAI's own results rely on, plus those 170 lines.
+The trusted base includes Lean's logic/kernel, imported definitions and permitted axioms, statement
+construction, subprocess and output validation, and the configured execution environment. The Docker
+policy limits host access; it does not by itself prevent forged console evidence. Host-local mode is
+an explicit opt-in for trusted fixtures, not isolation. Stronger hostile-input assurance requires exported
+proof replay and statement-identity checks outside the generating process, as described in
+[Lean's validation documentation](https://lean-lang.org/doc/reference/latest/ValidatingProofs/).
+
+Human decisions are stored with reviewer identity, rationale and dependency/document fingerprints.
+Model confidence only prioritizes work. Changing a shared definition or source document invalidates
+affected human reviews. Exact bounded Python arithmetic is labeled computational evidence and never
+presented as a Lean certificate or a universal equivalence result.
 
 ## Why AI flags are still useful
 

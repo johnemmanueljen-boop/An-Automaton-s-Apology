@@ -6,8 +6,9 @@ the body written in the challenge file. A community audit showed fake solutions
 (defining things as `False`) passing for 3 results in OpenAI's October release.
 
 For each hole we locate the solution module's declaration of the same fully-qualified
-name and compare its data fields with the challenge file's, ignoring proof fields that
-the challenge leaves as `sorry` (e.g. `disjoint := by sorry`).
+name and compare its text with the challenge file's. Fields constructed with `by` are
+retained because tactic syntax can construct data. Text differences need semantic review;
+cross-environment comparisons remain unresolved unless supported by checked evidence.
 
 Usage:
   python -m apology.holes                       # ten-proofs + Navier-Stokes -> data/holes.json
@@ -49,24 +50,28 @@ def scan(lines: list[str]) -> dict[str, list[int]]:
 
 
 def body(lines: list[str], start: int) -> list[str]:
-    """Declaration text from `start` until the next top-level line, minus proof-only fields."""
+    """Declaration text from `start` until the next top-level line; retain tactic-constructed data."""
     out = [lines[start]]
     for l in lines[start + 1 :]:
         if l and not l[0].isspace():
             break
         out.append(l)
     text = "\n".join(out)
-    # drop proof fields of the form `<field> ... := by ...` (indented two spaces) and their continuation
-    kept, skip = [], False
-    for l in text.split("\n"):
-        if re.match(r"^  \w[\w']*(\s+[\w'⟨⟩_]+)*\s*:=\s*by\b", l):
-            skip = True
-            continue
-        if skip and (l.startswith("    ") or not l.strip()):
-            continue
-        skip = False
-        kept.append(l)
-    return [" ".join(k.split()) for k in kept if k.strip()]
+    # `by` can construct data. Without elaborated field types, retain every field.
+    return [" ".join(k.split()) for k in text.split("\n") if k.strip()]
+
+
+def compare_extracted_definitions(challenge: dict, solution: dict) -> dict:
+    """Compare bodies only when elaboration and environment identity are available."""
+    if challenge.get("type_sha256") != solution.get("type_sha256"):
+        return {"status": "unresolved", "reason": "type encodings differ; semantic comparison required"}
+    if not challenge.get("body_available") or not solution.get("body_available"):
+        return {"status": "unresolved", "reason": "body unavailable"}
+    if challenge.get("environment_sha256") != solution.get("environment_sha256") or not challenge.get("environment_sha256"):
+        return {"status": "unresolved", "reason": "different or unrecorded name-resolution environments"}
+    if challenge["body_sha256"] == solution["body_sha256"]:
+        return {"status": "text_equal", "reason": "identical exported body encoding in the same context"}
+    return {"status": "unresolved", "reason": "different body encodings do not establish semantic inequality"}
 
 
 def _shape(lines: list[str]) -> str:

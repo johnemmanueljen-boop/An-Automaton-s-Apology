@@ -1,0 +1,103 @@
+{
+  "schema_version": 2,
+  "id": "synthetic-quantifier-order",
+  "documents": [
+    {
+      "id": "paper",
+      "content": "Synthetic controlled comparison.",
+      "sha256": "948d6b79c028190a72514f211109ae3de7ce8c9cd57bcc8b924510c344624c59",
+      "version": "synthetic-v1",
+      "url": null,
+      "extraction_method": "authored paraphrase verified against published HTML; not a PDF transcript"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "formal",
+      "content": "import Mathlib\n-- Authored test encoding; not code extracted from the paper.\n",
+      "sha256": "9f5eff2d699272ba02b69e2629c778d0371c09361a65e8e5336af94aa73a02ff",
+      "repository": "local-synthetic-encoding",
+      "commit": "2d8f0e3c2e828ba1ef0e0a6accaf846ff316ef6a339e0f08ca56ffdc9d61b0a3"
+    }
+  ],
+  "claims": [
+    {
+      "id": "comparison",
+      "paper_source": "paper",
+      "paper_span": [
+        1,
+        1
+      ],
+      "formal_targets": []
+    }
+  ],
+  "semantic_comparisons": [
+    {
+      "id": "synthetic-quantifier-order",
+      "category": "quantifier",
+      "variables": {},
+      "paper": {
+        "domain": "Nat",
+        "predicate": {
+          "op": "forall",
+          "var": "x",
+          "values": [
+            0,
+            1
+          ],
+          "body": {
+            "op": "exists",
+            "var": "y",
+            "values": [
+              0,
+              1
+            ],
+            "body": {
+              "op": "eq",
+              "args": [
+                {
+                  "var": "x"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "formal": {
+        "domain": "Nat",
+        "predicate": {
+          "op": "exists",
+          "var": "y",
+          "values": [
+            0,
+            1
+          ],
+          "body": {
+            "op": "forall",
+            "var": "x",
+            "values": [
+              0,
+              1
+            ],
+            "body": {
+              "op": "eq",
+              "args": [
+                {
+                  "var": "x"
+                },
+                {
+                  "var": "y"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "synthetic": true
+    }
+  ],
+  "example_kind": "synthetic"
+}

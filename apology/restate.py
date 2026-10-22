@@ -66,11 +66,16 @@ class RestateResult:
 
 def split_theorem(decl_text: str, short_name: str) -> tuple[str, str]:
     """Return (binders, statement) of a theorem declaration."""
-    i = decl_text.find(short_name) + len(short_name)
+    header = re.search(rf"\b(?:theorem|lemma)\s+{re.escape(short_name)}(?=[\s:(\[{{])", decl_text)
+    if header is None:
+        raise ValueError("unsupported theorem header")
+    i = header.end()
     body = decl_text[i:]
     end = body.rfind(":= by")
     if end < 0:
         end = body.rfind(":=")
+    if end < 0:
+        raise ValueError("theorem has no supported proof delimiter")
     body = body[:end]
     depth = 0
     for j, c in enumerate(body):
@@ -101,10 +106,7 @@ def split_def(decl_text: str, short_name: str) -> tuple[str, str]:
             colon = j
     head = body[:stop]
     if colon is None or colon >= stop:
-        return (
-            head.strip(),
-            "Prop",
-        )  # structures without an explicit type are Prop-or-Type; Prop is our only supported case
+        raise ValueError("inferred definition types require Lean extraction; refusing to guess Prop")
     return head[:colon].strip(), head[colon + 1 :].strip()
 
 
@@ -157,6 +159,9 @@ def assemble(ch: dict, repo: Path, spec: RestateSpec, idx: int) -> tuple[str | N
         return None, "", "", [], "mode must be iff or implies"
 
     ns = _namespace_of(decl)
+    source_text = (repo / ch["challenge_file"]).read_text(encoding="utf-8")
+    if re.search(r"^\s*(?:variable|universe|include|omit)\b", source_text, re.M):
+        return None, "", "", [], "section variables/universes require an elaborated target type; unsupported lexical reconstruction"
     if decl["kind"] in ("theorem", "lemma"):
         binders, stmt = split_theorem(decl["text"], decl["short_name"])
         original = f"∀ {binders}, {stmt}" if binders else stmt
@@ -199,7 +204,10 @@ def assemble(ch: dict, repo: Path, spec: RestateSpec, idx: int) -> tuple[str | N
 
 
 def certify(ch: dict, repo: Path, spec: RestateSpec, idx: int = 0) -> RestateResult:
-    lean, original, check, bespoke, reason = assemble(ch, repo, spec, idx)
+    try:
+        lean, original, check, bespoke, reason = assemble(ch, repo, spec, idx)
+    except (ValueError, OSError) as exc:
+        lean, original, check, bespoke, reason = None, "", "", [], str(exc)
     base = dict(
         target=spec.target,
         mode=spec.mode,
@@ -236,6 +244,7 @@ def llm_restate(
     src = (repo / ch["challenge_file"]).read_text()
     base = f"=== CHALLENGE FILE {ch['challenge_file']} ===\n{src}\n\n=== TARGET ===\n{target}\n=== MODE ===\n{mode}\n"
     history, res = "", None
+    locked = None
     for attempt in range(max_repairs + 1):
         js = complete_json(RESTATE_SYSTEM, base + history, max_tokens=10000)
         spec = RestateSpec(
@@ -246,6 +255,9 @@ def llm_restate(
             english=js.get("english", ""),
             why_clearer=js.get("why_clearer", ""),
         )
+        if locked is None:
+            locked = (spec.mode, spec.restated)
+        spec.mode, spec.restated = locked
         res = certify(ch, repo, spec, idx * 10 + attempt)
         if res.status == "CERTIFIED":
             return res

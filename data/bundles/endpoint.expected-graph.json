@@ -1,0 +1,109 @@
+{
+  "schema_version": 2,
+  "nodes": [
+    {
+      "id": "Demo.lower",
+      "name": "Demo.lower",
+      "kind": "definition",
+      "extraction_complete": false,
+      "type_sha256": "37ef7919642bd8ebaeef9a286832a6ce40f0ab15365af8028d4703bf3dcdc01f",
+      "body_sha256": "2b1f4f6d0f76dacd7d1615222e8bbf7c8a86a7db4f3dc9362f608a02eccadea9",
+      "source_span": {
+        "source_id": "endpoint-source",
+        "source_sha256": "951acbc70add84c4d3380e849293a051a29fc9e865343ecaa26ea0f7b647f1cc",
+        "start_line": 2,
+        "end_line": 2
+      }
+    },
+    {
+      "id": "Demo.positive",
+      "name": "Demo.positive",
+      "kind": "definition",
+      "extraction_complete": false,
+      "type_sha256": "f4be49e682ac514bd8d09cfee44c87d1f7db13ab588149ee765b965f272ac3ed",
+      "body_sha256": "a8c5bed4ea86bb3fff644c0f29568ff1a3b2ba5ce5757a758fbcf560528a2e24",
+      "source_span": {
+        "source_id": "endpoint-source",
+        "source_sha256": "951acbc70add84c4d3380e849293a051a29fc9e865343ecaa26ea0f7b647f1cc",
+        "start_line": 3,
+        "end_line": 3
+      }
+    },
+    {
+      "id": "Demo.nonnegative",
+      "name": "Demo.nonnegative",
+      "kind": "definition",
+      "extraction_complete": false,
+      "type_sha256": "e97b3064d3de2cd3c604f9cb83ab5cc44f6fc95c16f5e841b53fe413eb889d0f",
+      "body_sha256": "cce1a1c8f0dfcaea16ad7cd4de1f730da33512a25d125a0814778ebff3f65452",
+      "source_span": {
+        "source_id": "endpoint-source",
+        "source_sha256": "951acbc70add84c4d3380e849293a051a29fc9e865343ecaa26ea0f7b647f1cc",
+        "start_line": 4,
+        "end_line": 4
+      }
+    },
+    {
+      "id": "Demo.helper",
+      "name": "Demo.helper",
+      "kind": "theorem",
+      "extraction_complete": false,
+      "type_sha256": "6c795884e4f411a9452a18326d237a2a92cf3189e78e0143230900121071df08",
+      "body_sha256": "d8912dd8dd9708e674d147f1ecbca5db3a4fcc3c10741b7b0a6be48995a8ef22",
+      "source_span": {
+        "source_id": "endpoint-source",
+        "source_sha256": "951acbc70add84c4d3380e849293a051a29fc9e865343ecaa26ea0f7b647f1cc",
+        "start_line": 5,
+        "end_line": 5
+      }
+    },
+    {
+      "id": "Demo.endpoint",
+      "name": "Demo.endpoint",
+      "kind": "theorem",
+      "extraction_complete": false,
+      "type_sha256": "fa9807e3ce2a091061dda749fd63b634d3b07965b5e455fbb33a5f4bd93108e2",
+      "body_sha256": "fdfbfcf4dc7ba1edf8083a5d81b6a61516331224c8f1b3de3a3531703e5d1894",
+      "source_span": {
+        "source_id": "endpoint-source",
+        "source_sha256": "951acbc70add84c4d3380e849293a051a29fc9e865343ecaa26ea0f7b647f1cc",
+        "start_line": 6,
+        "end_line": 9
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Demo.endpoint",
+      "target": "Demo.positive",
+      "site": "type"
+    },
+    {
+      "source": "Demo.endpoint",
+      "target": "Demo.nonnegative",
+      "site": "type"
+    },
+    {
+      "source": "Demo.endpoint",
+      "target": "Demo.helper",
+      "site": "value"
+    },
+    {
+      "source": "Demo.positive",
+      "target": "Demo.lower",
+      "site": "value"
+    },
+    {
+      "source": "Demo.nonnegative",
+      "target": "Demo.lower",
+      "site": "value"
+    }
+  ],
+  "provenance": {
+    "kind": "hand_authored_expected_graph",
+    "lean_compilation": "not_executed"
+  },
+  "blockers": [
+    "Synthetic expected graph; native extraction was not executed."
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "schema_version": 2,
+  "id": "bastounis-example-2-1-sign",
+  "documents": [
+    {
+      "id": "paper",
+      "content": "Adapted sign comparison of polynomial and erroneous NL factorization, not a newly discovered Lean error.",
+      "sha256": "0053c1e318065b979a94479fff583c461ea30d2e626cf9746a5b7d27293b5500",
+      "version": "v1",
+      "url": "https://arxiv.org/html/2610.08144v1",
+      "extraction_method": "authored paraphrase verified against published HTML; not a PDF transcript"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "formal",
+      "content": "import Mathlib\n-- Authored test encoding; not code extracted from the paper.\n",
+      "sha256": "9f5eff2d699272ba02b69e2629c778d0371c09361a65e8e5336af94aa73a02ff",
+      "repository": "local-synthetic-encoding",
+      "commit": "3e331b9e94234ce2e5a8053f2e7820df80a6d860e63ef37677d928e083f18386"
+    }
+  ],
+  "claims": [
+    {
+      "id": "comparison",
+      "paper_source": "paper",
+      "paper_span": [
+        1,
+        1
+      ],
+      "formal_targets": []
+    }
+  ],
+  "semantic_comparisons": [
+    {
+      "id": "bastounis-example-2-1-sign",
+      "category": "goal-substitution",
+      "variables": {
+        "x": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "paper": {
+        "domain": "Rat",
+        "predicate": {
+          "op": "ge",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "sub",
+                  "args": [
+                    {
+                      "op": "sub",
+                      "args": [
+                        {
+                          "op": "mul",
+                          "args": [
+                            {
+                              "op": "mul",
+                              "args": [
+                                {
+                                  "var": "x"
+                                },
+                                {
+                                  "var": "x"
+                                }
+                              ]
+                            },
+                            {
+                              "var": "x"
+                            }
+                          ]
+                        },
+                        {
+                          "op": "mul",
+                          "args": [
+                            {
+                              "var": "x"
+                            },
+                            {
+                              "var": "x"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "var": "x"
+                    }
+                  ]
+                },
+                {
+                  "value": 1
+                }
+              ]
+            },
+            {
+              "value": 0
+            }
+          ]
+        }
+      },
+      "formal": {
+        "domain": "Rat",
+        "predicate": {
+          "op": "ge",
+          "args": [
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "op": "sub",
+                  "args": [
+                    {
+                      "var": "x"
+                    },
+                    {
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "op": "mul",
+                  "args": [
+                    {
+                      "op": "add",
+                      "args": [
+                        {
+                          "var": "x"
+                        },
+                        {
+                          "value": 1
+                        }
+                      ]
+                    },
+                    {
+                      "op": "add",
+                      "args": [
+                        {
+                          "var": "x"
+                        },
+                        {
+                          "value": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": 0
+            }
+          ]
+        }
+      },
+      "source_url": "https://arxiv.org/html/2610.08144v1",
+      "source_location": "Example 2.1",
+      "interpretation_note": "Adapted sign comparison of polynomial and erroneous NL factorization, not a newly discovered Lean error."
+    }
+  ],
+  "example_kind": "paper_adaptation"
+}

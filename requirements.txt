@@ -1,2 +1,2 @@
 anthropic>=0.40
-marimo>=0.9
+marimo>=0.25.2

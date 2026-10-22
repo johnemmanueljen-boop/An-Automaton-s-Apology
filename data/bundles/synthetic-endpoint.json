@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "id": "synthetic-endpoint",
+  "documents": [
+    {
+      "id": "paper",
+      "content": "Synthetic controlled comparison.",
+      "sha256": "948d6b79c028190a72514f211109ae3de7ce8c9cd57bcc8b924510c344624c59",
+      "version": "synthetic-v1",
+      "url": null,
+      "extraction_method": "authored paraphrase verified against published HTML; not a PDF transcript"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "formal",
+      "content": "import Mathlib\n-- Authored test encoding; not code extracted from the paper.\n",
+      "sha256": "9f5eff2d699272ba02b69e2629c778d0371c09361a65e8e5336af94aa73a02ff",
+      "repository": "local-synthetic-encoding",
+      "commit": "3c936549502a69eff659abb44429c3e0b9b6e6afcb16d85dfc328b42c575b9bb"
+    }
+  ],
+  "claims": [
+    {
+      "id": "comparison",
+      "paper_source": "paper",
+      "paper_span": [
+        1,
+        1
+      ],
+      "formal_targets": []
+    }
+  ],
+  "semantic_comparisons": [
+    {
+      "id": "synthetic-endpoint",
+      "category": "boundary",
+      "variables": {
+        "x": [
+          -1,
+          0,
+          1
+        ]
+      },
+      "paper": {
+        "domain": "Int",
+        "predicate": {
+          "op": "gt",
+          "args": [
+            {
+              "var": "x"
+            },
+            {
+              "value": 0
+            }
+          ]
+        }
+      },
+      "formal": {
+        "domain": "Int",
+        "predicate": {
+          "op": "ge",
+          "args": [
+            {
+              "var": "x"
+            },
+            {
+              "value": 0
+            }
+          ]
+        }
+      },
+      "synthetic": true
+    }
+  ],
+  "example_kind": "synthetic"
+}
