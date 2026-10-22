@@ -616,7 +616,7 @@
  ],
  "trust_burden": {
   "statement_lines": 233,
-  "lines_needing_human_review": 45,
-  "note": "target theorems always need review; definitions are cleared when judged standard and not flagged"
+  "lines_needing_human_review": 26,
+  "note": "target theorems and flagged declarations always need review; a definition is cleared when judged standard or certified by Lean in Mathlib terms; declarations no target uses are not counted"
  }
 }

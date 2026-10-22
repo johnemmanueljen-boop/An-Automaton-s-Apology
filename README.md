@@ -60,6 +60,11 @@ All from blind or held-out tests; misses are reported. Method and caveats: [docs
 
 The main weakness: subtle boundary changes (`0 < x` vs `0 ≤ x`) are caught only about half the time.
 
+Each audit card also reports how much of the statement a person still has to read to trust the result:
+the target theorems always count (they are the claim), plus anything flagged or not judged standard.
+Across the 14 results that is 48% of statement lines, from 11% (Navier–Stokes) to 76% (GapCVP); the
+target theorems alone are 17%. Recompute it with `python -m apology.audit --all --recount`.
+
 ## Try it
 
 ```sh

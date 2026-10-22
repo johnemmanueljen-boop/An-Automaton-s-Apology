@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -130,22 +131,65 @@ def verify_citations(ch: dict, audit: dict) -> None:
             item["citation_ok"] = bool(d) and (not isinstance(line, int) or d["start_line"] <= line <= d["end_line"])
 
 
-def trust_burden(ch: dict, audit: dict) -> dict:
-    """Statement lines a human still has to read: target theorems, flagged declarations, and any
-    definition the audit did not judge standard."""
-    cleared = {g["decl"] for g in audit.get("glossary", []) if g.get("matches_standard") == "yes"}
-    flagged = {f["decl"] for f in audit.get("flags", []) if f.get("severity") in ("high", "medium")}
+def _names(decl: dict, cited: str) -> bool:
+    """Does a name the audit cited (full, short, or partly qualified) refer to this declaration?"""
+    return cited in (decl["name"], decl["short_name"]) or decl["name"].endswith("." + cited)
+
+
+def _used_by_targets(decls: list[dict]) -> set[str]:
+    """Declarations the target theorems depend on, directly or through other declarations."""
+    by_short: dict[str, list[str]] = {}
+    for d in decls:
+        by_short.setdefault(d["short_name"], []).append(d["name"])
+    text = {d["name"]: d["text"] for d in decls}
+    used = {d["name"] for d in decls if d.get("is_target_theorem")}
+    todo = list(used)
+    while todo:
+        for token in re.findall(r"[A-Za-z_][\w'.]*", text[todo.pop()]):
+            for name in by_short.get(token.split(".")[-1], []):
+                if name not in used:
+                    used.add(name)
+                    todo.append(name)
+    return used
+
+
+def trust_burden(ch: dict, audit: dict, restatements: list[dict] | None = None) -> dict:
+    """Statement lines a person still has to read to trust the result.
+
+    Counted: every target theorem (it is the claim itself), every flagged declaration, and every
+    declaration the theorems use that the audit did not judge standard. Not counted: declarations no
+    target theorem uses, and definitions Lean has certified equivalent to a statement in standard
+    Mathlib terms (the reader reads that version instead)."""
+    decls = ch["decls"]
+    standard = [g["decl"] for g in audit.get("glossary", []) if g.get("matches_standard") == "yes"]
+    flagged = [f["decl"] for f in audit.get("flags", []) if f.get("severity") in ("high", "medium") and f.get("decl")]
+    certified = {r["target"] for r in restatements or [] if r.get("status") == "CERTIFIED" and r.get("mathlib_only")}
+    used = _used_by_targets(decls)
     needs = 0
-    for d in ch["decls"]:
-        names = {d["name"], d["short_name"]}
+    for d in decls:
+        if d["name"] not in used:
+            continue
         is_target = d["kind"] in ("theorem", "lemma") and d["is_target_theorem"]
-        if names & flagged or not names & cleared or is_target:
+        is_flagged = any(_names(d, n) for n in flagged)
+        is_cleared = any(_names(d, n) for n in standard) or d["name"] in certified
+        if is_target or is_flagged or not is_cleared:
             needs += sum(1 for line in d["text"].splitlines() if line.strip())
     return {
         "statement_lines": ch["nonblank_lines"],
         "lines_needing_human_review": needs,
-        "note": "target theorems always need review; definitions are cleared when judged standard and not flagged",
+        "note": "target theorems and flagged declarations always need review; a definition is cleared when "
+        "judged standard or certified by Lean in Mathlib terms; declarations no target uses are not counted",
     }
+
+
+def recount(stem: str) -> dict:
+    """Recompute a stored card's human-review count (no AI, no Lean)."""
+    path = CARDS / f"{stem}.json"
+    card = json.loads(path.read_text())
+    ch, _ = load_challenge(stem)
+    card["trust_burden"] = trust_burden(ch, card["audit"], card.get("restatements"))
+    path.write_text(json.dumps(card, indent=1, ensure_ascii=False))
+    return card
 
 
 # ---------------------------------------------------------------- Lean probes
@@ -257,7 +301,7 @@ def run(stem: str, do_probes: bool = True, max_probes: int = 4, max_restate: int
         "audit": audit,
         "probes": probes,
         "restatements": restatements,
-        "trust_burden": trust_burden(ch, audit),
+        "trust_burden": trust_burden(ch, audit, restatements),
     }
     CARDS.mkdir(parents=True, exist_ok=True)
     (CARDS / f"{stem}.json").write_text(json.dumps(card, indent=1, ensure_ascii=False))
@@ -271,11 +315,12 @@ def main() -> None:
     ap.add_argument("--no-probes", action="store_true")
     ap.add_argument("--max-probes", type=int, default=4)
     ap.add_argument("--max-restate", type=int, default=3)
+    ap.add_argument("--recount", action="store_true", help="only recompute the human-review count of stored cards")
     a = ap.parse_args()
     stems = list(_paper_map()["ranges"]) if a.all else [a.stem]
     for stem in stems:
         try:
-            card = run(stem, not a.no_probes, a.max_probes, a.max_restate)
+            card = recount(stem) if a.recount else run(stem, not a.no_probes, a.max_probes, a.max_restate)
         except RuntimeError as e:
             print(f"{stem}: stopped: {e}")
             if "Budget cap" in str(e):
